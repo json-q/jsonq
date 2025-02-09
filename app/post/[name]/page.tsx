@@ -15,23 +15,23 @@ async function getMDXContent(name: string): Promise<CompileMDXResult<Metadata> |
 }
 
 type Props = {
-  params: Promise<{ id: string }>;
+  params: Promise<{ name: string }>;
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { id } = await params;
+  const { name } = await params;
 
-  const res = await getMDXContent(id);
+  const res = await getMDXContent(name);
   if (!res) return { title: '' };
   const { frontmatter } = res;
   return { title: frontmatter.title };
 }
 
 export default async function Page({ params }: Props) {
-  const { id } = await params;
+  const { name } = await params;
 
-  const res = await getMDXContent(id);
+  const res = await getMDXContent(name);
 
   if (!res) return <ErrorResult status="404" back="prev" />;
 
