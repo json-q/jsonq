@@ -34,7 +34,9 @@ export default function RootLayout({
                 </Breadcrumb> */}
           </div>
         </header>
-        <div className="flex flex-1 flex-col gap-4 p-4 pt-0">{children}</div>
+        <article className="prose-sm flex flex-1 flex-col gap-4 p-4 pt-0 dark:prose-invert">
+          {children}
+        </article>
       </SidebarInset>
     </SidebarProvider>
   );
