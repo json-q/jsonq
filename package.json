@@ -3,14 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev:turbo": "run-p dev --turbopack watch-content",
-    "dev:webpack": "run-p dev watch-content",
-    "dev": "next dev --turbopack && npm run watch-content",
+    "dev": "next dev --turbopack && npm run generate && npm run watch",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write .",
-    "watch-content": "node ./scripts/watcher.js",
+    "watch": "node ./scripts/watcher",
+    "generate": "node ./scripts/content",
     "prepare": "husky"
   },
   "dependencies": {
@@ -28,6 +27,7 @@
     "next-mdx-remote": "^5.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "reading-time": "^1.5.0",
     "tailwind-merge": "^3.0.1",
     "tailwindcss-animate": "^1.0.7"
   },
