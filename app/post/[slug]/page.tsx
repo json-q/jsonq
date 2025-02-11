@@ -37,3 +37,7 @@ export default async function Page({ params }: Props) {
 
   return res.content;
 }
+
+// import CustomMDXComponents from '~/components/markdown';
+
+// export const dynamicParams = false;
