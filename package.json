@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack && npm run generate && npm run watch",
+    "dev": "npm run generate && next dev --turbopack && npm run watch",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
