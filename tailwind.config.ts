@@ -89,16 +89,19 @@ export default {
             },
             h2: {
               fontWeight: theme('fontWeight.extrabold'),
+              marginTop: '1rem',
             },
             h3: {
               fontWeight: theme('fontWeight.extrabold'),
             },
             hr: {
-              marginTop: '2rem',
-              marginBottom: '2rem',
+              marginTop: '1rem',
+              marginBottom: '1rem',
             },
             p: {
               color: theme('colors.slate.800'),
+              marginBottom: '0',
+              marginTop: '0.5rem',
             },
             img: {
               marginTop: 0,
@@ -129,6 +132,10 @@ export default {
                   display: 'block',
                 },
               },
+            },
+            figure: {
+              marginTop: '1rem',
+              marginBottom: '1rem',
             },
           },
         },

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "run-p dev:turbo generate watch",
+    "dev": "run-p dev:turbo watch",
     "dev:turbo": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
