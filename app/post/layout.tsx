@@ -34,7 +34,7 @@ export default function RootLayout({
                 </Breadcrumb> */}
           </div>
         </header>
-        <article className="prose max-w-[100ch] p-4 dark:prose-invert">{children}</article>
+        <article className="prose max-w-none p-4 dark:prose-invert">{children}</article>
       </SidebarInset>
     </SidebarProvider>
   );

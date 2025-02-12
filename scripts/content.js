@@ -68,9 +68,7 @@ function getMDXFiles(dir) {
  * @returns {{frontMatter: Metadata, content: string}} 包含解析出的元数据和正文内容的对象。
  */
 function readMDXFile(filePath) {
-  console.log(filePath);
-
-  let rawContent = readFileSync(filePath, 'utf-8');
+  const rawContent = readFileSync(filePath, 'utf-8');
   return parseFrontmatter(rawContent);
 }
 

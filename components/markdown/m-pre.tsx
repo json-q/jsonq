@@ -51,12 +51,10 @@ const MPre = (props: MPreProps): ReactElement => {
 
   return (
     <pre {...restProps}>
-      <button onClick={handleClick} tabIndex={0}>
+      <button onClick={handleClick} tabIndex={0} className="float-right">
         <IconToUse
-          className={`float-right block h-8 w-8 rounded border p-1 ${
-            isCopied
-              ? 'border-green-200 !bg-green-200 text-green-400'
-              : 'border-slate-200 !bg-slate-200 text-slate-400'
+          className={`block h-8 w-8 rounded border p-1 ${
+            isCopied ? '!bg-blue-200 text-blue-400' : '!bg-slate-200 text-slate-400'
           }`}
         />
       </button>
