@@ -31,9 +31,6 @@ importers:
       '@radix-ui/react-tooltip':
         specifier: ^1.1.8
         version: 1.1.8(@types/react-dom@19.0.3(@types/react@19.0.8))(@types/react@19.0.8)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-      '@shikijs/rehype':
-        specifier: ^2.3.2
-        version: 2.3.2
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -820,9 +817,6 @@ packages:
 
   '@shikijs/langs@2.3.2':
     resolution: {integrity: sha512-UqI6bSxFzhexIJficZLKeB1L2Sc3xoNiAV0yHpfbg5meck93du+EKQtsGbBv66Ki53XZPhnR/kYkOr85elIuFw==}
-
-  '@shikijs/rehype@2.3.2':
-    resolution: {integrity: sha512-ikzqbG46CXQLo+Ew86Fc7wOSoBRgoRKT+520e4hwI6gsJsJHSc/pTgzBZhs1xTw+pq6iGMhNunBVdDzxfhagYw==}
 
   '@shikijs/themes@2.3.2':
     resolution: {integrity: sha512-QAh7D/hhfYKHibkG2tti8vxNt3ekAH5EqkXJeJbTh7FGvTCWEI7BHqNCtMdjFvZ0vav5nvUgdvA7/HI7pfsB4w==}
@@ -3735,15 +3729,6 @@ snapshots:
   '@shikijs/langs@2.3.2':
     dependencies:
       '@shikijs/types': 2.3.2
-
-  '@shikijs/rehype@2.3.2':
-    dependencies:
-      '@shikijs/types': 2.3.2
-      '@types/hast': 3.0.4
-      hast-util-to-string: 3.0.1
-      shiki: 2.3.2
-      unified: 11.0.5
-      unist-util-visit: 5.0.0
 
   '@shikijs/themes@2.3.2':
     dependencies:
