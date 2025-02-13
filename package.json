@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write .",
-    "watch": "onchange posts/*.{md,mdx} -- npm run generate",
+    "watch": "onchange posts/**/*.{md,mdx} -- npm run generate",
     "generate": "node ./scripts/content",
     "prepare": "husky"
   },
