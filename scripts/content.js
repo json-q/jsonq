@@ -25,39 +25,54 @@ const dayjs = require('dayjs');
 function extractToc(markdown) {
   // 定义匹配Markdown标题的正则表达式
   const headingRegex = /^ *(#{1,6}) *([^\n]+?) *#* *(?:\n+|$)/gm;
+  // 定义匹配代码块开始和结束的正则表达式
+  const codeBlockStartRegex = /^```/;
+  let inCodeBlock = false;
 
   let match;
   const toc = [];
   let lastLevel = 0;
   let stack = [{ children: toc }]; // 初始化栈，根节点有一个空的children数组
 
-  while ((match = headingRegex.exec(markdown)) !== null) {
-    const level = match[1].length; // 标题级别，由#的数量决定
-    const title = match[2].trim(); // 标题文本
-    // id 就是把标题的空格转换成了 -
-    const id = title.toLowerCase().replace(/\s+/g, '-');
+  const lines = markdown.split('\n');
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
 
-    const item = { title: title, level: level, id: id, children: [] };
-
-    if (level > lastLevel) {
-      // 如果当前级别比上一级别深，则进入更深的一层
-      stack[stack.length - 1].children.push(item);
-      stack.push(item); // 更新栈顶为新添加的项
-    } else if (level < lastLevel) {
-      // 如果当前级别比上一级别浅，则返回到较浅的层次
-      for (let i = 0; i < lastLevel - level; i++) {
-        stack.pop(); // 弹出栈顶元素，回到上一层级
-      }
-      stack[stack.length - 1].children.push(item);
-      stack.push(item); // 更新栈顶为新添加的项
-    } else {
-      // 如果当前级别与上一级别相同，则在同一层级添加
-      stack.pop(); // 移除旧的同级项
-      stack[stack.length - 1].children.push(item);
-      stack.push(item); // 更新栈顶为新添加的项
+    if (codeBlockStartRegex.test(line)) {
+      // 如果遇到代码块开始或结束的标记，则切换inCodeBlock标志位
+      inCodeBlock = !inCodeBlock;
+      continue; // 跳过代码块中的行
     }
 
-    lastLevel = level;
+    if (!inCodeBlock && (match = headingRegex.exec(line)) !== null) {
+      headingRegex.lastIndex = 0; // 重置正则表达式的索引，以便下一次匹配能从头开始
+      const level = match[1].length; // 标题级别，由#的数量决定
+      const title = match[2].trim(); // 标题文本
+      // id 就是把标题的空格转换成了 -
+      const id = title.toLowerCase().replace(/\s+/g, '-');
+
+      const item = { title: title, level: level, id: id, children: [] };
+
+      if (level > lastLevel) {
+        // 如果当前级别比上一级别深，则进入更深的一层
+        stack[stack.length - 1].children.push(item);
+        stack.push(item); // 更新栈顶为新添加的项
+      } else if (level < lastLevel) {
+        // 如果当前级别比上一级别浅，则返回到较浅的层次
+        for (let i = 0; i < lastLevel - level; i++) {
+          stack.pop(); // 弹出栈顶元素，回到上一层级
+        }
+        stack[stack.length - 1].children.push(item);
+        stack.push(item); // 更新栈顶为新添加的项
+      } else {
+        // 如果当前级别与上一级别相同，则在同一层级添加
+        stack.pop(); // 移除旧的同级项
+        stack[stack.length - 1].children.push(item);
+        stack.push(item); // 更新栈顶为新添加的项
+      }
+
+      lastLevel = level;
+    }
   }
 
   return toc;

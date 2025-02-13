@@ -17,7 +17,7 @@ export default async function PostPage({ params }: Props) {
 
   return (
     <div className="flex">
-      <main className="w-full max-w-[75%] px-4">
+      <main className="w-full max-w-[75%] p-4">
         <CustomMDX source={post.content} />
       </main>
       <div className="w-full max-w-[25%]">
