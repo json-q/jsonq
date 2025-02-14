@@ -8,7 +8,7 @@ type Props = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
-export default async function PostPage({ params }: Props) {
+export default async function PostDetail({ params }: Props) {
   const { slug } = await params;
 
   const post = getPostBySlug(slug);
@@ -17,7 +17,7 @@ export default async function PostPage({ params }: Props) {
 
   return (
     <div className="flex">
-      <main className="w-full max-w-[75%] p-4">
+      <main className="w-full max-w-full px-12 py-4 md:max-w-[75%]">
         <CustomMDX source={post.content} />
       </main>
       <div className="w-full max-w-[25%]">
