@@ -17,7 +17,7 @@ export default function RootLayout({
           <div className="container flex h-14 items-center">000</div>
         </div>
       </header>
-      <article className="prose m-auto max-w-full dark:prose-invert">{children}</article>
+      <article className="prose m-auto dark:prose-invert md:max-w-[90%]">{children}</article>
     </>
   );
 }

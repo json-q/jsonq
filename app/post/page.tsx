@@ -1,3 +1,13 @@
+import { getAllPost } from '~/utils/postData';
+
 export default function PostList() {
-  return <>Post List</>;
+  const allPosts = getAllPost();
+
+  return (
+    <>
+      {allPosts.map((post) => (
+        <p key={post.slug}>{post.readingTime}</p>
+      ))}
+    </>
+  );
 }

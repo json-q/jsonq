@@ -1,4 +1,4 @@
-const { mkdirSync, readdirSync, readFileSync, writeFileSync, statSync } = require('fs');
+const { mkdirSync, readdirSync, readFileSync, writeFileSync } = require('fs');
 const { join, basename, extname } = require('path');
 const readingTime = require('reading-time');
 const dayjs = require('dayjs');
@@ -6,7 +6,8 @@ const dayjs = require('dayjs');
 /**
  * @typedef {Object} Metadata - 元数据对象。
  * @property {string} title - 文章标题。
- * @property {string} date - 发布日期。
+ * @property {string} date - 文章发布时间。
+ * @property {string} order - 文章顺序
  */
 
 /**
@@ -15,6 +16,19 @@ const dayjs = require('dayjs');
  * @property {number} level - 标题深度
  * @property {string} id - 标题的 id，和 html 的 id 对应
  * @property {Array<Toc>} children - 嵌套标题数据
+ */
+
+/**
+ * @typedef {Object} PostJsonData - 文章json数据
+ * @property {string} title - 标题
+ * @property {string} publishedAt - 发布时间，格式化
+ * @property {string} order - 文章顺序
+ * @property {string} url - 文章路由
+ * @property {number} slug - 文章参数（文件名）
+ * @property {string} readingTime - 阅读时长
+ * @property {number} wordCount - 文章字数
+ * @property {string} content - 文章md内容
+ * @property {Toc} toc - 目录结构
  */
 
 /**
@@ -158,45 +172,23 @@ function createMDXData(dir) {
           const { frontMatter, content, toc } = readMDXFile(file);
           const slug = basename(file, extname(file));
           return {
-            ...frontMatter,
+            title: frontMatter.title,
+            publishedAt: dayjs(frontMatter.date).format('YYYY-MM-DD'),
+            order: Number(frontMatter.order) || 0,
             url: `/blog/${slug}`,
             slug,
-            publishedAt: dayjs(frontMatter.date).format('YYYY-MM-DD'),
             readingTime: readingTime(content).text,
             wordCount: content.split(/\s+/gu).length,
             content,
             toc,
           };
         })
-        .sort((a, b) => {
-          return new Date(b.date).getTime() - new Date(a.date).getTime();
-        }),
+        .filter((item) => item.slug != 'README')
+        .sort((a, b) => a.order - b.order),
     ),
     'utf-8',
   );
   console.log('successfully generated!');
 }
-/**
- * @param {string} dir
- */
-function createPostCategory(dir) {
-  const files = readdirSync(dir);
 
-  const directories = files
-    .map((file) => {
-      const fullPath = join(dir, file);
-      const stats = statSync(fullPath);
-      if (stats.isDirectory()) {
-        return file;
-      }
-    })
-    .filter((dir) => Boolean(dir)); // 过滤掉非目录项
-
-  mkdirSync('generated', { recursive: true });
-
-  writeFileSync(join(__dirname, '../generated/category.json'), JSON.stringify(directories));
-}
-
-createMDXData(join(__dirname, '../posts'));
-
-createPostCategory(join(__dirname, '../posts'));
+createMDXData(join(__dirname, '../post'));
