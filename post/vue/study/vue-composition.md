@@ -1,3 +1,8 @@
+---
+title: Vue3 组合式 API
+date: 2023-06-11
+---
+
 # setup
 
 `setup` 函数实际上就是 选项式 API 的 data 函数 和 methods 函数 的合集

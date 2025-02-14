@@ -1,3 +1,8 @@
+---
+title: Docker
+date: 2024-11-02
+---
+
 # 服务器安装 Docker
 
 参考地址: https://docs.docker.com/engine/install/centos/

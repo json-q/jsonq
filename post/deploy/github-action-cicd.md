@@ -1,3 +1,8 @@
+---
+title: Github Action CICD 自动部署
+date: 2024-11-14
+---
+
 使用 Github Action 的原因是，jenkins 占用的服务器资源较多，低配置服务器 jenkins 很容易资源打满。
 
 # 了解 Github Action

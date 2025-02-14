@@ -1,3 +1,8 @@
+---
+title: react API层性能优化
+date: 2024-05-28
+---
+
 react 无法做到像 vue 一样自动收集依赖更新（期待 react19 的 React Compiler），需要开发人员手动的进行性能优化，此时 `memo`、`useCallback`、`useMemo`、`useRef` 就是性能优化中的重要 API
 
 > 本文虽然介绍可应用场景，但是正常开发中，尤其是 `useCallback`。除非遇到性能问题或者组件封装，亦或是能力足够，否则不建议轻易各处使用 `useCallback`，迭代过程中滥用的话，很可能出现屎山，甚至导致问题难以排查

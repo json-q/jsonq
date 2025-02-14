@@ -7,7 +7,6 @@ const dayjs = require('dayjs');
  * @typedef {Object} Metadata - 元数据对象。
  * @property {string} title - 文章标题。
  * @property {string} date - 文章发布时间。
- * @property {string} order - 文章顺序
  */
 
 /**
@@ -22,7 +21,6 @@ const dayjs = require('dayjs');
  * @typedef {Object} PostJsonData - 文章json数据
  * @property {string} title - 标题
  * @property {string} publishedAt - 发布时间，格式化
- * @property {string} order - 文章顺序
  * @property {string} url - 文章路由
  * @property {number} slug - 文章参数（文件名）
  * @property {string} readingTime - 阅读时长
@@ -173,7 +171,7 @@ function createMDXData(dir) {
           const slug = basename(file, extname(file));
           return {
             title: frontMatter.title,
-            publishedAt: dayjs(frontMatter.date).format('YYYY-MM-DD'),
+            publishedAt: dayjs(frontMatter.date).format('YYYY-MM-DD HH:mm'),
             order: Number(frontMatter.order) || 0,
             url: `/blog/${slug}`,
             slug,
@@ -184,7 +182,9 @@ function createMDXData(dir) {
           };
         })
         .filter((item) => item.slug != 'README')
-        .sort((a, b) => a.order - b.order),
+        .sort((a, b) => {
+          return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
+        }),
     ),
     'utf-8',
   );

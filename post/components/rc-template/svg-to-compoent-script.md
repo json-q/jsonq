@@ -1,3 +1,8 @@
+---
+title: 从零到一构建并打包 React + TypeScript + Less组件库系列（四、Icon 图标组件库自动生成 svg 组件）
+date: 2024-11-15 15:58
+---
+
 点击查看此次 [commit](https://github.com/json-q/rc-library-templete/commit/afa917602d3578d229c8c02614bbf50a47ca24a8)
 
 # 了解流行组件库的 Icon 组件

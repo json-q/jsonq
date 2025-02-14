@@ -1,3 +1,8 @@
+---
+title: 微信小程序项目构建问题
+date: 2023-08-16
+---
+
 ## TS 项目构建 npm 出错
 
 使用微信开发者工具构建 npm 时出现 `NPM packages not found. Please confirm npm packages which need to build are belong to miniprogramRoot directory…` 的错误

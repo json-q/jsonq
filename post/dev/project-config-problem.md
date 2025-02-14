@@ -1,3 +1,8 @@
+---
+title: 项目配置问题汇总
+date: 2024-11-07
+---
+
 # 项目配置问题汇总
 
 ## vue+ts 项目使用 unplugin-auto-import 类型为 unknown

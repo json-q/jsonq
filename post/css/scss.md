@@ -1,3 +1,8 @@
+---
+title: Sass 语法
+date: 2024-10-23
+---
+
 Why Not less？
 
 感觉 scss 语法更贴近 js 的语法，更易于阅读。

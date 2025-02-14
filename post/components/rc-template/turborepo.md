@@ -1,3 +1,8 @@
+---
+title: 从零到一构建并打包 React + TypeScript + Less组件库系列（三、turborepo 集成）
+date: 2024-11-14 15:32
+---
+
 点击查看此次 [commit](https://github.com/json-q/rc-library-templete/commit/ce05a078ffce16f01e1c622a9f2cbf8ac7a1f5e5)
 
 [`turborepo`](https://turbo.build/repo/docs) 就是专门做构建用的，对于 `monorepo` 项目来说更适合，构建缓存等可以大大优化开发体验。如果只是基本使用，甚至可以把它当作一个大号的 [`npm-run-all2`](https://www.npmjs.com/package/npm-run-all2)，基本功能会用就行，这里不过多介绍相关细节知识，大家自行探索。

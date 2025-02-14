@@ -1,3 +1,8 @@
+---
+title: Vue 组件
+date: 2023-06-09
+---
+
 # Vue 的组件化
 
 ?> 由于组件化特殊，需采用 `vue cli` 创建项目。如何安装 Vue cli 请见[初识 Vue3](/post/vue/basic/vue-know.md#如何使用-vue)

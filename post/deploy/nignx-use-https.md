@@ -1,3 +1,8 @@
+---
+title: Nginx 离线配置 ssl 证书使用 https
+date: 2024-04-07
+---
+
 纯离线的内网环境中使用 nginx 配置 ssl 并使用 https 访问网站。对于服务器中 nginx 及其它环境的搭建，可参考我的该文章 [Linux Centos7 离线部署 SpringBoot 前后端分离项目](/post/deploy/linux-offline-deploy.md)，该文章的环境是以此文章的基础上进行搭建的。同时，该文章涉及的部分安装包已提供在以上文章的开头部分。
 
 # 检查环境

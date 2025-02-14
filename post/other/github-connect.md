@@ -1,3 +1,8 @@
+---
+title: 连接 Github 的 host 文件配置
+date: 2025-02-13
+---
+
 # github 连接（代码提交）
 
 vpn 代理对网页访问可以，对 github 的命令行无效，但是鉴于部分人没有代理软件，而且想要访问 GitHub，就只能去修改 `host` 文件，该文件位于 `C:\Windows\System32\drivers\etc` 下，host 的代理配置会经常更改，此处列出截至 2025-02-23 号的 host 文件配置。

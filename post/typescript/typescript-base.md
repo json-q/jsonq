@@ -1,3 +1,8 @@
+---
+title: TS 基础
+date: 2024-04-29
+---
+
 # TS 认知
 
 安装 TypeScript 编译环境

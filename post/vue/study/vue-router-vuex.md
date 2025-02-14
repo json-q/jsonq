@@ -1,3 +1,8 @@
+---
+title: Vue 路由 状态管理
+date: 2023-06-14
+---
+
 # vue-router
 
 安装 vue-router

@@ -6,7 +6,7 @@ export default function PostList() {
   return (
     <>
       {allPosts.map((post) => (
-        <p key={post.slug}>{post.readingTime}</p>
+        <p key={post.slug}>{post.title}</p>
       ))}
     </>
   );

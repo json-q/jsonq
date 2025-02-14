@@ -1,3 +1,8 @@
+---
+title: Springboot 集成 MinIO
+date: 2024-04-27
+---
+
 由后端集中管理 minio 的 SDK 调用，而非前端对接 minio
 
 # 基本配置
