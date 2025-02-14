@@ -1,5 +1,5 @@
 ---
-title: Docker
+title: Docker 学习
 date: 2024-11-02
 ---
 
@@ -85,7 +85,9 @@ sudo tee /etc/docker/daemon.json <<-'EOF'
     "https://docker.udayun.com",
     "https://docker.211678.top",
     "https://docker.nju.edu.cn",
-    "https://mirror.iscas.ac.cn"
+    "https://mirror.iscas.ac.cn",
+    "https://docker.xuanyuan.me",
+    "https://docker.1ms.run"
   ]
 }
 EOF
@@ -186,7 +188,7 @@ docker pull hub.uuuadc.top/library/mysql:5.7
 
 ## 进入容器
 
-以 nginx 为例，`docker exce -it <容器id | 容器名称> bash` 即可进入 nginx 容器
+以 nginx 为例，`docker exec -it <容器id | 容器名称> bash` 即可进入 nginx 容器
 
 进入之后，`ls /` 查看可知，容器内容就是一个小型的 linux 环境，就可以像正常操作 linux 一样操作容器了。退出容器时，使用 `exit` 即可。
 

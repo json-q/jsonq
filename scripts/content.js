@@ -1,7 +1,6 @@
 const { mkdirSync, readdirSync, readFileSync, writeFileSync } = require('fs');
 const { join, basename, extname } = require('path');
 const readingTime = require('reading-time');
-const dayjs = require('dayjs');
 
 /**
  * @typedef {Object} Metadata - 元数据对象。
@@ -22,7 +21,7 @@ const dayjs = require('dayjs');
  * @property {string} title - 标题
  * @property {string} publishedAt - 发布时间，格式化
  * @property {string} url - 文章路由
- * @property {number} slug - 文章参数（文件名）
+ * @property {string} slug - 文章参数（文件名）
  * @property {string} readingTime - 阅读时长
  * @property {number} wordCount - 文章字数
  * @property {string} content - 文章md内容
@@ -171,9 +170,9 @@ function createMDXData(dir) {
           const slug = basename(file, extname(file));
           return {
             title: frontMatter.title,
-            publishedAt: dayjs(frontMatter.date).format('YYYY-MM-DD HH:mm'),
+            publishedAt: frontMatter.date,
             order: Number(frontMatter.order) || 0,
-            url: `/blog/${slug}`,
+            url: `/post/${slug}`,
             slug,
             readingTime: readingTime(content).text,
             wordCount: content.split(/\s+/gu).length,
