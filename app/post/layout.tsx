@@ -11,13 +11,8 @@ export default function PostLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
-      <header className="border-grid sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container-wrapper">
-          <div className="container flex h-14 items-center">000</div>
-        </div>
-      </header>
-      <article className="prose m-auto dark:prose-invert md:max-w-[90%]">{children}</article>
-    </>
+    <article className="container-wrapper prose dark:prose-invert">
+      <div className="container">{children}</div>
+    </article>
   );
 }

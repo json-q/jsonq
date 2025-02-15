@@ -75,7 +75,8 @@ export default {
               color: theme('colors.pink.600'),
             },
             h1: {
-              marginBottom: 0,
+              marginTop: '0.75rem',
+              marginBottom: '0.75rem',
             },
             h2: {
               fontWeight: theme('fontWeight.extrabold'),

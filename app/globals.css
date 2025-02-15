@@ -3,6 +3,15 @@
 @tailwind utilities;
 
 @layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer base {
   :root {
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
@@ -57,14 +66,6 @@
     --chart-5: 340 75% 55%;
   }
 }
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
 
 * {
   scrollbar-width: thin;
@@ -72,18 +73,56 @@
 }
 
 .md-header {
-  display: flex;
-  align-items: center;
-  gap: 5px;
+  @apply flex items-center gap-1;
 }
 
 .md-header > a {
-  width: 0;
-  opacity: 0;
-  transition: all 0.2s ease-in-out;
+  @apply w-0 opacity-0 transition-all duration-200 ease-in-out;
 }
 
 .md-header:hover > a {
   width: 20px;
   opacity: 1;
+}
+
+/* layout */
+.container-wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: 1400px;
+  border-style: dashed;
+  border-color: hsl(var(--border) / 0.7);
+}
+
+.container-wrapper:is(.dark *) {
+  border-color: hsl(var(--border));
+}
+
+@media (min-width: 1400px) {
+  .container-wrapper {
+    border-left-width: 1px;
+    border-right-width: 1px;
+  }
+}
+
+@media (min-width: 1800px) {
+  .container-wrapper {
+    max-width: 1536px;
+  }
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1536px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 1280px) {
+  .container {
+    padding-left: 3.5rem;
+    padding-right: 3.5rem;
+  }
 }
