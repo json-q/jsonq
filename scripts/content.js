@@ -2,6 +2,8 @@ const { mkdirSync, readdirSync, readFileSync, writeFileSync } = require('fs');
 const { join, basename, extname } = require('path');
 const readingTime = require('reading-time');
 
+const POST_DIR = 'post';
+
 /**
  * @typedef {Object} Metadata - 元数据对象。
  * @property {string} title - 文章标题。
@@ -111,7 +113,17 @@ function parseFrontmatter(fileContent) {
     });
   }
 
-  const content = fileContent.replace(frontmatterRegex, '').trim();
+  const normalContent = fileContent.replace(frontmatterRegex, '').trim();
+
+  const innerLinkReg = new RegExp(`\\[([^\\]]+)\\]\\(/${POST_DIR}/([^)]+)\\)`, 'g');
+
+  // 替换链接中的中间路径部分（md 中指向的是本地文件，存在嵌套文件夹，但是生成的 url 不包含嵌套，会 404）
+  const content = normalContent.replace(innerLinkReg, (match, text, path) => {
+    // 如果路径中的连接地址存在 .md 后缀，去掉
+    const filename = path.split('/').pop().replace(/\.md$/, '');
+    return `[${text}](/${POST_DIR}/${filename})`;
+  });
+
   const toc = extractToc(content);
 
   return { frontMatter: metadata, content, toc };
@@ -172,7 +184,7 @@ function createMDXData(dir) {
             title: frontMatter.title,
             publishedAt: frontMatter.date,
             order: Number(frontMatter.order) || 0,
-            url: `/post/${slug}`,
+            url: `/${POST_DIR}/${slug}`,
             slug,
             readingTime: readingTime(content).text,
             wordCount: content.split(/\s+/gu).length,
@@ -190,4 +202,4 @@ function createMDXData(dir) {
   console.log('😊 successfully generated!');
 }
 
-createMDXData(join(__dirname, '../post'));
+createMDXData(join(__dirname, `../${POST_DIR}`));

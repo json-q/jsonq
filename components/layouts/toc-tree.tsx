@@ -10,12 +10,12 @@ const TocTree = (props: { toc: Toc[] }) => {
       {toc.map(
         (item) =>
           // only render h1, h2, h3
-          item.level <= 3 && (
+          item.level <= 4 && (
             <li key={item.id} className="mb-2 mt-0 p-0">
               <a
                 className="block text-gray-700 no-underline hover:text-blue-600"
                 href={`#${item.id}`}
-                style={{ paddingLeft: `${(item.level - 1) * 0.5}rem` }}
+                style={{ paddingLeft: `${(item.level - 1) * 0.8}rem` }}
               >
                 {item.title}
               </a>
