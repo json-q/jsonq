@@ -7,6 +7,8 @@ import rehypeCodeTitles from 'rehype-code-titles';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import { fromHtmlIsomorphic } from 'hast-util-from-html-isomorphic';
 import rehypePrism from 'rehype-prism-plus';
+import rehypeRaw from 'rehype-raw';
+import rehypeSanitize from 'rehype-sanitize';
 
 import CustomMDXComponents from '.';
 
@@ -19,6 +21,13 @@ export default function CustomMDX(props: React.JSX.IntrinsicAttributes & MDXRemo
         mdxOptions: {
           remarkPlugins: [remarkGfm],
           rehypePlugins: [
+            rehypeSanitize,
+            [
+              rehypeRaw,
+              {
+                passThrough: ['pre', 'style', 'div', 'body', 'span'], // 根据需要调整此数组
+              },
+            ],
             [
               rehypePrettyCode,
               {

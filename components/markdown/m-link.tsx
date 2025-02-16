@@ -1,10 +1,11 @@
 import Link from 'next/link';
 
-const CustomLink = (props: React.JSX.IntrinsicElements['a']) => {
-  const { href, ...restProps } = props;
+const MLink = (props: React.JSX.IntrinsicElements['a']) => {
+  const { href } = props;
   if (href!.startsWith('#')) return <a {...props} />;
 
-  if (!href!.startsWith('/')) {
+  // 外部链接
+  if (href!.startsWith('http')) {
     props = {
       target: '_blank',
       rel: 'noopener noreferrer',
@@ -12,7 +13,9 @@ const CustomLink = (props: React.JSX.IntrinsicElements['a']) => {
     };
   }
 
-  return <Link href={href!} {...restProps} />;
+  const { href: link, ...restProps } = props;
+
+  return <Link href={link!} {...restProps} />;
 };
 
-export default CustomLink;
+export default MLink;

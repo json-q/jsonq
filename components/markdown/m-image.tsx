@@ -1,6 +1,6 @@
 import Image, { ImageProps } from 'next/image';
 
-export default function CustomImg({ src, alt, width, height, ...props }: ImageProps) {
+export default function MImg({ src, alt, width, height, ...props }: ImageProps) {
   return (
     <Image
       {...props}

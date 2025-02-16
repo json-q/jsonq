@@ -6,7 +6,7 @@ export default function PostList() {
   const allPosts = getAllPost();
 
   return (
-    <ul>
+    <ul className="m-0 p-0">
       {allPosts.map((post) => (
         <Link
           key={post.url}

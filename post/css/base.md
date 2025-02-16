@@ -34,14 +34,10 @@ date: 2022-10-21
 
 ## 文本属性
 
-1. **_text-decoration_**  
-   文本添加横线（下划线：`underline`、删除线：`line-through`、上划线：`overline`、去除横线：`none`）
-2. **_text-transform_**  
-   针对英文的大小写转换（首字母大写：`capitalize`、所有字符大写：`uppercase`、所有字符小写：`lowercase`、无影响：`none`）
-3. **_text-indent_**  
-   首行文本缩进两个字符：`2em`
-4. **_text-align（重要）_**  
-   定义**行内内容（例如文字[inline / inline-block]）**相对于它的**块级父元素**对齐
+1. **_text-decoration_** 文本添加横线（下划线：`underline`、删除线：`line-through`、上划线：`overline`、去除横线：`none`）
+2. **_text-transform_** 针对英文的大小写转换（首字母大写：`capitalize`、所有字符大写：`uppercase`、所有字符小写：`lowercase`、无影响：`none`）
+3. **_text-indent_** 首行文本缩进两个字符：`2em`
+4. **_text-align（重要）_** 定义**行内内容（例如文字[inline / inline-block]）**相对于它的**块级父元素**对齐
 
    - ` align`、`left`、`right`
    - `justify`：两端对齐，需配合其它 css 使用，只有一行情况下无法实现。
@@ -55,25 +51,17 @@ date: 2022-10-21
      ```
      > `text-align` 只针对行内或行内块元素相对于父级块元素居中，无法使块级元素在块级元素内居中。需使用 `margin:0 auto;`
 
-5. **_word/letter-spacing_**  
-   `letter-spacing`、`word-spacing` 分别用于设置字母、单词之间的间距
+5. **_word/letter-spacing_** `letter-spacing`、`word-spacing` 分别用于设置字母、单词之间的间距
 
 ## 字体属性
 
-1. **_font-size_**  
-   `px em`，其中，em 是对父元素字体的继承,`1em=父元素的font-size`
-2. **_font-family_**  
-   设置文字的字体名称。浏览器会选择列表中第一个该计算机上有安装的字体。或者是通过 `@font-face` 指定的可以直接下载的字体
-3. **_font-weight_**  
-   文字粗细。[100-900]，`normal` 为 400，`bold` 为 700，常用为 700
-4. **_font-style_**  
-   常规显示：`normal`、斜体：`italic`（文字样式本身支持斜体）、倾斜：`oblique`（强制文字倾斜）
-5. **_font-variant_**  
-   常规显示：`normal`、小写字母替换为大写字母：`small-caps`（本身依旧是小写字母高度）
-6. **_line-height_**  
-   两行文字基线（baseline）之间的间距。string/number，纯数值，则是相对于父级字体的倍数相乘
-7. **_font_**  
-   font 属性可以用来作为 `font-style`, `font-variant`, `font-weight`, `font-size`, `line-height` 和 `font-family` 的简写
+1. **_font-size_** `px em`，其中，em 是对父元素字体的继承,`1em=父元素的font-size`
+2. **_font-family_** 设置文字的字体名称。浏览器会选择列表中第一个该计算机上有安装的字体。或者是通过 `@font-face` 指定的可以直接下载的字体
+3. **_font-weight_** 文字粗细。[100-900]，`normal` 为 400，`bold` 为 700，常用为 700
+4. **_font-style_** 常规显示：`normal`、斜体：`italic`（文字样式本身支持斜体）、倾斜：`oblique`（强制文字倾斜）
+5. **_font-variant_** 常规显示：`normal`、小写字母替换为大写字母：`small-caps`（本身依旧是小写字母高度）
+6. **_line-height_** 两行文字基线（baseline）之间的间距。string/number，纯数值，则是相对于父级字体的倍数相乘
+7. **_font_** font 属性可以用来作为 `font-style`, `font-variant`, `font-weight`, `font-size`, `line-height` 和 `font-family` 的简写
    - font-style、font-variant、font-weight 可以随意调换顺序，也可以省略
    - /line-height 可以省略，如果不省略，必须跟在 font-size 后面
    - font-size、font-family 不可以调换顺序，不可以省略
@@ -211,10 +199,7 @@ date: 2022-10-21
 
 ## 继承
 
-常见继承属性：  
-`color`、`cursor`、`font-family`、`font-size`、`font-style`、`font-variant`、`font-weight`、`font`  
-`letter-spacing`、`line-height`、`list-style`、`text-align`、`text-indent`、`text-shadow`、  
-`visibility`、`white-space`、`word-space`、`word-break`、`word-spacing`、`word-wrap`
+常见继承属性： `color`、`cursor`、`font-family`、`font-size`、`font-style`、`font-variant`、`font-weight`、`font` `letter-spacing`、`line-height`、`list-style`、`text-align`、`text-indent`、`text-shadow`、 `visibility`、`white-space`、`word-space`、`word-break`、`word-spacing`、`word-wrap`
 
 强制继承：
 
@@ -237,16 +222,6 @@ date: 2022-10-21
 
 如下图所示
 
-<pre>
-   <style>
-   .box {color: red; border: 2px solid blue;}
-   .box p { border: inherit;  }
-   </style>
-   <div class="box">
-      <p>this is p</p>
-   </div>
-</pre>
-
 ## 层叠
 
 权重越大，样式优先级更高同权重下，同样式下，后设置优先级更高
@@ -260,8 +235,7 @@ date: 2022-10-21
 
 ## 元素的类型
 
-块级元素、行内元素、行内块元素  
-可以通过 display 设置元素的类型
+块级元素、行内元素、行内块元素可以通过 display 设置元素的类型
 
 - `block`：让元素显示为块级元素
   - _独占父元素的一行_
@@ -316,8 +290,7 @@ HTML 中的每一个元素都可以看做是一个盒子，可以具备 4 个属
 
 **width height 宽高**
 
-内容区域为：width height。也可以设置：`min-width`、`max-width`、`min-height`、`max-height`  
-padding 的缩写的顺序为：`top right bottom left`
+内容区域为：width height。也可以设置：`min-width`、`max-width`、`min-height`、`max-height` padding 的缩写的顺序为：`top right bottom left`
 
 **padding 内边距**
 
@@ -349,19 +322,6 @@ padding 的缩写的顺序为：`top right bottom left`
 <div class="border-class"></div>
 ```
 
-<pre>
-  <style>
-    .border-class {
-      width: 200px;
-      height: 100px;
-      border-width: 5px;
-      border-color: red blue green orange;
-      border-style: solid dashed dotted double;
-    }
-  </style>
-  <div class="border-class"></div>
-</pre>
-
 ## margin
 
 - margin 属性用于设置盒子的**外边距**, 通常用于**元素和元素之间的间距**
@@ -389,11 +349,9 @@ padding 的缩写的顺序为：`top right bottom left`
 - **垂直方向上相邻** 2 个 margin（margin-top、margin-bottom）有**可能会合并为 1 个 margin**，这种现象叫做 collapse（折叠）
 - 水平方向上的 margin（margin-left、margin-right）永远不会 collapse
 
-折叠后最终值的计算规则:  
- 两个值进行比较，取较大的值
+折叠后最终值的计算规则: 两个值进行比较，取较大的值
 
-如何防止 margin collapse？  
- 只设置其中一个元素的 margin
+如何防止 margin collapse？只设置其中一个元素的 margin
 
 - 两个兄弟块级元素之间上下 margin 的折叠
   - 见上图
@@ -434,8 +392,7 @@ padding 的缩写的顺序为：`top right bottom left`
 
 [文字阴影在线调试](https://html-css-js.com/css/generator/text-shadow/)
 
-类似于 box-shadow，用于给文字添加阴影效果。  
-相当于 box-shadow, 它没有 `spread-radius` 和 `inset`的值
+类似于 box-shadow，用于给文字添加阴影效果。相当于 box-shadow, 它没有 `spread-radius` 和 `inset`的值
 
 **行内非替换元素**
 

@@ -97,10 +97,10 @@ sudo systemctl restart docker
 
 # 镜像操作（下载镜像）
 
-- docker search <name> : 搜索（docker hub）镜像
-- docker pull <name> : 拉取（docker hub）镜像
-- docker images : 查看已下载镜像
-- docker rmi <name> : 删除已有镜像
+- `docker search <name>` : 搜索（docker hub）镜像
+- `docker pull <name>` : 拉取（docker hub）镜像
+- `docker images` : 查看已下载镜像
+- `docker rmi <name>` : 删除已有镜像
 
 以 nginx 为例
 
