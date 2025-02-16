@@ -3,13 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "run-p dev:turbo watch generate",
+    "dev": "run-p watch generate dev:turbo ",
     "dev:turbo": "next dev --turbopack",
-    "build": "next build",
+    "build": "npm run generate && next build",
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write .",
-    "watch": "onchange posts/**/*.{md,mdx} -- npm run generate",
+    "watch": "onchange post/**/*.{md,mdx} -- npm run generate",
     "generate": "node ./scripts/content",
     "prepare": "husky"
   },

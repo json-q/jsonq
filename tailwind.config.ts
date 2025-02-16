@@ -59,7 +59,7 @@ export default {
           '5': 'hsl(var(--chart-5))',
         },
       },
-      typography: (theme) => ({
+      typography: (theme: (arg: string) => string) => ({
         DEFAULT: {
           css: {
             'blockquote p:first-of-type::before': { content: 'none' },

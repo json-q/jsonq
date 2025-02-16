@@ -187,7 +187,7 @@ function createMDXData(dir) {
     ),
     'utf-8',
   );
-  console.log('successfully generated!');
+  console.log('😊 successfully generated!');
 }
 
 createMDXData(join(__dirname, '../post'));
