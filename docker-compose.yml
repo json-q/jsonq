@@ -1,0 +1,16 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: blog-next
+    ports:
+      - 3000:3000
+    networks:
+      - nginx-minio-network
+    volumes:
+      - /data/container/jsonq:/app
+
+networks:
+  nginx-minio-network:
+    external: true
