@@ -1,5 +1,5 @@
 # 指定基础镜像版本，确保每次构建都是幂等的
-FROM node:18-alpine AS base
+FROM node:20-alpine AS base
 
 FROM base AS builder
 
