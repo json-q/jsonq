@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: nextjs
+    image: nextjs # docker build -t nextjs .
     container_name: blog
     ports:
       - 3000:3000
