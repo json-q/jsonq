@@ -542,8 +542,6 @@ packages:
       '@types/react':
         optional: true
 
-<<<<<<< HEAD
-=======
   '@radix-ui/react-dialog@1.1.6':
     resolution: {integrity: sha512-/IVhJV5AceX620DUJ4uYVMymzsipdKBzo3edo+omeskCKGm9FRHM0ebIdbPnlQVJqyuHbuBltQUOG2mOTq2IYw==}
     peerDependencies:
@@ -557,7 +555,6 @@ packages:
       '@types/react-dom':
         optional: true
 
->>>>>>> 4562034a2ab953b7feddb3fc4889ba8faa57cb19
   '@radix-ui/react-direction@1.1.0':
     resolution: {integrity: sha512-BUuBvgThEiAXh2DWu93XsT+a3aWrGqolGlqqw5VU1kG7p/ZH2cuDlM1sRLNnY3QcBS69UIz2mcKhMxDsdewhjg==}
     peerDependencies:
@@ -3445,8 +3442,6 @@ snapshots:
     optionalDependencies:
       '@types/react': 19.0.8
 
-<<<<<<< HEAD
-=======
   '@radix-ui/react-dialog@1.1.6(@types/react-dom@19.0.3(@types/react@19.0.8))(@types/react@19.0.8)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
       '@radix-ui/primitive': 1.1.1
@@ -3469,7 +3464,6 @@ snapshots:
       '@types/react': 19.0.8
       '@types/react-dom': 19.0.3(@types/react@19.0.8)
 
->>>>>>> 4562034a2ab953b7feddb3fc4889ba8faa57cb19
   '@radix-ui/react-direction@1.1.0(@types/react@19.0.8)(react@19.0.0)':
     dependencies:
       react: 19.0.0
