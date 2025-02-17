@@ -27,6 +27,8 @@ jobs:
           SSH_USER: ${{ secrets.SSH_USER }}
           BLOG_PATH_REMOTE: ${{ secrets.BLOG_PATH_REMOTE }}
         run: |
+          ssh-keyscan $SSH_HOST >> ~/.ssh/known_hosts
+          ssh $SSH_USER@$SSH_HOST  << EOF
           cd $BLOG_PATH_REMOTE
 
           MAX_RETRIES=8
