@@ -3,13 +3,12 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: blog-next
+    image: nextjs # docker build -t nextjs .
+    container_name: blog
     ports:
       - 3000:3000
     networks:
       - nginx-minio-network
-    volumes:
-      - /data/container/jsonq:/app
 
 networks:
   nginx-minio-network:

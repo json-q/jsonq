@@ -1,0 +1,55 @@
+name: Push to Server
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: ssh connect server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }} # ip address
+          username: ${{ secrets.SSH_USER }} # server username
+          key: ${{ secrets.SSH_PRIVATE_KEY }} # server ssh private key
+
+      - name: Run Script to Push serve
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          BLOG_PATH_REMOTE: ${{ secrets.BLOG_PATH_REMOTE }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan $SSH_HOST >> ~/.ssh/known_hosts
+          ssh $SSH_USER@$SSH_HOST  << EOF
+          cd $BLOG_PATH_REMOTE
+
+          MAX_RETRIES=8
+          RETRY_COUNT=0
+
+          while [ \$RETRY_COUNT -lt \$MAX_RETRIES ]; do
+            if git pull origin main; then
+              break  # pull succesful exit
+            else
+              echo "Git pull failed, retrying (\$((RETRY_COUNT + 1)) of \$MAX_RETRIES)..."
+              ((RETRY_COUNT++))
+              sleep 5
+            fi
+          done
+
+          # check if retry count exceeded
+          if [ \$RETRY_COUNT -eq \$MAX_RETRIES ]; then
+            echo "Failed to pull code after \$MAX_RETRIES attempts. Exiting."
+            exit 1  # throw error
+          fi
+          EOF

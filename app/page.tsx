@@ -1,3 +1,5 @@
+import { MH1 } from '~/components/markdown/m-typography';
+
 export default function Home() {
-  return <div>0000</div>;
+  return <MH1 className="my-8">Home: 页面建设中...</MH1>;
 }
