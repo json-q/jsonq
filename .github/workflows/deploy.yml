@@ -21,16 +21,17 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }} # server ssh private key
           script: |
             BLOG_PATH_REMOTE=${{ secrets.BLOG_PATH_REMOTE }}
-            cd $BLOG_PATH_REMOTE
+            cd "$BLOG_PATH_REMOTE"
 
             MAX_RETRIES=8
             RETRY_COUNT=0
 
-            while [ \$RETRY_COUNT -lt \$MAX_RETRIES ]; do
+            while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
               if git pull origin main; then
-                break  # pull succesful exit
+                echo "Git pull successful."
+                break  # pull successful, exit loop
               else
-                echo "Git pull failed, retrying (\$((RETRY_COUNT + 1)) of \$MAX_RETRIES)..."
+                echo "Git pull failed, retrying ($((RETRY_COUNT + 1)) of $MAX_RETRIES)..."
                 ((RETRY_COUNT++))
                 sleep 5
               fi
@@ -41,4 +42,3 @@ jobs:
               echo "Failed to pull code after \$MAX_RETRIES attempts. Exiting."
               exit 1  # throw error
             fi
-            EOF
