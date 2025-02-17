@@ -15,7 +15,7 @@ WORKDIR /app
 
 # pnpm fetch does require only lockfile
 # 注意还需要复制 `.npmrc`，因为里面可能包含 npm registry 等配置，下载依赖需要用到
-COPY pnpm-lock.yaml ./
+COPY package.json pnpm-lock.yaml ./
 COPY patches ./patches
 
 # 推荐使用 pnpm fetch 命令下载依赖到 virtual store，专为 docker 构建优化
