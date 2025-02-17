@@ -8,8 +8,6 @@ services:
       - 3000:3000
     networks:
       - nginx-minio-network
-    volumes:
-      - /data/container/jsonq/dist:/app
 
 networks:
   nginx-minio-network:
