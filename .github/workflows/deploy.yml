@@ -27,11 +27,6 @@ jobs:
           SSH_USER: ${{ secrets.SSH_USER }}
           BLOG_PATH_REMOTE: ${{ secrets.BLOG_PATH_REMOTE }}
         run: |
-          mkdir -p ~/.ssh
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan $SSH_HOST >> ~/.ssh/known_hosts
-          ssh $SSH_USER@$SSH_HOST  << 'EOF'
           cd $BLOG_PATH_REMOTE
 
           MAX_RETRIES=8
@@ -39,7 +34,7 @@ jobs:
 
           while [ \$RETRY_COUNT -lt \$MAX_RETRIES ]; do
             if git pull origin main; then
-              break  # pull successful, exit loop
+              break  # pull succesful exit
             else
               echo "Git pull failed, retrying (\$((RETRY_COUNT + 1)) of \$MAX_RETRIES)..."
               ((RETRY_COUNT++))
@@ -52,20 +47,4 @@ jobs:
             echo "Failed to pull code after \$MAX_RETRIES attempts. Exiting."
             exit 1  # throw error
           fi
-
-          # Build Docker image
-          docker build -t nextjs .
-
-          # Stop the running container (if any)
-          if docker ps -q --filter "name=blog" | grep -q .; then
-            docker stop blog
-          fi
-
-          # Remove the stopped container (optional, but recommended for cleanup)
-          if docker ps -aq --filter "name=blog" | grep -q .; then
-            docker rm blog
-          fi
-
-          # Start the new container using docker-compose
-          docker compose up -d
           EOF
