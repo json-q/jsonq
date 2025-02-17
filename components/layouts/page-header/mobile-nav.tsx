@@ -34,6 +34,11 @@ export default function MobileNav() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="ml-4">
+        <Link href="/">
+          <DropdownMenuItem className={cn({ 'bg-gray-100': pathname == '/' })}>
+            首页
+          </DropdownMenuItem>
+        </Link>
         {siteConfig.navs.map((item) => (
           <Link href={item.href} key={item.href}>
             <DropdownMenuItem className={cn({ 'bg-gray-100': pathname == item.href })}>
