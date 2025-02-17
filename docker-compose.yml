@@ -9,7 +9,7 @@ services:
     networks:
       - nginx-minio-network
     volumes:
-      - /data/container/jsonq:/app
+      - /data/container/jsonq/dist:/app
 
 networks:
   nginx-minio-network:
