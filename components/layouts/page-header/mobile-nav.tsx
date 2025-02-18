@@ -9,7 +9,7 @@ import {
   DropdownMenuTrigger,
 } from '~/components/ui/dropdown-menu';
 import { cn } from '~/lib/utils';
-import { siteConfig } from './config';
+import siteConfig from '~/config/siteConfig';
 
 export default function MobileNav() {
   const pathname = usePathname();

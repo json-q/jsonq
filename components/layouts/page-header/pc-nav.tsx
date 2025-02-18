@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import SiteLogo from './icons/Logo';
-import { siteConfig } from './config';
+import siteConfig from '~/config/siteConfig';
 
 export default function PCNav() {
   return (

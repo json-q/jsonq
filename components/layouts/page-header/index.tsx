@@ -3,7 +3,7 @@ import CommandMenu from './command-menu';
 import MobileNav from './mobile-nav';
 import PCNav from './pc-nav';
 import Link from 'next/link';
-import { siteConfig } from './config';
+import siteConfig from '~/config/siteConfig';
 
 export default function PageHeader() {
   return (
@@ -17,7 +17,7 @@ export default function PageHeader() {
               <CommandMenu />
             </div>
             <nav className="flex items-center gap-0.5">
-              {siteConfig.links.map((item) => (
+              {siteConfig.externalLink.map((item) => (
                 <Button
                   key={item.title}
                   asChild
