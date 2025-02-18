@@ -11,9 +11,9 @@ export default function PostList() {
         <Link
           key={post.url}
           href={post.url}
-          className="text-inherit no-underline hover:text-inherit dark:text-inherit"
+          className="!text-inherit no-underline hover:text-inherit dark:hover:text-inherit"
         >
-          <li className="mb-4 flex w-full flex-col rounded border p-4 hover:bg-slate-50 hover:shadow-sm dark:border-slate-600 dark:bg-black dark:hover:bg-slate-900 dark:hover:shadow-sm">
+          <li className="mb-4 flex w-full flex-col rounded border p-4 hover:bg-slate-50 hover:shadow-sm dark:border-slate-600 dark:hover:bg-accent dark:hover:shadow-sm">
             <h5 className="font-bold">{post.title}</h5>
             <div className="flex justify-between">
               <time className="mt-2 text-sm text-slate-400">

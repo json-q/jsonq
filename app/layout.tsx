@@ -3,7 +3,6 @@ import { ThemeProvider } from 'next-themes';
 import PageHeader from '~/components/layouts/page-header';
 import './globals.css';
 import siteConfig from '~/config/siteConfig';
-import { ThemeChanger } from '~/components/layouts/page-header/theme';
 
 export const metadata: Metadata = {
   title: siteConfig.title,
@@ -21,7 +20,6 @@ export default function RootLayout({
         <ThemeProvider attribute="class" enableSystem enableColorScheme>
           <PageHeader />
           {children}
-          <ThemeChanger />
         </ThemeProvider>
       </body>
     </html>

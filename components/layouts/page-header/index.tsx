@@ -4,6 +4,7 @@ import MobileNav from './mobile-nav';
 import PCNav from './pc-nav';
 import Link from 'next/link';
 import siteConfig from '~/config/siteConfig';
+import ThemeSwitcher from './theme-switcher';
 
 export default function PageHeader() {
   return (
@@ -32,7 +33,7 @@ export default function PageHeader() {
                 </Button>
               ))}
 
-              {/* <ModeSwitcher /> */}
+              <ThemeSwitcher />
             </nav>
           </div>
         </div>
