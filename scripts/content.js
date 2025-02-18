@@ -27,7 +27,7 @@ const POST_DIR = 'post';
  * @property {string} readingTime - 阅读时长
  * @property {number} wordCount - 文章字数
  * @property {string} content - 文章md内容
- * @property {Toc} toc - 目录结构
+ * @property {Toc[]} toc - 目录结构
  */
 
 /**
@@ -183,7 +183,6 @@ function createMDXData(dir) {
           return {
             title: frontMatter.title,
             publishedAt: frontMatter.date,
-            order: Number(frontMatter.order) || 0,
             url: `/${POST_DIR}/${slug}`,
             slug,
             readingTime: readingTime(content).text,
