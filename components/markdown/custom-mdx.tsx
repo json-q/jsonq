@@ -32,7 +32,7 @@ export default function CustomMDX(props: React.JSX.IntrinsicAttributes & MDXRemo
               rehypePrettyCode,
               {
                 // 'one-dark-pro' | 'one-light'
-                theme: 'one-light',
+                theme: 'one-dark-pro',
               },
             ],
             rehypeSlug,
