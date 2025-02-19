@@ -56,12 +56,12 @@ export default function TocTree() {
 
     throttledScrollHandler();
 
-    const a = Array.from(nodes.current).map((node) => ({
+    const extracToc = Array.from(nodes.current).map((node) => ({
       title: node.textContent,
       id: node.id,
       depth: +node.tagName[1],
     }));
-    setList(a);
+    setList(extracToc);
 
     window.addEventListener('scroll', throttledScrollHandler);
 

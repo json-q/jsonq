@@ -53,7 +53,7 @@ export function MP(props: React.JSX.IntrinsicElements['p']) {
 
 export function MUl(props: React.JSX.IntrinsicElements['ul']) {
   const { className, ...restProps } = props;
-  return <ul {...restProps} className={cn(className, 'ml-6 list-disc [&>li]:mt-2')} />;
+  return <ul {...restProps} className={cn(className, 'ml-4 list-disc [&>li]:mt-2')} />;
 }
 
 export function MBlockquote(props: React.JSX.IntrinsicElements['blockquote']) {

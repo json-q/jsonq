@@ -10,7 +10,6 @@ export default function MImg({ src, alt, width, height, ...props }: ImageProps) 
       height={height || 0}
       sizes="100vw"
       style={{ width: '100%', height: 'auto' }}
-      priority
     />
   );
 }
