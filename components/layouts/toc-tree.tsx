@@ -76,7 +76,8 @@ export default function TocTree() {
           <a
             href={`#${id}`}
             className={cn('text-gray-700 no-underline hover:text-blue-400 dark:text-gray-100', {
-              'text-blue-600': i === activeIndex,
+              'text-blue-400': i === activeIndex,
+              'dark:text-blue-400': i === activeIndex,
             })}
             style={{ paddingLeft: `${depth * 0.6}rem` }}
           >
