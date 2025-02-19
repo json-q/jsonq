@@ -2,6 +2,7 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
 import throttle from 'lodash.throttle';
 import { cn } from '~/lib/utils';
+import { useIsMobile } from '~/hooks/use-mobile';
 
 interface List {
   title: string | null;
@@ -14,6 +15,7 @@ export default function TocTree() {
   const [activeIndex, setActiveIndex] = useState<number>();
   const nodes = useRef<NodeListOf<Element>>(null); // 记录所有 h1,h2,h3 标签
   const tocRef = useRef<HTMLUListElement>(null); // TOC 组件 DOM
+  const isMobile = useIsMobile();
 
   const scrollHandler = useCallback(() => {
     if (!nodes.current) return;
@@ -69,22 +71,24 @@ export default function TocTree() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return (
-    <ul ref={tocRef} className="m-o list-none p-0 text-sm">
-      {list.map(({ title, id, depth }, i) => (
-        <li key={id} className="mb-2 mt-0 p-0">
-          <a
-            href={`#${id}`}
-            className={cn('text-gray-700 no-underline hover:text-blue-400 dark:text-gray-100', {
-              'text-blue-400': i === activeIndex,
-              'dark:text-blue-400': i === activeIndex,
-            })}
-            style={{ paddingLeft: `${depth * 0.6}rem` }}
-          >
-            {title}
-          </a>
-        </li>
-      ))}
-    </ul>
-  );
+  if (!isMobile) {
+    return (
+      <ul ref={tocRef} className="m-o list-none p-0 text-sm">
+        {list.map(({ title, id, depth }, i) => (
+          <li key={id} className="mb-2 mt-0 p-0">
+            <a
+              href={`#${id}`}
+              className={cn('text-gray-700 no-underline hover:text-blue-400 dark:text-gray-100', {
+                'text-blue-400': i === activeIndex,
+                'dark:text-blue-400': i === activeIndex,
+              })}
+              style={{ paddingLeft: `${depth * 0.6}rem` }}
+            >
+              {title}
+            </a>
+          </li>
+        ))}
+      </ul>
+    );
+  }
 }
