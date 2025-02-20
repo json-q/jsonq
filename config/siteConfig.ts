@@ -27,6 +27,11 @@ const siteConfig = {
     //   icon: Gitee,
     // },
   ],
+  docSearch: {
+    appId: process.env.NEXT_PUBLIC_DOC_SEARCH_APP_ID || '',
+    indexName: process.env.NEXT_PUBLIC_DOC_SEARCH_INDEX_NAME || '',
+    apiKey: process.env.NEXT_PUBLIC_DOC_SEARCH_API_KEY || '',
+  },
 };
 
 export default siteConfig;
