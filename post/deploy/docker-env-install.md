@@ -176,8 +176,8 @@ server {
 }
 
 server {
-   listen       443 ssl http2;
-   listen       [::]:443 ssl http2;
+   listen 443 ssl;
+   http2 on;
    server_name  xxx.com www.xxx.com;
   #  root         /usr/share/nginx/html;
    ssl_certificate "/etc/nginx/ssl/jsonq.top_ecc/jsonq.top.cer";
@@ -209,7 +209,7 @@ server {
 创建自定义网络桥接
 
 ```bash
-docker network create nginx-minio-network
+docker network create nginx-network
 ```
 
 查看现有的网络桥接列表
@@ -227,9 +227,9 @@ name: 'minio'
 services:
   minio:
     networks:
-      - nginx-minio-network
+      - nginx-network
 networks:
-  nginx-minio-network:
+  nginx-network:
     external: true
 ```
 
@@ -239,9 +239,9 @@ nginx 的 `docker-compose.yml`
 services:
   nginx:
     networks:
-      - nginx-minio-network
+      - nginx-network
 networks:
-  nginx-minio-network:
+  nginx-network:
     external: true
 ```
 
@@ -255,8 +255,8 @@ server {
 }
 
 server {
-   listen       443 ssl http2;
-   listen       [::]:443 ssl http2;
+   listen 443 ssl;
+   http2 on;
    server_name  minio.jsonq.top www.minio.jsonq.top;
    ssl_certificate "/etc/nginx/ssl/jsonq.top_ecc/jsonq.top.cer";
    ssl_certificate_key "/etc/nginx/ssl/jsonq.top_ecc/jsonq.top.key";
@@ -408,14 +408,14 @@ services:
     ports:
       - 3000:3000
     networks:
-      - nginx-minio-network
+      - nginx-network
 
 networks:
-  nginx-minio-network:
+  nginx-network:
     external: true
 ```
 
-- `nginx-minio-network` 就是自定义的网络桥接，由于 Nextjs 项目要通过 Nginx 代理，所以必须处于同一个网络桥段下，才能让各容器共享一个网络
+- `nginx-network` 就是自定义的网络桥接，由于 Nextjs 项目要通过 Nginx 代理，所以必须处于同一个网络桥段下，才能让各容器共享一个网络
 - `image: nextjs` 这里指定了刚才构建的镜像 `nextjs` 镜像，如果不指定，执行 `docker compose up -d` 时，Nextjs 会自动再依据 `Dockerfile` 重新构建一个镜像
 - `container_name: blog` 指定容器别名，nginx 代理时可以直接 `http://blog:3000` 即可代理到该容器的运行地址
 
@@ -429,8 +429,8 @@ server {
 }
 
 server {
-   listen       443 ssl http2;
-   listen       [::]:443 ssl http2;
+   listen 443 ssl;
+   http2 on;
    server_name  jsonq.top www.jsonq.top;
 #    root         /usr/share/nginx/html;
    ssl_certificate "/etc/nginx/ssl/jsonq.top_ecc/jsonq.top.cer";

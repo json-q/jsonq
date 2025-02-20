@@ -2,6 +2,7 @@ import type { Config } from 'tailwindcss';
 import twAnimate from 'tailwindcss-animate';
 import twTypography from '@tailwindcss/typography';
 
+/** @type {import('tailwindcss').Config} */
 export default {
   darkMode: ['class'],
   content: [
@@ -74,32 +75,13 @@ export default {
             code: {
               color: theme('colors.pink.600'),
             },
-            h1: {
-              marginTop: '0.75rem',
-              marginBottom: '0.75rem',
-            },
-            h2: {
-              fontWeight: theme('fontWeight.extrabold'),
-              marginTop: '1rem',
-            },
-            h3: {
-              fontWeight: theme('fontWeight.extrabold'),
-            },
             hr: {
               marginTop: '1rem',
               marginBottom: '1rem',
             },
-            p: {
-              color: theme('colors.slate.800'),
-              marginBottom: '0',
-              marginTop: '0.5rem',
-            },
             img: {
               marginTop: 0,
               marginBottom: 0,
-            },
-            ul: {
-              marginTop: 0,
             },
             blockquote: {
               p: {
@@ -130,31 +112,28 @@ export default {
             },
           },
         },
-        invert: {
-          css: {
-            a: {
-              color: theme('colors.blue.400'),
-              '&:hover': {
-                color: theme('colors.blue.600'),
-              },
-              code: { color: theme('colors.blue.400') },
-            },
-            code: { color: theme('colors.pink.400') },
-            p: {
-              color: theme('colors.slate.200'),
-            },
-            blockquote: {
-              p: {
-                color: theme('colors.slate.400'),
-              },
-            },
-          },
-        },
+        // invert: {
+        //   css: {
+        //     a: {
+        //       color: theme('colors.blue.400'),
+        //       '&:hover': {
+        //         color: theme('colors.blue.600'),
+        //       },
+        //       code: { color: theme('colors.blue.400') },
+        //     },
+        //     code: { color: theme('colors.pink.400') },
+        //     p: {
+        //       color: theme('colors.slate.200'),
+        //     },
+        //     blockquote: {
+        //       p: {
+        //         color: theme('colors.slate.400'),
+        //       },
+        //     },
+        //   },
+        // },
       }),
     },
-  },
-  variants: {
-    typography: ['dark'],
   },
   plugins: [twAnimate, twTypography],
 } satisfies Config;

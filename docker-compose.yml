@@ -8,8 +8,8 @@ services:
     ports:
       - 3000:3000
     networks:
-      - nginx-minio-network
+      - nginx-network
 
 networks:
-  nginx-minio-network:
+  nginx-network:
     external: true

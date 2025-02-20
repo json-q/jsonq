@@ -39,7 +39,13 @@ jobs:
 
           while [ \$RETRY_COUNT -lt \$MAX_RETRIES ]; do
             if git pull origin main; then
-              break  # pull succesful exit
+              echo "Git pull successful, proceeding with Docker commands."
+              docker stop blog || true
+              docker rm blog || true
+              docker rmi nextjs || true
+              docker build -t nextjs .
+              docker compose up -d
+              break  # pull successful exit
             else
               echo "Git pull failed, retrying (\$((RETRY_COUNT + 1)) of \$MAX_RETRIES)..."
               ((RETRY_COUNT++))

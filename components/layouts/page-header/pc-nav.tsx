@@ -1,12 +1,12 @@
 import Link from 'next/link';
 import SiteLogo from './icons/Logo';
-import { siteConfig } from './config';
+import siteConfig from '~/config/siteConfig';
 
 export default function PCNav() {
   return (
     <div className="mr-4 hidden md:flex">
       <Link href="/" className="mr-4 flex items-center gap-2 lg:mr-6">
-        <SiteLogo className="w-18 h-12 -translate-y-1.5" />
+        <SiteLogo className="h-12 -translate-y-1.5" />
       </Link>
       <nav className="flex items-center gap-4 text-sm xl:gap-6">
         {siteConfig.navs.map((item) => (
