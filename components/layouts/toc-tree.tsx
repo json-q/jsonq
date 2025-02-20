@@ -3,6 +3,15 @@ import { useEffect, useState, useRef, useCallback } from 'react';
 import throttle from 'lodash.throttle';
 import { cn } from '~/lib/utils';
 import { useIsMobile } from '~/hooks/use-mobile';
+import { CircleArrowLeft } from 'lucide-react';
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '~/components/ui/sheet';
 
 interface List {
   title: string | null;
@@ -10,7 +19,12 @@ interface List {
   depth: number;
 }
 
-export default function TocTree() {
+interface TocTreeProps {
+  className?: string;
+}
+
+export default function TocTree(props: TocTreeProps) {
+  const { className } = props;
   const [list, setList] = useState<List[]>([]);
   const [activeIndex, setActiveIndex] = useState<number>();
   const nodes = useRef<NodeListOf<Element>>(null); // 记录所有 h1,h2,h3 标签
@@ -71,7 +85,7 @@ export default function TocTree() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (!isMobile) {
+  const renderList = () => {
     return (
       <ul ref={tocRef} className="m-o list-none p-0 text-sm">
         {list.map(({ title, id, depth }, i) => (
@@ -90,5 +104,31 @@ export default function TocTree() {
         ))}
       </ul>
     );
+  };
+
+  if (isMobile) {
+    return (
+      <Sheet>
+        <SheetTrigger>
+          <CircleArrowLeft className="fixed right-0 top-1/4 z-20 h-7 w-7 translate-y-1/4 text-blue-600" />
+        </SheetTrigger>
+        <SheetContent className="overflow-y-auto p-4">
+          <SheetHeader className="sr-only">
+            <SheetTitle></SheetTitle>
+            <SheetDescription></SheetDescription>
+          </SheetHeader>
+          <div className="flex flex-col gap-4">{renderList()}</div>
+        </SheetContent>
+      </Sheet>
+    );
   }
+
+  return (
+    <div className={cn('w-full max-w-[25%]', className)}>
+      {/* calc top offset: header: 3 container: pt-1 pb-1 rem*/}
+      <nav className="sticky top-20 max-h-screen overflow-y-auto border-l border-l-gray-200 px-4 dark:border-l-gray-700">
+        {renderList()}
+      </nav>
+    </div>
+  );
 }
