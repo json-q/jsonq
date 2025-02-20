@@ -45,3 +45,8 @@ next-env.d.ts
 
 # generated json files of all posts
 generated
+
+# sitemap
+*/sitemap*.xml
+*/robots.txt
+*/rss.xml
