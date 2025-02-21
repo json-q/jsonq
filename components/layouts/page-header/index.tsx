@@ -1,10 +1,10 @@
 import { Button } from '~/components/ui/button';
-import CommandMenu from './command-menu';
 import MobileNav from './mobile-nav';
 import PCNav from './pc-nav';
 import Link from 'next/link';
 import siteConfig from '~/config/siteConfig';
 import ThemeSwitcher from './theme-switcher';
+import AlgoliaDocSearch from './doc-search';
 
 export default function PageHeader() {
   return (
@@ -15,7 +15,7 @@ export default function PageHeader() {
           <MobileNav />
           <div className="flex flex-1 items-center justify-between gap-2 md:justify-end">
             <div className="w-full flex-1 md:w-auto md:flex-none">
-              <CommandMenu />
+              <AlgoliaDocSearch />
             </div>
             <nav className="flex items-center gap-0.5">
               {siteConfig.externalLink.map((item) => (
