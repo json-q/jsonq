@@ -31,7 +31,7 @@ export default function CommandMenu() {
     return (
       <Link
         href={href}
-        className="relative flex cursor-pointer select-none items-center gap-2 rounded-sm px-4 py-3 text-sm text-inherit outline-none hover:bg-accent hover:text-accent-foreground hover:text-inherit [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
+        className="relative flex cursor-pointer select-none items-center gap-2 rounded-sm px-4 py-3 text-sm text-inherit outline-none hover:bg-accent hover:text-accent-foreground [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
       >
         {children}
       </Link>

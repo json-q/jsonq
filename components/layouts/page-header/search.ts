@@ -104,7 +104,7 @@ function praseAst() {
 
         targetItem = {
           id,
-          link: post.slug,
+          link: post.url,
           type: 'heading',
           headings: headings.map((item) => item.title).join('>'),
           content: getText(item),
@@ -117,7 +117,7 @@ function praseAst() {
         if (content) {
           targetItem = {
             id,
-            link: post.slug,
+            link: post.url,
             type: 'content',
             headings: headings.map((item) => item.title).join('>'),
             content,
