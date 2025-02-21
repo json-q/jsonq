@@ -69,7 +69,7 @@
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: initial;
+  scrollbar-color: hsl(var(--border)) transparent;
 }
 
 .md-header {
