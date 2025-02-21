@@ -1,6 +1,9 @@
 'use client';
-
-import { File, Search } from 'lucide-react';
+import Link from 'next/link';
+import { useState } from 'react';
+import debounce from 'lodash.debounce';
+import { File, Heading, Search } from 'lucide-react';
+import { EnrichedDocumentSearchResultSetUnitResultUnit } from 'flexsearch';
 import { Button } from '~/components/ui/button';
 import {
   Dialog,
@@ -11,13 +14,28 @@ import {
   DialogTrigger,
 } from '~/components/ui/dialog';
 import { Input } from '~/components/ui/input';
+import searchDoc, { IndexItem } from './search';
 
 export default function CommandMenu() {
-  // const list = useSearch(searchQuery);
-  // console.log(list);
+  const [searchList, setSearchList] = useState<
+    EnrichedDocumentSearchResultSetUnitResultUnit<IndexItem>[]
+  >([]);
 
   const onSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
+    const result = searchDoc(e.target.value);
+
+    setSearchList(result.length > 0 ? result[0].result : []);
+  };
+
+  const Line = ({ children, href }: { children: React.ReactNode; href: string }) => {
+    return (
+      <Link
+        href={href}
+        className="relative flex cursor-pointer select-none items-center gap-2 rounded-sm px-4 py-3 text-sm text-inherit outline-none hover:bg-accent hover:text-accent-foreground hover:text-inherit [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
+      >
+        {children}
+      </Link>
+    );
   };
 
   return (
@@ -44,14 +62,44 @@ export default function CommandMenu() {
 
         <div className="flex items-center border-b px-3">
           <Search className="mr-2 h-4 w-4 shrink-0 opacity-50" />
-          <Input className="border-none focus-visible:ring-0" onChange={onSearch} />
+          <Input
+            className="border-none focus-visible:ring-0"
+            placeholder="搜索文章"
+            onChange={debounce(onSearch, 200)}
+          />
         </div>
-        <div className="overflow-hidden px-2 py-1 text-foreground">
-          <div className="relative flex cursor-default select-none items-center gap-2 rounded-sm px-4 py-3 outline-none hover:bg-accent hover:text-accent-foreground [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0">
-            <File />
-            oooooo
+        {searchList.length == 0 && (
+          <div className="h-[300px]">
+            <div className="flex h-full w-full flex-col items-center justify-center">
+              <Search className="h-16 w-16 shrink-0 opacity-50" />
+              <div className="text-foreground/60">输入关键词搜索</div>
+            </div>
           </div>
-        </div>
+        )}
+        {searchList.length > 0 && (
+          <div className="max-h-[300px] overflow-y-auto overflow-x-hidden px-2 py-1 text-foreground md:max-h-[calc(100vh-300px)]">
+            {searchList.map((item) => {
+              if (item.doc.type == 'heading') {
+                return (
+                  <Line key={item.doc.id} href={item.doc.link}>
+                    <Heading /> {item.doc.headings}
+                  </Line>
+                );
+              }
+              return (
+                <Line key={item.doc.id} href={item.doc.link}>
+                  <File />
+                  <div>
+                    <div className="line-clamp-2 w-full">{item.doc.content}</div>
+                    <div className="overflow-hidden text-xs font-bold text-muted-foreground">
+                      {item.doc.headings}
+                    </div>
+                  </div>
+                </Line>
+              );
+            })}
+          </div>
+        )}
       </DialogContent>
     </Dialog>
   );
