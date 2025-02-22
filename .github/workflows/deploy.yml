@@ -1,61 +1,41 @@
-name: Push to Server
-
 on:
   push:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: ssh connect server
+      - name: Connect Server Deploy
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.SSH_HOST }} # ip address
-          username: ${{ secrets.SSH_USER }} # server username
-          key: ${{ secrets.SSH_PRIVATE_KEY }} # server ssh private key
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd ${{ secrets.BLOG_PATH_REMOTE }}
+            MAX_RETRIES=8
+            RETRY_COUNT=0
 
-      - name: Run Script to Push serve
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          SSH_HOST: ${{ secrets.SSH_HOST }}
-          SSH_USER: ${{ secrets.SSH_USER }}
-          BLOG_PATH_REMOTE: ${{ secrets.BLOG_PATH_REMOTE }}
-        run: |
-          mkdir -p ~/.ssh
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan $SSH_HOST >> ~/.ssh/known_hosts
-          ssh $SSH_USER@$SSH_HOST  << EOF
-          cd $BLOG_PATH_REMOTE
+            while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
+              echo "▶️ Attempt $((RETRY_COUNT+1))/$MAX_RETRIES: Pulling code..."
+              if git pull origin main; then
+                echo "✅ Git pull succeeded"
+                docker stop blog || true
+                docker rm blog || true
+                docker rmi nextjs || true
+                docker build -t nextjs .
+                docker compose up -d
+                exit 0
+              else
+                echo "❌ Git pull failed (attempt $((RETRY_COUNT+1))/$MAX_RETRIES)"
+                ((RETRY_COUNT++))
+                sleep 5
+              fi
+            done
 
-          MAX_RETRIES=8
-          RETRY_COUNT=0
-
-          while [ \$RETRY_COUNT -lt \$MAX_RETRIES ]; do
-            if git pull origin main; then
-              echo "Git pull successful, proceeding with Docker commands."
-              docker stop blog || true
-              docker rm blog || true
-              docker rmi nextjs || true
-              docker build -t nextjs .
-              docker compose up -d
-              break  # pull successful exit
-            else
-              echo "Git pull failed, retrying (\$((RETRY_COUNT + 1)) of \$MAX_RETRIES)..."
-              ((RETRY_COUNT++))
-              sleep 5
-            fi
-          done
-
-          # check if retry count exceeded
-          if [ \$RETRY_COUNT -eq \$MAX_RETRIES ]; then
-            echo "Failed to pull code after \$MAX_RETRIES attempts. Exiting."
-            exit 1  # throw error
-          fi
-          EOF
+            echo "🛑 Error: Failed to pull code after $MAX_RETRIES attempts"
+            exit 1
