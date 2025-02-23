@@ -8,6 +8,7 @@ const siteConfig = {
   theme: 'system',
   navs: [
     { title: '文章', href: '/post' },
+    { title: '图床', href: '/picture' },
     { title: '关于我', href: '/about' },
   ],
   externalLink: [

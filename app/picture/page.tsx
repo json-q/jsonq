@@ -1,4 +1,3 @@
-// pages/upload.tsx
 'use client';
 import { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
@@ -8,6 +7,7 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { cn } from '~/lib/utils';
+import { useSession } from 'next-auth/react';
 
 interface UploadResult {
   url: string;
@@ -25,44 +25,50 @@ type ImageList = (UploadResult & CopyStatus)[];
 export default function UploadPage() {
   const [imgList, setImgList] = useState<ImageList>([]);
   const [isUploading, setIsUploading] = useState(false);
+  const { status } = useSession();
 
-  const onDrop = useCallback(async (acceptedFiles: File[]) => {
-    const file = acceptedFiles[0];
-    if (!file) return;
+  const onDrop = useCallback(
+    async (acceptedFiles: File[]) => {
+      if (status !== 'authenticated') return toast.error('请登录后使用');
 
-    const formData = new FormData();
-    formData.append('file', file);
+      const file = acceptedFiles[0];
+      if (!file) return;
 
-    setIsUploading(true);
+      const formData = new FormData();
+      formData.append('file', file);
 
-    const promise = async () => {
-      try {
-        const response = await fetch('/api/upload', {
-          method: 'POST',
-          body: formData,
-        });
-        if (!response.ok) throw new Error(await response.text());
+      setIsUploading(true);
 
-        const res: Promise<R<UploadResult>> = await response.json();
-        return res;
-      } catch (error) {
-        throw new Error((error as Error).message);
-      } finally {
-        setIsUploading(false);
-      }
-    };
+      const promise = async () => {
+        try {
+          const response = await fetch('/api/upload', {
+            method: 'POST',
+            body: formData,
+          });
+          if (!response.ok) throw new Error(await response.text());
 
-    toast.promise(promise(), {
-      loading: '上传中...',
-      success: (res) => {
-        setImgList((prev) =>
-          [...prev].concat([{ ...res.data, mdCopy: false, linkCopy: false }] as ImageList),
-        );
-        return <div className="line-clamp-2">{`${res.data?.fileName || ''}上传成功！`}</div>;
-      },
-      error: (res) => res.message,
-    });
-  }, []);
+          const res: Promise<R<UploadResult>> = await response.json();
+          return res;
+        } catch (error) {
+          throw new Error((error as Error).message);
+        } finally {
+          setIsUploading(false);
+        }
+      };
+
+      toast.promise(promise(), {
+        loading: '上传中...',
+        success: (res) => {
+          setImgList((prev) =>
+            [...prev].concat([{ ...res.data, mdCopy: false, linkCopy: false }] as ImageList),
+          );
+          return <div className="line-clamp-2">{`${res.data?.fileName || ''}上传成功！`}</div>;
+        },
+        error: (res) => res.message,
+      });
+    },
+    [status],
+  );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
