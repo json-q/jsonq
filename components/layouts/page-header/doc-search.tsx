@@ -16,7 +16,7 @@ import {
 import { Input } from '~/components/ui/input';
 import searchDoc, { IndexItem } from './search';
 
-export default function CommandMenu() {
+export default function DocSearch() {
   const [searchList, setSearchList] = useState<
     EnrichedDocumentSearchResultSetUnitResultUnit<IndexItem>[]
   >([]);

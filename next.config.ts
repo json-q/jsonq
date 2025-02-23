@@ -14,7 +14,25 @@ const nextConfig: NextConfig = {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: process.env.NEXT_PUBLIC_MINIO_END_POINT || '',
+        port: '',
+        pathname: '/**',
+      },
     ],
+    // 扩展支持的设备尺寸
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840, 4096, 5120],
+    // 扩展图像尺寸列表
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    // 禁用静态图像尺寸校验
+    disableStaticImages: false,
+    // 调整图像压缩质量 (75-100)
+    minimumCacheTTL: 3600,
+    formats: ['image/webp'],
+    // 重要：允许处理超大图像
+    dangerouslyAllowSVG: true,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
   async headers() {
     return [
