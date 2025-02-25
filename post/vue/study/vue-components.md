@@ -20,7 +20,7 @@ date: 2023-06-09
 
 1. 创建全局组件进行编写
 2. 在`main.js`中**引入并注册**该组件
-3. 在其它组件中使用 ![代码](https://static.jsonq.top/2024/10/18/160949820_978cb07a-15ef-4e38-be70-916d5b3e5b1a.jpg) ![结果](https://static.jsonq.top/2024/10/18/160950139_1202c296-c157-4d38-89f8-2dd9548076b4.jpg)
+3. 在其它组件中使用 ![代码](https://img.jsonq.top/blog/2025/2/25/1740465695457-eau6u8he.jpg) ![结果](https://static.jsonq.top/2024/10/18/160950139_1202c296-c157-4d38-89f8-2dd9548076b4.jpg)
 
 ### 局部组件
 
@@ -278,7 +278,7 @@ export default {
 
 1. 什么是非 Prop 的 Attribute 呢？当我们**传递给一个组件某个属性**，但是该属性并**没有定义对应的 `props` 或者 `emits` 时**，就称之为 **非 Prop 的 Attribute**；常见的包括 `class、style、id` 属性等；
 
-   ![结果](https://static.jsonq.top/2024/10/18/160950577_3ad92ac6-6569-431b-8f76-183883fd539b.jpg)
+   ![结果](https://img.jsonq.top/blog/2025/2/25/1740465695589-cmhb9iv1.jpg)
 
 2. 禁用 Attribute 继承禁止非 props 的 attribute 添加到子组件根节点上，可以在使用`inheritAttrs: false`来禁止
 
@@ -401,7 +401,7 @@ export default {
 
 当自定义验证生效时，控制台会报出警告，说是一个校验失败的自定义事件
 
-![自定义事件校验失败](https://static.jsonq.top/2024/10/18/160950922_f2ff0790-3ac0-4aec-9b43-fad9422c5f49.jpg)
+![自定义事件校验失败](https://img.jsonq.top/blog/2025/2/25/1740465695717-nggk0s4o.jpg)
 
 ## 非父子组件通信
 
@@ -415,13 +415,13 @@ export default {
 
 #### 基本使用：
 
-![provide inject流程](https://static.jsonq.top/2024/10/18/160951265_0bb4c6dd-be8b-4ec1-a12d-e7d7fbaffe47.jpg)
+![provide inject流程](https://img.jsonq.top/blog/2025/2/25/1740465695810-6g9c0ghd.jpg)
 
 #### Provide 函数写法
 
 如果`Provide`中提供的一些数据是来自 data，那么我们可能会想要通过 this 来获取
 
-![函数写法](https://static.jsonq.top/2024/10/18/160951697_09929505-667e-4364-aee8-4083cec63385.jpg)
+![函数写法](https://img.jsonq.top/blog/2025/2/25/1740465695937-dh1o2cgq.jpg)
 
 > provide 一般都写成函数写法
 
@@ -429,7 +429,7 @@ export default {
 
 当我们使用 provide 给子组件传递数据时，我们更希望该数据是响应式的
 
-![非响应式provide数据](https://static.jsonq.top/2024/10/18/160952086_469e6e26-6284-4cf8-93b9-2ac847c15a84.jpg)
+![非响应式provide数据](https://img.jsonq.top/blog/2025/2/25/1740465696059-cxgioz4d.jpg)
 
 解决方法：使用`computed` ![computed响应式数据](https://static.jsonq.top/2024/10/18/160952501_4a18bc33-03c0-4a42-860e-7e3dc5316cba.jpg)
 
@@ -520,7 +520,7 @@ Vue 中将 **`<slot>` 元素作为承载分发内容**的出口；在封装组�
 
 ### 基本使用
 
-![slot基本使用](https://static.jsonq.top/2024/10/18/160952739_7970d802-04ae-486f-b831-e568a8bf58c1.jpg)
+![slot基本使用](https://img.jsonq.top/blog/2025/2/25/1740465696173-t1q9e547.jpg)
 
 ### 默认插槽内容
 
@@ -535,7 +535,7 @@ Vue 中将 **`<slot>` 元素作为承载分发内容**的出口；在封装组�
 - 具名插槽`v-slot`可以简写为`#`
 - `v-slot`必须写在`<template></template>`标签上
 
-![具名插槽](https://static.jsonq.top/2024/10/18/160953173_4dd3237d-787d-4394-9a3b-2e284273656f.jpg)
+![具名插槽](https://img.jsonq.top/blog/2025/2/25/1740465696273-2x3nzhdl.jpg)
 
 > 最常用的是第三种写法
 
@@ -543,7 +543,7 @@ Vue 中将 **`<slot>` 元素作为承载分发内容**的出口；在封装组�
 
 我们可以通过 `v-slot:[dynamicSlotName]` 方式动态绑定一个名称
 
-![动态插槽名](https://static.jsonq.top/2024/10/18/160953409_2bbb288a-3c82-4d67-903a-f6a5abf0c9eb.jpg)
+![动态插槽名](https://img.jsonq.top/blog/2025/2/25/1740465696401-ogx9ybs6.jpg)
 
 ### 插槽难点
 
@@ -576,13 +576,13 @@ Vue 中将 **`<slot>` 元素作为承载分发内容**的出口；在封装组�
 </template>
 ```
 
-![结果](https://static.jsonq.top/2024/10/18/160955607_15292a5e-9ad9-4479-84c8-b200e47e3ab7.jpg)
+![结果](https://img.jsonq.top/blog/2025/2/25/1740465696523-ehwkzqp9.jpg)
 
 **提问：** 在这种情况下，该如何在子组件有插槽的循环中插入循环项的自定义内容 **思路：** 将插槽的当前项传递给父组件，供父组件访问
 
 2. 在 `slot` 标签绑定自定义`attribute`将**当前循环项插槽的数据传递给父组件**，父组件通过`v-slot:default="xxx"`（简写`#default="xxx"`）接收，`xxx`代表的是传递给父组件的所有数据，所以是一个对象，可以通过`xxx.id、xxx.title`的格式访问这些数据。
 
-![作用域插槽](https://static.jsonq.top/2024/10/18/160956085_0e6b9f98-b6e6-4011-9f8e-305f76450c1f.jpg)
+![作用域插槽](https://img.jsonq.top/blog/2025/2/25/1740465696637-p43oc1dp.jpg)
 
 #### 认识独占默认插槽的缩写
 
@@ -621,7 +621,7 @@ Vue 中将 **`<slot>` 元素作为承载分发内容**的出口；在封装组�
 
 # 生命周期
 
-![生命周期流程图](https://static.jsonq.top/2024/10/18/160956649_dad5ecd6-110a-455d-9037-6bc2d3ae83da.jpg)
+![生命周期流程图](https://img.jsonq.top/blog/2025/2/25/1740465696741-6wssgq2g.jpg)
 
 1. 创建（组件实例初始化）阶段
    1. beforeCreate：开始创建组件实例
@@ -640,7 +640,7 @@ Vue 中将 **`<slot>` 元素作为承载分发内容**的出口；在封装组�
 
 父子组件挂载阶段
 
-![父子组件挂载阶段](https://static.jsonq.top/2024/10/18/160956899_58bdc0b7-9931-409f-ad81-2b934dc6809d.jpg)
+![父子组件挂载阶段](https://img.jsonq.top/blog/2025/2/25/1740465696868-gd0r8ha9.jpg)
 
 父子组件更新阶段
 
@@ -648,7 +648,7 @@ Vue 中将 **`<slot>` 元素作为承载分发内容**的出口；在封装组�
 
 父子组件卸载阶段
 
-![父子组件卸载阶段](https://static.jsonq.top/2024/10/18/160957312_a132a261-f12d-4546-9068-5d083cf5824b.jpg)
+![父子组件卸载阶段](https://img.jsonq.top/blog/2025/2/25/1740465696981-rl6x23wd.jpg)
 
 # $refs
 
@@ -705,7 +705,7 @@ Vue 中将 **`<slot>` 元素作为承载分发内容**的出口；在封装组�
 <style></style>
 ```
 
-![结果](https://static.jsonq.top/2024/10/18/160957522_d9ec47ba-c415-4b3b-95b3-1b3244354b2f.jpg)
+![结果](https://img.jsonq.top/blog/2025/2/25/1740465697085-s1oudz47.jpg)
 
 > 当 `ref` 绑定元素时，`this.$refs.xxx` 获取到的是 DOM 节点。当 `ref` 绑定 组件时，`this.$ref.xxx` 获取的是该组件的**组件实例**，可以直接访问内部的数据（data 中的数据，methods 中的方法等**所有能够通过 this 访问的**）
 
@@ -786,7 +786,7 @@ Vue 中将 **`<slot>` 元素作为承载分发内容**的出口；在封装组�
    ```
 2. `include` 只有名称匹配的组件会被缓存，写法：`string | RegExp | Array<string>`
 
-   ![include写法](https://static.jsonq.top/2024/10/18/160959092_e3516200-0184-4165-af7c-4600962f544c.jpg)
+   ![include写法](https://img.jsonq.top/blog/2025/2/25/1740465697210-3ki0ttwx.jpg)
 
 3. `exclude` 任何名称匹配的组件都**不会被缓存**，用法和 `include`一致
 4. 最多可以缓存多少组件实例，一旦达到这个数字，那么缓存组件中最近没有被访问的实例会被销毁。写法：`number | string`
@@ -851,7 +851,7 @@ Vue 中将 **`<slot>` 元素作为承载分发内容**的出口；在封装组�
 
 ## 组件 v-model 实现
 
-![组件v-model实现](https://static.jsonq.top/2024/10/18/160959438_018be0ed-24a2-4cee-a29d-8b68ec49e0b7.jpg)
+![组件v-model实现](https://img.jsonq.top/blog/2025/2/25/1740465697306-7bayyeu0.jpg)
 
 ## 多个 v-model 绑定
 
@@ -879,7 +879,7 @@ Vue 中将 **`<slot>` 元素作为承载分发内容**的出口；在封装组�
 
 ## 基本使用
 
-![mixins基本使用](https://static.jsonq.top/2024/10/18/160959880_e931f703-3bd2-4bcb-82e0-0d2d52ba5c57.jpg)
+![mixins基本使用](https://img.jsonq.top/blog/2025/2/25/1740465697427-o1bm32hc.jpg)
 
 ## Mixin 的合并规则
 

@@ -361,7 +361,7 @@ console.log(a.name, a.watchHome());
 
 对于对象的字面量赋值，在 TypeScript 中有一个非常有意思的现象
 
-![严格的字面量赋值检测](https://static.jsonq.top/2024/10/21/114621968_2be06860-bff4-4773-bc28-b4806cdea077.jpeg)
+![严格的字面量赋值检测](https://img.jsonq.top/blog/2025/2/25/1740465694055-p566ssg1.jpeg)
 
 - 官方 Issue 回复：
   - 每个对象字面量最初都被认为是“新鲜的（fresh）”，对于“新鲜的”是**有严格的字面量检测**。

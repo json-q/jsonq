@@ -125,7 +125,7 @@ if (window.__POWERED_BY_QIANKUN__) {
 
 这段代码是为了在访问子应用的静态资源时，可以加载子应用的静态资源
 
-![image](https://static.jsonq.top/2024/10/21/171408799_dd7e07fc-cd5b-44ea-9206-4b1fc5419bae.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465691680-4573lov0.png)
 
 如图所示，子应用的静态资源直接加载的就是完整路径地址
 
@@ -224,21 +224,21 @@ module.exports = {
 
 # 主应用微应用路由注册
 
-![image](https://static.jsonq.top/2024/10/21/171408943_824a3ff5-6950-4307-8508-d7363988fad4.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465691797-a74iwugr.png)
 
 当匹配到主应用路由时，只会渲染主应用的路由，当主应用切换到子应用路由时，才会挂载子应用路由，简单示例图如下
 
-![image](https://static.jsonq.top/2024/10/21/171409111_4d92ce92-a7cc-49fe-8668-dbbb9b988fc1.gif)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465691933-3p6981dd.gif)
 
 其中 ` <Route path="*" element={<></>} />` 是为了控制台不报警告加上的，不然主应用在切换到子应用时，其自身匹配不到这个路由，就会一直报警告，例如
 
-![image](https://static.jsonq.top/2024/10/21/171409197_682fa881-10f2-44af-8d72-6469ff363bf0.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465692315-qqolwhc3.png)
 
 `/micro-app1` 并不在主应用路由之内，匹配的是微应用项目，就会报警告
 
 美化版的主子应用路由切换
 
-![image](https://static.jsonq.top/2024/10/21/171409386_e1739520-bad4-49ad-9a9f-edf0846bc2b8.gif)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465692468-2ckz17gv.gif)
 
 # Vue3 Webpack 子应用对接 qiankun
 
@@ -426,7 +426,7 @@ server {
 
 如图所示，思路很清晰，给两个 div 设置高度 100%
 
-![image](https://static.jsonq.top/2024/10/21/171409508_8d22bea2-9564-46a4-84b8-b935a924d3dc.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465692644-s0bfxcoo.png)
 
 ### 给挂载节点设置高度 100%
 
@@ -454,7 +454,7 @@ server {
 
 其实可以通过这个 div 的 `data attribute` 进行样式选择，`data-name` 就是注册时的 name 名称，用这个明显更为可靠
 
-![image](https://static.jsonq.top/2024/10/21/171409605_57101167-af82-4b25-92dc-1290fc810dd7.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465692755-vw42mla7.png)
 
 所以 css 应该这么写（在主应用的 css 中进行全局重置即可）
 
@@ -472,7 +472,7 @@ div[data-name='rc'] {
 
 子应用中按钮点击弹出 modal，若子应用为第一次加载（子应用刷新浏览器或者从别的页面第一次切到该子应用），modal 样式丢失，只要进行一次路由切换，就会恢复
 
-![image](https://static.jsonq.top/2024/10/21/171409984_cf72c26f-91fb-444d-a4a8-0f62768072a8.gif)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465692992-s2bpndca.gif)
 
 解决方法：关闭 `experimentalStyleIsolation` 样式隔离，即主应用的 `start()` 中删除配置，改成 css module 进行样式隔离（推荐）
 

@@ -17,7 +17,7 @@ cd /sbin # 进入 sbin 目录
 
 > `V` 一定要是大写，小写只显示版本号。如果出现 `configure arguments: --with-http_ssl_module`，则跳过该步骤。
 
-![image](https://static.jsonq.top/2024/10/21/171402274_9d82f1ba-19e8-4818-ac68-e5ed1a3c358d.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465680546-oyhebmq7.png)
 
 # 安装 openssl
 
@@ -25,7 +25,7 @@ cd /sbin # 进入 sbin 目录
 
 > 由于之前已有留存 openssl 安装包，所以使用的 `openssl-1.1.1u` 版本，此次文章的演示也是如此。最新的 `openssl-3.x` 不确定是否与此版本完全兼容，若出现额外问题，需自行解决。
 
-![image](https://static.jsonq.top/2024/10/21/171402329_0e12a258-5443-4026-b61f-c9b5cc16b2fd.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465680642-3r19dg58.png)
 
 上传 openssl 压缩包到指定的存放目录，例如我的存放目录：`/data/software/nginx-deps` 解压 openssl 压缩包
 
@@ -38,13 +38,13 @@ cd openssl-1.1.1u
 
 如果执行 `./config` 出现如下错误信息，需根据提示安装 perl5，若没有则跳过
 
-![image](https://static.jsonq.top/2024/10/21/171402401_32a200c5-0a51-4e4b-a6aa-1234b2b20cc5.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465680808-3z93wsht.png)
 
 ## 安装 perl5
 
 去 perl 官网下载：https://www.perl.org/get.html
 
-![image](https://static.jsonq.top/2024/10/21/171402530_71d8c749-b575-4112-8a9b-94dee5def43f.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465680942-citaf8kl.png)
 
 上传到服务器，解压
 
@@ -94,7 +94,7 @@ make # 此处切记不要执行 make install，否则会重新安装 nginx
 
 执行完以上操作后，使用 xftp 等工具查看 nginx 目录，此时会发现目录下多出一个 objs 文件夹，文件夹内存在 nginx 文件
 
-![image](https://static.jsonq.top/2024/10/21/171402615_d4764edd-d25f-434f-8c22-7289140250ce.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465681049-5itfdx2g.png)
 
 ![image](https://static.jsonq.top/2024/10/21/171402668_32b40420-2a74-4f81-aabc-404c28a3f73a.png)
 
@@ -106,7 +106,7 @@ cd /usr/local/nginx/sbin
 cp /data/software/nginx/objs/nginx /usr/local/nginx/sbin # 替换掉 sbin 下的 nginx 文件
 ```
 
-![image](https://static.jsonq.top/2024/10/21/171402724_7916064e-f7c7-4fbb-97cd-1001a393d298.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465681181-p3dgqc9z.png)
 
 查看 nginx 是否已配置号 ssl 模块，出现 `configure arguments: --with-http_ssl_module`,证明安装成功，如果此步就出现找不到 `nginx.pid` 的错误，可直接跳过看下边的解决方法。
 
@@ -114,11 +114,11 @@ cp /data/software/nginx/objs/nginx /usr/local/nginx/sbin # 替换掉 sbin 下的
 ./nginx -V
 ```
 
-![image](https://static.jsonq.top/2024/10/21/171402780_b7bfa6b2-046f-41dd-82c2-c491ec3cb526.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465681279-uw2cdfoi.png)
 
 如果执行 `-V` 时出现权限补足，可给 nginx 文件提权
 
-![image](https://static.jsonq.top/2024/10/21/171402837_3eef45b7-ad2e-4739-84ad-b7a858017544.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465681449-c9xhn5gy.png)
 
 ![image](https://static.jsonq.top/2024/10/21/171402890_ed349dce-8644-4c3f-8ac6-b1d61af9baf4.png)
 
@@ -147,7 +147,7 @@ cp /data/software/nginx/objs/nginx /usr/local/nginx/sbin # 替换掉 sbin 下的
 
 不管是自签证书还是正规的 ca 证书，都会有两个证书文件： `cert` 和 `key`，文件后缀可能比较多，比如 `pem 和 key` 或者 `crt 和 key`，能区分 `cert` 和 `key` 就行。
 
-![image](https://static.jsonq.top/2024/10/21/171402947_418c44c9-9e79-464a-96c0-1c167a5f15f8.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465681540-fgdl8n2y.png)
 
 将这两个文件上传到服务器上，例如我上传到 `/data/software/nginx-ssl/` 目录下，上传完毕之后，就可以开始更改 `nginx.conf` 文件了。
 

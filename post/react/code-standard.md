@@ -75,7 +75,7 @@ module.exports = {
 
 就是关闭对 不允许 `any` 这个规则的校验，其它的约束如果不合理，也可以选择 `off` `warn` `error` 等不同等级。
 
-![eslint 校验](https://static.jsonq.top/2024/10/21/171407464_2998af19-ab5a-4fc3-947b-c0db8a6a4bbb.png)
+![eslint 校验](https://img.jsonq.top/blog/2025/2/25/1740465689712-lgds5v4x.png)
 
 在写作的过程中，如果觉得有些规则没有必要，但是 eslint 给出了错误或警告提示，就可以根据提示去关闭这些 eslint 规则
 
@@ -123,7 +123,7 @@ module.exports = {
 
 然后你就可以看到如下情况，eslint 提示了 prettier 的不规范代码：
 
-![prettier 集成到 eslint](https://static.jsonq.top/2024/10/21/171407526_5907b547-1c40-4f35-95c7-bf9ee0e3a71f.png)
+![prettier 集成到 eslint](https://img.jsonq.top/blog/2025/2/25/1740465689805-mvs86mbz.png)
 
 **也可以看到 prettier 提示换行符的问题，几乎每个文件都有，此时就可以查看 <b style="color:red;">统一编码格式</b> 小节，接着跟流程也不影响**
 
@@ -202,7 +202,7 @@ npm i stylelint stylelint-config-standard stylelint-prettier stylelint-order sty
 
 此时新建一个 css 文件，写入一些内容
 
-![验证 stylelint 工作](https://static.jsonq.top/2024/10/21/171407605_b5837369-1367-46cb-9ec5-523487ec296b.png)
+![验证 stylelint 工作](https://img.jsonq.top/blog/2025/2/25/1740465689909-tmv21g2p.png)
 
 可以看到，stylelint 已经对 css 的排序进行了校验，顺序不对的情况下会给出提示，但由于我们在 `settings.json` 中配置了自动修复，所以保存该文件时，vscode 会自动对这些 css 样式进行排序修复的，既避免开发人员一直在 css 的顺序上浪费时间，也统一了 css 代码风格
 
@@ -263,7 +263,7 @@ npm i less postcss-less -D
 }
 ```
 
-![stylelint 排序校验](https://static.jsonq.top/2024/10/21/171407671_d0403e30-f918-4e10-affb-163a1a9d3993.png)
+![stylelint 排序校验](https://img.jsonq.top/blog/2025/2/25/1740465690004-ho45s89u.png)
 
 ## 集成 postcss autoprefixer 实现自动添加浏览器前缀
 
@@ -281,7 +281,7 @@ export default {
 };
 ```
 
-![autoprefixer 用处](https://static.jsonq.top/2024/10/21/171407744_81363bba-afa0-4d84-83c8-24dedc754442.png)
+![autoprefixer 用处](https://img.jsonq.top/blog/2025/2/25/1740465690097-bqptkwbt.png)
 
 # 提交规范
 
@@ -328,11 +328,11 @@ npm i pretty-quick simple-git-hooks -D
 
 npx 手动初始化
 
-![npx 手动初始化](https://static.jsonq.top/2024/10/21/171407818_a4cf9c88-7089-4aba-8a4d-c165068fb206.png)
+![npx 手动初始化](https://img.jsonq.top/blog/2025/2/25/1740465690197-inknzxzh.png)
 
 git 拉取下来安装时自带 .git 文件，会自动执行 `postinstall` 命令进行初始化
 
-![自动初始化](https://static.jsonq.top/2024/10/21/171407913_b28c514e-5ce9-4b7c-b886-c2e25e76e660.png)
+![自动初始化](https://img.jsonq.top/blog/2025/2/25/1740465690297-gg4gsof4.png)
 
 ### 对 git commit 的信息进行校验
 
@@ -392,19 +392,19 @@ if (!commitRE.test(msg)) {
 
 这里先检测格式化代码，然后进行 eslint 和 stylelint 的校验，故意写出一些 eslint 错误或警告，执行 `git commit`
 
-![eslint错误检测](https://static.jsonq.top/2024/10/21/171408007_c23f2b58-01b0-47f8-b8fb-0b2ebb570e87.png)
+![eslint错误检测](https://img.jsonq.top/blog/2025/2/25/1740465690406-xbkgqa9z.png)
 
 eslint 执行通过之后开始执行 stylelint 校验
 
-![stylelint错误检测](https://static.jsonq.top/2024/10/21/171408076_a5f14ebc-effa-4092-a675-c53d496d0341.png)
+![stylelint错误检测](https://img.jsonq.top/blog/2025/2/25/1740465690535-chi7nohc.png)
 
 `commit-msg` 校验提交的信息是否符合规范
 
-![错误的提交信息](https://static.jsonq.top/2024/10/21/171408180_0f087a5c-b099-4a15-9fca-80d8ab9c6044.png)
+![错误的提交信息](https://img.jsonq.top/blog/2025/2/25/1740465690664-mkvhhob6.png)
 
 以上提交信息故意写错，使校验不通过，由此可见 `commit-msg` 生效了，然后改成例子中那样就可以正常提交了
 
-![正确的提交信息](https://static.jsonq.top/2024/10/21/171408250_a60f0680-af7c-4ff7-a109-f8aeb09c8669.png)
+![正确的提交信息](https://img.jsonq.top/blog/2025/2/25/1740465690783-v8u8b0nq.png)
 
 # git 提交忽略文件
 
@@ -454,7 +454,7 @@ lf 是 Unix 编码，crlf 是 windows 编码。
 
 在开发时，绝大部分时候换行符格式都是 `lf`，但是从仓库拉取下来代码后，经常会遇到变成 `crlf` 格式，此时 prettier 就会报错。
 
-![编码问题](https://static.jsonq.top/2024/10/21/171408324_5dc48982-fac6-4b65-868a-45ae2828a58e.png)
+![编码问题](https://img.jsonq.top/blog/2025/2/25/1740465690920-6yg7fka4.png)
 
 为了避免这种现象，可以从两方面杜绝换行符不一致的问题。
 
@@ -496,7 +496,7 @@ trim_trailing_whitespace = false
 
 此时提交过后，从仓库拉取一份新的代码下来，就不再是 crlf 而是 lf 行尾符了
 
-![lf编码格式](https://static.jsonq.top/2024/10/21/171408385_9ad900f9-042d-487e-ad85-658a6efa9f0f.png)
+![lf编码格式](https://img.jsonq.top/blog/2025/2/25/1740465691082-r66vxen5.png)
 
 # 配置路径别名
 
@@ -533,7 +533,7 @@ export default defineConfig((mode) => {
 }
 ```
 
-![别名](https://static.jsonq.top/2024/10/21/171408461_2dbb95ce-91a1-4675-9807-21c8e5a2bb28.png)
+![别名](https://img.jsonq.top/blog/2025/2/25/1740465691176-pcrkh1qm.png)
 
 # 动态读取 env 环境变量
 
@@ -661,13 +661,13 @@ interface ImportMeta {
 }
 ```
 
-![image](https://static.jsonq.top/2024/10/21/171408540_9b24cdd7-c39c-4acd-9696-2d13ad507ae8.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465691271-87ysuvv4.png)
 
 ## index.html 标题使用 env 配置
 
 vite 本身都支持在 html 中读取 env 的环境变量，以下是官方文档的描述
 
-![image](https://static.jsonq.top/2024/10/21/171408620_86c1a8f6-be3d-4dbe-a527-e5d3692f4ee2.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465691384-4nfxxrvp.png)
 
 所以我们也可以直接将网站标题也作为集中配置项
 
@@ -856,4 +856,4 @@ function wrapperEnv(envConf: Record<string, string>) {
 
 最后附上该项目的结构，其中 `tailwindcss` 的配置可忽略，其余文章中都有涉及。
 
-![项目目录](https://static.jsonq.top/2024/10/21/171408715_2747568d-7838-421a-9bdf-c4ac90433b3e.png)
+![项目目录](https://img.jsonq.top/blog/2025/2/25/1740465691537-8mt7sxe1.png)

@@ -237,7 +237,7 @@ interface Person {
 }
 ```
 
-![interface 和 type 区别](https://static.jsonq.top/2024/10/21/114619312_79dbae34-fc0d-40b8-8938-77e4cdcde02b.jpeg)
+![interface 和 type 区别](https://img.jsonq.top/blog/2025/2/25/1740465693842-94zq0rl7.jpeg)
 
 > type 的使用类型更广，非对象类型推荐使用 type，interface 只能用来声明对象
 
@@ -676,7 +676,7 @@ type FooThisType = ThisParameterType<FooType>;
 type PureFooType = OmitThisParameter<FooType>;
 ```
 
-![ThisParameterType OmitThisParameter](https://static.jsonq.top/2024/10/21/114620944_c9456d03-f440-44a9-8ec3-3767069dd2ff.jpeg)
+![ThisParameterType OmitThisParameter](https://img.jsonq.top/blog/2025/2/25/1740465693954-iavt5m61.jpeg)
 
 - `ThisType`
 

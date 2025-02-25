@@ -169,7 +169,7 @@ antd 组件，前端设置了跨域代理，以 `/api` 开头的请求都会代�
 
 前端展示效果
 
-![image](https://static.jsonq.top/2024/10/21/171412293_baadcc36-27ee-493e-95c6-f8b8392d6534.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465687402-71lodgs3.png)
 
 minio 后台文件结构
 
@@ -177,7 +177,7 @@ minio 后台文件结构
 
 url 地址预览（需上传时设置 `Content-Type`）
 
-![image](https://static.jsonq.top/2024/10/21/171412477_c3548771-a8ce-4aa0-a51d-cbfe39a72956.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465687534-fxbg3bp2.png)
 
 # 文件下载
 

@@ -81,7 +81,7 @@ scss 写法
 
 比如 `.my%placeholder{...}`，使用时 `.a{ @extend %placeholder; }` ，则会生成 `.my.a{...}`
 
-![example.png](https://static.jsonq.top/2024/10/18/160803983_97ee266e-7b4f-4b22-8d5a-f6300fbc42ad.png)
+![example.png](https://img.jsonq.top/blog/2025/2/25/1740465676129-loyvngd1.png)
 
 3. 嵌套时的父选择器 `&` 使用和 less 一致
 
@@ -208,7 +208,7 @@ $color-primary: #1677ff !default;
 
 scss 在以前版本是使用 `@import` 导入 scss 文件，和 css 的 `@import` 一样，但是现在推荐使用 `@use`，因为 `@import` 会把所有变量、函数、mixin 全部引入，而 `@use` 只引入需要的变量、函数、mixin。
 
-![@use 说明](https://static.jsonq.top/2024/10/18/160804270_4ef4faba-5ca7-4309-92e5-acd91c0307c1.png)
+![@use 说明](https://img.jsonq.top/blog/2025/2/25/1740465676355-sezyurbd.png)
 
 在使用 `@use` 的时候，如果变量、函数、mixin 重名了，会报错，所以需要使用 `as` 关键字来重命名，通常情况下，在编写样式表时才 `as *`。
 
@@ -649,4 +649,4 @@ $base-color: #1677ff;
 }
 ```
 
-![色调示例](https://static.jsonq.top/2024/10/18/160808626_3c77d050-d376-489f-ab76-4466085507bb.png)
+![色调示例](https://img.jsonq.top/blog/2025/2/25/1740465676455-mtsx3qt1.png)

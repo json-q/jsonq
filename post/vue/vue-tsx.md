@@ -112,7 +112,7 @@ export default defineComponent({
 
 之前使用的 props 标注是属于参数校验，是 Schema 数据，而非 TS。如果其它组件基于此组件进行二次封装，需要该组件的 TS 类型，此时可以使用 [`ExtractPublicPropTypes`](https://cn.vuejs.org/api/utility-types.html#extractpublicproptypes) 来将 props 类型标注转为 TS 类型，这样其它组件就可以使用了。
 
-![image](https://img2024.cnblogs.com/blog/3395093/202501/3395093-20250123092432663-383524712.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465280589-7pgol2nf.png)
 
 对于 vue 版本低于 3.3 的，可以使用 [`ExtractPropTypes`](https://cn.vuejs.org/api/utility-types.html#extractproptypes)，个人感觉两者的关系就是 `type ExtractPublicPropTypes = Patrial<ExtractPropTypes>`
 
@@ -125,7 +125,7 @@ export default defineComponent({
 
 对于第一点，下一小节会讲 emits 的类型定义，对于第二点，如图所示：
 
-![image](https://img2024.cnblogs.com/blog/3395093/202501/3395093-20250122231559584-634451622.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465280814-vmuyxr5g.png)
 
 虽然是在 `emits` 属性上定义的事件，但是 props 依然可以访问，那为什么不直接在 props 上定义呢？ `ant-design-vue` 就是把事件写在了 props 中，但是也有不少组件库依然写在 `emits` 里，看个人习惯吧。
 
@@ -176,7 +176,7 @@ export default defineComponent({
 });
 ```
 
-![image](https://img2024.cnblogs.com/blog/3395093/202501/3395093-20250123100220295-1621088676.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465280885-sgd9pvww.png)
 
 - `emits` 标注 TS 类型，将 `emits` 换成对象写法
 
@@ -189,7 +189,7 @@ export default defineComponent({
 
 这种写法在 eslint 中会出现一些问题，例如 `search` 事件，会报 “声明值未使用” 的问题，所以我推荐在 props 中定义事件，当然也可以全局禁用该规则，就不会出现这个报错问题。
 
-![image](https://img2024.cnblogs.com/blog/3395093/202501/3395093-20250123101455435-1111736216.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465280956-dz61bpsb.png)
 
 # slot 插槽
 
@@ -257,7 +257,7 @@ template 写法
 
 使用 `defineSlots` 的好处就是拥有更完整、更友好的 TS 类型提示。
 
-![image](https://img2024.cnblogs.com/blog/3395093/202501/3395093-20250123120740234-1468796104.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465281030-0s6248gg.png)
 
 jsx 有两种使用插槽的写法
 
@@ -311,11 +311,11 @@ export default defineComponent({
 
 这里就以 useuse 的 [`useVirtualList`](https://vueuse.nodejs.cn/core/useVirtualList/#usevirtuallist) 为例
 
-![image](https://img2024.cnblogs.com/blog/3395093/202501/3395093-20250123125650805-1581112777.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465281106-rt0h8rqd.png)
 
 以上的 `v-bind` 写法换成 jsx 就如下所示
 
-![image](https://img2024.cnblogs.com/blog/3395093/202501/3395093-20250123130029450-198649876.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465281180-2a9h8z3q.png)
 
 由于 `wrapperProps` 是一个 `computed` 计算结果，所以在使用时加 `.value`
 

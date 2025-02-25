@@ -11,7 +11,7 @@ date: 2024-03-25
 - 设置完之后，不要忘记 `Apply` 确认
 - 不要在单个项目中设置，全局设置，请关闭项目，在如图所示处设置
 
-![image](https://static.jsonq.top/2024/10/21/171403031_c53d6baf-657a-4055-8a8d-aa63d1d75eb5.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465683389-nkltc4la.png)
 
 # 代码换行
 
@@ -23,19 +23,19 @@ date: 2024-03-25
 
 setting —> Editor -> CodeStyle，在 `Wrap on typing` 打勾即可
 
-![image](https://static.jsonq.top/2024/10/21/171403108_b0aeca2e-acec-40f9-8488-3451696d319d.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465683494-a9hvgoaz.png)
 
 ## 设置代码格式化时自动换行
 
 会把超过 120 列的自动换行，这个是格式化时才会换行，上边的是写代码过程中就会换行
 
-![image](https://static.jsonq.top/2024/10/21/171403247_d1df6c6b-8ad6-48d4-912e-936ed7222e6f.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465683628-o8zv7g5v.png)
 
 ## 开启换行分割线(垂直标尺)
 
 开启后编辑器会出现一个换行的分割线，根据个人喜好设置
 
-![image](https://static.jsonq.top/2024/10/21/171403356_3ea4c14a-e1f4-40c0-8c46-2ab6225aa5f7.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465683764-a2329gfk.png)
 
 # xml 注释顶格
 
@@ -45,7 +45,7 @@ setting —> Editor -> CodeStyle，在 `Wrap on typing` 打勾即可
 
 # foreach 不换行
 
-![image](https://static.jsonq.top/2024/10/21/171403610_0955af5b-5f4e-4835-8c7f-52c81fc705d4.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465683883-gi2aq4di.png)
 
 # UTF-8 设置
 
@@ -57,13 +57,13 @@ setting —> Editor -> CodeStyle，在 `Wrap on typing` 打勾即可
 
 UTF-8 的 BOM 在文件头部，用来标识该文件属于 utf-8 编码，但是 BOM 虽然在编辑器中不显示，但是会产生输出，占用三个字节。
 
-![image](https://static.jsonq.top/2024/10/21/171403782_51600278-09b2-4fd6-9cea-1f39d7b9a4df.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465684064-711l59ak.png)
 
 ## 换行符编码格式为 Unix
 
 IDEA 中文件的换行符使用 `Unix` 格式，不使用 `Windows` 格式。
 
-![image](https://static.jsonq.top/2024/10/21/171403903_fb1cb0f3-30ae-496c-808b-b6f81c69a5af.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465684226-lndhg4f8.png)
 
 # 创建文件时自动填入作者时间定制格式
 
@@ -77,7 +77,7 @@ IDEA 中文件的换行符使用 `Unix` 格式，不使用 `Windows` 格式。
 */
 ```
 
-![image](https://static.jsonq.top/2024/10/21/171404002_1a71ca33-027e-4fd4-918e-d2c006e6fe12.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465684346-2nunedgu.png)
 
 # 自动移除未使用的导入
 
@@ -87,7 +87,7 @@ IDEA 中文件的换行符使用 `Unix` 格式，不使用 `Windows` 格式。
 
 <span style="color:blue;">只有不重名的导入名才会自动导入，重名的需手动导入</span>
 
-![image](https://static.jsonq.top/2024/10/21/171404222_8b397233-004f-4c15-8de0-659bdf2302e5.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465684446-r8g8gzno.png)
 
 # 注释
 
@@ -95,35 +95,35 @@ IDEA 中文件的换行符使用 `Unix` 格式，不使用 `Windows` 格式。
 
 行注释不放在行首，取消掉这两个勾选
 
-![image](https://static.jsonq.top/2024/10/21/171404362_764255f2-2049-4615-b52f-f398892229ce.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465684561-sbe91lg4.png)
 
 ## 快捷键注释自动添加空格
 
 使用 `ctrl+/` 快捷键进行行注释时，在行注释 `//` 后自动添加空格
 
-![image](https://static.jsonq.top/2024/10/21/171404512_c369bc05-f7a6-478d-bf74-abfa8d5651bb.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465684729-wr3gdslt.png)
 
 ## 格式化时，行注释由行首，变成跟随缩进
 
-![image](https://static.jsonq.top/2024/10/21/171404660_4ea92eab-e8c5-45c5-9693-5df6e25ca3af.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465684868-8od39xhe.png)
 
 # 设置 UTF-8 编码(每个新建项目都需要设置)
 
-![image](https://static.jsonq.top/2024/10/21/171404802_c2a49c83-d02f-4b9e-a09b-a779e189fa90.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465685033-6mve1vlf.png)
 
 查看右下角，确认是否是 UTF-8，不是则修改设置
 
-![image](https://static.jsonq.top/2024/10/21/171404880_7fc139ab-7947-415a-b26e-3f970312e47d.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465685181-2phfzvyh.png)
 
 # 缩进
 
 采用 4 个空格缩进，禁止使用 Tab 字符。 说明：如果使用 Tab 缩进，必须设置 1 个 Tab 为 4 个空格。IDEA 设置 Tab 为 4 个空格时，请勿勾选 `Use tab character`
 
-![image](https://static.jsonq.top/2024/10/21/171404968_5afaa578-fc05-4252-a168-271d3442120c.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465685289-0wg3029l.png)
 
 # 类型强制转换时，右括号与强制转换值之间不需要任何空格隔开
 
-![image](https://static.jsonq.top/2024/10/21/171405128_a6a9559a-40e4-4d47-aa70-c0acc2288a91.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465685449-yakqs690.png)
 
 # 行注释参数后的描述不对齐
 
@@ -133,7 +133,7 @@ IDEA 中文件的换行符使用 `Unix` 格式，不使用 `Windows` 格式。
 
 默认格式化后，多行注释之间是有空行的，不喜可以去掉
 
-![image](https://static.jsonq.top/2024/10/21/171405429_8a6682ba-4b0c-4265-acd8-7c8b09e0746b.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465685632-doroflmc.png)
 
 # 鼠标滚轮控制试图缩放大小
 

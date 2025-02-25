@@ -17,7 +17,7 @@ react 无法做到像 vue 一样自动收集依赖更新（期待 react19 的 Re
 
 代码示例：
 
-![image](https://static.jsonq.top/2024/10/21/171405627_0fd776f2-9673-4d1c-be61-fded6f6431ba.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465688016-h2tuhwqc.png)
 
 效果图：
 
@@ -31,7 +31,7 @@ react 无法做到像 vue 一样自动收集依赖更新（期待 react19 的 Re
 
 代码示例：
 
-![image](https://static.jsonq.top/2024/10/21/171405802_72000dc6-a280-48c5-803f-ecfdbdeed28b.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465688157-nhrorb9e.png)
 
 效果图：
 
@@ -49,7 +49,7 @@ react 无法做到像 vue 一样自动收集依赖更新（期待 react19 的 Re
 
 效果图：
 
-![image](https://static.jsonq.top/2024/10/21/171405982_d47145f9-c28a-4bb8-b29b-99031e34f5a4.gif)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465688245-m8lve545.gif)
 
 图中结合代码可见，`obj` 是传入的不变值，看似 props 是没有发生变化的。但是：**`obj` 是引用数据类型，其数据是存到堆内存中的，和基本类型不同**，`state` 每发生一次变化，`obj` 的内存地址就会重新变动，生成的是一个全新的 `obj` 对象，这就导致了表面上看似 props 没变化，实际上是 `obj` 是一直在变，一直在 rerender
 
@@ -74,7 +74,7 @@ function App() {
 
 使用 `useMemo` 缓存，和 `useEffect` 用法相似，不过第一个函数需要返回数据，第二个参数是依赖，空数组就是仅初始化执行，但是 `useMemo` 大部分是用于计算缓存的，纯静态值不推荐
 
-![image](https://static.jsonq.top/2024/10/21/171406045_a1e88ffd-622b-42b4-8051-661542714b35.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465688359-ug8x9vxv.png)
 
 ```js
 <Child
@@ -91,7 +91,7 @@ function App() {
 
 memo 有第二个参数，是一个函数，函数第一个参数是更新前的 props，第二个参数是更新后的 props，可以自行对比，返回 true 不更新，返回 false 说明两次 props 不一致，更新。
 
-![image](https://static.jsonq.top/2024/10/21/171406124_be85d30f-9f46-46cd-b9d0-0349e99bf15c.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465688445-khbicxq5.png)
 
 深度对比的第三方库很多，此处以 `fast-deep-equal` 为例
 
@@ -115,11 +115,11 @@ const Child: React.FC<ChildProps> = memo((props) => {
 
 示例代码：
 
-![image](https://static.jsonq.top/2024/10/21/171406210_9da76889-b8a5-4519-95eb-ff63ab1684cd.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465688529-3bbzit8e.png)
 
 当我更改时间戳时，`computedCount` 跟 `timestamp` 半毛钱关系没有，但依旧每次都会重新执行 `computedCount` 函数，每次执行函数的计算花费 50-60 毫秒不等，如果计算内容再复杂一点，每次都会产生大量无用开支
 
-![image](https://static.jsonq.top/2024/10/21/171406313_6ed9e85b-a51b-47e5-a631-1912a44c1743.gif)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465688682-t71n95ix.gif)
 
 ## 解决方法
 
@@ -127,7 +127,7 @@ const Child: React.FC<ChildProps> = memo((props) => {
 
 代码示例：
 
-![image](https://static.jsonq.top/2024/10/21/171406435_d283f5e4-dbe4-48f2-a61e-818fcd343556.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465688784-6ui29nns.png)
 
 效果图：
 
@@ -141,11 +141,11 @@ const Child: React.FC<ChildProps> = memo((props) => {
 
 代码示例：
 
-![image](https://static.jsonq.top/2024/10/21/171406639_d84281fc-4c7e-4805-a8a3-215cab166747.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465688881-sh04f07a.png)
 
 更改父组件的 `timestamp`，其中 `getList` 函数跟 `timestamp` 半毛钱关系没有，就算子组件加了 `memo` 和 深对比，也无法阻止 rerender
 
-![image](https://static.jsonq.top/2024/10/21/171406759_bd333e3b-f857-4d6f-9803-f09be35f0341.gif)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465688977-h8f6fq7y.gif)
 
 **原因：**
 
@@ -158,7 +158,7 @@ const Child: React.FC<ChildProps> = memo((props) => {
 
 代码示例：
 
-![image](https://static.jsonq.top/2024/10/21/171406854_be7c3a3d-33e8-4a3e-8636-c2a9263ec117.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465689120-l54rsibg.png)
 
 效果图：
 
@@ -176,7 +176,7 @@ const Child: React.FC<ChildProps> = memo((props) => {
 
 何时使用 `useRef` 而不是 `useState`？这是 react 中文网对 `useRef` 的描述
 
-![image](https://static.jsonq.top/2024/10/21/171407010_5a104dcd-10ad-43a3-93a7-9a01f61c4ef7.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465689224-sh3l1b7z.png)
 
 当一个数据不需要展示到页面上，仅仅作为一个记录值，比如分页数据。请求后端数据时，页码和分页尺寸通常是不会显示到页面上的（纯受控分页除外），当页码改变，去请求后端数据
 
@@ -184,7 +184,7 @@ const Child: React.FC<ChildProps> = memo((props) => {
 
 ## 使用 useState 的效果
 
-![image](https://static.jsonq.top/2024/10/21/171407116_47bb00fa-b997-4168-b581-2346b9ecfc3b.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465689356-k6taeudx.png)
 
 ![image](https://static.jsonq.top/2024/10/21/171407210_1a1b8f36-305b-43b0-a7f5-c966691bd661.gif)
 
@@ -194,7 +194,7 @@ const Child: React.FC<ChildProps> = memo((props) => {
 
 `useRef` 最重要的就是**不会导致组件 reredner**
 
-![image](https://static.jsonq.top/2024/10/21/171407295_c1a6661e-36a2-414a-961e-f2af624f5999.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465689486-wfzytqao.png)
 
 ![image](https://static.jsonq.top/2024/10/21/171407389_e59eed4f-9bcd-4f60-acaa-9ef4ab19870d.gif)
 

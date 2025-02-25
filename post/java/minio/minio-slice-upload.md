@@ -35,7 +35,7 @@ date: 2024-05-14
 
 展示及请求
 
-![image](https://static.jsonq.top/2024/10/21/171410891_8e334bf4-3fb4-44db-919d-e030227e61f8.gif)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465686426-2zexl8gi.gif)
 
 前端控制台
 
@@ -43,7 +43,7 @@ date: 2024-05-14
 
 浏览器可支持的文件预览
 
-![image](https://static.jsonq.top/2024/10/21/171411237_bc5087ed-75b4-458a-9287-318d9bd59174.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465686709-b6kqi6gn.png)
 
 目录结构
 
@@ -58,7 +58,7 @@ date: 2024-05-14
 
 ## 大文件分片流程
 
-![image](https://static.jsonq.top/2024/10/21/171411653_144537d1-412f-4747-acd2-df7cb715b7aa.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465686912-cnaq033q.png)
 
 整体步骤：
 
@@ -86,7 +86,7 @@ date: 2024-05-14
 
 未优化前，一个 2.1G 的文件上传耗时 18s
 
-![image](https://static.jsonq.top/2024/10/21/171411712_4f76e8f3-39ca-4f72-82fe-cbb0b7140769.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465687007-5scnspb0.png)
 
 优化后，仅 2s
 
@@ -104,7 +104,7 @@ date: 2024-05-14
 
 下载及暂停操作展示
 
-![image](https://static.jsonq.top/2024/10/21/171412039_c9a778c9-e85e-4bfb-a94e-f098b5681b09.gif)
+![image](https://img.jsonq.top/blog/2025/2/25/1740465687166-h8kpiik8.gif)
 
 下载内容展示
 

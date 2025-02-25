@@ -7,7 +7,7 @@ date: 2023-09-03
 
 先上官方的经典登录流程图：
 
-![登录流程时序](https://static.jsonq.top/2024/10/21/143941055_f3382488-2c4f-4567-b865-f64470ef702a.jpg)
+![登录流程时序](https://img.jsonq.top/blog/2025/2/25/1740465687700-0qn8z6y5.jpg)
 
 步骤拆分解析：
 
@@ -268,7 +268,7 @@ Page({
 });
 ```
 
-![获取用户昵称示意图](https://static.jsonq.top/2024/10/21/143942685_a2f75f23-409d-4c87-acd1-7b7f09b3120d.png)
+![获取用户昵称示意图](https://img.jsonq.top/blog/2025/2/25/1740465687801-ovyhe0pq.png)
 
 ### 获取用户头像
 
@@ -300,4 +300,4 @@ Page({
 });
 ```
 
-![获取用户头像示意图](https://static.jsonq.top/2024/10/21/143944057_bba20fa7-15d3-4736-bf93-c8cfc96cc319.png)
+![获取用户头像示意图](https://img.jsonq.top/blog/2025/2/25/1740465687906-gh4ssuxo.png)
