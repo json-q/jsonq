@@ -3,5 +3,11 @@
     "source.fixAll": "explicit"
   },
   "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "search.exclude": {
+    ".next": true,
+    "node_modules": true,
+    "pnpm-lock.yaml": true,
+    "generated": true
+  }
 }
