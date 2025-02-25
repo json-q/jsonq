@@ -130,7 +130,7 @@ function Page() {
 
 上传组件的封装思路：
 
-![image](https://static.jsonq.top/2024/10/21/175423384_4f1e9a2f-c04c-4e4d-a4cc-8e37f9eb69c4.png)
+[image](https://img.jsonq.top/blog/2025/2/25/1740476578202-6g6awrqd.png)
 
 ### 上传封装
 

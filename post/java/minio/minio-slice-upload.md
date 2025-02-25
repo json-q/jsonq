@@ -39,7 +39,7 @@ date: 2024-05-14
 
 前端控制台
 
-![image](https://static.jsonq.top/2024/10/21/171411064_8c816c86-0479-41b2-b346-02f0b8a0d137.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740476995150-w6keufbi.png)
 
 浏览器可支持的文件预览
 
@@ -47,7 +47,7 @@ date: 2024-05-14
 
 目录结构
 
-![image](https://static.jsonq.top/2024/10/21/171411470_473d3b33-20ea-4afa-b9c6-36e240abbc62.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740476995259-ggwse6gu.png)
 
 一个文件的上传，对接后端的请求有三个
 
@@ -90,7 +90,7 @@ date: 2024-05-14
 
 优化后，仅 2s
 
-![image](https://static.jsonq.top/2024/10/21/171411781_982c579a-5ec9-429a-a3f9-0f07d9bed0ef.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740476995390-726vfgxk.png)
 
 #### 缺点
 
@@ -108,4 +108,4 @@ date: 2024-05-14
 
 下载内容展示
 
-![image](https://static.jsonq.top/2024/10/21/171412165_7e232a49-00d7-4bdf-9f6e-adadcadb1ddb.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740476995459-445g8to6.png)

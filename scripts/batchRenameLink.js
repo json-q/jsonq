@@ -35,7 +35,6 @@ async function processMdFile(filePath) {
   let match;
   while ((match = imageRegex.exec(fileContent)) !== null) {
     // const oldImgUrl = `https://cdn.jsdelivr.net/${match[1]}`;
-    // const oldImgUrl = `https://img2024.cnblogs.com/${match[1]}`;
     const oldImgUrl = `https://img.example.com/${match[1]}`;
     const newImgUrl = await updateImageLink(oldImgUrl);
 

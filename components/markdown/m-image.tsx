@@ -1,6 +1,7 @@
 import Image, { ImageProps } from 'next/image';
 
 export default function MImg({ src, alt, width, height, ...props }: ImageProps) {
+  const isGif = (src as string).endsWith('.gif');
   return (
     <Image
       {...props}
@@ -9,7 +10,8 @@ export default function MImg({ src, alt, width, height, ...props }: ImageProps) 
       width={width || 0}
       height={height || 0}
       sizes="100vw"
-      style={{ width: '100%', height: 'auto' }}
+      className="h-auto w-full"
+      unoptimized={isGif}
     />
   );
 }

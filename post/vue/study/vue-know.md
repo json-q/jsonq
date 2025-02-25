@@ -26,7 +26,15 @@ date: 2023-06-08
   npm run serve
   ```
 
-  具体安装流程图如下： ![选择安装方式](https://img.jsonq.top/blog/2025/2/25/1740465698615-n16bxyvc.jpg) ![自定义安装选项](https://static.jsonq.top/2024/10/18/161002587_fe1270d1-efbe-4ff8-9504-320272f3d2a8.jpg) ![选择Vue版本](https://img.jsonq.top/blog/2025/2/25/1740465698715-n8pqoaf0.jpg) ![选择ESLint规范](https://static.jsonq.top/2024/10/18/161003235_7c472c1e-c674-455d-8ba5-a890faa92a75.jpg) ![代码检测时机](https://img.jsonq.top/blog/2025/2/25/1740465698817-2f2374re.jpg) ![配置文件保存位置](https://static.jsonq.top/2024/10/18/161003892_dc757309-51fe-4ea8-b00e-c39862c0ab2a.jpg) ![保存此次配置](https://img.jsonq.top/blog/2025/2/25/1740465698995-qxexugyk.jpg)
+  具体安装流程图如下：
+
+  - ![选择安装方式](https://img.jsonq.top/blog/2025/2/25/1740465698615-n16bxyvc.jpg)
+  - ![自定义安装选项](https://img.jsonq.top/blog/2025/2/25/1740475766663-0pyu35yv.jpg)
+  - ![选择Vue版本](https://img.jsonq.top/blog/2025/2/25/1740465698715-n8pqoaf0.jpg)
+  - ![选择ESLint规范](https://img.jsonq.top/blog/2025/2/25/1740475766829-9so9iw5t.jpg)
+  - ![代码检测时机](https://img.jsonq.top/blog/2025/2/25/1740465698817-2f2374re.jpg)
+  - ![配置文件保存位置](https://img.jsonq.top/blog/2025/2/25/1740475766996-qk1zpgc4.jpg)
+  - ![保存此次配置](https://img.jsonq.top/blog/2025/2/25/1740465698995-qxexugyk.jpg)
 
   > 该配置是自定义创建项目，即**第三个选项**，若选择前两个，则直接创建默认项目配置。
 

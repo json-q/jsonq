@@ -20,7 +20,9 @@ date: 2023-06-09
 
 1. 创建全局组件进行编写
 2. 在`main.js`中**引入并注册**该组件
-3. 在其它组件中使用 ![代码](https://img.jsonq.top/blog/2025/2/25/1740465695457-eau6u8he.jpg) ![结果](https://static.jsonq.top/2024/10/18/160950139_1202c296-c157-4d38-89f8-2dd9548076b4.jpg)
+3. 在其它组件中使用
+   - ![代码](https://img.jsonq.top/blog/2025/2/25/1740465695457-eau6u8he.jpg)
+   - ![结果](https://img.jsonq.top/blog/2025/2/25/1740475764100-91lezxpn.jpg)
 
 ### 局部组件
 
@@ -431,7 +433,9 @@ export default {
 
 ![非响应式provide数据](https://img.jsonq.top/blog/2025/2/25/1740465696059-cxgioz4d.jpg)
 
-解决方法：使用`computed` ![computed响应式数据](https://static.jsonq.top/2024/10/18/160952501_4a18bc33-03c0-4a42-860e-7e3dc5316cba.jpg)
+解决方法：使用`computed`
+
+![computed响应式数据](https://img.jsonq.top/blog/2025/2/25/1740475764958-85uqkizf.jpg)
 
 > `computed`是 **vue3 的新特性**,且`computed`返回的是一个`ref`对象，需要取出其中的`value`来使用
 
@@ -524,7 +528,7 @@ Vue 中将 **`<slot>` 元素作为承载分发内容**的出口；在封装组�
 
 ### 默认插槽内容
 
-![默认插槽内容](https://static.jsonq.top/2024/10/18/160952961_8f4b046d-2a72-4474-87b9-b0d9b6c8ebb8.jpg)
+![默认插槽内容](https://img.jsonq.top/blog/2025/2/25/1740475765112-oqa503qy.jpg)
 
 ### 具名插槽
 
@@ -644,7 +648,7 @@ Vue 中将 **`<slot>` 元素作为承载分发内容**的出口；在封装组�
 
 父子组件更新阶段
 
-![父子组件更新阶段](https://static.jsonq.top/2024/10/18/160957105_0af56bad-3af1-4e5e-8a3a-d894ad951fc9.jpg)
+![父子组件更新阶段](https://img.jsonq.top/blog/2025/2/25/1740475765934-nfxwsw78.jpg)
 
 父子组件卸载阶段
 

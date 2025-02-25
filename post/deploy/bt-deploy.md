@@ -39,7 +39,9 @@ yum install -y wget && wget -O install.sh https://download.bt.cn/install/install
 
 ## 访问宝塔
 
-![宝塔登录页面](https://static.jsonq.top/2024/10/18/160827262_162a6971-06f0-4317-b56b-a50d2e66a9b2.jpg) 如果操作无误，可以通过 **第三步** 提供好的地址访问成功，输入账号和密码，登录即可。
+![宝塔登录页面](https://img.jsonq.top/blog/2025/2/25/1740476078938-ywosymfu.jpg)
+
+如果操作无误，可以通过 **第三步** 提供好的地址访问成功，输入账号和密码，登录即可。
 
 ## 绑定手机号
 
@@ -126,7 +128,9 @@ npm run build
 
 在访问宝塔时，开放了宝塔的端口，java 项目运行所需的端口，例如 MySQL（3306）、Redis（6379）、以及后端运行端口等等。
 
-![开放安全组端口](https://img.jsonq.top/blog/2025/2/25/1740465677933-bgtpdnhi.jpg) ![防火墙端口](https://static.jsonq.top/2024/10/18/160832185_c157b4c9-bc9f-4fea-8a15-bbbeb01e2457.jpg)
+![开放安全组端口](https://img.jsonq.top/blog/2025/2/25/1740465677933-bgtpdnhi.jpg)
+
+![防火墙端口](https://img.jsonq.top/blog/2025/2/25/1740476079160-wgfgeua8.jpg)
 
 # 启动后端服务
 

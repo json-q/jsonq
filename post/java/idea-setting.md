@@ -41,7 +41,7 @@ setting —> Editor -> CodeStyle，在 `Wrap on typing` 打勾即可
 
 去掉勾选。
 
-![image](https://static.jsonq.top/2024/10/21/171403466_7adb054e-69e0-4f63-bf2a-f9e4e7c4f1c5.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740476994703-qgomwu2h.png)
 
 # foreach 不换行
 
@@ -81,7 +81,7 @@ IDEA 中文件的换行符使用 `Unix` 格式，不使用 `Windows` 格式。
 
 # 自动移除未使用的导入
 
-![image](https://static.jsonq.top/2024/10/21/171404105_9ed944ae-4512-49a5-aa5c-bfe6b498be65.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740476994849-beyzlwql.png)
 
 # 自动添加导入
 
@@ -127,7 +127,7 @@ IDEA 中文件的换行符使用 `Unix` 格式，不使用 `Windows` 格式。
 
 # 行注释参数后的描述不对齐
 
-![image](https://static.jsonq.top/2024/10/21/171405291_2998ec48-42ba-4f33-861b-e67872e8645d.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740476994953-i8fsgg1t.png)
 
 # 多行注释格式化后不换行
 
@@ -137,7 +137,7 @@ IDEA 中文件的换行符使用 `Unix` 格式，不使用 `Windows` 格式。
 
 # 鼠标滚轮控制试图缩放大小
 
-![image](https://static.jsonq.top/2024/10/21/171405524_9abb2c22-68f7-4230-8278-80fe6b1daeba.png)
+![image](https://img.jsonq.top/blog/2025/2/25/1740476995055-4gwzmo1d.png)
 
 # 常用快捷键
 

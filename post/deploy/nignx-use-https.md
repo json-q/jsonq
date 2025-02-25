@@ -96,7 +96,7 @@ make # 此处切记不要执行 make install，否则会重新安装 nginx
 
 ![image](https://img.jsonq.top/blog/2025/2/25/1740465681049-5itfdx2g.png)
 
-![image](https://static.jsonq.top/2024/10/21/171402668_32b40420-2a74-4f81-aabc-404c28a3f73a.png)
+[image](https://img.jsonq.top/blog/2025/2/25/1740476367992-np8cuuud.png)
 
 停止 nginx 服务，用 objs 下的 nginx 文件替换掉 `/usr/local/nignx/sbin` 目录下的 nginx 执行文件
 
@@ -120,7 +120,7 @@ cp /data/software/nginx/objs/nginx /usr/local/nginx/sbin # 替换掉 sbin 下的
 
 ![image](https://img.jsonq.top/blog/2025/2/25/1740465681449-c9xhn5gy.png)
 
-![image](https://static.jsonq.top/2024/10/21/171402890_ed349dce-8644-4c3f-8ac6-b1d61af9baf4.png)
+[image](https://img.jsonq.top/blog/2025/2/25/1740476430852-b7trcl32.png)
 
 重启 nginx
 
