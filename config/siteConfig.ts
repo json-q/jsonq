@@ -1,10 +1,8 @@
+import { Metadata } from 'next';
 import Cnblog from '~/components/layouts/page-header/icons/Cnblog';
 import Github from '~/components/layouts/page-header/icons/Github';
 
 const siteConfig = {
-  title: 'Jsonq’s Blog',
-  author: 'Jsonq',
-  description: 'Blog power by Next.js',
   theme: 'system',
   navs: [
     { title: '文章', href: '/post' },
@@ -34,6 +32,32 @@ const siteConfig = {
     endPoint: process.env.NEXT_PUBLIC_MINIO_END_POINT || '',
     bucket: process.env.NEXT_PUBLIC_MINIO_BUCKET || '',
   },
+  metadata: {
+    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_HOST!),
+    title: {
+      default: "Jsonq's Blog",
+      template: `%s | Jsonq's Blog`,
+    },
+    description: 'documenting experiences and reflections during the process of work and study.',
+    openGraph: {
+      title: 'Jsonq',
+      description: 'documenting experiences and reflections during the process of work and study.',
+      url: process.env.NEXT_PUBLIC_SITE_HOST,
+      siteName: 'Jsonq',
+      locale: 'zh-CN',
+      type: 'website',
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-snippet': -1,
+      },
+    },
+  } satisfies Metadata,
 };
 
 export default siteConfig;
