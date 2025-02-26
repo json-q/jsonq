@@ -3,6 +3,8 @@ title: Github Action CICD 自动部署
 date: 2024-11-14
 ---
 
+> 该文章的 Shell 脚本部分过于冗余，若需要看更简约更直观的，可查看 [Github Action 实现 CI CD 自动化部署](/post/deploy/docker-env-install#github-action-实现-ci-cd-自动化部署)
+
 使用 Github Action 的原因是，jenkins 占用的服务器资源较多，低配置服务器 jenkins 很容易资源打满。
 
 # 了解 Github Action

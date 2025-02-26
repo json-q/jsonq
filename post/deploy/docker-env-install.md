@@ -3,7 +3,7 @@ title: Docker 下安装多种环境
 date: 2025-01-26
 ---
 
-Docker 环境搭建可参考 [docker.md](/post/deploy/docker)
+Docker 环境搭建可参考 [Docker 学习](/post/deploy/docker)
 
 # Minio
 
@@ -69,7 +69,9 @@ dcoker 只支持挂载文件夹，所以 `/etc/nginx/nginx.conf` 无法映射本
 docker cp 容器id或名称:/etc/nginx/nginx.conf ./nginx.conf
 ```
 
-docker 默认安装的 nginx 是没有配置 80 服务的，所以我们需要去 `default.d` 文件夹下新建 `xxx.conf` 文件，这个 xxx 随便什么名字都行
+## 新建 test.conf 配置文件
+
+docker 默认安装的 nginx 是没有配置 80 服务的，所以我们需要去本机的 `conf.d` 文件夹（映射的就是容器 `/etc/nginx/conf.d`）下新建 `test.conf` 文件，这个 test 随便什么名字都行，写入以下内容，只要是 `.conf` 结尾能让 nginx 识别到就行。
 
 ```bash
 server {
@@ -84,14 +86,14 @@ server {
 }
 ```
 
-由于我们将本地的 `./html` 和容器的 `/usr/share/nginx/html` 做映射，所以直接在 `html` 文件夹下新建 `index.html`，写入点东西，保存，`docker restart 容器id或名字`，访问 ip 地址即可看到 html 内容。
+由于我们将本地的 `./html` 和容器的 `/usr/share/nginx/html` 做映射，所以直接在 `html` 文件夹下新建 `index.html`，写入点东西，保存，`docker restart [容器id或名字]`，访问 ip 地址即可看到 html 内容。
 
 # acme
 
 - docker pull neilpang/acme.sh
 - cd /data/container && mkdir acme
 
-新建 `docker-compose.yml`，去阿里云申请一个子账户，勾选权限策略 `AliyunDNSFullAccess - 管理云解析（DNS）的权限`，会生成 `id` 和 `Secret`,**一定要保存好，仅有一次查看机会**
+新建 `docker-compose.yml`，去阿里云 [申请一个子账户](https://ram.console.aliyun.com/users)，勾选权限策略 `AliyunDNSFullAccess - 管理云解析（DNS）的权限`，会生成 `id` 和 `Secret`,**一定要保存好，仅有一次查看机会**
 
 ```yaml
 services:
@@ -108,7 +110,7 @@ services:
     network_mode: host
 ```
 
-- 需要注册邮箱: `docker exec acme --register-account -m ccc@xx.xxx`
+- 注册邮箱（感觉没什么用）: `docker exec acme --register-account -m ccc@xx.xxx`
 - 注册证书: `docker exec acme --issue --dns dns_ali -d jsonq.top -d *.jsonq.top`
   - 如果网络执行较慢，第二步可以添加 `--server https://acme-v02.api.letsencrypt.org/directory`
 
@@ -125,7 +127,7 @@ services:
 
 ## 注意事项
 
-不同的运营商的 `DNS API` 不一样，这里使用 阿里云，则是 `dns_ali`，如果是其它运营商，请参考 [How to use DNS API](https://github.com/acmesh-official/acme.sh/wiki/dnsapi)
+不同的运营商的 `DNS API` 不一样，这里使用 阿里云，则是 `dns_ali`，如果是其它运营商，请参考 [How to use DNS API](https://github.com/acmesh-official/acme.sh/wiki/dnsapi) 来配置 key
 
 - `*.jsonq.top` 这里的 `*` 就代表泛域名
 
@@ -149,6 +151,8 @@ crontab -e
 10 1 * * * docker restart nginx
 ```
 
+每天零点十分，会检查 acme 证书是否快要过期，若符合，则会自动更新证书，并在 一点十分 重启 nginx 容器
+
 然后 `:wq` 保存退出
 
 使用 `crontab -l` 查看定时任务是否添加成功
@@ -164,7 +168,7 @@ services:
       - /data/container/acme/acme:/etc/nginx/ssl
 ```
 
-然后停止 nginx 容器，重新启动，**注意，由于更改是 docker compose，所以必须停止，然后再使用 docker compose up -d 启动**
+然后停止 nginx 容器，重新启动，**注意，由于更改是 docker compose，所以必须停止 nginx 容器，然后再使用 docker compose up -d 启动**
 
 ## 修改 nginx 配置文件
 
@@ -178,7 +182,7 @@ server {
 server {
    listen 443 ssl;
    http2 on;
-   server_name  xxx.com www.xxx.com;
+   server_name  jsonq.com www.jsonq.com;
   #  root         /usr/share/nginx/html;
    ssl_certificate "/etc/nginx/ssl/jsonq.top_ecc/jsonq.top.cer";
    ssl_certificate_key "/etc/nginx/ssl/jsonq.top_ecc/jsonq.top.key";
@@ -204,9 +208,9 @@ server {
 
 # nginx 和 minio 网络桥接
 
-现在 minio 的容器和 nginx 的容器是互不干涉的，但是我有域名之后，想让 nginx 的域名代理到 minio。所以需要将两个容器的网络桥接起来，让两个容器共享网络
+现在 minio 的容器和 nginx 的容器是互不干涉的，但是我有（泛）域名之后，想让 nginx 把这个域名代理到 minio。所以需要将两个容器的网络桥接起来，让两个容器共享网络
 
-创建自定义网络桥接
+创建自定义网络桥接，个人不推荐让容器自动创建网络桥接，会导致管理混乱。
 
 ```bash
 docker network create nginx-network
@@ -309,14 +313,15 @@ RUN apk add --no-cache libc6-compat
 # Node v16.13 开始支持 corepack 用于管理第三方包管理器
 # 锁定包管理器版本，确保 CI 每次构建都是幂等的
 # RUN corepack enable && corepack prepare pnpm@latest --activate
+# 这里指定了 pnpm 和本地开发的 pnpm 版本一致，防止出现跨版本的 break change
 RUN corepack enable && corepack prepare pnpm@9.15.3 --activate
 
 WORKDIR /app
 
 # pnpm fetch does require only lockfile
 # 注意还需要复制 `.npmrc`，因为里面可能包含 npm registry 等配置，下载依赖需要用到
-COPY pnpm-lock.yaml ./
-COPY patches ./patches
+# ！！！ 不存在的文件不要写入 COPY 命令中，不然镜像会构建失败
+COPY package.json pnpm-lock.yaml ./
 
 # 推荐使用 pnpm fetch 命令下载依赖到 virtual store，专为 docker 构建优化
 # 参考：https://pnpm.io/cli/fetch
@@ -393,7 +398,7 @@ CMD ["node", "server.js"]
 
 Dockerfile 注意事项： **执行 COPY 命令时，COPY 的文件必须存在，否则 COPY 失败会导致镜像构建失败**
 
-> 使用 `docker build -t nextjs .` 来构建镜像，其中 `nextjs` 就是镜像名，名字随便起，只要使用镜像时使用这个镜像名即可
+> 使用 `docker build -t nextjs .` 来构建镜像，其中 `nextjs` 就是镜像名，名字随便起只要能和项目的 `docker-compose` 使用的镜像名称保持一致即可。
 
 ## 编写 docker-compose 启动容器
 
@@ -452,3 +457,94 @@ server {
 ```
 
 配置完之后，直接重启 nginx 容器即可。
+
+## Github Action 实现 CI CD 自动化部署
+
+此部分可以查看 [Github Action CICD 自动部署](/post/deploy/github-action-cicd.md)，编写的 workflow 再往下看
+
+### 编写 Github Action
+
+在项目根目录新建 `.github/workflows/deploy.yml` 工作流文件
+
+指定 main 分支发生 commit 变动时，会触发 workflow
+
+```yml
+on:
+  push:
+    branches: main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Connect Server Deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          command_timeout: 20m
+          script: |
+            cd ${{ secrets.PATH_REMOTE }}
+            MAX_RETRIES=8
+            RETRY_COUNT=0
+
+            while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
+              echo "▶️ Attempt $((RETRY_COUNT+1))/$MAX_RETRIES: Pulling code..."
+              if git pull origin main; then
+                echo "✅ Git pull succeeded"
+                docker stop blog || true
+                docker rm blog || true
+                docker rmi nextjs || true
+                docker build -t nextjs .
+                docker compose up -d
+                exit 0
+              else
+                echo "❌ Git pull failed (attempt $((RETRY_COUNT+1))/$MAX_RETRIES)"
+                ((RETRY_COUNT++))
+                sleep 5
+              fi
+            done
+
+            echo "🛑 Error: Failed to pull code after $MAX_RETRIES attempts"
+            exit 1
+```
+
+使用 `appleboy/ssh-action` 连接远程服务器，连接成功后，执行脚本，即 `script` 部分。
+
+`command_timeout` 修改为了 20 分钟，默认是 10 分钟，因为有 git pull 的错误重试机制，很容易超过 10 分钟，纯 Docker 构建都要 5 分钟左右
+
+这部分内容其实很少，简单来说就是以下步骤：
+
+- 拉取 GitHub 仓库的最新代码
+- 停止容器，删除容器
+- 停止镜像，删除镜像
+
+为什么写了一大堆呢？其实就是 `git pull` 拉取代码失败后的重试机制，因为众所周知的问题，拉取 github 的代码经常失败（当时傻Ⅹ买了台国内服务器，结果自讨苦吃）
+
+## Nextjs 开发中的踩坑
+
+### 本地 http 访问 https 图片
+
+http 没法访问 https，目前这里有两种方法
+
+- 在项目的 `env` 中设置 `NODE_TLS_REJECT_UNAUTHORIZED=0` 绕过证书问题
+- 使用 next cli，`next dev --experimental-https`，这个命令在启动项目时生成一份证书临时使用
+
+### 使用 next-auth 生成环境第三方授权出现 Server Error
+
+环境变量设置 `AUTH_TRUST_HOST=true`，具体可查看 [next-auth issues](https://github.com/nextauthjs/next-auth/issues/3770#issuecomment-2145575926)
+
+### 容器部署的 Next 项目 next-auth 无法正确推断 redirect_uri
+
+虽然 next-auth 官方说可以自动推断 redirect_uri，本地确实没问题，但是 Docker 部署后的 Next 项目推断失败（笑死）
+
+![image](https://img.jsonq.top/blog/2025/2/26/1740559560949-6nlv08er.png)
+
+出现问题的时候，推断出来的 `redirect_uri` 是 `https//: 容器id:容器端口`，但是这种显然是无法公网访问的，而且和 Github 里配置的路径不一致，所以会出错，那就没办法了，就去 `env` 里明确一下呗
+
+- `.env.development`：`AUTH_URL=http://localhost:3000/api/auth`
+- `.env.production`： `AUTH_URL=https://example.com/api/auth`
