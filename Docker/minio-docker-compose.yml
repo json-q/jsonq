@@ -1,0 +1,27 @@
+name: 'minio'
+services:
+  minio:
+    container_name: minio
+    image: minio/minio
+    restart: always
+    environment:
+      - TZ=Asia/Shanghai
+      - MINIO_ROOT_USER=your_minio_username
+      - MINIO_ROOT_PASSWORD=youer_minio_password
+    networks:
+      - nginx-network
+    ports:
+      - '9000:9000'
+      - '9999:9999'
+    volumes:
+      - ./db:/data
+      - ./config:/root/.minio
+    command: minio server /data --console-address ":9999"
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:9000/minio/health/live']
+      interval: 30s
+      timeout: 20s
+      retries: 3
+networks:
+  nginx-network:
+    external: true

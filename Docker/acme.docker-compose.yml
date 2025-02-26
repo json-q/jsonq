@@ -1,0 +1,12 @@
+services:
+  acme-sh:
+    image: neilpang/acme.sh
+    container_name: acme
+    restart: always
+    command: daemon
+    environment:
+      - Ali_Key=xxx
+      - Ali_Secret=yyy
+    volumes:
+      - ./acme:/acme.sh
+    network_mode: host
