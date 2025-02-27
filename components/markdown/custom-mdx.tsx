@@ -20,7 +20,15 @@ export default function CustomMDX(props: React.JSX.IntrinsicAttributes & MDXRemo
           remarkPlugins: [remarkGfm],
           rehypePlugins: [
             rehypeSanitize,
-            [rehypePrettyCode, { theme: 'one-dark-pro' }],
+            [
+              rehypePrettyCode,
+              {
+                theme: {
+                  dark: 'one-dark-pro',
+                  light: 'one-light',
+                },
+              },
+            ],
             rehypeSlug,
             [rehypePrism, { showLineNumbers: true }],
             [
