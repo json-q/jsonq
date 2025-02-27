@@ -3,7 +3,6 @@ import { MDXRemote, MDXRemoteProps } from 'next-mdx-remote/rsc';
 import remarkGfm from 'remark-gfm';
 import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeSlug from 'rehype-slug';
-import rehypeCodeTitles from 'rehype-code-titles';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import { fromHtmlIsomorphic } from 'hast-util-from-html-isomorphic';
 import rehypePrism from 'rehype-prism-plus';
@@ -21,21 +20,9 @@ export default function CustomMDX(props: React.JSX.IntrinsicAttributes & MDXRemo
           remarkPlugins: [remarkGfm],
           rehypePlugins: [
             rehypeSanitize,
-            [
-              rehypePrettyCode,
-              {
-                // 'one-dark-pro' | 'one-light'
-                theme: 'one-dark-pro',
-              },
-            ],
+            [rehypePrettyCode, { theme: 'one-dark-pro' }],
             rehypeSlug,
-            rehypeCodeTitles,
-            [
-              rehypePrism,
-              {
-                showLineNumbers: true,
-              },
-            ],
+            [rehypePrism, { showLineNumbers: true }],
             [
               rehypeAutolinkHeadings,
               {
