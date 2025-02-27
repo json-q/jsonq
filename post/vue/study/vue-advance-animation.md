@@ -11,7 +11,7 @@ date: 2023-06-18
 
 ## 局部自定义指令
 
-![局部自定义指令](https://img.jsonq.top/blog/2025/2/25/1740465694618-z38xrcnq.jpg)
+![局部自定义指令](https://jsonq.top/cdn-static/2025/02/25/1740465694618-z38xrcnq.jpg)
 
 > 在 选项式 API 中， v-xxx 的 xxx 对应的是 directives 中的 key
 >
@@ -32,7 +32,7 @@ app.directive('focus', {
 
 当自定义指令过多时，会导致 main.js 中的挂载非常多，为了更易于，可以将其抽离出去
 
-![自定义指令抽离](https://img.jsonq.top/blog/2025/2/25/1740465694728-enm0e8ma.jpg)
+![自定义指令抽离](https://jsonq.top/cdn-static/2025/02/25/1740465694728-enm0e8ma.jpg)
 
 ## 自定义指令生命周期
 
@@ -48,7 +48,7 @@ app.directive('focus', {
 
 ## 指令的参数和修饰符
 
-![指令的参数和修饰符](https://img.jsonq.top/blog/2025/2/25/1740465694843-59upf1ni.jpg)
+![指令的参数和修饰符](https://jsonq.top/cdn-static/2025/02/25/1740465694843-59upf1ni.jpg)
 
 # Teleport
 
@@ -225,7 +225,7 @@ class 的 name 命名规则如下：
 
 整个动画流程状态如图所示：
 
-![动画状态](https://img.jsonq.top/blog/2025/2/25/1740465694950-gy7ev10x.jpg)
+![动画状态](https://jsonq.top/cdn-static/2025/02/25/1740465694950-gy7ev10x.jpg)
 
 **appear：初次渲染** 给 `<transition/>` 属性添加 apper 属性，可以实现首次渲染时的动画效果
 
@@ -465,11 +465,11 @@ obj.name = '李四';
 
 在 [监听属性变化](#监听属性变化) 这一步，实现的流程大致如下：
 
-![监听属性变化流程思路](https://img.jsonq.top/blog/2025/2/25/1740465695042-w2wsivut.jpg)
+![监听属性变化流程思路](https://jsonq.top/cdn-static/2025/02/25/1740465695042-w2wsivut.jpg)
 
 通过 Map 对象进行多重 map 映射，就可以很轻松的获取到数对象的 属性 对应的 dep 对象
 
-![map映射](https://img.jsonq.top/blog/2025/2/25/1740465695145-mhm3u61e.jpg)
+![map映射](https://jsonq.top/cdn-static/2025/02/25/1740465695145-mhm3u61e.jpg)
 
 ```js
 class Depend {
@@ -565,7 +565,7 @@ console.log('age发生变化------');
 user.age = 30;
 ```
 
-![执行结果](https://img.jsonq.top/blog/2025/2/25/1740465695235-m5xhumil.jpg)
+![执行结果](https://jsonq.top/cdn-static/2025/02/25/1740465695235-m5xhumil.jpg)
 
 1. 每一个对象的每一个属性都会对应一个 dep 对象
 2. 同一个对象的多个属性的 dep 对象是存放在一个 map 对象中的
@@ -576,7 +576,7 @@ user.age = 30;
 
 当一个函数内部，重复使用一个属性时，函数会被执行多次
 
-![BUG](https://img.jsonq.top/blog/2025/2/25/1740465695342-v3ihkif3.jpg)
+![BUG](https://jsonq.top/cdn-static/2025/02/25/1740465695342-v3ihkif3.jpg)
 
 每次获取时，都会执行 get 内部的逻辑
 

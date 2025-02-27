@@ -137,7 +137,7 @@ const info = {
 getObjProperty(info, 'name');
 ```
 
-![keyof 使用](https://img.jsonq.top/blog/2025/2/25/1740465694153-959mrc0i.jpeg)
+![keyof 使用](https://jsonq.top/cdn-static/2025/02/25/1740465694153-959mrc0i.jpeg)
 
 ## 映射类型
 
@@ -327,7 +327,7 @@ type ReadonlyPerson = Readonly<Person>;
 `Record<Keys,T>` 用于构造一个对象类型，它所有的 key(键)都是 Keys 类型，它所有的 value(值)都是 T 类型。  
 具体功能如图所示：
 
-![Record 基本用法](https://img.jsonq.top/blog/2025/2/25/1740465694247-s561dxqq.png)
+![Record 基本用法](https://jsonq.top/cdn-static/2025/02/25/1740465694247-s561dxqq.png)
 
 ```ts
 type Person = {
@@ -354,7 +354,7 @@ type RecordPerson = Record<CityKeys, Person>;
 
 `Pick<T,Keys>` 是从原类型 T 中挑选出部分 T 拥有的部分属性 Keys，生成一个新的类型
 
-![Pick 使用](https://img.jsonq.top/blog/2025/2/25/1740465694336-ofmhxevh.png)
+![Pick 使用](https://jsonq.top/cdn-static/2025/02/25/1740465694336-ofmhxevh.png)
 
 ```ts
 type Person = {

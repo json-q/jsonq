@@ -108,7 +108,7 @@ acme.sh --upgrade
 acme.sh --upgrade --auto-upgrade
 ```
 
-![命令使用及运行示例](https://img.jsonq.top/blog/2025/2/25/1740465681628-wk6i3ut8.png)
+![命令使用及运行示例](https://jsonq.top/cdn-static/2025/02/25/1740465681628-wk6i3ut8.png)
 
 ## 使用（单 DNS 运营商）
 
@@ -136,11 +136,11 @@ acme.sh --issue -d xxx.com,www.xxx.com --webroot /home/wwwroot/xxx.com
 
 ### 阿里云配置 AccessKey
 
-![指引](https://img.jsonq.top/blog/2025/2/25/1740465681767-2lod5iny.png)
+![指引](https://jsonq.top/cdn-static/2025/02/25/1740465681767-2lod5iny.png)
 
 自己的服务器用 AccessKey 也可以，简单方便，用子账户的话还需要手动授予权限（前提是能分辨那些该分配那些不该分配）。
 
-![阿里云配置 Securty](https://img.jsonq.top/blog/2025/2/25/1740465681911-f52u27y4.png)
+![阿里云配置 Security](https://jsonq.top/cdn-static/2025/02/25/1740465681911-f52u27y4.png)
 
 总的配置文件是 `/root/.acme.sh/account.conf`，所有的 api 信息都最终被储存在这里。
 
@@ -154,7 +154,7 @@ acme.sh --issue --dns dns_ali -d xxx.com,*.xxx.com --server https://acme-v02.api
 
 **注意：**新转移到阿里云或新购的域名需要转移后等一天等 DNS 全球生效之后再配置。
 
-![输出路径](https://img.jsonq.top/blog/2025/2/25/1740465682047-hepi4qap.png)
+![输出路径](https://jsonq.top/cdn-static/2025/02/25/1740465682047-hepi4qap.png)
 
 > 更多的域名厂商的 SSL 证书，比如 cloudflare 等生成可以参考 [DNS_API](https://github.com/acmesh-official/acme.sh/wiki/dnsapi)
 
@@ -277,11 +277,13 @@ firewall-cmd --zone=public --list-ports  # 查看开放的防火墙端口
 
 先找到（搜索） 数字证书管理服务
 
-![上传证书位置](https://img.jsonq.top/blog/2025/2/25/1740465682193-p5p6yvte.png)
+![上传证书位置](https://jsonq.top/cdn-static/2025/02/25/1740465682193-p5p6yvte.png)
 
 根据之前 acme 生成的证书，最简单的方法：使用 Xftp 将 `/root/.acme.sh/xxx.com_cee` 文件夹下载下到本地，然后上传到阿里云
 
-![对应证书名](https://img.jsonq.top/blog/2025/2/25/1740465682433-cg6z7pya.png)
+- 证书文件 - `jsonq.top.cer`
+- 证书私钥 - `jsonq.top.key`
+- 证书链 - `ca.cer`
 
 > 默认情况下，Xftp 中以 `.` 开头的隐藏文件都不会显示，可以根据上方操作栏的：工具 --> 选项 --> 显示隐藏文件夹（勾选） 即可
 

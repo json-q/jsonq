@@ -152,7 +152,7 @@ export default IconContext;
 
 此时可能看到 `context.ts` 中的 React 未被使用
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465674974-bmg0o4dp.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465674974-bmg0o4dp.png)
 
 这是为了兼容 react 17 及之前的旧版本，可以去 `eslint.config.mjs` 中规避一下这个问题
 
@@ -242,7 +242,7 @@ pnpm i tsx -D
 
 此时可以看到输出了 `svgs` 文件夹下的 svg 图标名称，输出结果如下：
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465675083-0l7dtpth.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465675083-0l7dtpth.png)
 
 ### 使用 svgr 转换组件
 
@@ -347,7 +347,7 @@ transSvgToComponent();
 
 我们生成的组件内容如下：
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465675174-y867frm6.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465675174-y867frm6.png)
 
 这是 svgr 的 jsx 插件生成的，确实是一个规范的 React 组件，但不是我们想要的 React 组件：
 
@@ -411,7 +411,7 @@ const jsxCode = await transform(
 
 再次执行 `pnpm gen:icon`，查看生成的组件
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465675325-ucx89ezp.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465675325-ucx89ezp.png)
 
 可以看到所有的 svg 组件都使用了 Icon 组件的方法来创建，这样就相当于完成了 Icon 的创建，到这一步基本就属于大功告成了。
 

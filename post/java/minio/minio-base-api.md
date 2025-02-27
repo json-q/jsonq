@@ -27,7 +27,7 @@ minio 文档提供了多个运行环境的安装流程，此处以 windows 为�
 
 > `E:\minio` 是项目运行和文件存储的目录 `--console-address` 指定 MinIO Web 控制台 `9090` 是 Web 的运行端口
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465685775-ubylgh3d.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465685775-ubylgh3d.png)
 
 打开终端显示的地址就能看到 minio 的项目页面（以 `http://localhost` + `端口号`访问更方便），输入终端给出的 user 和 password
 
@@ -176,7 +176,7 @@ ObjectWriteResponse response = minioClient.putObject(PutObjectArgs.builder()
 
 查看 minio 后台页面
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465685877-laibrbal.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465685877-laibrbal.png)
 
 **2. `uploadObject` 上传文件（新方法）**
 
@@ -256,7 +256,7 @@ minio 默认生成的 url 是必须携带签名才能访问的，若想要直接
 
 1. 去后台将桶的访问权限由私有 `private` 改为 `public`
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465685992-vgfb6v4d.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465685992-vgfb6v4d.png)
 
 此方式不推荐，任何人不使用用户名和密码认证，都可以对该桶的文件信息上传，下载和删除
 
@@ -276,10 +276,10 @@ minioClient.setBucketPolicy(SetBucketPolicyArgs.builder()
         .build());
 ```
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465686127-dff2kwoz.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465686127-dff2kwoz.png)
 
 此时再向该桶 `public-readonly-file` 中上传文件 `uploadObject`，然后使用 `getPresignedObjectUrl` 获取图片访问地址
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465686236-23ipftqu.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465686236-23ipftqu.png)
 
 > 虽然 `getPresignedObjectUrl` 默认生成的还是带签名的地址，但是因为设置了公开读，所以可以去掉

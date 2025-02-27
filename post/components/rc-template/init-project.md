@@ -65,7 +65,7 @@ pnpm i typescript less @types/node -D
 pnpm dlx @eslint/create-config
 ```
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465674009-r6fksi55.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465674009-r6fksi55.png)
 
 eslint 基本结构有了，再装一些辅助插件
 
@@ -166,7 +166,7 @@ module.exports = {
 
 此时你可以发现 `.prettierrc.cjs` 被 eslint 报错了
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465674140-clkgisgs.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465674140-clkgisgs.png)
 
 这是由于 module 是 node 环境的全局变量，而 eslint 不识别 node 环境。在 `eslint.config.mjs` 中的 `globals` 属性添加 node 全局变量
 
@@ -206,7 +206,7 @@ export default [
 
 不出意外的话，此时就能看到 `eslint.config.mjs` 中存在大量的 prettier 报错提示。
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465674250-2ykr44hu.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465674250-2ykr44hu.png)
 
 在根目录新建一个 `.vscode` 文件夹，在文件夹内部新建 `settings.json` 文件
 
@@ -235,7 +235,7 @@ export default [
 
 在 windows 上默认是 CRLF 编码，而 prettier 认为这是一种错误的编码方式，格式化也不行。
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465674347-4bgbnqhm.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465674347-4bgbnqhm.png)
 
 - 安装 `EditorConfig for VS Code` 插件
 - 根目录新建 `.editorconfig`，写入内容，再次保存，就可以看到编码已经变成 `LF` 了
@@ -314,7 +314,7 @@ module.exports = {
 
 完毕之后可以随便建一个测试的 less 文件，写一些内容来测试插件是否生效
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465674465-hqg9y6po.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465674465-hqg9y6po.png)
 
 由此可见，排序插件是生效了，此时保存代码就可以自动修复排序规则，那这个 stylelint 的配置应该也没什么问题。
 
@@ -604,14 +604,14 @@ const a = 1; // 'a' is assigned a value but never used.
 
 然后执行 commit（初次执行代码校验时间可能较长）
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465674568-merp240h.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465674568-merp240h.png)
 
 上图可以看到，lint 校验没通过，无法 commit，此时再把 `const a = 1;` 删除掉，消除 eslint 的报错，再次执行 commit
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465674709-qnpa4a7t.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465674709-qnpa4a7t.png)
 
 上图可知，这次代码的校验已经通过，但是 commitlint 抛出了错误，提示 commit 信息不规范，此时修改一下再提交
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465674833-qpi6bask.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465674833-qpi6bask.png)
 
 此时提交就可以正常通过了，接下来推送到远程仓库即可。

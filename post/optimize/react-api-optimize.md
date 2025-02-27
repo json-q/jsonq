@@ -17,11 +17,11 @@ react 无法做到像 vue 一样自动收集依赖更新（期待 react19 的 Re
 
 代码示例：
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465688016-h2tuhwqc.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465688016-h2tuhwqc.png)
 
 效果图：
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740476995624-l09dxd1q.gif)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740476995624-l09dxd1q.gif)
 
 图中可以看到，虽然 `Child` 子组件的 name 没有发生任何变化，但是由于父组件的 state 改变导致整个组件重新渲染，子组件也无法避免 rerender（第一个打印是初始加载时的渲染）
 
@@ -31,11 +31,11 @@ react 无法做到像 vue 一样自动收集依赖更新（期待 react19 的 Re
 
 代码示例：
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465688157-nhrorb9e.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465688157-nhrorb9e.png)
 
 效果图：
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740476995743-5hh6l5q0.gif)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740476995743-5hh6l5q0.gif)
 
 子组件 `memo` 后，props 只要不发生变化就不会重渲染
 
@@ -49,7 +49,7 @@ react 无法做到像 vue 一样自动收集依赖更新（期待 react19 的 Re
 
 效果图：
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465688245-m8lve545.gif)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465688245-m8lve545.gif)
 
 图中结合代码可见，`obj` 是传入的不变值，看似 props 是没有发生变化的。但是：**`obj` 是引用数据类型，其数据是存到堆内存中的，和基本类型不同**，`state` 每发生一次变化，`obj` 的内存地址就会重新变动，生成的是一个全新的 `obj` 对象，这就导致了表面上看似 props 没变化，实际上是 `obj` 是一直在变，一直在 rerender
 
@@ -74,7 +74,7 @@ function App() {
 
 使用 `useMemo` 缓存，和 `useEffect` 用法相似，不过第一个函数需要返回数据，第二个参数是依赖，空数组就是仅初始化执行，但是 `useMemo` 大部分是用于计算缓存的，纯静态值不推荐
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465688359-ug8x9vxv.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465688359-ug8x9vxv.png)
 
 ```js
 <Child
@@ -91,7 +91,7 @@ function App() {
 
 memo 有第二个参数，是一个函数，函数第一个参数是更新前的 props，第二个参数是更新后的 props，可以自行对比，返回 true 不更新，返回 false 说明两次 props 不一致，更新。
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465688445-khbicxq5.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465688445-khbicxq5.png)
 
 深度对比的第三方库很多，此处以 `fast-deep-equal` 为例
 
@@ -115,11 +115,11 @@ const Child: React.FC<ChildProps> = memo((props) => {
 
 示例代码：
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465688529-3bbzit8e.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465688529-3bbzit8e.png)
 
 当我更改时间戳时，`computedCount` 跟 `timestamp` 半毛钱关系没有，但依旧每次都会重新执行 `computedCount` 函数，每次执行函数的计算花费 50-60 毫秒不等，如果计算内容再复杂一点，每次都会产生大量无用开支
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465688682-t71n95ix.gif)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465688682-t71n95ix.gif)
 
 ## 解决方法
 
@@ -127,11 +127,11 @@ const Child: React.FC<ChildProps> = memo((props) => {
 
 代码示例：
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465688784-6ui29nns.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465688784-6ui29nns.png)
 
 效果图：
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740476995829-8p69rv5d.gif)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740476995829-8p69rv5d.gif)
 
 # useCallback
 
@@ -141,11 +141,11 @@ const Child: React.FC<ChildProps> = memo((props) => {
 
 代码示例：
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465688881-sh04f07a.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465688881-sh04f07a.png)
 
 更改父组件的 `timestamp`，其中 `getList` 函数跟 `timestamp` 半毛钱关系没有，就算子组件加了 `memo` 和 深对比，也无法阻止 rerender
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465688977-h8f6fq7y.gif)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465688977-h8f6fq7y.gif)
 
 **原因：**
 
@@ -158,11 +158,11 @@ const Child: React.FC<ChildProps> = memo((props) => {
 
 代码示例：
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465689120-l54rsibg.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465689120-l54rsibg.png)
 
 效果图：
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740476995960-cebv5f8i.gif)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740476995960-cebv5f8i.gif)
 
 # useRef
 
@@ -176,7 +176,7 @@ const Child: React.FC<ChildProps> = memo((props) => {
 
 何时使用 `useRef` 而不是 `useState`？这是 react 中文网对 `useRef` 的描述
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465689224-sh3l1b7z.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465689224-sh3l1b7z.png)
 
 当一个数据不需要展示到页面上，仅仅作为一个记录值，比如分页数据。请求后端数据时，页码和分页尺寸通常是不会显示到页面上的（纯受控分页除外），当页码改变，去请求后端数据
 
@@ -184,9 +184,9 @@ const Child: React.FC<ChildProps> = memo((props) => {
 
 ## 使用 useState 的效果
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465689356-k6taeudx.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465689356-k6taeudx.png)
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740476996069-evstla4a.gif)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740476996069-evstla4a.gif)
 
 这种写法，由于 `setState` 为异步，需要在 `useEffect` 中拿到页码改变后的最新值并请求（也可以有其它方式，暂不赘述），而且**每次页码 +1，都会导致组件 rerender，这也是一部分无用的性能开销，重要的是 rerender**
 
@@ -194,9 +194,9 @@ const Child: React.FC<ChildProps> = memo((props) => {
 
 `useRef` 最重要的就是**不会导致组件 reredner**
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465689486-wfzytqao.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465689486-wfzytqao.png)
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740476996148-ggmav6yd.gif)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740476996148-ggmav6yd.gif)
 
 记录了页码的变动，也没有导致组件的 rerender
 

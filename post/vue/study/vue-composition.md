@@ -89,7 +89,7 @@ setup 是一个函数
 </script>
 ```
 
-![count打印](https://img.jsonq.top/blog/2025/2/25/1740465697550-909pefro.jpg)
+![count打印](https://jsonq.top/cdn-static/2025/02/25/1740465697550-909pefro.jpg)
 
 > 在 **template 模板**中引入 ref 的值时，Vue 会自动进行解包操作，所以并**不需要在模板中通过 `ref.value` 的方式**来使用。
 >
@@ -168,7 +168,7 @@ export default function useCount() {
 
 `reactive` 要求必须传入的是一个**对象或者数组类型**,如果传入基本类型`Number、String、Boolean`等，控制台会报警告
 
-![reactive警告](https://img.jsonq.top/blog/2025/2/25/1740465697680-s9efgvow.jpg)
+![reactive警告](https://jsonq.top/cdn-static/2025/02/25/1740465697680-s9efgvow.jpg)
 
 ```html
 <template>
@@ -228,7 +228,7 @@ const refName = ref('666');
 const readonlyName = readonly(refName);
 ```
 
-![readonly示例](https://img.jsonq.top/blog/2025/2/25/1740465697782-c00i6oad.jpg)
+![readonly示例](https://jsonq.top/cdn-static/2025/02/25/1740465697782-c00i6oad.jpg)
 
 ### toRefs
 
@@ -283,7 +283,7 @@ export default {
 
 选项式 computed 写法：
 
-详情可查看 [初识计算属性 computed](/post/vue/basic/vue-know.md#初识计算属性-computed)
+详情可查看 [初识计算属性 computed](/post/vue/basic/vue-know#初识计算属性-computed)
 
 ```html
 <script>
@@ -357,7 +357,7 @@ export default {
 </script>
 ```
 
-![computed修饰的返回结果](https://img.jsonq.top/blog/2025/2/25/1740465697986-8buln3yb.jpg)
+![computed修饰的返回结果](https://jsonq.top/cdn-static/2025/02/25/1740465697986-8buln3yb.jpg)
 
 > computed 修饰后，返回的结果就是一个 Ref 修饰的响应式值
 
@@ -365,7 +365,7 @@ export default {
 
 和选项式中的 `$ref` 的目的是相同的。在 Vue2 中，获取元素 DOM 节点需要 **给元素绑定 ref="xxx"** 和 通过 **this.$refs.xxx**进行访问
 
-详情可查看 [refs](/post/vue/basic/vue-components.md#refs) Vue3 的 setup 中，使用如下方式
+详情可查看 [refs](/post/vue/basic/vue-components#refs) Vue3 的 setup 中，使用如下方式
 
 ```html
 <template>
@@ -403,13 +403,13 @@ export default {
 </script>
 ```
 
-![ref绑定节点](https://img.jsonq.top/blog/2025/2/25/1740465698070-0g1s3zo7.jpg)
+![ref绑定节点](https://jsonq.top/cdn-static/2025/02/25/1740465698070-0g1s3zo7.jpg)
 
 # 生命周期
 
 setup 可以用来替代 data 、 methods 、 computed 等等这些选项，也可以替代 生命周期钩子
 
-选项式生命周期详情可查看 [Vue2 生命周期](/post/vue/basic/vue-components.md#生命周期)
+选项式生命周期详情可查看 [Vue2 生命周期](/post/vue/basic/vue-components#生命周期)
 
 | 选项式 API    | 组合式 API      |
 | ------------- | --------------- |
@@ -450,7 +450,7 @@ export default {
 
 # provide/inject
 
-关于 Vue2 的 Provide 和 Inject [点击查看详情](/post/vue/basic/vue-components.md#provide-inject)
+关于 Vue2 的 Provide 和 Inject [点击查看详情](/post/vue/basic/vue-components#provide-inject)
 
 provide 提供数据（响应式和非响应式）：
 
@@ -492,7 +492,7 @@ export default {
 
 `function watch(source: string, callback: function, options?: object)`
 
-关于 Vue2 的 watch [点击查看详情](/post/vue/basic/vue-know.md#侦听器-watch)
+关于 Vue2 的 watch [点击查看详情](/post/vue/basic/vue-know#侦听器-watch)
 
 Vue2 选项式 API watch
 
@@ -586,7 +586,7 @@ watchEffect 的原理和 React 的 useEffect 比较类似，不同的是：watch
 </script>
 ```
 
-![watchEffect基本使用](https://img.jsonq.top/blog/2025/2/25/1740465698169-4quy6e4v.jpg)
+![watchEffect基本使用](https://jsonq.top/cdn-static/2025/02/25/1740465698169-4quy6e4v.jpg)
 
 ### 停止侦听
 
@@ -603,7 +603,7 @@ const stopWatch = watchEffect(() => {
 });
 ```
 
-![watchEffect 停止侦听](https://img.jsonq.top/blog/2025/2/25/1740465698268-8izi3zed.jpg)
+![watchEffect 停止侦听](https://jsonq.top/cdn-static/2025/02/25/1740465698268-8izi3zed.jpg)
 
 # script setup 语法糖
 
@@ -634,7 +634,7 @@ setup 语法糖，是在 Vue3.2 版本才成为正式版。
 </script>
 ```
 
-![setup 语法糖基本使用](https://img.jsonq.top/blog/2025/2/25/1740465698400-9h2dpofa.jpg)
+![setup 语法糖基本使用](https://jsonq.top/cdn-static/2025/02/25/1740465698400-9h2dpofa.jpg)
 
 ## defineProps()和 defineEmits()
 
@@ -682,7 +682,7 @@ defineEmits 使用：
 </script>
 ```
 
-![defineEmits使用](https://img.jsonq.top/blog/2025/2/25/1740465698515-2ugpqfsx.jpg)
+![defineEmits使用](https://jsonq.top/cdn-static/2025/02/25/1740465698515-2ugpqfsx.jpg)
 
 ## defineExpose()
 

@@ -5,7 +5,7 @@ date: 2023-06-09
 
 # Vue 的组件化
 
-?> 由于组件化特殊，需采用 `vue cli` 创建项目。如何安装 Vue cli 请见[初识 Vue3](/post/vue/basic/vue-know.md#如何使用-vue)
+?> 由于组件化特殊，需采用 `vue cli` 创建项目。如何安装 Vue cli 请见[初识 Vue3](/post/vue/basic/vue-know#如何使用-vue)
 
 ## 注册组件
 
@@ -21,8 +21,8 @@ date: 2023-06-09
 1. 创建全局组件进行编写
 2. 在`main.js`中**引入并注册**该组件
 3. 在其它组件中使用
-   - ![代码](https://img.jsonq.top/blog/2025/2/25/1740465695457-eau6u8he.jpg)
-   - ![结果](https://img.jsonq.top/blog/2025/2/25/1740475764100-91lezxpn.jpg)
+   - ![代码](https://jsonq.top/cdn-static/2025/02/25/1740465695457-eau6u8he.jpg)
+   - ![结果](https://jsonq.top/cdn-static/2025/02/25/1740475764100-91lezxpn.jpg)
 
 ### 局部组件
 
@@ -280,7 +280,7 @@ export default {
 
 1. 什么是非 Prop 的 Attribute 呢？当我们**传递给一个组件某个属性**，但是该属性并**没有定义对应的 `props` 或者 `emits` 时**，就称之为 **非 Prop 的 Attribute**；常见的包括 `class、style、id` 属性等；
 
-   ![结果](https://img.jsonq.top/blog/2025/2/25/1740465695589-cmhb9iv1.jpg)
+   ![结果](https://jsonq.top/cdn-static/2025/02/25/1740465695589-cmhb9iv1.jpg)
 
 2. 禁用 Attribute 继承禁止非 props 的 attribute 添加到子组件根节点上，可以在使用`inheritAttrs: false`来禁止
 
@@ -403,7 +403,7 @@ export default {
 
 当自定义验证生效时，控制台会报出警告，说是一个校验失败的自定义事件
 
-![自定义事件校验失败](https://img.jsonq.top/blog/2025/2/25/1740465695717-nggk0s4o.jpg)
+![自定义事件校验失败](https://jsonq.top/cdn-static/2025/02/25/1740465695717-nggk0s4o.jpg)
 
 ## 非父子组件通信
 
@@ -417,13 +417,13 @@ export default {
 
 #### 基本使用：
 
-![provide inject流程](https://img.jsonq.top/blog/2025/2/25/1740465695810-6g9c0ghd.jpg)
+![provide inject流程](https://jsonq.top/cdn-static/2025/02/25/1740465695810-6g9c0ghd.jpg)
 
 #### Provide 函数写法
 
 如果`Provide`中提供的一些数据是来自 data，那么我们可能会想要通过 this 来获取
 
-![函数写法](https://img.jsonq.top/blog/2025/2/25/1740465695937-dh1o2cgq.jpg)
+![函数写法](https://jsonq.top/cdn-static/2025/02/25/1740465695937-dh1o2cgq.jpg)
 
 > provide 一般都写成函数写法
 
@@ -431,11 +431,11 @@ export default {
 
 当我们使用 provide 给子组件传递数据时，我们更希望该数据是响应式的
 
-![非响应式provide数据](https://img.jsonq.top/blog/2025/2/25/1740465696059-cxgioz4d.jpg)
+![非响应式provide数据](https://jsonq.top/cdn-static/2025/02/25/1740465696059-cxgioz4d.jpg)
 
 解决方法：使用`computed`
 
-![computed响应式数据](https://img.jsonq.top/blog/2025/2/25/1740475764958-85uqkizf.jpg)
+![computed响应式数据](https://jsonq.top/cdn-static/2025/02/25/1740475764958-85uqkizf.jpg)
 
 > `computed`是 **vue3 的新特性**,且`computed`返回的是一个`ref`对象，需要取出其中的`value`来使用
 
@@ -524,11 +524,11 @@ Vue 中将 **`<slot>` 元素作为承载分发内容**的出口；在封装组�
 
 ### 基本使用
 
-![slot基本使用](https://img.jsonq.top/blog/2025/2/25/1740465696173-t1q9e547.jpg)
+![slot基本使用](https://jsonq.top/cdn-static/2025/02/25/1740465696173-t1q9e547.jpg)
 
 ### 默认插槽内容
 
-![默认插槽内容](https://img.jsonq.top/blog/2025/2/25/1740475765112-oqa503qy.jpg)
+![默认插槽内容](https://jsonq.top/cdn-static/2025/02/25/1740475765112-oqa503qy.jpg)
 
 ### 具名插槽
 
@@ -539,7 +539,7 @@ Vue 中将 **`<slot>` 元素作为承载分发内容**的出口；在封装组�
 - 具名插槽`v-slot`可以简写为`#`
 - `v-slot`必须写在`<template></template>`标签上
 
-![具名插槽](https://img.jsonq.top/blog/2025/2/25/1740465696273-2x3nzhdl.jpg)
+![具名插槽](https://jsonq.top/cdn-static/2025/02/25/1740465696273-2x3nzhdl.jpg)
 
 > 最常用的是第三种写法
 
@@ -547,7 +547,7 @@ Vue 中将 **`<slot>` 元素作为承载分发内容**的出口；在封装组�
 
 我们可以通过 `v-slot:[dynamicSlotName]` 方式动态绑定一个名称
 
-![动态插槽名](https://img.jsonq.top/blog/2025/2/25/1740465696401-ogx9ybs6.jpg)
+![动态插槽名](https://jsonq.top/cdn-static/2025/02/25/1740465696401-ogx9ybs6.jpg)
 
 ### 插槽难点
 
@@ -580,13 +580,13 @@ Vue 中将 **`<slot>` 元素作为承载分发内容**的出口；在封装组�
 </template>
 ```
 
-![结果](https://img.jsonq.top/blog/2025/2/25/1740465696523-ehwkzqp9.jpg)
+![结果](https://jsonq.top/cdn-static/2025/02/25/1740465696523-ehwkzqp9.jpg)
 
 **提问：** 在这种情况下，该如何在子组件有插槽的循环中插入循环项的自定义内容 **思路：** 将插槽的当前项传递给父组件，供父组件访问
 
 2. 在 `slot` 标签绑定自定义`attribute`将**当前循环项插槽的数据传递给父组件**，父组件通过`v-slot:default="xxx"`（简写`#default="xxx"`）接收，`xxx`代表的是传递给父组件的所有数据，所以是一个对象，可以通过`xxx.id、xxx.title`的格式访问这些数据。
 
-![作用域插槽](https://img.jsonq.top/blog/2025/2/25/1740465696637-p43oc1dp.jpg)
+![作用域插槽](https://jsonq.top/cdn-static/2025/02/25/1740465696637-p43oc1dp.jpg)
 
 #### 认识独占默认插槽的缩写
 
@@ -625,7 +625,7 @@ Vue 中将 **`<slot>` 元素作为承载分发内容**的出口；在封装组�
 
 # 生命周期
 
-![生命周期流程图](https://img.jsonq.top/blog/2025/2/25/1740465696741-6wssgq2g.jpg)
+![生命周期流程图](https://jsonq.top/cdn-static/2025/02/25/1740465696741-6wssgq2g.jpg)
 
 1. 创建（组件实例初始化）阶段
    1. beforeCreate：开始创建组件实例
@@ -644,15 +644,15 @@ Vue 中将 **`<slot>` 元素作为承载分发内容**的出口；在封装组�
 
 父子组件挂载阶段
 
-![父子组件挂载阶段](https://img.jsonq.top/blog/2025/2/25/1740465696868-gd0r8ha9.jpg)
+![父子组件挂载阶段](https://jsonq.top/cdn-static/2025/02/25/1740465696868-gd0r8ha9.jpg)
 
 父子组件更新阶段
 
-![父子组件更新阶段](https://img.jsonq.top/blog/2025/2/25/1740475765934-nfxwsw78.jpg)
+![父子组件更新阶段](https://jsonq.top/cdn-static/2025/02/25/1740475765934-nfxwsw78.jpg)
 
 父子组件卸载阶段
 
-![父子组件卸载阶段](https://img.jsonq.top/blog/2025/2/25/1740465696981-rl6x23wd.jpg)
+![父子组件卸载阶段](https://jsonq.top/cdn-static/2025/02/25/1740465696981-rl6x23wd.jpg)
 
 # $refs
 
@@ -709,7 +709,7 @@ Vue 中将 **`<slot>` 元素作为承载分发内容**的出口；在封装组�
 <style></style>
 ```
 
-![结果](https://img.jsonq.top/blog/2025/2/25/1740465697085-s1oudz47.jpg)
+![结果](https://jsonq.top/cdn-static/2025/02/25/1740465697085-s1oudz47.jpg)
 
 > 当 `ref` 绑定元素时，`this.$refs.xxx` 获取到的是 DOM 节点。当 `ref` 绑定 组件时，`this.$ref.xxx` 获取的是该组件的**组件实例**，可以直接访问内部的数据（data 中的数据，methods 中的方法等**所有能够通过 this 访问的**）
 
@@ -790,7 +790,7 @@ Vue 中将 **`<slot>` 元素作为承载分发内容**的出口；在封装组�
    ```
 2. `include` 只有名称匹配的组件会被缓存，写法：`string | RegExp | Array<string>`
 
-   ![include写法](https://img.jsonq.top/blog/2025/2/25/1740465697210-3ki0ttwx.jpg)
+   ![include写法](https://jsonq.top/cdn-static/2025/02/25/1740465697210-3ki0ttwx.jpg)
 
 3. `exclude` 任何名称匹配的组件都**不会被缓存**，用法和 `include`一致
 4. 最多可以缓存多少组件实例，一旦达到这个数字，那么缓存组件中最近没有被访问的实例会被销毁。写法：`number | string`
@@ -855,7 +855,7 @@ Vue 中将 **`<slot>` 元素作为承载分发内容**的出口；在封装组�
 
 ## 组件 v-model 实现
 
-![组件v-model实现](https://img.jsonq.top/blog/2025/2/25/1740465697306-7bayyeu0.jpg)
+![组件v-model实现](https://jsonq.top/cdn-static/2025/02/25/1740465697306-7bayyeu0.jpg)
 
 ## 多个 v-model 绑定
 
@@ -883,7 +883,7 @@ Vue 中将 **`<slot>` 元素作为承载分发内容**的出口；在封装组�
 
 ## 基本使用
 
-![mixins基本使用](https://img.jsonq.top/blog/2025/2/25/1740465697427-o1bm32hc.jpg)
+![mixins基本使用](https://jsonq.top/cdn-static/2025/02/25/1740465697427-o1bm32hc.jpg)
 
 ## Mixin 的合并规则
 

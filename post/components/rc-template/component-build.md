@@ -99,7 +99,7 @@ pnpm i clsx -D
 
 代码我就不列出来了，大家可以自行编写，或者去仓库看也可以，就是一个简单的示例组件，编写完成后，目录结构如下
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465671795-5ag1kxb7.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465671795-5ag1kxb7.png)
 
 - 由于样式后续要做按需导入，所以必须确保每个组件的样式 style 有一个导出的 index.(ts|js) 文件和 index.less 文件
 - index.(ts|js) 的内容就是 `@import xxx.less`
@@ -280,7 +280,7 @@ pnpm i rimraf -D -w
 
 然后执行命令 `pnpm build`，就能在 lib 目录下看到 commonjs 的代码了，且诸多 helper 方法已被抽离至 `@babel/runtime` 中
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465672018-rqpzh6mq.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465672018-rqpzh6mq.png)
 
 ## 导出 ESM 代码
 
@@ -349,7 +349,7 @@ const build = gulp.parallel(gulp.series(compileCJS, compileESM));
 
 执行 `pnpm build`，观察 es 目录下的编译结果，都是 `import` 的 esm 写法
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465672207-ut65dlpr.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465672207-ut65dlpr.png)
 
 ## Less 样式处理
 
@@ -369,7 +369,7 @@ const build = gulp.parallel(gulp.series(compileCJS, compileESM));
 
 这里就举例国内采用同样技术的组件库：[antd 4.x](https://github.com/ant-design/ant-design/tree/4.x-stable)、[arco design](https://github.com/arco-design/arco-design)、[tdesign](https://github.com/Tencent/tdesign-react) ，可以参考一下他们的打包后的结构目录
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465672432-w93mhxcl.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465672432-w93mhxcl.png)
 
 可以看到以上组件库的样式结构基本都一样（tdesign 直接使用 `cssvar`，但是对外提供了 less 能力），提供了 `index.js`（内部是 less 文件的导入）、`css.js`（内部是 css 文件的导入）`index.css`（内部是合并后的纯 css）以及原样的 less 文件
 
@@ -403,7 +403,7 @@ const build = gulp.parallel(gulp.series(compileCJS, compileESM), copyLess);
 
 可以看到 less 样式已经按照原来的结构 copy 到 es 和 lib 包中，然后就是生成 css 的步骤。
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465672606-2bccrdfz.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465672606-2bccrdfz.png)
 
 ### less 编译成 css
 
@@ -435,7 +435,7 @@ const build = gulp.parallel(gulp.series(compileCJS, compileESM), copyLess, less2
 
 执行 `pnpm build`，检查打包文件，如图所示就是成功的。
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465672781-6zg13c0t.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465672781-6zg13c0t.png)
 
 这里没有对 css 进行压缩，esm 和 lib 会被用户以 npm 方式使用，用户打包时，自然会对 css 进行压缩。
 
@@ -474,7 +474,7 @@ const build = gulp.parallel(gulp.series(compileCJS, compileESM), copyLess, less2
 
 功能实现参考 [antd-tools](https://github.com/ant-design/antd-tools)，由于 antd5 现在不使用 less 了，就直接找到之前的 commit 把代码贴出来了，如下图所示
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465672947-51pmv6ad.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465672947-51pmv6ad.png)
 
 这段代码做的就是匹配到 `style/index.js` 时，生成 `style/css.js`，并通过正则将文件内容中引入的 less 文件后缀改成 css。
 
@@ -537,7 +537,7 @@ function cssInjection(content) {
 
 执行 `pnpm build`，即可看到 `css.js` 文件
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465673066-o1sbcgs5.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465673066-o1sbcgs5.png)
 
 > 其实这一部分很多可以优化的地方，做的更细致一点，大家在看懂之后可以自行尝试优化，比如 `token.css` 并不存在（`token.less` 未被编译），可以去掉，再比如可以把 less 变量编译 cssvar，`css.js` 可以再额外引入 css 变量，就可以做到动态换肤功能。
 
@@ -593,7 +593,7 @@ cssinjs 的库都不需要这个，因为 cssinjs 只有 js，天然支持 `tree
 
 其实 `exports` 是用来替代 `@babel/plugin-transform-runtime` 的 `useESModules` 的（对导出这块我也不是很熟，同样是查资料和摸索出来的）
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465673182-ihgkdchv.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465673182-ihgkdchv.png)
 
 而后边又添加了 `./es/*": "./es/*` 等的指向，是因为我在使用按需加载的过程中发现插件无法从 `./es` 中读取文件，找不到文件路径，而且编辑器无法给出路径提示（看样子确实是没有指定到文件下），所以才有了这一系列的指向，大家可以去掉之后自行尝试一下。
 
@@ -645,7 +645,7 @@ storybook 分两个运行界面，一个是 vite + react 默认的模板页面�
 
 在 `App.tsx` 中导入组件
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465673340-xbx2ifpr.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465673340-xbx2ifpr.png)
 
 运行 `pnpm dev`，打开即可看到一个很丑的按钮 button，因为没有样式，接下来我们做样式的按需导入
 
@@ -688,7 +688,7 @@ export default defineConfig({
 
 此时一个漂亮的按钮就成功出来了
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465673506-n68zohxm.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465673506-n68zohxm.png)
 
 > 这么看来在项目结构搭建时可以把 `storybook` 作为根目录作为项目共享的配置，这样可以直接在 `components` 文件夹下写 story 文档，结构上更方便查看
 
@@ -754,7 +754,7 @@ export const ButtonSize: Story = {
 
 执行 `pnpm storybook`，运行 storybook 文档
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465673618-ctnk1wis.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465673618-ctnk1wis.png)
 
 样式的按需加载也被 storybook 文档享受到了，不需要单独导入 css。
 
@@ -891,7 +891,7 @@ module.exports = merge(prodConfig, commonConfig);
 
 执行 `pnpm build:dist`，就可以看到生成了 `dist` 文件夹
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465673727-v2zl6fg7.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465673727-v2zl6fg7.png)
 
 ### 细节优化
 
@@ -966,7 +966,7 @@ function less2css() {
 
 执行 `pnpm build`，如图所示，就大功告成了
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465673806-8t8664tc.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465673806-8t8664tc.png)
 
 > 其实 webpack 打包 dist 这块不用拆分出 `dev` 和 `prod` 两个文件，可以将配置项作为一个函数，通过传参判断构建的产物类型，作为构建脚本执行会更合适。
 
@@ -1007,7 +1007,7 @@ function less2css() {
 </html>
 ```
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465673908-d60ccdoo.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465673908-d60ccdoo.png)
 
 组件库的打包到此结束！同时期待阅读这篇文章的你有更深入的优化
 

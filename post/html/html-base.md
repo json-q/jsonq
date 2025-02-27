@@ -89,7 +89,7 @@ date: 2022-10-19
 
 详情请参照 MDN 文档 [table 弃用的属性](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/table#%E5%BC%83%E7%94%A8%E7%9A%84%E5%B1%9E%E6%80%A7)
 
-![table基本使用](https://img.jsonq.top/blog/2025/2/25/1740465683288-dka6punr.jpg)
+![table基本使用](https://jsonq.top/cdn-static/2025/02/25/1740465683288-dka6punr.jpg)
 
 `border-collapse: collapse;` 来决定 border 的边框是合并的
 

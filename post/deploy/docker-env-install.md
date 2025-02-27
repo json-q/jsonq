@@ -542,7 +542,7 @@ http 没法访问 https，目前这里有两种方法
 
 虽然 next-auth 官方说可以自动推断 redirect_uri，本地确实没问题，但是 Docker 部署后的 Next 项目推断失败（笑死）
 
-![image](https://img.jsonq.top/blog/2025/2/26/1740559560949-6nlv08er.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740559560949-6nlv08er.png)
 
 出现问题的时候，推断出来的 `redirect_uri` 是 `https//: 容器id:容器端口`，但是这种显然是无法公网访问的，而且和 Github 里配置的路径不一致，所以会出错，那就没办法了，就去 `env` 里明确一下呗
 

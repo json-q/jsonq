@@ -126,11 +126,11 @@ function Page() {
 - 表单中文件回显时，需要转换成 `antd` 的格式
 - 删除时根据 id 删除文件，所以 id 必须要在显示数据中（不论是初次新建上传的，还是编辑回显的）
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465689594-2pgbb4ud.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465689594-2pgbb4ud.png)
 
 上传组件的封装思路：
 
-[image](https://img.jsonq.top/blog/2025/2/25/1740476578202-6g6awrqd.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740476578202-6g6awrqd.png)
 
 ### 上传封装
 

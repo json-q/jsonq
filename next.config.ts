@@ -10,13 +10,19 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'static.jsonq.top',
+        hostname: 'testingcf.jsdelivr.net',
         port: '',
         pathname: '/**',
       },
       {
         protocol: 'https',
-        hostname: process.env.NEXT_PUBLIC_MINIO_END_POINT || '',
+        hostname: 'jsdelivr.net',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: process.env.SITE_DOMAIN || 'jsonq.top',
         port: '',
         pathname: '/**',
       },

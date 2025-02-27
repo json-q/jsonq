@@ -20,7 +20,7 @@ date: 2024-04-10
 
 如果对以上文字描述的感觉并不明显，查看以下图片即可。
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465693271-am9n5dtg.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465693271-am9n5dtg.png)
 
 该项目来源于 `alitajs`，由 umi 团队人员，基于 `umijs` 实现的移动端开箱即用的框架，内置了移动端适配（rem 方案）。整体架构风格和 `@umijs/max` 差不多。左侧是以电脑访问的，三个 `ListItem` 就占满了整个电脑屏幕，而在移动端则是很正常的显示，对比非常明显，电脑端体验极差！！！这也是为什么最终不采用移动端适配的原因。
 
@@ -158,7 +158,7 @@ export default ErrorBoundary;
 
 内部的错误大概就是这样的，这种在出现意外报错时，可以第一时间排查错误来源，而不是白屏无从查起
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465693411-wowqa6t9.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465693411-wowqa6t9.png)
 
 ## 签字组件封装
 
@@ -341,7 +341,7 @@ function SIG() {
 export default SIG;
 ```
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465693528-5fp7szxt.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465693528-5fp7szxt.png)
 
 ## 移动端 select 实现
 
@@ -615,7 +615,7 @@ export default memo(SelectPicker);
 
 效果图如图所示：
 
-![image](https://img.jsonq.top/blog/2025/2/25/1740465693702-0iosezxr.png)
+![image](https://jsonq.top/cdn-static/2025/02/25/1740465693702-0iosezxr.png)
 
 ## 简易 redux
 

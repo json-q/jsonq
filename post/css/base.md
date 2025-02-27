@@ -28,7 +28,9 @@ date: 2022-10-21
 - 其它属性
   - `overflow`、`clip`、`cursor`、`transform`、`animation、transition`、`withe-space`
 
-3. **_浏览器渲染流程_** 自上而下依次解析，解析到外部链接时 ![浏览器渲染流程](https://img.jsonq.top/blog/2025/2/25/1740465675500-gwgy42aw.jpg)
+3. **_浏览器渲染流程_** 自上而下依次解析，解析到外部链接时
+
+![浏览器渲染流程](https://jsonq.top/cdn-static/2025/02/25/1740465675500-gwgy42aw.jpg)
 
 # CSS 基本属性
 
@@ -284,7 +286,7 @@ date: 2022-10-21
 
 HTML 中的每一个元素都可以看做是一个盒子，可以具备 4 个属性
 
-![盒子](https://img.jsonq.top/blog/2025/2/25/1740465675648-rmmzqf57.jpg)
+![盒子](https://jsonq.top/cdn-static/2025/02/25/1740465675648-rmmzqf57.jpg)
 
 ## 基础属性
 
@@ -329,7 +331,7 @@ HTML 中的每一个元素都可以看做是一个盒子，可以具备 4 个属
 
 ### 上下 margin 的传递
 
-![margin-top](https://img.jsonq.top/blog/2025/2/25/1740465675770-51b3hm0a.jpg)
+![margin-top](https://jsonq.top/cdn-static/2025/02/25/1740465675770-51b3hm0a.jpg)
 
 - margin-top 传递
   - 如果**块级元素的顶部线和父元素的顶部线重叠**，那么这个**块级元素的 margin-top 值会传递给父元素**
@@ -344,7 +346,7 @@ HTML 中的每一个元素都可以看做是一个盒子，可以具备 4 个属
 
 ## 上下 margin 的折叠
 
-![margin 的重叠问题](https://img.jsonq.top/blog/2025/2/25/1740465675867-og4w8p7b.jpg)
+![margin 的重叠问题](https://jsonq.top/cdn-static/2025/02/25/1740465675867-og4w8p7b.jpg)
 
 - **垂直方向上相邻** 2 个 margin（margin-top、margin-bottom）有**可能会合并为 1 个 margin**，这种现象叫做 collapse（折叠）
 - 水平方向上的 margin（margin-left、margin-right）永远不会 collapse
@@ -356,7 +358,7 @@ HTML 中的每一个元素都可以看做是一个盒子，可以具备 4 个属
 - 两个兄弟块级元素之间上下 margin 的折叠
   - 见上图
 - 父子块级元素之间 margin 的折叠
-  - ![父子块级元素之间 margin 的折叠](https://img.jsonq.top/blog/2025/2/25/1740465675972-t618s95x.jpg)
+  - ![父子块级元素之间 margin 的折叠](https://jsonq.top/cdn-static/2025/02/25/1740465675972-t618s95x.jpg)
 
 ## 常用属性
 

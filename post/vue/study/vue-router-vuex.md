@@ -14,11 +14,11 @@ npm i vue-router
 ## 路由基本使用
 
 1. **创建路由实例**  
-   ![创建路由实例](https://img.jsonq.top/blog/2025/2/25/1740465701055-q0d9p8gh.jpeg)
+   ![创建路由实例](https://jsonq.top/cdn-static/2025/02/25/1740465701055-q0d9p8gh.jpeg)
 2. **在 `main.js` 中使用 路由实例**  
-   ![使用路由实例](https://img.jsonq.top/blog/2025/2/25/1740465701169-mpwkmfnt.jpeg)
+   ![使用路由实例](https://jsonq.top/cdn-static/2025/02/25/1740465701169-mpwkmfnt.jpeg)
 3. **使用 `<router-link>` 设置跳转链接。使用 `<router-view>` 设置路由组件的渲染位置**  
-   ![router组件渲染](https://img.jsonq.top/blog/2025/2/25/1740465701279-k8l6rek7.jpeg)
+   ![router组件渲染](https://jsonq.top/cdn-static/2025/02/25/1740465701279-k8l6rek7.jpeg)
 
 > redirect 在 router 实例中的作用就是 **路由重定向**，访问 path 路径时，重定向到 redirect 对应的 path 路径
 
@@ -47,7 +47,7 @@ const Home = () => import(/* webpackChunkName: 'home' */ '@/views/Home.vue');
 类似 `xxx/:xx` ，以 `/:` 做匹配的路由都是动态路由
 
 1. **使用动态路由**  
-   ![动态路由](https://img.jsonq.top/blog/2025/2/25/1740465701406-37d92lil.jpeg)
+   ![动态路由](https://jsonq.top/cdn-static/2025/02/25/1740465701406-37d92lil.jpeg)
 2. **获取动态路由的值**
 
 3. template 模板中获取，通过 `$route.params` 获取参数对象
@@ -272,7 +272,7 @@ router.beforEach((to, form) => {
 });
 ```
 
-![参数打印](https://img.jsonq.top/blog/2025/2/25/1740465701515-cqghyu1q.jpeg)
+![参数打印](https://jsonq.top/cdn-static/2025/02/25/1740465701515-cqghyu1q.jpeg)
 
 beforEach 回调有返回值：
 
@@ -290,7 +290,7 @@ beforEach 回调有返回值：
 
 Vuex 的数据流程图：
 
-![Vuex数据流程图](https://img.jsonq.top/blog/2025/2/25/1740465701632-qgepiy9o.png)
+![Vuex数据流程图](https://jsonq.top/cdn-static/2025/02/25/1740465701632-qgepiy9o.png)
 
 ## Vuex 基本使用
 
@@ -481,7 +481,7 @@ mapState 不仅可以接收一个数组，也可以接收一个对象。
 </script>
 ```
 
-![mapState映射](https://img.jsonq.top/blog/2025/2/25/1740465701727-g7pduqnr.jpeg)
+![mapState映射](https://jsonq.top/cdn-static/2025/02/25/1740465701727-g7pduqnr.jpeg)
 
 ## setup 中使用 mapState
 
@@ -501,9 +501,11 @@ mapState 不仅可以接收一个数组，也可以接收一个对象。
 
 会出现如下错误：
 
-![computed直接使用mapState解构](https://img.jsonq.top/blog/2025/2/25/1740465701822-3ugq3d9q.jpeg)
+![computed直接使用mapState解构](https://jsonq.top/cdn-static/2025/02/25/1740465701822-3ugq3d9q.jpeg)
 
-原因是，`name、age` 函数是通过 `this.$store.state` 进行访问数据，而 **setup 中没有 this** ![name函数](https://img.jsonq.top/blog/2025/2/25/1740465701934-126bhh6e.jpeg)
+原因是，`name、age` 函数是通过 `this.$store.state` 进行访问数据，而 **setup 中没有 this**
+
+![name函数](https://jsonq.top/cdn-static/2025/02/25/1740465701934-126bhh6e.jpeg)
 
 若无法通过 this 访问，则可以给函数手动**绑定 this**，让函数有`this.$store`。
 
@@ -521,7 +523,9 @@ useState 可以通过实例 `store.state` 的所有数据，和 `this.$store.sta
 </script>
 ```
 
-访问成功 ![bind绑定this](https://img.jsonq.top/blog/2025/2/25/1740465702038-loevcm7i.jpeg)
+访问成功
+
+![bind绑定this](https://jsonq.top/cdn-static/2025/02/25/1740465702038-loevcm7i.jpeg)
 
 ### setup 中 mapState hooks 封装
 
@@ -837,7 +841,7 @@ app.use(pinia);
 
 defineStore 接收两个参数，`defineStore(id: string, options:{...})`，id 必须为唯一值
 
-![pinia基本使用](https://img.jsonq.top/blog/2025/2/25/1740465702137-n008zm7f.jpeg)
+![pinia基本使用](https://jsonq.top/cdn-static/2025/02/25/1740465702137-n008zm7f.jpeg)
 
 **注意：Store 获取到后不能被解构，那么会失去响应式**
 
@@ -891,14 +895,19 @@ function btnClick() {
    });
    ```
 4. 替换 State
+
    - 可以通过将其 `$state` 属性设置为新对象来**替换 Store 的整个状态**
+
    ```js
    nameStore.$state = {
      sex: '男',
      list: ['张三', '李四'],
    };
    ```
-   **`$state`问题说明**：虽然官方说是替换 state，但实际结果却并非如此 ![$state问题说明](https://img.jsonq.top/blog/2025/2/25/1740465702238-lqf4vi9i.jpeg)
+
+   **`$state`问题说明**：虽然官方说是替换 state，但实际结果却并非如此
+
+   ![$state问题说明](https://jsonq.top/cdn-static/2025/02/25/1740465702238-lqf4vi9i.jpeg)
 
 ## getters
 

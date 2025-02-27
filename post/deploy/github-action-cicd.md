@@ -27,7 +27,7 @@ date: 2024-11-14
 
 点击项目仓库的 Settings -> Secrets and variables -> Actions -> new repository secret，填入 key 和 value，多个 secret 需要多次创建，在 GitHub Action 中访问时以 object 对象格式访问。跟 js 的对象语法类似。key 就是对象 key，value 就是 对应的值。
 
-![secret key 设置](https://img.jsonq.top/blog/2025/2/25/1740465678450-mpx1tyhi.png)
+![secret key 设置](https://jsonq.top/cdn-static/2025/02/25/1740465678450-mpx1tyhi.png)
 
 > 比如 `new repository secret` 时添加了 key `SSH_PRIVATE_KEY`，那么在 GitHub Action 中访问时，就使用 `${{ secrets.SSH_PRIVATE_KEY }}`。
 
@@ -156,13 +156,13 @@ jobs:
 - `pm2 stop nest-oss`
 - `pm2 delete nest-oss`
 
-![命令示例](https://img.jsonq.top/blog/2025/2/25/1740465678612-8gk8zqnt.png)
+![命令示例](https://jsonq.top/cdn-static/2025/02/25/1740465678612-8gk8zqnt.png)
 
 # 提交代码
 
 此时提交代码就可以触发 GitHub Action 了。失败的话会有邮箱提示，详细信息可以查看 Action 控制台日志。
 
-![cicd 成功示例](https://img.jsonq.top/blog/2025/2/25/1740465678809-g33pqm6k.png)
+![cicd 成功示例](https://jsonq.top/cdn-static/2025/02/25/1740465678809-g33pqm6k.png)
 
 ## SSL 证书
 
