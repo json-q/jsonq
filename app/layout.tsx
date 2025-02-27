@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { ThemeProvider } from 'next-themes';
-import { SessionProvider } from 'next-auth/react';
 import PageHeader from '~/components/layouts/page-header';
 import siteConfig from '~/config/siteConfig';
 import './globals.css';
@@ -16,10 +15,8 @@ export default function RootLayout({
     <html lang="zh-CN" suppressHydrationWarning>
       <body className="antialiased">
         <ThemeProvider attribute="class" enableSystem enableColorScheme>
-          <SessionProvider>
-            <PageHeader />
-            {children}
-          </SessionProvider>
+          <PageHeader />
+          {children}
         </ThemeProvider>
       </body>
     </html>

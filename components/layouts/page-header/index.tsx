@@ -5,7 +5,6 @@ import Link from 'next/link';
 import siteConfig from '~/config/siteConfig';
 import ThemeSwitcher from './theme-switcher';
 import DocSearch from './doc-search';
-import SignIn from '~/components/auth/sign-in';
 
 export default function PageHeader() {
   return (
@@ -29,13 +28,12 @@ export default function PageHeader() {
                 >
                   <Link href={item.href} target="_blank" rel="noreferrer">
                     <item.icon className="h-4 w-4" />
-                    <span className="sr-only">cnblog</span>
+                    <span className="sr-only">{item.title}</span>
                   </Link>
                 </Button>
               ))}
 
               <ThemeSwitcher />
-              <SignIn />
             </nav>
           </div>
         </div>

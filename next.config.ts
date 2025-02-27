@@ -16,13 +16,13 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'jsdelivr.net',
+        hostname: 'cdn.jsdelivr.net',
         port: '',
         pathname: '/**',
       },
       {
         protocol: 'https',
-        hostname: process.env.SITE_DOMAIN || 'jsonq.top',
+        hostname: process.env.NEXT_PUBLIC_SITE_DOMAIN || '',
         port: '',
         pathname: '/**',
       },
