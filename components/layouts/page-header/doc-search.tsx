@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import debounce from 'lodash.debounce';
 import { File, Heading, Search } from 'lucide-react';
 import { EnrichedDocumentSearchResultSetUnitResultUnit } from 'flexsearch';
@@ -14,12 +14,18 @@ import {
   DialogTrigger,
 } from '~/components/ui/dialog';
 import { Input } from '~/components/ui/input';
+import { ScrollArea } from '~/components/ui/scroll-area';
 import searchDoc, { IndexItem } from './search';
 
 export default function DocSearch() {
+  const [open, setOpen] = useState(false);
   const [searchList, setSearchList] = useState<
     EnrichedDocumentSearchResultSetUnitResultUnit<IndexItem>[]
   >([]);
+
+  useEffect(() => {
+    if (!open) setSearchList([]);
+  }, [open]);
 
   const onSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const result = searchDoc(e.target.value);
@@ -39,7 +45,7 @@ export default function DocSearch() {
   };
 
   return (
-    <Dialog>
+    <Dialog onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <div className="hidden md:block">
           <Button
@@ -77,7 +83,7 @@ export default function DocSearch() {
           </div>
         )}
         {searchList.length > 0 && (
-          <div className="max-h-[300px] overflow-y-auto overflow-x-hidden px-2 py-1 text-foreground md:max-h-[calc(100vh-300px)]">
+          <ScrollArea className="max-h-[300px] overflow-y-auto overflow-x-hidden px-2 py-1 text-foreground md:max-h-[calc(100vh-300px)]">
             {searchList.map((item) => {
               if (item.doc.type == 'heading') {
                 return (
@@ -98,7 +104,7 @@ export default function DocSearch() {
                 </Line>
               );
             })}
-          </div>
+          </ScrollArea>
         )}
       </DialogContent>
     </Dialog>
