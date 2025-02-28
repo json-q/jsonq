@@ -1,6 +1,6 @@
 services:
   nginx:
-    image: nginx
+    image: nginx # nginx:alpine
     container_name: nginx
     restart: always
     ports:

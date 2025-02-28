@@ -39,14 +39,15 @@ services:
 
 # Nginx
 
-- docker pull nginx
+- docker pull nginx，若对镜像大小有要求，可使用 `nginx:alpine`
+- nginx:latest 约 200M，nginx:alpine 约 50M
 
 新建 `/data/container/nginx` 文件夹，并在 `nginx` 目录下新建 `docker-compose.yml` 文件，写入以下内容
 
 ```yaml
 services:
   nginx:
-    image: nginx
+    image: nginx # nginx:alpine
     container_name: nginx
     restart: always
     ports:
