@@ -127,7 +127,7 @@
   }
 }
 
-/* shiki 多代码主题 */
+/* shiki multi-theme */
 html[class='dark'] code[data-theme*=' '],
 html[class='dark'] code[data-theme*=' '] span {
   color: var(--shiki-dark);
@@ -148,4 +148,20 @@ html[class='dark'] .prose :where(pre):not(:where([class~='not-prose'], [class~='
 html[class='light'] .prose :where(pre):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
   background-color: rgb(250, 250, 250);
   color: rgb(56, 58, 66);
+}
+
+/* copy button */
+figure[data-rehype-pretty-code-figure] {
+  position: relative;
+}
+
+figure[data-rehype-pretty-code-figure] > button.copy-btn {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+  display: none;
+}
+
+figure[data-rehype-pretty-code-figure]:hover > button.copy-btn {
+  display: block;
 }

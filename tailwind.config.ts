@@ -88,50 +88,12 @@ export default {
                 color: theme('colors.slate.600'),
               },
             },
-            pre: {
-              position: 'relative',
-              code: {
-                overflow: 'hidden',
-                whiteSpace: 'pre-wrap !important',
-              },
-              button: {
-                position: 'absolute',
-                right: '0.5rem',
-                top: '0.5rem',
-                display: 'none',
-              },
-              '&:hover': {
-                button: {
-                  display: 'block',
-                },
-              },
-            },
             figure: {
               marginTop: '1rem',
               marginBottom: '1rem',
             },
           },
         },
-        // invert: {
-        //   css: {
-        //     a: {
-        //       color: theme('colors.blue.400'),
-        //       '&:hover': {
-        //         color: theme('colors.blue.600'),
-        //       },
-        //       code: { color: theme('colors.blue.400') },
-        //     },
-        //     code: { color: theme('colors.pink.400') },
-        //     p: {
-        //       color: theme('colors.slate.200'),
-        //     },
-        //     blockquote: {
-        //       p: {
-        //         color: theme('colors.slate.400'),
-        //       },
-        //     },
-        //   },
-        // },
       }),
     },
   },
