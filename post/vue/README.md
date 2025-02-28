@@ -15,12 +15,12 @@
 
 ## 学习
 
-- [初识 Vue3](/post/vue/study/vue-know.md)
-- [Vue 组件](/post/vue/study/vue-components.md)
-- [Vue3 组合式 API](/post/vue/study/vue-composition.md)
-- [路由 状态管理](/post/vue/study/vue-router-vuex.md)
-- [Vue 高级特性及过渡动画](/post/vue/study/vue-advance-animation.md)
+- [初识 Vue3](/post/vue/study/vue-know)
+- [Vue 组件](/post/vue/study/vue-components)
+- [Vue3 组合式 API](/post/vue/study/vue-composition)
+- [路由 状态管理](/post/vue/study/vue-router-vuex)
+- [Vue 高级特性及过渡动画](/post/vue/study/vue-advance-animation)
 
 ## 其它
 
-- [html 搭建 vue 项目](/post/vue/html-vue.md)
+- [html 搭建 vue 项目](/post/vue/html-vue)

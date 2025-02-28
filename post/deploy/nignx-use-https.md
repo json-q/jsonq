@@ -3,7 +3,7 @@ title: Nginx 离线配置 ssl 证书使用 https
 date: 2024-04-07
 ---
 
-纯离线的内网环境中使用 nginx 配置 ssl 并使用 https 访问网站。对于服务器中 nginx 及其它环境的搭建，可参考我的该文章 [Linux Centos7 离线部署 SpringBoot 前后端分离项目](/post/deploy/linux-offline-deploy.md)，该文章的环境是以此文章的基础上进行搭建的。同时，该文章涉及的部分安装包已提供在以上文章的开头部分。
+纯离线的内网环境中使用 nginx 配置 ssl 并使用 https 访问网站。对于服务器中 nginx 及其它环境的搭建，可参考我的该文章 [Linux Centos7 离线部署 SpringBoot 前后端分离项目](/post/deploy/linux-offline-deploy)，该文章的环境是以此文章的基础上进行搭建的。同时，该文章涉及的部分安装包已提供在以上文章的开头部分。
 
 # 检查环境
 
@@ -61,7 +61,7 @@ make
 make install
 ```
 
-> 这个过程可能会比较漫长，如果环境中缺失 `gcc` 等，也会出现莫名其妙的错误，nginx 的离线配置可参考我的另一篇文章：[Linux Centos7 离线部署 SpringBoot 前后端分离项目](/post/deploy/linux-offline-deploy.md)
+> 这个过程可能会比较漫长，如果环境中缺失 `gcc` 等，也会出现莫名其妙的错误，nginx 的离线配置可参考我的另一篇文章：[Linux Centos7 离线部署 SpringBoot 前后端分离项目](/post/deploy/linux-offline-deploy)
 
 等待安装完成之后，就可以重新回到 openssl 安装的部分了。
 

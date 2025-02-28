@@ -166,4 +166,4 @@ jobs:
 
 ## SSL 证书
 
-证书相关请查看 [免费无限续期 SSL 证书](/post/deploy/ssl-cert.md)
+证书相关请查看 [免费无限续期 SSL 证书](/post/deploy/ssl-cert)

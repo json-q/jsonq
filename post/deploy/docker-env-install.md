@@ -461,7 +461,7 @@ server {
 
 ## Github Action 实现 CI CD 自动化部署
 
-此部分可以查看 [Github Action CICD 自动部署](/post/deploy/github-action-cicd.md)，编写的 workflow 再往下看
+此部分可以查看 [Github Action CICD 自动部署](/post/deploy/github-action-cicd)，编写的 workflow 再往下看
 
 ### 编写 Github Action
 

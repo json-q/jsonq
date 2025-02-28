@@ -7,5 +7,5 @@
 
 # 目录
 
-- [CSS 基础](/post/css/base.md)
-- [Sass 语法](/post/css/scss.md)
+- [CSS 基础](/post/css/base)
+- [Sass 语法](/post/css/scss)

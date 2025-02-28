@@ -10,7 +10,7 @@
 
 # 目录
 
-- [TS 基础](/post/typescript/typescript-base.md)
-- [TS 面向对象](/post/typescript/typescript-oo.md)
-- [TS 泛型及类型体操](/post/typescript/typescript-t.md)
-- [TS 语法扩展](/post/typescript/typescript-extra.md)
+- [TS 基础](/post/typescript/typescript-base)
+- [TS 面向对象](/post/typescript/typescript-oo)
+- [TS 泛型及类型体操](/post/typescript/typescript-t)
+- [TS 语法扩展](/post/typescript/typescript-extra)

@@ -489,7 +489,7 @@ cd ./sbin  #进入sbin文件
 
 # 开启 https，安装 openssl 等相关依赖
 
-<strong style="color:red;">以下内容仅作为临时参考，无实际应用，更详细的 openssl 安装与配置，需查看该文章：[Nginx 离线配置 ssl 证书](/post/deploy/nignx-use-https.md)</strong>
+<strong style="color:red;">以下内容仅作为临时参考，无实际应用，更详细的 openssl 安装与配置，需查看该文章：[Nginx 离线配置 ssl 证书](/post/deploy/nignx-use-https)</strong>
 
 ---
 

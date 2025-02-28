@@ -10,8 +10,8 @@ date: 2024-04-25
 
 minio 有开源版和收费版，使用开源版时，若修改了 minio 的源代码，需要将修改后的源代码完全公开。
 
-- 对 minio 有一定了解后，可查看：[SpringBoot 集成 minio 前后端联调（后端集中管理 minio）](/post/java/minio/minio-springboot-use.md)，实现了前后端的基本文件上传下载。
-- 更多大文件的使用方式可查看：[Minio 分片上传、断点续传、分片下载、秒传、暂停（断点）下载](/post/java/minio/minio-slice-upload.md)，此文章结合业务实现对 minio 多种文件存储方式以及流程分析，同时含有代码示例地址，相信能从中有所收获。
+- 对 minio 有一定了解后，可查看：[SpringBoot 集成 minio 前后端联调（后端集中管理 minio）](/post/java/minio/minio-springboot-use)，实现了前后端的基本文件上传下载。
+- 更多大文件的使用方式可查看：[Minio 分片上传、断点续传、分片下载、秒传、暂停（断点）下载](/post/java/minio/minio-slice-upload)，此文章结合业务实现对 minio 多种文件存储方式以及流程分析，同时含有代码示例地址，相信能从中有所收获。
 
 ## 启动 minio
 
