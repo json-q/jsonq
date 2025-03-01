@@ -2,14 +2,14 @@ import type { NextConfig } from 'next';
 import type { RemotePattern } from 'next/dist/shared/lib/image-config';
 
 const imageRemotes: RemotePattern[] = [
-  'testingcf.jsdelivr.net',
-  'cdn.jsdelivr.net',
-  process.env.NEXT_PUBLIC_IMAGE_DOMAIN || '',
-].map((hostname) => ({
+  { hostname: 'testingcf.jsdelivr.net', pathname: '/**' },
+  { hostname: 'cdn.jsdelivr.net', pathname: '/**' },
+  { hostname: process.env.NEXT_PUBLIC_IMAGE_DOMAIN || '', pathname: '/cdn-static/**' },
+].map((item) => ({
   protocol: 'https',
-  hostname,
+  hostname: item.hostname,
   port: '',
-  pathname: '/**',
+  pathname: item.pathname,
 }));
 
 const nextConfig: NextConfig = {
