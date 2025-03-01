@@ -1,5 +1,2 @@
 [[plugins]]
   package = "@netlify/plugin-nextjs"
-[images]
-  # https://docs.netlify.com/image-cdn/overview/#remote-path
-  remote_images = ["https:\\/\\/jsonq.top\\/cdn-static\\/.*"]

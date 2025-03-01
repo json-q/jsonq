@@ -199,6 +199,8 @@ server {
 }
 ```
 
+**注意：** `ssl_certificate` 这里指定的是 `example.com.cer`，指向此证书能满足大部分场景的基本使用，但是它不是一个完整的证书链。比如第三方网站访问此域名，可能会因为证书问题而出错，此时必须使用 `fullchain.cer`
+
 重启 nginx 容器：`docker restart nginx`
 
 此时访问 `jsonq.top` 应该就可以了，如果还是报不安全，建议去运营商的 ssl 管理后台去上传证书，这里以阿里云为例
