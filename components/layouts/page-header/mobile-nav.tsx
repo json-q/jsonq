@@ -39,8 +39,8 @@ export default function MobileNav() {
           <Link href="/">
             <DropdownMenuItem
               className={cn({
-                'bg-gray-100': pathname == '/',
-                'dark:bg-gray-800': pathname == '/',
+                'bg-zinc-100': pathname == '/',
+                'dark:bg-zinc-800': pathname == '/',
               })}
             >
               首页
@@ -50,8 +50,8 @@ export default function MobileNav() {
             <Link href={item.href} key={item.href}>
               <DropdownMenuItem
                 className={cn({
-                  'bg-gray-100': pathname == item.href,
-                  'dark:bg-gray-800': pathname == item.href,
+                  'bg-zinc-100': pathname == item.href,
+                  'dark:bg-zinc-800': pathname == item.href,
                 })}
               >
                 {item.title}

@@ -92,9 +92,8 @@ export default function TocTree(props: TocTreeProps) {
           <li key={id} className="mb-2 mt-0 p-0">
             <a
               href={`#${id}`}
-              className={cn('text-gray-700 no-underline hover:text-blue-400 dark:text-gray-100', {
-                'text-blue-400': i === activeIndex,
-                'dark:text-blue-400': i === activeIndex,
+              className={cn('text-zinc-700 no-underline hover:text-blue-400 dark:text-zinc-100', {
+                'text-blue-400 dark:text-blue-500': i === activeIndex,
               })}
               style={{ paddingLeft: `${depth * 0.6}rem` }}
             >
@@ -126,7 +125,7 @@ export default function TocTree(props: TocTreeProps) {
   return (
     <div className={cn('w-full max-w-[25%]', className)}>
       {/* calc top offset: header: 3 container: pt-1 pb-1 rem*/}
-      <nav className="sticky top-20 max-h-screen overflow-y-auto border-l border-l-gray-200 px-4 dark:border-l-gray-700">
+      <nav className="sticky top-20 max-h-screen overflow-y-auto border-l border-l-zinc-200 px-4 dark:border-l-zinc-700">
         {renderList()}
       </nav>
     </div>
