@@ -1,4 +1,16 @@
 import type { NextConfig } from 'next';
+import type { RemotePattern } from 'next/dist/shared/lib/image-config';
+
+const imageRemotes: RemotePattern[] = [
+  'testingcf.jsdelivr.net',
+  'cdn.jsdelivr.net',
+  process.env.NEXT_PUBLIC_IMAGE_DOMAIN || '',
+].map((hostname) => ({
+  protocol: 'https',
+  hostname,
+  port: '',
+  pathname: '/**',
+}));
 
 const nextConfig: NextConfig = {
   output: 'standalone',
@@ -7,26 +19,7 @@ const nextConfig: NextConfig = {
   // https://github.com/hashicorp/next-mdx-remote?tab=readme-ov-file#installation
   transpilePackages: ['next-mdx-remote'],
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'testingcf.jsdelivr.net',
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'cdn.jsdelivr.net',
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: process.env.NEXT_PUBLIC_SITE_DOMAIN || '',
-        port: '',
-        pathname: '/**',
-      },
-    ],
+    remotePatterns: imageRemotes,
   },
   async headers() {
     return [
