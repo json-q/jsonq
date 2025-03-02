@@ -18,6 +18,9 @@ const nextConfig: NextConfig = {
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
   // https://github.com/hashicorp/next-mdx-remote?tab=readme-ov-file#installation
   transpilePackages: ['next-mdx-remote'],
+  experimental: {
+    reactCompiler: true,
+  },
   images: {
     remotePatterns: imageRemotes,
   },
