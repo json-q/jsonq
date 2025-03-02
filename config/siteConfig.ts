@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
-import Cnblog from '~/components/layouts/page-header/icons/Cnblog';
-import Github from '~/components/layouts/page-header/icons/Github';
+import { JsDelivrIcon, NetfilyIcon, NextjsIcon } from '~/components/layouts/page-footer/icons';
+import { Cnblog, Github } from '~/components/layouts/page-header/icons';
 
 const siteConfig = {
   theme: 'system',
@@ -9,21 +9,14 @@ const siteConfig = {
     { title: '关于我', href: '/about' },
   ],
   externalLink: [
-    {
-      title: 'Github',
-      href: 'https://github.com/json-q/jsonq',
-      icon: Github,
-    },
-    {
-      title: 'cnblog',
-      href: 'https://www.cnblogs.com/jsonq',
-      icon: Cnblog,
-    },
-    // {
-    //   title: 'Gitee',
-    //   href: 'https://gitee.com/jsonqi',
-    //   icon: Gitee,
-    // },
+    { icon: Github, title: 'Github', href: 'https://github.com/json-q/jsonq' },
+    { icon: Cnblog, title: 'cnblog', href: 'https://www.cnblogs.com/jsonq' },
+    // { icon: Gitee, title: 'Gitee', href: 'https://gitee.com/jsonqi' },
+  ],
+  footerLink: [
+    { icon: NextjsIcon, title: 'Nextjs', href: 'https://nextjs.org' },
+    { icon: JsDelivrIcon, title: 'jsDelivr ', href: 'https://www.jsdelivr.com/' },
+    { icon: NetfilyIcon, title: 'Netfily', href: 'https://app.netlify.com/' },
   ],
   metadata: {
     metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_HOST!),
