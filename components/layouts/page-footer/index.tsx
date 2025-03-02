@@ -9,7 +9,7 @@ export default function PageFooter() {
           <span aria-label="copyright">©2025 风希落</span>
           <Link
             aria-label="beian"
-            href="http://www.beian.gov.cn"
+            href="https://beian.miit.gov.cn"
             target="_blank"
             rel="noopener"
             className="transition-colors hover:text-blue-600 dark:hover:text-blue-400"
