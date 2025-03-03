@@ -192,14 +192,15 @@
 }
 
 /* shiki multi-theme */
-html[class='dark'] code[data-theme*=' '],
-html[class='dark'] code[data-theme*=' '] span {
+/* https://github.com/vercel/next.js/issues/76052#issuecomment-2676709996 */
+html[class='dark'] .prose code[data-theme],
+html[class='dark'] .prose code[data-theme] span {
   color: var(--shiki-dark);
   background-color: var(--shiki-dark-bg);
 }
 
-html[class='light'] code[data-theme*=' '],
-html[class='light'] code[data-theme*=' '] span {
+html[class='light'] .prose code[data-theme],
+html[class='light'] .prose code[data-theme] span {
   color: var(--shiki-light);
   background-color: var(--shiki-light-bg);
 }
