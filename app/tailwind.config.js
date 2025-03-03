@@ -34,6 +34,9 @@ module.exports = {
               marginTop: '0.5rem',
               marginBottom: '0.5rem',
             },
+            ul: {
+              'padding-inline-start': '0.5rem',
+            },
           },
         },
       },
