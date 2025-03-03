@@ -31,7 +31,7 @@ export default function PageFooter() {
               className="text-zinc-600 transition-colors hover:text-blue-600 dark:text-zinc-300 dark:hover:text-blue-400"
             >
               <span className="inline-flex items-center gap-x-2">
-                <item.icon className="h-5 w-5" /> {item.title}
+                <item.icon className="size-5" /> {item.title}
               </span>
             </Link>
           ))}
