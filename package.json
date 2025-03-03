@@ -1,6 +1,6 @@
 {
   "name": "jsonq",
-  "version": "0.1.0",
+  "version": "0.0.2",
   "private": true,
   "packageManager": "pnpm@9.15.3",
   "engines": {
@@ -84,10 +84,10 @@
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [
       "eslint --fix",
-      "prettier --write"
+      "prettier --write ."
     ],
     "**/*.{md,mdx}": [
-      "prettier --write"
+      "prettier --write ."
     ]
   },
   "pnpm": {
