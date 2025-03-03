@@ -37,7 +37,7 @@ export default function DocSearch() {
     return (
       <Link
         href={href}
-        className="relative flex cursor-pointer select-none items-center gap-2 rounded-sm px-4 py-3 text-sm text-inherit outline-none hover:bg-accent hover:text-accent-foreground [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
+        className="hover:bg-accent hover:text-accent-foreground relative flex cursor-pointer items-center gap-2 rounded-sm px-4 py-3 text-sm text-inherit outline-none select-none [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
       >
         {children}
       </Link>
@@ -50,10 +50,10 @@ export default function DocSearch() {
         <div className="hidden md:block">
           <Button
             variant="outline"
-            className="relative h-8 w-full justify-start rounded-[0.5rem] bg-muted/50 text-sm font-normal text-muted-foreground shadow-none sm:pr-12 md:w-32 lg:w-48 xl:w-56"
+            className="bg-muted/50 text-muted-foreground relative h-8 w-full justify-start rounded-[0.5rem] text-sm font-normal shadow-none sm:pr-12 md:w-32 lg:w-48 xl:w-56"
           >
             <span className="inline-flex">Try Search</span>
-            <kbd className="pointer-events-none absolute right-[0.3rem] top-[0.3rem] hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
+            <kbd className="bg-muted pointer-events-none absolute top-[0.3rem] right-[0.3rem] hidden h-5 items-center gap-1 rounded border px-1.5 font-mono text-[10px] font-medium opacity-100 select-none sm:flex">
               <span className="text-xs">⌘</span>K
             </kbd>
           </Button>
@@ -67,7 +67,7 @@ export default function DocSearch() {
         </DialogHeader>
 
         <div className="flex items-center border-b px-3">
-          <Search className="mr-2 h-4 w-4 shrink-0 opacity-50" />
+          <Search className="mr-2 size-4 shrink-0 opacity-50" />
           <Input
             className="border-none focus-visible:ring-0"
             placeholder="搜索文章"
@@ -83,7 +83,7 @@ export default function DocSearch() {
           </div>
         )}
         {searchList.length > 0 && (
-          <ScrollArea className="max-h-[300px] overflow-y-auto overflow-x-hidden px-2 py-1 text-foreground md:max-h-[calc(100vh-300px)]">
+          <ScrollArea className="text-foreground max-h-[300px] overflow-x-hidden overflow-y-auto px-2 py-1 md:max-h-[calc(100vh-300px)]">
             {searchList.map((item) => {
               if (item.doc.type == 'heading') {
                 return (
@@ -97,7 +97,7 @@ export default function DocSearch() {
                   <File />
                   <div>
                     <div className="line-clamp-2 w-full">{item.doc.content}</div>
-                    <div className="overflow-hidden text-xs font-bold text-muted-foreground">
+                    <div className="text-muted-foreground overflow-hidden text-xs font-bold">
                       {item.doc.headings}
                     </div>
                   </div>

@@ -30,11 +30,11 @@ export default function ErrorResult(props: ErrorResultProps) {
           <div className="text-6xl font-bold">{props.status}</div>
         </div>
 
-        <h1 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+        <h1 className="text-foreground mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
           {TipEnum[props.status].title}
         </h1>
 
-        <p className="mb-6 mt-4 text-sm text-muted-foreground">{TipEnum[props.status].tip}</p>
+        <p className="text-muted-foreground mt-4 mb-6 text-sm">{TipEnum[props.status].tip}</p>
 
         {props.back === 'prev' ? (
           <Button variant="secondary" onClick={router.back}>

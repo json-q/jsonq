@@ -8,7 +8,7 @@ import DocSearch from './doc-search';
 
 export default function PageHeader() {
   return (
-    <header className="border-grid sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="border-grid bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 w-full border-b backdrop-blur">
       <div className="container-wrapper">
         <div className="container flex h-14 items-center">
           <PCNav />
@@ -24,10 +24,10 @@ export default function PageHeader() {
                   asChild
                   variant="ghost"
                   size="icon"
-                  className="h-8 w-8 px-0"
+                  className="size-8 px-0"
                 >
                   <Link href={item.href} target="_blank" rel="noreferrer">
-                    <item.icon className="h-4 w-4" />
+                    <item.icon className="size-4" />
                     <span className="sr-only">{item.title}</span>
                   </Link>
                 </Button>

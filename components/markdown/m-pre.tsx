@@ -56,7 +56,7 @@ const MPre = (props: MPreProps): ReactElement => {
       <button onClick={handleClick} tabIndex={0} className="copy-btn">
         <IconToUse
           className={cn(
-            'block h-8 w-8 rounded border !bg-slate-200 p-1 text-slate-400 dark:!bg-slate-600',
+            'block size-8 rounded border !bg-slate-200 p-1 text-slate-400 dark:!bg-slate-600',
             {
               '!bg-blue-200 text-blue-400 dark:!bg-blue-600': isCopied,
             },

@@ -133,7 +133,7 @@ class ErrorBoundary extends Component {
         <div className="flex h-full w-full flex-col items-center justify-center">
           <Clear fontSize={60} color="var(--rv-danger-color)" />
           <div className="my-2 text-xl">意外错误</div>
-          <div className="break-all px-4">{this.state.errorInfo}</div>
+          <div className="px-4 break-all">{this.state.errorInfo}</div>
         </div>
       );
     }
@@ -491,7 +491,7 @@ function SelectPicker(props) {
         onClose={() => togglePopup(false)}
         className={`h-[50%] ${loading ? 'overflow-y-hidden' : 'overflow-y-auto'}`}
       >
-        <div className="sticky left-0 top-0 z-10 bg-white">
+        <div className="sticky top-0 left-0 z-10 bg-white">
           <div className={styles['sel-picker__toolbar']}>
             <button
               type="button"
@@ -561,7 +561,7 @@ function SelectPicker(props) {
           <div
             className={`${
               loading ? 'flex' : 'hidden'
-            } absolute bottom-0 left-0 right-0 top-0 z-10 items-center justify-center bg-white/90`}
+            } absolute top-0 right-0 bottom-0 left-0 z-10 items-center justify-center bg-white/90`}
           >
             <Loading type="spinner" color="var(--rv-picker-loading-icon-color)" vertical>
               加载中

@@ -89,7 +89,7 @@ export default function TocTree(props: TocTreeProps) {
     return (
       <ul ref={tocRef} className="m-o list-none p-0 text-sm">
         {list.map(({ title, id, depth }, i) => (
-          <li key={id} className="mb-2 mt-0 p-0">
+          <li key={id} className="mt-0 mb-2 p-0">
             <a
               href={`#${id}`}
               className={cn('text-zinc-700 no-underline hover:text-blue-400 dark:text-zinc-100', {
@@ -109,7 +109,7 @@ export default function TocTree(props: TocTreeProps) {
     return (
       <Sheet>
         <SheetTrigger>
-          <CircleArrowLeft className="fixed right-0 top-1/4 z-20 h-7 w-7 translate-y-1/4 text-blue-600" />
+          <CircleArrowLeft className="fixed top-1/4 right-0 z-20 h-7 w-7 translate-y-1/4 text-blue-600" />
         </SheetTrigger>
         <SheetContent className="overflow-y-auto p-4">
           <SheetHeader className="sr-only">

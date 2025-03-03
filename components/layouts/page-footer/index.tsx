@@ -3,9 +3,9 @@ import siteConfig from '~/config/siteConfig';
 
 export default function PageFooter() {
   return (
-    <footer className="mt-auto box-border border-t bg-zinc-50 p-2 dark:bg-zinc-900 md:p-4">
+    <footer className="mt-auto box-border border-t bg-zinc-50 p-2 md:p-4 dark:bg-zinc-900">
       <div className="flex flex-col items-center space-y-4 text-center">
-        <div className="flex flex-col items-center gap-4 text-sm text-zinc-600 dark:text-zinc-300 md:flex-row md:text-base">
+        <div className="flex flex-col items-center gap-4 text-sm text-zinc-600 md:flex-row md:text-base dark:text-zinc-300">
           <span aria-label="copyright">©2025 风希落</span>
           <Link
             aria-label="beian"

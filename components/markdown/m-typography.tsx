@@ -63,7 +63,7 @@ export function MBlockquote(props: React.JSX.IntrinsicElements['blockquote']) {
 
 export function MTr(props: React.JSX.IntrinsicElements['tr']) {
   const { className, ...restProps } = props;
-  return <tr {...restProps} className={cn(className, 'm-0 border-t p-0 even:bg-muted')} />;
+  return <tr {...restProps} className={cn(className, 'even:bg-muted m-0 border-t p-0')} />;
 }
 export function MTd(props: React.JSX.IntrinsicElements['td']) {
   const { className, ...restProps } = props;
