@@ -14,10 +14,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh-CN" suppressHydrationWarning>
-      <body className="antialiased">
+      <body className="flex min-h-screen flex-col antialiased">
         <ThemeProvider attribute="class" enableSystem enableColorScheme>
           <PageHeader />
-          {children}
+          <main>{children}</main>
           <PageFooter />
         </ThemeProvider>
       </body>
