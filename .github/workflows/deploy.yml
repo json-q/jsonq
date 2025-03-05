@@ -30,6 +30,9 @@ jobs:
                 docker stop blog || true
                 docker rm blog || true
                 docker rmi nextjs || true
+
+                echo "🗑️ Clearing docker cache"
+                docker system prune -f
                 docker build -t nextjs .
                 docker compose up -d
                 exit 0
