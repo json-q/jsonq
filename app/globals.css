@@ -156,11 +156,6 @@
   width: 100%;
   max-width: 1400px;
   border-style: dashed;
-  border-color: hsl(var(--border) / 0.7);
-}
-
-.container-wrapper:is(.dark *) {
-  border-color: hsl(var(--border));
 }
 
 @media (min-width: 1400px) {
@@ -191,8 +186,8 @@
   }
 }
 
-/* shiki multi-theme */
-/* https://github.com/vercel/next.js/issues/76052#issuecomment-2676709996 */
+/* https://rehype-pretty.pages.dev/#multiple-themes-dark-and-light-mode */
+/* next 15.2.0, see: https://github.com/vercel/next.js/issues/76052#issuecomment-2676709996 */
 html[class='dark'] .prose code[data-theme],
 html[class='dark'] .prose code[data-theme] span {
   color: var(--shiki-dark);
