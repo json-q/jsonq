@@ -17,7 +17,8 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          command_timeout: 20m
+          # 无缓存时，构建大约需要 10min+，8 次拉取重试约 8min+
+          command_timeout: 30m
           script: |
             cd ${{ secrets.BLOG_PATH_REMOTE }}
             MAX_RETRIES=8
@@ -30,9 +31,6 @@ jobs:
                 docker stop blog || true
                 docker rm blog || true
                 docker rmi nextjs || true
-
-                echo "🗑️ Clearing docker cache"
-                docker system prune -f
                 docker build -t nextjs .
                 docker compose up -d
                 exit 0
