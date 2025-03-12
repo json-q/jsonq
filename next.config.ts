@@ -13,9 +13,9 @@ const imageRemotes: RemotePattern[] = [
 }));
 
 const nextConfig: NextConfig = {
-  output: 'standalone',
+  // output: 'standalone',
   reactStrictMode: true,
-  pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
+  pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx', 'json'],
   // https://github.com/hashicorp/next-mdx-remote?tab=readme-ov-file#installation
   transpilePackages: ['next-mdx-remote'],
   images: {

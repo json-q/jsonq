@@ -1,14 +1,14 @@
-import allPosts from '~/generated/content.json';
-import { PostJsonData } from '~/scripts/content';
+import type { PostJsonData } from '~/scripts/content';
 
-// only format type
-const posts = allPosts as unknown as PostJsonData[];
+type BaseList = Omit<PostJsonData, 'content'>;
 
-export function getAllPost() {
-  return posts;
+export async function getPostList() {
+  const postList = await import(`~/generated/catalog.json`);
+
+  return postList.default as BaseList[];
 }
 
-export function getPostBySlug(slug: string) {
-  const post = allPosts.find((post) => post.slug === slug);
-  return post;
+export async function getPostBySlug(slug: string) {
+  const post = await import(`~/generated/${slug}.json`);
+  return post as PostJsonData;
 }
