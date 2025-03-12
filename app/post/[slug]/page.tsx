@@ -11,7 +11,7 @@ type Props = {
 export default async function PostDetail({ params }: Props) {
   const { slug } = await params;
 
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
 
   if (!post) return <ErrorResult status="404" back="prev" />;
 

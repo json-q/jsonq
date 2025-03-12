@@ -1,9 +1,9 @@
 import Link from 'next/link';
-import { getAllPost } from '~/utils/postData';
+import { getPostList } from '~/utils/postData';
 import dayjs from 'dayjs';
 
-export default function PostList() {
-  const allPosts = getAllPost();
+export default async function PostList() {
+  const allPosts = await getPostList();
 
   return (
     <ul className="m-0 p-0">

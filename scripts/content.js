@@ -1,4 +1,4 @@
-const { mkdirSync, readdirSync, readFileSync, writeFileSync } = require('fs');
+const { mkdirSync, readdirSync, readFileSync, writeFileSync, existsSync, rmSync } = require('fs');
 const { join, basename, extname } = require('path');
 const readingTime = require('reading-time');
 
@@ -97,35 +97,51 @@ function readMDXFile(filePath) {
  * @param {string} dir
  */
 function createMDXData(dir) {
-  const mdxFiles = getMDXFiles(dir);
-
+  const folder = join(__dirname, 'generated');
+  if (existsSync(folder)) {
+    rmSync(folder, { recursive: true, force: true });
+  }
   mkdirSync('generated', { recursive: true });
 
+  const mdxFiles = getMDXFiles(dir);
+
+  const catalogFilePath = join(__dirname, '../generated', 'catalog.json');
+  const catalogs = [];
+
+  mdxFiles.forEach((mdxPath) => {
+    const { frontMatter, content } = readMDXFile(mdxPath);
+    const slug = basename(mdxPath, extname(mdxPath));
+
+    if (slug === 'README') return;
+
+    const outputFilePath = join(__dirname, '../generated', `${slug}.json`);
+
+    const baseInfo = {
+      title: frontMatter.title,
+      publishedAt: frontMatter.date,
+      url: `/${POST_DIR}/${slug}`,
+      slug,
+      readingTime: readingTime(content).text,
+      wordCount: content.split(/\s+/gu).length,
+    };
+    catalogs.push(baseInfo);
+
+    writeFileSync(outputFilePath, JSON.stringify({ ...baseInfo, content }), 'utf8');
+  });
+
   writeFileSync(
-    join(__dirname, '../generated/content.json'),
+    catalogFilePath,
     JSON.stringify(
-      mdxFiles
-        .map((file) => {
-          const { frontMatter, content } = readMDXFile(file);
-          const slug = basename(file, extname(file));
-          return {
-            title: frontMatter.title,
-            publishedAt: frontMatter.date,
-            url: `/${POST_DIR}/${slug}`,
-            slug,
-            readingTime: readingTime(content).text,
-            wordCount: content.split(/\s+/gu).length,
-            content,
-          };
-        })
+      catalogs
         .filter((item) => item.slug != 'README')
         .sort((a, b) => {
           return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
         }),
     ),
-    'utf-8',
+    'utf8',
   );
-  console.log('😊 successfully generated!');
+
+  console.log('😊 post successfully generated!');
 }
 
 createMDXData(join(__dirname, `../${POST_DIR}`));

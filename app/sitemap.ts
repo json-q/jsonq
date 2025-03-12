@@ -1,8 +1,8 @@
-import allPosts from '~/generated/content.json';
+import catalogs from '~/generated/catalog.json';
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const posts = allPosts.map((post) => ({
+  const posts = catalogs.map((post) => ({
     url: `${process.env.NEXT_PUBLIC_SITE_HOST}/post/${post.slug}`,
     lastModified: post.publishedAt,
   }));
