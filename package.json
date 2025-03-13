@@ -2,7 +2,6 @@
   "name": "jsonq",
   "version": "0.0.3-SSG",
   "private": true,
-  "packageManager": "pnpm@9.15.3",
   "author": {
     "name": "jsonq",
     "email": "j996730508@163.com",
