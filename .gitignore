@@ -50,3 +50,5 @@ generated
 */sitemap*.xml
 */robots.txt
 */rss.xml
+
+_pagefind/

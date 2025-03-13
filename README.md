@@ -1,5 +1,7 @@
 基于 `shadcn ui` 的 Nextjs 博客，简约！
 
+Next 静态博客，构建时导出纯 html，部署时需注意的事项可查看 [Static Exports](https://nextjs.org/docs/app/building-your-application/deploying/static-exports#deploying)
+
 # 特性
 
 - 纯 markdown 编写，无后台，基于 `rehpy` `remark` 等相关插件渲染，更低的资源消耗
@@ -7,8 +9,9 @@
 - 基于 Github Action 的 CI CD 自动化部署
 - netfily 的镜像站点作为备用（vercel 域名境内基本无法访问，可自定义域名做 dns 解析）
 - Docker 构建，包括 nginx acme 等，网络桥接保证容器之间通信
-- `flexsearch` 实现文章的高性能搜索
 - 主题切换
+- SSG 博客，`pagefind` 全文检索
+- ~~`flexsearch` 实现文章的高性能搜索（v0.0.3-SSG 后替换为 `pagefind`）~~
 - ~~minio 图床（v0.0.1 之后移除）~~
 - ~~GitHub OAuth 认证（v0.0.1 之后移除）~~
 

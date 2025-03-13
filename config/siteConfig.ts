@@ -20,10 +20,11 @@ const siteConfig = {
   ],
   metadata: {
     metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_HOST!),
-    title: {
-      default: "Jsonq's Blog",
-      template: `%s | Jsonq's Blog`,
-    },
+    title: "Jsonq's Blog",
+    // title: {
+    //   default: "Jsonq's Blog",
+    //   template: `%s | Jsonq's Blog`,
+    // },
     description: 'documenting experiences and reflections during the process of work and study.',
     openGraph: {
       title: 'Jsonq',
