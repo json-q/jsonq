@@ -8,21 +8,6 @@ type Props = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
-// export async function getStaticPaths() {
-//   const posts = await getAllPosts(); // 获取所有文章的 slug 列表
-//   return {
-//     paths: posts.map((post) => ({ params: { slug: post.slug } })),
-//     fallback: false, // 如果有未预渲染的路径，则返回 404 页面
-//   };
-// }
-
-// export async function getStaticProps({ params }: { params: { slug: string } }) {
-//   const post = await getPostBySlug(params.slug);
-//   return {
-//     props: { post },
-//   };
-// }
-
 export async function generateStaticParams() {
   const posts = await getPostList();
 
