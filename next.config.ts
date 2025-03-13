@@ -10,9 +10,7 @@ const nextConfig: NextConfig = {
     // 静态导出无法优化
     unoptimized: true,
   },
-
-  // 可选：阻止自动 `/me` -> `/me/`
-  skipTrailingSlashRedirect: true,
+  trailingSlash: false,
 };
 
 export default nextConfig;
