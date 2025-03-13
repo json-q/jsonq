@@ -45,10 +45,6 @@ jobs:
           NEXT_PUBLIC_IMAGE_DOMAIN: ${{ secrets.NEXT_PUBLIC_IMAGE_DOMAIN }}
         run: pnpm run build
 
-      - name: Move Public to out
-        run: |
-          cp -r public/_pagefind/ out/
-
       - name: Copy file via ssh key
         uses: appleboy/scp-action@v0.1.7
         with:
