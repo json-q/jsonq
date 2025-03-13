@@ -35,11 +35,20 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
+      # Set env
+      - name: Set up environment variables
+        run: |
+          echo "NEXT_PUBLIC_SITE_HOST=${{ secrets.NEXT_PUBLIC_SITE_HOST }}" >> $GITHUB_ENV
+          echo "NEXT_PUBLIC_IMAGE_DOMAIN=${{ secrets.NEXT_PUBLIC_IMAGE_DOMAIN }}" >> $GITHUB_ENV
+
       # Install and build
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
 
       - name: Build project
+        env:
+          NEXT_PUBLIC_SITE_HOST: ${{ secrets.NEXT_PUBLIC_SITE_HOST }}
+          NEXT_PUBLIC_IMAGE_DOMAIN: ${{ secrets.NEXT_PUBLIC_IMAGE_DOMAIN }}
         run: pnpm run build
 
       - name: Copy file via ssh key
