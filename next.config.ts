@@ -1,7 +1,7 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  output: 'export',
+  output: 'standalone',
   reactStrictMode: true,
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx', 'json'],
   // https://github.com/hashicorp/next-mdx-remote?tab=readme-ov-file#installation
@@ -10,7 +10,6 @@ const nextConfig: NextConfig = {
     // 静态导出无法优化
     unoptimized: true,
   },
-  trailingSlash: false,
 };
 
 export default nextConfig;
