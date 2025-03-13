@@ -47,7 +47,7 @@ jobs:
 
       - name: Move Public to out
         run: |
-          cp -r public/ out/
+          cp -r public/_pagefind/ out/
 
       - name: Copy file via ssh key
         uses: appleboy/scp-action@v0.1.7
@@ -57,3 +57,4 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: out
           target: ${{ secrets.BLOG_PATH_REMOTE }}
+          rm: true
