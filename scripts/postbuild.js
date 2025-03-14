@@ -1,7 +1,6 @@
-// scripts/copy-files.js
 const { execSync } = require('child_process');
-const fs = require('fs-extra');
-const path = require('path');
+const { copySync } = require('fs-extra');
+const { join } = require('path');
 
 try {
   // next-sitemap
@@ -10,24 +9,19 @@ try {
   // pagefind
   execSync('pagefind --site .next/server/app --output-path public/_pagefind', {
     stdio: 'inherit',
-    env: {
-      ...process.env,
-      NODE_ENV: 'production',
-    },
   });
 
-  const outputDir = path.join(process.cwd(), 'out');
-  const publicDir = path.join(process.cwd(), 'public');
+  const outputDir = join(process.cwd(), 'out');
+  const publicDir = join(process.cwd(), 'public');
 
-  // 复制 _pagefind 目录
-  fs.copySync(path.join(publicDir, '_pagefind'), path.join(outputDir, '_pagefind'), {
-    overwrite: true,
-  });
+  // === copy ===
+
+  copySync(join(publicDir, '_pagefind'), join(outputDir, '_pagefind'));
 
   const seoFiles = ['robots.txt', 'sitemap.xml'];
-  seoFiles.forEach((file) => {
-    fs.copySync(path.join(publicDir, file), path.join(outputDir, file), { overwrite: true });
-  });
+  for (const file of seoFiles) {
+    copySync(join(publicDir, file), join(outputDir, file));
+  }
 } catch (error) {
   console.error(error.message);
   process.exit(1);

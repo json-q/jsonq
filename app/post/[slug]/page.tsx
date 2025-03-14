@@ -1,3 +1,5 @@
+import type { Metadata } from 'next';
+import siteConfig from '~/config/siteConfig';
 import ErrorResult from '~/components/layouts/error-result';
 import TocTree from '~/components/layouts/toc-tree';
 import CustomMDX from '~/components/markdown/custom-mdx';
@@ -13,7 +15,23 @@ export async function generateStaticParams() {
 
   return posts.map((post) => ({
     slug: post.slug,
+    title: post.title,
   }));
+}
+
+export async function generateMetadata({ params }: Props) {
+  const { slug } = await params;
+  const posts = await getPostList();
+  const post = posts.find((post) => post.slug === slug);
+
+  return {
+    ...siteConfig.metadata,
+    title: `${post?.title || '404'} | ${siteConfig.metadata.title}`,
+    openGraph: {
+      ...siteConfig.metadata.openGraph,
+      title: `${post?.title || '404'} | ${siteConfig.metadata.title}`,
+    },
+  } satisfies Metadata;
 }
 
 export default async function PostDetail({ params }: Props) {

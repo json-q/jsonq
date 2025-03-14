@@ -2,7 +2,8 @@
 import Link from 'next/link';
 import { addBasePath } from 'next/dist/client/add-base-path';
 import { useDeferredValue, useEffect, useState } from 'react';
-import { Search } from 'lucide-react';
+import { CircleX, LoaderCircle, Search } from 'lucide-react';
+import debounce from 'lodash.debounce';
 import { Button } from '~/components/ui/button';
 import {
   Dialog,
@@ -17,10 +18,7 @@ import { ScrollArea } from '~/components/ui/scroll-area';
 
 export async function importPagefind() {
   window.pagefind = await import(/* webpackIgnore: true */ addBasePath('/_pagefind/pagefind.js'));
-  await window.pagefind!.options({
-    baseUrl: '/',
-    // ... more search options
-  });
+  await window.pagefind!.options({ baseUrl: '/' });
 }
 
 type PagefindResult = {
@@ -38,66 +36,78 @@ type PagefindResult = {
 };
 
 export default function DocSearch() {
-  const [loading, setIsLoading] = useState(true);
+  const [open, setOpen] = useState(false);
+  const [loading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [results, setResults] = useState<PagefindResult[]>([]);
   const [search, setSearch] = useState('');
   const deferredSearch = useDeferredValue(search);
 
   useEffect(() => {
-    const handleSearch = async (value: string) => {
-      if (!value) {
-        setResults([]);
-        setError('');
-        return;
-      }
-      setIsLoading(true);
-      if (!window.pagefind) {
-        try {
-          await importPagefind();
-        } catch (error) {
-          setError((error as Error).message);
-          setIsLoading(false);
-          return;
-        }
-      }
-      const response = await window.pagefind!.debouncedSearch<PagefindResult>(value, {});
-      if (!response) return;
-
-      const data = await Promise.all(response.results.map((o) => o.data()));
-      setIsLoading(false);
-      setError('');
-      const r = data.map((newData) => ({
-        ...newData,
-        sub_results: newData.sub_results.map((r) => {
-          const url = r.url.replace(/\.html$/, '').replace(/\.html#/, '#');
-
-          return { ...r, url };
-        }),
-      }));
-
-      setResults(r);
-    };
     handleSearch(deferredSearch);
   }, [deferredSearch]);
+
+  useEffect(() => {
+    document.addEventListener('keydown', down);
+    return () => document.removeEventListener('keydown', down);
+  }, []);
+
+  const handleSearch = async (value: string) => {
+    if (!value) {
+      setResults([]);
+      setError('');
+      return;
+    }
+    setIsLoading(true);
+    if (!window.pagefind) {
+      try {
+        await importPagefind();
+      } catch (error) {
+        setError((error as Error).message);
+        setIsLoading(false);
+        return;
+      }
+    }
+    const response = await window.pagefind!.debouncedSearch<PagefindResult>(value, {});
+    if (!response) return;
+
+    const data = await Promise.all(response.results.map((o) => o.data()));
+    setIsLoading(false);
+    setError('');
+    const r = data.map((newData) => ({
+      ...newData,
+      sub_results: newData.sub_results.map((r) => {
+        const url = r.url.replace(/\.html$/, '').replace(/\.html#/, '#');
+
+        return { ...r, url };
+      }),
+    }));
+
+    setResults(r);
+  };
 
   const onSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
   };
 
-  const EmptyStatus = ({ tip }: { tip: string }) => {
-    return (
-      <div className="h-[300px]">
-        <div className="flex h-full w-full flex-col items-center justify-center">
-          <Search className="h-16 w-16 shrink-0 opacity-50" />
-          <div className="text-foreground/60">{tip}</div>
-        </div>
-      </div>
-    );
+  const down = (e: KeyboardEvent) => {
+    if ((e.key === 'k' && (e.metaKey || e.ctrlKey)) || e.key === '/') {
+      if (
+        (e.target instanceof HTMLElement && e.target.isContentEditable) ||
+        e.target instanceof HTMLInputElement ||
+        e.target instanceof HTMLTextAreaElement ||
+        e.target instanceof HTMLSelectElement
+      ) {
+        return;
+      }
+
+      e.preventDefault();
+      setOpen((open) => !open);
+    }
   };
 
   return (
-    <Dialog /* onOpenChange={setOpen} */>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <div className="hidden md:block">
           <Button
@@ -114,8 +124,8 @@ export default function DocSearch() {
       <DialogContent hideCloseIcon className="gap-0 p-0">
         {/* Header 仅仅防止报错 */}
         <DialogHeader>
-          <DialogTitle className="m-0 p-0"></DialogTitle>
-          <DialogDescription className="m-0 p-0"></DialogDescription>
+          <DialogTitle className="sr-only"></DialogTitle>
+          <DialogDescription className="sr-only"></DialogDescription>
         </DialogHeader>
 
         <div className="flex items-center border-b px-3">
@@ -123,15 +133,18 @@ export default function DocSearch() {
           <Input
             className="border-none focus-visible:ring-0"
             placeholder="搜索文章"
-            onChange={onSearch}
+            onChange={debounce(onSearch, 200)}
           />
         </div>
         {error ? (
-          <EmptyStatus tip={error} />
+          <EmptyStatus tip={error} icon={<CircleX className="h-16 w-16 shrink-0 opacity-50" />} />
         ) : loading ? (
-          <EmptyStatus tip="搜索中..." />
+          <EmptyStatus
+            tip="加载中..."
+            icon={<LoaderCircle className="h-16 w-16 shrink-0 animate-spin opacity-50" />}
+          />
         ) : results.length == 0 ? (
-          <EmptyStatus tip="输入关键词搜索" />
+          <EmptyStatus tip="暂无结果" icon={<Search className="h-16 w-16 shrink-0 opacity-50" />} />
         ) : (
           <ScrollArea className="text-foreground max-h-[300px] overflow-x-hidden overflow-y-auto px-2 py-1 md:max-h-[calc(100vh-300px)]">
             {results.map((item) => (
@@ -159,4 +172,15 @@ function ResultList({ data }: { data: PagefindResult }) {
       </Link>
     );
   });
+}
+
+function EmptyStatus({ tip, icon }: { tip: string; icon: React.ReactNode }) {
+  return (
+    <div className="h-[300px]">
+      <div className="flex h-full w-full flex-col items-center justify-center">
+        {icon}
+        <div className="text-foreground/60">{tip}</div>
+      </div>
+    </div>
+  );
 }

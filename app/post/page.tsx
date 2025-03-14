@@ -1,13 +1,18 @@
 import Link from 'next/link';
-import { getPostList } from '~/utils/postData';
+import type { Metadata } from 'next';
 import dayjs from 'dayjs';
+import { getPostList } from '~/utils/postData';
+
+export const metadata: Metadata = {
+  title: "Post | Jsonq's Blog",
+};
 
 export default async function PostList() {
-  const allPosts = await getPostList();
+  const postList = await getPostList();
 
   return (
     <ul className="m-0 p-0">
-      {allPosts.map((post) => (
+      {postList.map((post) => (
         <Link
           key={post.url}
           href={post.url}
