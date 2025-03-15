@@ -695,7 +695,7 @@ action 也可以和 mutation 一样，也可以使用对象形式派发
 >
 > 所以我们可以从其中获取到 commit 方法来提交一个 mutation，或者通过 `context.state` 和 `context.getters` 来获取 state 和 getters；
 
-:::warning{title=警告} mutation 提交事务使用 `store.commit("add")`，action 派发事务使用 `store.dispatch("addAction")` :::
+> mutation 提交事务使用 `store.commit("add")`，action 派发事务使用 `store.dispatch("addAction")`
 
 #### action 的异步操作
 

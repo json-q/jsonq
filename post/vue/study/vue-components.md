@@ -5,7 +5,7 @@ date: 2023-06-09
 
 # Vue 的组件化
 
-?> 由于组件化特殊，需采用 `vue cli` 创建项目。如何安装 Vue cli 请见[初识 Vue3](/post/vue/basic/vue-know#如何使用-vue)
+> 由于组件化特殊，需采用 `vue cli` 创建项目。如何安装 Vue cli 请见[初识 Vue3](/post/vue/basic/vue-know#如何使用-vue)
 
 ## 注册组件
 
@@ -199,7 +199,7 @@ export default {
 };
 ```
 
-?> 当子组件要求`age`字段必须为数字时，父组件的`<InfoItem age="18" />`就需要改为`<InfoItem :age="18" />`
+> 当子组件要求`age`字段必须为数字时，父组件的`<InfoItem age="18" />`就需要改为`<InfoItem :age="18" />`
 
 ##### props 对象写法拓展
 

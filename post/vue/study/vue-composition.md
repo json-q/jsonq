@@ -95,7 +95,7 @@ setup 是一个函数
 >
 > 在 **setup 函数内部**，它依然是一个 ref 引用， 所以对其进行操作时，**依然需要使用 `ref.value` 的方式**
 
-!> ref 函数适用于**基本类型**
+> ref 函数适用于**基本类型**
 
 #### 封装 hook
 
@@ -198,7 +198,7 @@ export default function useCount() {
 </script>
 ```
 
-?> `reactive` 必须传入**对象或者数组类型**，`ref` 传入的是基本类型
+> `reactive` 必须传入**对象或者数组类型**，`ref` 传入的是基本类型
 
 ### readonly
 
