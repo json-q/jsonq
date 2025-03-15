@@ -20,6 +20,7 @@ export default function MobileNav() {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button
+            aria-label="navigate page"
             variant="ghost"
             className="mr-2 -ml-2 size-8 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden"
           >
@@ -61,7 +62,7 @@ export default function MobileNav() {
         </DropdownMenuContent>
       </DropdownMenu>
 
-      <Link href="/">
+      <Link href="/" aria-label="site logo">
         <SiteLogo className="block h-10 -translate-y-1.5 md:hidden" />
       </Link>
     </>

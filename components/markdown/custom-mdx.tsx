@@ -35,6 +35,7 @@ export default function CustomMDX(props: React.JSX.IntrinsicAttributes & MDXRemo
               {
                 properties: {
                   className: ['anchor'],
+                  'aria-label': 'Link Heading',
                 },
                 behavior: 'prepend',
                 headingProperties: {

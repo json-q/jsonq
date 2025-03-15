@@ -15,6 +15,7 @@ import {
 } from '~/components/ui/dialog';
 import { Input } from '~/components/ui/input';
 import { ScrollArea } from '~/components/ui/scroll-area';
+import { useIsMobile } from '~/hooks/use-mobile';
 
 export async function importPagefind() {
   window.pagefind = await import(/* webpackIgnore: true */ addBasePath('/_pagefind/pagefind.js'));
@@ -42,6 +43,7 @@ export default function DocSearch() {
   const [results, setResults] = useState<PagefindResult[]>([]);
   const [search, setSearch] = useState('');
   const deferredSearch = useDeferredValue(search);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     handleSearch(deferredSearch);
@@ -109,7 +111,7 @@ export default function DocSearch() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <div className="hidden md:block">
+        {!isMobile && (
           <Button
             variant="outline"
             className="bg-muted/50 text-muted-foreground relative h-8 w-full justify-start rounded-[0.5rem] text-sm font-normal shadow-none sm:pr-12 md:w-32 lg:w-48 xl:w-56"
@@ -119,7 +121,7 @@ export default function DocSearch() {
               <span className="text-xs">⌘</span>K
             </kbd>
           </Button>
-        </div>
+        )}
       </DialogTrigger>
       <DialogContent hideCloseIcon className="gap-0 p-0">
         {/* Header 仅仅防止报错 */}
