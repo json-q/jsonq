@@ -1,6 +1,7 @@
 基于 `shadcn ui` 的 Nextjs 博客，简约！
 
-Next 静态博客，构建时导出纯 html，部署时需注意的事项可查看 [Static Exports](https://nextjs.org/docs/app/building-your-application/deploying/static-exports#deploying)
+- 当前为 SSG 静态版本
+- RSC 版本请查看 v0.0.3
 
 # 特性
 
