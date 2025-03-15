@@ -13,7 +13,7 @@ date: 2024-06-22
 
 # 对 html 写 vue 的认知
 
-很多人对 在 html 中运行 vue 项目这种内容，认知只停留在引入 vue 的 cdn 文件，然后在 html 里一顿写，就觉得 <span style="color:blue;">html 写 vue 不是很简单嘛</span>，但请注意用词，是**项目**，而不是**页面**，你能写一个 `.vue` 页面引入让 html 去运行吗？显然不可以，而此文章就是说这个的。
+很多人对 在 html 中运行 vue 项目这种内容，认知只停留在引入 vue 的 cdn 文件，然后在 html 里一顿写，就觉得 <span style={{color:"blue"}}>html 写 vue 不是很简单嘛</span>，但请注意用词，是**项目**，而不是**页面**，你能写一个 `.vue` 页面引入让 html 去运行吗？显然不可以，而此文章就是说这个的。
 
 ---
 
@@ -25,7 +25,7 @@ date: 2024-06-22
 
 # 如何获取 vue 等 npm 的离线包
 
-- [jsdelivr](https://www.jsdelivr.com/) <strong style="color:red;">推荐</strong>
+- [jsdelivr](https://www.jsdelivr.com/) <strong style={{color:"red"}}>推荐</strong>
   - 优点：更新及时，所有 npm 包都可查询到
   - 缺点：自行区分 es 和 umd 包，且部分包依赖文件需自行查找
 - [cdnjs](https://cdnjs.com/)
@@ -60,7 +60,7 @@ es 包支持 import 导入的写法，比如这样
 
 # 让 html 识别 `.vue` 文件
 
-<strong style="color:red;">需由一个前提条件，由于下载的都是生产文件，打开 html 页面时需要使用 `Live Server` 插件打开，普通打开方式无法运行</strong>
+<strong style={{color:"red"}}>需由一个前提条件，由于下载的都是生产文件，打开 html 页面时需要使用 `Live Server` 插件打开，普通打开方式无法运行</strong>
 
 > 这里统一用 es 文件，模仿脚手架结构进行搭建
 

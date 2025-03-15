@@ -212,7 +212,7 @@ String url = minioClient.getPresignedObjectUrl(GetPresignedObjectUrlArgs.builder
 System.out.println(url);
 ```
 
-可以限制 url 的访问过期时间 `expiry(3, TimeUnit.HOURS)` 指定该链接 3 小时后失效。<span style="color:red;">当指定 `Method.GET` 时，访问该 url 是获取资源，若指定为 `Method.PUT`，则生成的是上传链接，可让前端将文件通过该 url 上传至 minio</span>
+可以限制 url 的访问过期时间 `expiry(3, TimeUnit.HOURS)` 指定该链接 3 小时后失效。<span style={{color:"red"}}>当指定 `Method.GET` 时，访问该 url 是获取资源，若指定为 `Method.PUT`，则生成的是上传链接，可让前端将文件通过该 url 上传至 minio</span>
 
 > 如果要使用不带签名的访问地址，可直接查看下一小节
 

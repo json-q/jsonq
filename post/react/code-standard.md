@@ -17,7 +17,7 @@ date: 2023-06-23
 
 # eslint
 
-<b style="color:red;">需安装 `ESlint` 插件</b>
+<b style={{color:"red"}}>需安装 `ESlint` 插件</b>
 
 vite 在安装 react 时就带了 eslint 的很多依赖，算是省去了对 eslint 的配置，其它脚手架可以参考 vite 的 eslint 规则进行配置。而且 esint 9 的变动挺大的，目前普及度并不高，此处用的还是 eslint^8。以下是对 eslint 的一些增强设置
 
@@ -81,7 +81,7 @@ module.exports = {
 
 # prettier
 
-<b style="color:red;">需安装 `Prettier - Code formatter` 插件</b>
+<b style={{color:"red"}}>需安装 `Prettier - Code formatter` 插件</b>
 
 ## 安装相关依赖
 
@@ -125,7 +125,7 @@ module.exports = {
 
 ![prettier 集成到 eslint](https://jsonq.top/cdn-static/2025/02/25/1740465689805-mvs86mbz.png)
 
-**也可以看到 prettier 提示换行符的问题，几乎每个文件都有，此时就可以查看 <b style="color:red;">统一编码格式</b> 小节，接着跟流程也不影响**
+**也可以看到 prettier 提示换行符的问题，几乎每个文件都有，此时就可以查看 <b style={{color:"red"}}>统一编码格式</b> 小节，接着跟流程也不影响**
 
 ## prettier 规则
 
@@ -167,7 +167,7 @@ vscode 的 prettier 插件可以修改设置保存时自动格式化代码，但
 
 # stylelint
 
-<b style="color:red;">需安装 `Stylelint` 插件</b>
+<b style={{color:"red"}}>需安装 `Stylelint` 插件</b>
 
 ## 安装 stylelint 及相关插件
 
@@ -460,7 +460,7 @@ lf 是 Unix 编码，crlf 是 windows 编码。
 
 **1. 开发时直接将文件编码变成 `lf` 格式**
 
-<b style="color:red;">需安装 `EditorConfig for VS Code` 插件</b>
+<b style={{color:"red"}}>需安装 `EditorConfig for VS Code` 插件</b>
 
 在根目录下新建 `.editorconfig` 文件，写入以下内容
 

@@ -6,7 +6,7 @@ import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import { fromHtmlIsomorphic } from 'hast-util-from-html-isomorphic';
 import rehypePrism from 'rehype-prism-plus';
-import rehypeSanitize from 'rehype-sanitize';
+import remarkMath from 'remark-math';
 
 import CustomMDXComponents from '.';
 
@@ -17,9 +17,8 @@ export default function CustomMDX(props: React.JSX.IntrinsicAttributes & MDXRemo
       components={{ ...CustomMDXComponents, ...(props.components || {}) }}
       options={{
         mdxOptions: {
-          remarkPlugins: [remarkGfm],
+          remarkPlugins: [remarkGfm, remarkMath],
           rehypePlugins: [
-            rehypeSanitize,
             [
               rehypePrettyCode,
               {

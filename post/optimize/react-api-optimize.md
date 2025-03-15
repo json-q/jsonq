@@ -154,7 +154,7 @@ const Child: React.FC<ChildProps> = memo((props) => {
 
 ## 解决方法
 
-使用 `useCallback` 缓存 `getList` 函数 <strong style="color:red;">不要依赖项无脑写空，如果函数内部用到了某个 state，必须写入依赖项，否则拿不到最新值</strong>
+使用 `useCallback` 缓存 `getList` 函数 <strong style={{color:"red"}}>不要依赖项无脑写空，如果函数内部用到了某个 state，必须写入依赖项，否则拿不到最新值</strong>
 
 代码示例：
 

@@ -17,7 +17,7 @@ date: 2024-03-25
 
 在设置前已经超过代码行宽度限制的代码不会自动换行
 
-<span style="color:red;">个人感觉换行没必要，换行后的代码阅读性并不是很好</span>
+<span style={{color:"red"}}>个人感觉换行没必要，换行后的代码阅读性并不是很好</span>
 
 ## 超过 120 列换行
 
@@ -85,7 +85,7 @@ IDEA 中文件的换行符使用 `Unix` 格式，不使用 `Windows` 格式。
 
 # 自动添加导入
 
-<span style="color:blue;">只有不重名的导入名才会自动导入，重名的需手动导入</span>
+<span style={{color:"blue"}}>只有不重名的导入名才会自动导入，重名的需手动导入</span>
 
 ![image](https://jsonq.top/cdn-static/2025/02/25/1740465684446-r8g8gzno.png)
 

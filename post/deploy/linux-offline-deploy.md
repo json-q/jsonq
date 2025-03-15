@@ -251,7 +251,7 @@ alter user 'root'@'localhost'  identified by 'Root123..';
 
 ### 添加环境配置
 
-<span style="color: red;">在配置环境变量之前，使用 `systemctl status mysqld` 之类的命令，系统是无法识别到的</span>
+<span style={{color:"red"}}>在配置环境变量之前，使用 `systemctl status mysqld` 之类的命令，系统是无法识别到的</span>
 
 - 在 etc 目录下新增 mysql 配置文件 `my.cnf`
 
@@ -368,7 +368,7 @@ flush privileges;                           # 刷新
 
 > 此时即可使用本地 Navicat 尝试连接
 
-<span style="color:red;">如果做 **nginx 本地资源映射**的话，例如 3306 这些可以外部访问/连接的端口。为了安全起见，可以在数据初始化之后关闭对应的安全组，非必要情况下，可以只开放 80 或者 443 安全组端口</span>
+<span style={{color:"red"}}>如果做 **nginx 本地资源映射**的话，例如 3306 这些可以外部访问/连接的端口。为了安全起见，可以在数据初始化之后关闭对应的安全组，非必要情况下，可以只开放 80 或者 443 安全组端口</span>
 
 如果需要再次修改密码
 
@@ -489,7 +489,7 @@ cd ./sbin  #进入sbin文件
 
 # 开启 https，安装 openssl 等相关依赖
 
-<strong style="color:red;">以下内容仅作为临时参考，无实际应用，更详细的 openssl 安装与配置，需查看该文章：[Nginx 离线配置 ssl 证书](/post/deploy/nignx-use-https)</strong>
+<strong style={{color:"red"}}>以下内容仅作为临时参考，无实际应用，更详细的 openssl 安装与配置，需查看该文章：[Nginx 离线配置 ssl 证书](/post/deploy/nignx-use-https)</strong>
 
 ---
 

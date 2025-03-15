@@ -399,7 +399,7 @@ HTML 中的每一个元素都可以看做是一个盒子，可以具备 4 个属
 **行内非替换元素**
 
 - 以下属性对行内级非替换元素不起作用: width、height、margin-top、margin-bottom
-- 以下属性对行内级非替换元素的效果比较特殊 padding-top、padding-bottom、上下方向的 border。<span style="color:red;">padding 在视觉上会被撑起来，但实际上并不占用空间。 </span>
+- 以下属性对行内级非替换元素的效果比较特殊 padding-top、padding-bottom、上下方向的 border。<span style={{color:"red"}}>padding 在视觉上会被撑起来，但实际上并不占用空间。 </span>
 
 ```html
 <style>

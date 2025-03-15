@@ -9,11 +9,11 @@ date: 2024-05-14
 
 前端 React：React + TypeScript + Antd + axios + spark-md5 前端 Vue：vue@3.4 + TypeScript + arco design vue + axios + spark-md5后端：Springboot 3.x + minio + mybatisplus + redis + lombok + hutool-core
 
-前后端的依赖都是截止 2024.05 的最新版。<strong style="color:red;">代码较多，文章内只讲实现思路，gitee 地址: https://gitee.com/jsonqi/minio-spring-web</strong>
+前后端的依赖都是截止 2024.05 的最新版。<strong style={{color:"red"}}>代码较多，文章内只讲实现思路，gitee 地址: https://gitee.com/jsonqi/minio-spring-web</strong>
 
 **为什么不直接前端对接 minio，而要走后端？**
 
-- 直接在前端搭建 minio 环境，如果后端给临时凭证让前端直传，<span style="color:blue;">后端是无法感知到文件的存入和变动</span>
+- 直接在前端搭建 minio 环境，如果后端给临时凭证让前端直传，<span style={{color:"blue"}}>后端是无法感知到文件的存入和变动</span>
 - 大文件是必须要入数据库的，否则秒传是无法实现的。
 
 **为什么要给前端每个分片的 url 上传，而不是前端将每个分片给后端，后端存入 minio？**
@@ -28,7 +28,7 @@ date: 2024-05-14
 - 文件入库（秒传）
 - 分片上传，以全量文件计算 md5。
 - 识别 `ContentType`，可以在线访问浏览器支持的文件格式，如：图片、视频、PDF 等。
-- 进度条展示。<span style="color:red;">如果不想使用自定义进度条，直接把文件地址放到 a 标签中下载即可</span>
+- 进度条展示。<span style={{color:"red"}}>如果不想使用自定义进度条，直接把文件地址放到 a 标签中下载即可</span>
 - 文件重命名以原文件名 + md5 格式重命名。尽可能在文件名不重复情况下，保留原文件名。
 
 ## 功能效果图

@@ -76,7 +76,7 @@ cd openssl-1.1.1u
 
 # 安装 ssl 模块
 
-一般是没有 ssl 相关模块的，此时进入到 **解压缩目录** 注意：<strong style="color:red;">是解压缩目录，因为是离线安装，必定需要上传 nginx 的压缩包进行解压，然后执行完 `./configure` 之后，一般才会将 nginx 安装到 `/usr/local/nginx` 路径下</strong> **此处以我的安装目录为例**：解压缩 nginx 的目录是 `/data/software/nginx`，安装后的目录是 `/usr/local/nginx`，则此时我需要进入 `/data/software/nginx` 进行之后的操作
+一般是没有 ssl 相关模块的，此时进入到 **解压缩目录** 注意：<strong style={{color:"red"}}>是解压缩目录，因为是离线安装，必定需要上传 nginx 的压缩包进行解压，然后执行完 `./configure` 之后，一般才会将 nginx 安装到 `/usr/local/nginx` 路径下</strong> **此处以我的安装目录为例**：解压缩 nginx 的目录是 `/data/software/nginx`，安装后的目录是 `/usr/local/nginx`，则此时我需要进入 `/data/software/nginx` 进行之后的操作
 
 ```bash
 # 进入我的 nginx 解压缩目录

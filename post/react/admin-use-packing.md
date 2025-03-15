@@ -48,14 +48,14 @@ const useAccess = (access: UserAPI.Auth | UserAPI.Auth[]) => {
 export default useAccess;
 ```
 
-<strong style="color:blue;">代码解读</strong>
+<strong style={{color:"blue"}}>代码解读</strong>
 
 - `zustand` 中存储着当前人的角色，比如 `["admin", "person", "pro-admin"]`。
   - 一个人可以有多个角色，对应的权限功能是合并的关系
 - 页面中，某个功能模块，只要是角色中含有 `person` 的就可以通过。那么使用 `const access = useAccess("person")` ，若返回 `true`，则证明有权限。
 - 页面中，某个功能模块，需要限定 `admin` 或者 `pro-admin` 的角色才能通过，那么使用 `const access = useAccess(["admin", "pro-admin"])`，返回 `true`，则证明有权限。
 
-<strong style="color:blue;">伪代码示例</strong>。结合了 `ProTable` 的 columns，当前拥有 `pro-admin` **或者** `admin` 角色时，才有**操作按钮**的权限。
+<strong style={{color:"blue"}}>伪代码示例</strong>。结合了 `ProTable` 的 columns，当前拥有 `pro-admin` **或者** `admin` 角色时，才有**操作按钮**的权限。
 
 ```ts
 function Page(){
@@ -105,7 +105,7 @@ const Access: FC<PropsWithChildren<AccessProps>> = ({ access, children }) => {
 export default Access;
 ```
 
-<strong style="color:blue;">伪代码示例</strong>。
+<strong style={{color:"blue"}}>伪代码示例</strong>。
 
 ```ts
 import Access from "@/components/Access";
@@ -290,7 +290,7 @@ export const getFileListByFileData = (fileData: FileData[] = []): UploadFile[] =
 };
 ```
 
-<strong style="color:blue;">伪代码示例</strong>
+<strong style={{color:"blue"}}>伪代码示例</strong>
 
 ```ts
 // 也可以通过 form 绑定到 initValues 等属性上边
