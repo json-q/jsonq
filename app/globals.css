@@ -145,7 +145,7 @@
 }
 
 .md-header:hover > a {
-  width: 20px;
+  width: 1em;
   opacity: 1;
 }
 
