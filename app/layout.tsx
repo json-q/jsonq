@@ -15,9 +15,9 @@ export default function RootLayout({
   return (
     <html lang="zh-CN" suppressHydrationWarning>
       <body className="flex min-h-screen flex-col antialiased">
-        <ThemeProvider attribute="class" enableSystem enableColorScheme>
+        <ThemeProvider attribute="class" enableSystem enableColorScheme disableTransitionOnChange>
           <PageHeader />
-          <main>{children}</main>
+          <main className="container-wrapper">{children}</main>
           <PageFooter />
         </ThemeProvider>
       </body>
