@@ -6,7 +6,6 @@ const desc = [
     heading: 'Feature',
     content: [
       'Nextjs + shadcn （当前为 SSG，旧版为 RSC 则可使用 docker/pm2 部署）',
-      '可零成本部署，netfily + jsdelivr',
       '纯 markdown 编写，无后台，使用 rehpy、remark 等相关插件渲染，极低的资源占用',
       '简单实现 markdown 内容更改后的页面热更新（hmr）',
       'Github Action 的 CI/CD 部署',
