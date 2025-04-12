@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { addBasePath } from 'next/dist/client/add-base-path';
 import { useDeferredValue, useEffect, useState } from 'react';
 import { CircleX, LoaderCircle, Search } from 'lucide-react';
-import debounce from 'lodash.debounce';
+import { debounce } from 'lodash-es';
 import { Button } from '~/components/ui/button';
 import {
   Dialog,
@@ -19,7 +19,7 @@ import { useIsMobile } from '~/hooks/use-mobile';
 
 export async function importPagefind() {
   window.pagefind = await import(/* webpackIgnore: true */ addBasePath('/_pagefind/pagefind.js'));
-  await window.pagefind!.options({ baseUrl: '/' });
+  await window.pagefind?.options({ baseUrl: '/' });
 }
 
 type PagefindResult = {
@@ -60,6 +60,7 @@ export default function DocSearch() {
       setError('');
       return;
     }
+
     setIsLoading(true);
     if (!window.pagefind) {
       try {
@@ -76,7 +77,8 @@ export default function DocSearch() {
     const data = await Promise.all(response.results.map((o) => o.data()));
     setIsLoading(false);
     setError('');
-    const r = data.map((newData) => ({
+
+    const _results = data.map((newData) => ({
       ...newData,
       sub_results: newData.sub_results.map((r) => {
         const url = r.url.replace(/\.html$/, '').replace(/\.html#/, '#');
@@ -85,7 +87,7 @@ export default function DocSearch() {
       }),
     }));
 
-    setResults(r);
+    setResults(_results);
   };
 
   const onSearch = (e: React.ChangeEvent<HTMLInputElement>) => {

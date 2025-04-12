@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState, useRef, useCallback } from 'react';
-import throttle from 'lodash.throttle';
+import { throttle } from 'lodash-es';
 import { cn } from '~/lib/utils';
 import { useIsMobile } from '~/hooks/use-mobile';
 import { CircleArrowLeft } from 'lucide-react';
@@ -12,6 +12,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '~/components/ui/sheet';
+import useMutationObserver from '~/hooks/useMutationObserver';
 
 interface List {
   title: string | null;
@@ -27,17 +28,19 @@ export default function TocTree(props: TocTreeProps) {
   const { className } = props;
   const [list, setList] = useState<List[]>([]);
   const [activeIndex, setActiveIndex] = useState<number>();
-  const nodes = useRef<NodeListOf<Element>>(null); // 记录所有 h1,h2,h3 标签
+  // const nodes = useRef<NodeListOf<Element>>(null); // 记录所有 h1,h2,h3 标签
   const tocRef = useRef<HTMLUListElement>(null); // TOC 组件 DOM
+  const containerRef = useRef<HTMLElement>(null);
   const isMobile = useIsMobile();
 
   const scrollHandler = useCallback(() => {
-    if (!nodes.current) return;
+    if (!containerRef.current) return;
 
     const viewHeight = window.innerHeight;
     // nodes 和 list 其实是一一对应的，所以可以设置一个索引判断哪个目录高亮了
-    for (let i = 0; i < nodes.current.length; i++) {
-      const node = nodes.current[i];
+    const nodes = Array.from(containerRef.current.querySelectorAll('h1, h2, h3'));
+    for (let i = 0; i < nodes.length; i++) {
+      const node = nodes[i];
       const rect = node.getBoundingClientRect();
       if (rect.bottom >= 0 && rect.top < viewHeight) {
         highlight(i);
@@ -45,7 +48,7 @@ export default function TocTree(props: TocTreeProps) {
       }
 
       // 如果下滑的过程中刚好碰到一个标题（A），这时候上滑，那么高亮的应该是 A 之前的标题
-      const nextRect = nodes.current[i + 1]?.getBoundingClientRect();
+      const nextRect = nodes[i + 1]?.getBoundingClientRect();
       if (rect.bottom < 0 && nextRect && nextRect.top > window.innerHeight) {
         highlight(i);
         break;
@@ -67,23 +70,43 @@ export default function TocTree(props: TocTreeProps) {
     }
   }
 
-  useEffect(() => {
-    nodes.current = document.querySelectorAll('.md-container > h1,h2,h3');
+  const handleToc = useCallback(() => {
+    console.log('aaa');
 
-    throttledScrollHandler();
-
-    const extracToc = Array.from(nodes.current).map((node) => ({
+    const nodes = Array.from(containerRef.current?.querySelectorAll('h1, h2, h3') || []);
+    const newList = nodes.map((node) => ({
       title: node.textContent,
       id: node.id,
       depth: +node.tagName[1],
     }));
-    setList(extracToc);
+
+    setList(newList);
+  }, []);
+
+  useEffect(() => {
+    const container = document.querySelector('.md-container');
+
+    if (!container) return;
+
+    containerRef.current = container as HTMLElement;
+
+    throttledScrollHandler();
+    handleToc();
+
+    // const extracToc = Array.from(nodes.current).map((node) => ({
+    //   title: node.textContent,
+    //   id: node.id,
+    //   depth: +node.tagName[1],
+    // }));
+    // setList(extracToc);
 
     window.addEventListener('scroll', throttledScrollHandler);
 
     return () => window.removeEventListener('scroll', throttledScrollHandler);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useMutationObserver(containerRef.current, handleToc);
 
   const renderList = () => {
     return (
