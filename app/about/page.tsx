@@ -9,13 +9,13 @@ export const metadata: Metadata = {
 
 const headingIntroduce = [
   '你好，我是 Jsonq（焦松奇），一名<span class="line-through">（API 调用）</span>前端开发人员，主要使用 React、Vue、TypeScript、antd 相关技术进行日常开发和工作。',
-  '三年工作经验，目前就职于北京某公司，工作中常用技术栈为 React + antd + pnpjs + <a class="text-blue-600 dark:text-blue-500" target="_blank" rel="noopener noreferrer" href="https://learn.microsoft.com/en-us/sharepoint/dev/schema/query-schema">SharePoint CamlQuery</a>',
+  '三年工作经验，目前就职于北京某公司，工作中常用技术栈为 React + antd + <a class="text-blue-600 dark:text-blue-500" target="_blank" rel="noopener noreferrer" href="https://learn.microsoft.com/en-us/sharepoint/dev/schema/query-schema">SharePoint CamlQuery</a> + pnpjs（SharePoint Orm）',
 ];
 
 const workIntroduceContent = [
   '需求分析、功能设计、技术选型、业务数据表结构设计（团队内部讨论）',
-  'pnpjs 和 CamlQuery 进行源数据交互，前端功能开发',
-  '负责前端项目整体架构的基础搭建和相关功能开发（基本由我负责）',
+  '基于 SharePoint 的需求功能开发',
+  '负责前端项目整体架构的基础搭建和相关功能开发（基本都是本人负责）',
   '参与后端 Java 技术栈开发的部分工作',
 ];
 
@@ -39,7 +39,7 @@ export default function AboutPage() {
           ))}
         </ul>
 
-        <h2 className="my-4 text-3xl font-semibold tracking-tight">Common Tech Stack</h2>
+        <h2 className="my-4 text-3xl font-semibold tracking-tight">Tech Stack</h2>
         <ul role="list" className="flex flex-wrap gap-6 py-4">
           {commonTechStack.map((tech, index) => (
             <li key={index}>
@@ -50,7 +50,7 @@ export default function AboutPage() {
           ))}
         </ul>
 
-        <h2 className="my-4 text-3xl font-semibold tracking-tight">Other Tech Stack</h2>
+        <h2 className="my-4 text-3xl font-semibold tracking-tight">Learning</h2>
         <ul role="list" className="flex flex-wrap gap-6 py-4">
           {otherTechStack.map((tech, index) => (
             <li key={index}>
