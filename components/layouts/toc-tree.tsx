@@ -71,8 +71,6 @@ export default function TocTree(props: TocTreeProps) {
   }
 
   const handleToc = useCallback(() => {
-    console.log('aaa');
-
     const nodes = Array.from(containerRef.current?.querySelectorAll('h1, h2, h3') || []);
     const newList = nodes.map((node) => ({
       title: node.textContent,
