@@ -1,13 +1,12 @@
 {
   "name": "jsonq",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "author": {
     "name": "jsonq",
     "email": "j996730508@163.com",
     "url": "https://github.com/json-q/jsonq"
   },
-  "packageManager": "pnpm@9.15.9",
   "engines": {
     "node": ">=20"
   },
