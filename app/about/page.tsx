@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { commonTechStack, otherTechStack } from './techStack';
 import { Mail } from 'lucide-react';
+import { commonTechStack, otherTechStack } from './techStack';
 
 export const metadata: Metadata = {
   title: "About | Jsonq's Blog",
@@ -14,8 +14,8 @@ const headingIntroduce = [
 
 const workIntroduceContent = [
   '需求分析、功能设计、技术选型、业务数据表结构设计（团队内部讨论）',
-  '基于 SharePoint 的需求功能开发',
-  '负责前端项目整体架构的基础搭建和相关功能开发（基本都是本人负责）',
+  '基于 SharePoint 进行需求功能开发',
+  '负责前端项目技术选型及搭建，基础建设功能开发和维护（本人负责）',
   '参与后端 Java 技术栈开发的部分工作',
 ];
 

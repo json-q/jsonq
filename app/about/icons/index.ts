@@ -8,6 +8,7 @@ export { default as TechMySQL } from './TechMySQL';
 export { default as TechNodejs } from './TechNodejs';
 export { default as TechNestjs } from './TechNestjs';
 export { default as TechNextjs } from '~/components/layouts/page-footer/icons/NextjsIcon';
+export { default as TechTailwindcss } from './TechTailwindcss';
 export { default as TechPnpjs } from './TechPnpjs';
 export { default as TechCentos } from './TechCentos';
 export { default as TechNginx } from './TechNginx';

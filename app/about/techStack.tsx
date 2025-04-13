@@ -10,7 +10,7 @@ import {
   TechNestjs,
   TechNextjs,
   TechPnpjs,
-  TechCentos,
+  TechTailwindcss,
 } from './icons';
 
 export const commonTechStack = [
@@ -47,6 +47,11 @@ export const otherTechStack = [
     href: 'https://nextjs.org',
   },
   {
+    icon: TechTailwindcss,
+    color: '#06B6D4',
+    href: 'https://tailwindcss.com',
+  },
+  {
     icon: TechNodejs,
     color: '#5FA04E',
     href: 'https://nodejs.org',
@@ -66,11 +71,11 @@ export const otherTechStack = [
     color: '#E0234E',
     href: 'https://nestjs.com',
   },
-  {
-    icon: TechCentos,
-    color: '#262577',
-    href: 'https://www.centos.org',
-  },
+  // {
+  //   icon: TechCentos,
+  //   color: '#262577',
+  //   href: 'https://www.centos.org',
+  // },
   // {
   //   icon: TechNginx,
   //   color: '#009639',

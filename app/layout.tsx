@@ -2,16 +2,12 @@ import type { Metadata } from 'next';
 import { ThemeProvider } from 'next-themes';
 import PageHeader from '~/components/layouts/page-header';
 import siteConfig from '~/config/siteConfig';
-import './globals.css';
 import PageFooter from '~/components/layouts/page-footer';
+import './globals.css';
 
 export const metadata: Metadata = siteConfig.metadata;
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="zh-CN" suppressHydrationWarning>
       <body className="flex min-h-screen flex-col antialiased">

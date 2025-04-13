@@ -1,5 +1,5 @@
-import styles from './home.module.css';
 import { cn } from '~/lib/utils';
+import styles from './home.module.css';
 
 const desc = [
   {
