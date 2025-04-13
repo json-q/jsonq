@@ -27,7 +27,7 @@ export const commonTechStack = [
   {
     icon: TechTypeScript,
     color: '#3178C6',
-    href: 'https://react.dev',
+    href: 'https://www.typescriptlang.org',
   },
   {
     icon: TechPnpjs,
