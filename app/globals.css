@@ -1,6 +1,6 @@
 @import 'tailwindcss';
 
-@plugin "tailwindcss-animate";
+@import 'tw-animate-css';
 
 @plugin "@tailwindcss/typography";
 @config "./tailwind.config.js";
@@ -138,19 +138,6 @@
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--border) transparent;
-}
-
-.md-header {
-  @apply flex items-center gap-1;
-}
-
-.md-header > a {
-  @apply w-0 opacity-0 transition-all duration-200 ease-in-out;
-}
-
-.md-header:hover > a {
-  width: 1em;
-  opacity: 1;
 }
 
 /* layout */
