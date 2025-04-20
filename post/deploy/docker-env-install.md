@@ -203,6 +203,14 @@ server {
 
 重启 nginx 容器：`docker restart nginx`
 
+### DNS 解析
+
+去域名的运营商那里对域名的 DNS 解析一下，一级域名 `example.com`，如果有二级域名，也都添加一下，域名级别解析的都是 A 记录，CNAME 是做域名转发（代理）的，以阿里云为例，大致如下所示：
+
+![image](https://jsonq.top/cdn-static/2025/03/10/202504201542755.png)
+
+### 访问域名验证正确性
+
 此时访问 `jsonq.top` 应该就可以了，如果还是报不安全，建议去运营商的 ssl 管理后台去上传证书，这里以阿里云为例
 
 - 证书文件 - `jsonq.top.cer`
