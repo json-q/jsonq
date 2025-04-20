@@ -53,6 +53,20 @@ date: 2025-03-28
 
 `drizzle` 是一个非常轻量级的 ORM，我第一次看文档的时候就觉得这个 orm 非常合适，因为 `drizzle` 只是对 sql 进行了一次很薄的封装，所有的 API 和 原生 sql 基本保持一致，意思就是只要你会 sql，你就能很轻松的上手 `drizzle`，学习成本是非常低的
 
+### server action 和 route handlers
+
+在 nextjs 的基础上，连 API 都分了好几种写法
+
+- [API Routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes)
+- [Route Handlers](https://nextjs.org/docs/app/building-your-application/routing/route-handlers)
+- [Server Actions](https://nextjs.org/docs/app/guides#server-actions)
+
+`server action` 并不是严格意义上的 api 请求，因为它不通过 fetch 调用，直接在服务端组件中调用 action 方法
+
+`API Routes` 应该是 next 往前版本的写法，所有的请求都耦合在一个方法中，并不直观
+
+`Route Handlers` 才更像一个 restful API，而且更有利于做迁移，甚至说提供给第三方服务（这点 `server action` 是做不到的，而且 `server action` 据说在出现问题的情况下难以排查），所以这点上倒是没什么好纠结的
+
 ### monorepo
 
 为什么使用 monorepo？
@@ -61,7 +75,7 @@ date: 2025-03-28
 
 在 node 生态不满足的情况下，只能使用 springboot（`MybatisPlus` 对国产数据库的支持性挺好的），所以尽量将 drizzle 构成的服务端代码单独抽离，这样如果真的需要迁移，也能够在不和客户端代码耦合的情况下，减小迁移成本。
 
-其次就是一个聊天对话组件，将这一部分抽离，只专注于聊天组件的封装和逻辑处理
+其次就是一个聊天对话组件，将这一部分抽离，只专注于聊天组件的封装和逻辑处理（基于 `antd` 的封装）
 
 ### linter biomejs
 
