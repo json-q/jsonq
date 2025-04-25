@@ -83,7 +83,6 @@ export default function TocTree(props: TocTreeProps) {
 
   useEffect(() => {
     const container = document.querySelector('.md-container');
-
     if (!container) return;
 
     containerRef.current = container as HTMLElement;
@@ -91,18 +90,9 @@ export default function TocTree(props: TocTreeProps) {
     throttledScrollHandler();
     handleToc();
 
-    // const extracToc = Array.from(nodes.current).map((node) => ({
-    //   title: node.textContent,
-    //   id: node.id,
-    //   depth: +node.tagName[1],
-    // }));
-    // setList(extracToc);
-
     window.addEventListener('scroll', throttledScrollHandler);
-
     return () => window.removeEventListener('scroll', throttledScrollHandler);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [handleToc, throttledScrollHandler]);
 
   useMutationObserver(containerRef.current, handleToc);
 
