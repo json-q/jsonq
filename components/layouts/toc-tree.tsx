@@ -56,7 +56,8 @@ export default function TocTree(props: TocTreeProps) {
     }
   }, []);
 
-  const throttledScrollHandler = throttle(scrollHandler, 100);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const throttledScrollHandler = useCallback(throttle(scrollHandler, 100), []);
 
   function highlight(i: number) {
     setActiveIndex(i);
@@ -100,12 +101,15 @@ export default function TocTree(props: TocTreeProps) {
     return (
       <ul ref={tocRef} className="m-o list-none p-0 text-sm">
         {list.map(({ title, id, depth }, i) => (
-          <li key={id} className="mt-0 mb-2 p-0">
+          <li key={id} title={title || ''} className="mt-0 mb-2 w-full p-0">
             <a
               href={`#${id}`}
-              className={cn('text-zinc-700 no-underline hover:text-blue-400 dark:text-zinc-100', {
-                'text-blue-400 dark:text-blue-500': i === activeIndex,
-              })}
+              className={cn(
+                'text-foreground line-clamp-1 w-full no-underline hover:text-blue-400',
+                {
+                  'text-blue-400 dark:text-blue-500': i === activeIndex,
+                },
+              )}
               style={{ paddingLeft: `${depth * 0.6}rem` }}
             >
               {title}
