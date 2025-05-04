@@ -38,6 +38,27 @@ function SheetOverlay({
   );
 }
 
+/** SheetContent 的变体，类似于 Mask */
+function SheetMaskContent({
+  className,
+  children,
+  ...props
+}: React.ComponentProps<typeof SheetPrimitive.Content>) {
+  return (
+    <SheetPortal>
+      <SheetOverlay className="bg-black/60" />
+      <SheetPrimitive.Content
+        aria-describedby="sheet-mask-description"
+        data-slot="sheet-mask-content"
+        {...props}
+        className={cn('fixed z-50 flex flex-col gap-4', className)}
+      >
+        {children}
+      </SheetPrimitive.Content>
+    </SheetPortal>
+  );
+}
+
 function SheetContent({
   className,
   children,
@@ -127,4 +148,5 @@ export {
   SheetFooter,
   SheetTitle,
   SheetDescription,
+  SheetMaskContent,
 };

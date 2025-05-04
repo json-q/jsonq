@@ -27,6 +27,7 @@ export async function generateMetadata({ params }: Props) {
   return {
     ...siteConfig.metadata,
     title: `${post?.title || '404'} | ${siteConfig.metadata.title}`,
+    description: post?.title || siteConfig.metadata.description,
     openGraph: {
       ...siteConfig.metadata.openGraph,
       title: `${post?.title || '404'} | ${siteConfig.metadata.title}`,

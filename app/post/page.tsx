@@ -15,7 +15,7 @@ export default async function PostList() {
       {postList.map((post) => (
         <li
           key={post.url}
-          className="dark:hover:bg-accent mb-4 flex w-full flex-col rounded border hover:bg-slate-50 dark:border-slate-600"
+          className="dark:hover:bg-accent mb-4 flex w-full flex-col rounded border p-0 hover:bg-slate-50 dark:border-slate-600"
         >
           <Link
             href={post.url}

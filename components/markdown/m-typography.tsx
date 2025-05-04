@@ -23,7 +23,6 @@ const BaseHeadering = <C extends HeadingComponent>(props: HeaderingProps<C>) => 
       {children}
       {/* fix icon not align center */}
       <a
-        role="img"
         href={`#${id}`}
         aria-label="anchor"
         className="inline-flex cursor-pointer items-center opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100"

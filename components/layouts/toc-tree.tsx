@@ -99,7 +99,7 @@ export default function TocTree(props: TocTreeProps) {
 
   const renderList = () => {
     return (
-      <ul ref={tocRef} className="m-o list-none p-0 text-sm">
+      <ul ref={tocRef} className="m-0 list-none p-0 text-sm">
         {list.map(({ title, id, depth }, i) => (
           <li key={id} title={title || ''} className="mt-0 mb-2 w-full p-0">
             <a
@@ -139,8 +139,9 @@ export default function TocTree(props: TocTreeProps) {
 
   return (
     <div className={cn('w-full max-w-[25%]', className)}>
-      {/* calc top offset: header: 3 container: pt-1 pb-1 rem*/}
-      <nav className="sticky top-20 max-h-screen overflow-y-auto border-l border-l-zinc-200 px-4 dark:border-l-zinc-700">
+      {/* calc top offset: header: 3.5 container: pt-1 pb-1 rem*/}
+      {/* max-h header 3.5 top 5.5*/}
+      <nav className="sticky top-[5.5rem] max-h-[calc(100vh-9rem)] overflow-y-auto border-l border-l-zinc-200 px-4 dark:border-l-zinc-700">
         {renderList()}
       </nav>
     </div>
