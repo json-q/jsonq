@@ -559,3 +559,73 @@ http 没法访问 https，目前这里有两种方法
 
 - `.env.development`：`AUTH_URL=http://localhost:3000/api/auth`
 - `.env.production`： `AUTH_URL=https://example.com/api/auth`
+
+# Postgresql
+
+先上 dockerc-compose.yml 文件
+
+```yaml
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: postgres
+    environment:
+      POSTGRES_USER: postgres # 管理员用户不设置默认 postgres
+      POSTGRES_PASSWORD: xxxxx # 密码
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    restart: always
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
+```
+
+然后 `docker compose up -d` 启动即可，安装 Postgresql 很简单，只是连接的话就会出问题了
+
+这是通过 `Navicat` 连接 Postgresql 的报错
+
+![image](https://jsonq.top/cdn-static/2025/05/03/202505032134122.png)
+
+这个错误是因为 Postgres 从 15 开始，从 `pg_database` 表中删除了 `datlastsysoid` 字段引发此错误。
+
+解决此问题的方式也有简单粗暴的，也有麻烦的：
+
+1. 升级 Navicat（目前 16 是不行的）
+2. 降低 Postgresql 的版本
+3. 修改 dll（采用方式）
+
+## 修改 Navicat dll 以修复连接 Postgresql 错误的问题
+
+1. 打开安装 Navicat 的文件夹，找到 `libcc.dll` 文件
+
+![image](https://jsonq.top/cdn-static/2025/05/03/202505032139411.png)
+
+2. 备份 `libcc.dll` 文件，将其复制并粘贴改为任意名称（这里是为了以防万一搞炸了恢复用）
+
+![image](https://jsonq.top/cdn-static/2025/05/03/202505032142225.png)
+
+3. 在任何十六进制编辑器中打开此文件，可使用在线工具，如 https://hexed.it ，这里使用 vscode 插件 `Hex Editor`
+4. 将 `libcc.dll` 使用 vscode 打开，使用 `Hex Editor` 插件预览
+
+![image](https://jsonq.top/cdn-static/2025/05/03/202505032154752.png)
+
+5.  `ctrl+f` 检索内容 `SELECT DISTINCT datlastsysoid`
+
+![image](https://jsonq.top/cdn-static/2025/05/03/202505032155490.png)
+
+6. 将 `datlastsysoid` 替换为 `dattablespace`
+
+> 注意更改的时候，要切换 INS 模式，有光标变为插入才能正常替换内容
+
+![image](https://jsonq.top/cdn-static/2025/05/03/202505032211517.png)
+
+## 最终展示
+
+![image](https://jsonq.top/cdn-static/2025/05/03/202505032216843.png)
