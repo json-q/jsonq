@@ -1,29 +1,35 @@
 import { cn } from '~/lib/utils';
 import styles from './home.module.css';
+import { Metadata } from 'next';
 
 const desc = [
   {
     heading: 'Feature',
     content: [
-      'Nextjs + shadcn （当前为 SSG，旧版为 RSC 则可使用 docker/pm2 部署）',
-      '纯 markdown 编写，无后台，使用 rehpy、remark 等相关插件渲染，极低的资源占用',
-      '简单实现 markdown 内容更改后的页面热更新（hmr）',
+      'Nextjs + shadcn （当前为静态导出，便于 pagefind 检索）',
+      '纯 markdown 编写，无后台，使用 rehype remark 等相关插件渲染优化展示',
+      '简单实现 markdown 内容更改后的页面 hmr',
       'Github Action 的 CI/CD 部署',
-      '<a class="text-blue-600 dark:text-blue-500" target="_blank" rel="noopener noreferrer" href="https://jsonq.netlify.app">镜像站点</a>托管 netfily',
+      '<a class="text-link" target="_blank" rel="noopener noreferrer" href="https://jsonq.netlify.app">镜像站点</a> 托管 netfily',
       'pagefind 本地检索',
       '优秀的性能和可访问性，Lighthouse 评分 95+（文章内容大小会影响 Perfermance）',
-      '更多历史功能（目前移除）可移步 <a class="text-blue-600 dark:text-blue-500" target="_blank" rel="noopener noreferrer" href="https://github.com/json-q/jsonq">Github</a>',
+      '更多历史功能（目前移除）可移步 <a class="text-link" target="_blank" rel="noopener noreferrer" href="https://github.com/json-q/jsonq">Github</a>',
     ],
   },
   {
     heading: 'Background',
     content: [
-      '从零写该站点的原因之一是很早想接触 Nextjs，在此之前曾使用过 docsify、dumi、hexo 做文档站点',
-      '托管服务曾使用过 github pages 和 vercel，在做 CNAME 解析后，访问效果依然不好，netfily 目前未被墙，响应速度较好',
-      '图床服务使用 PicGo + jsdelivr 镜像，最初使用 minio，服务器压力较大',
+      '基于 Next 搭建的原因之一是很早想接触 Next',
+      '曾使用过 Github Pages 和 Vercel 托管，经过 CNAME 解析后，访问效果依然不佳，netfily 目前响应速度较好',
+      '图床使用 PicGo + jsdelivr',
     ],
   },
 ];
+
+export const metadata: Metadata = {
+  title: "Post | Jsonq's Blog",
+  description: '基于 Nextjs 的博客, 简约, 专注于内容, 不断完善优化',
+};
 
 export default function Home() {
   return (

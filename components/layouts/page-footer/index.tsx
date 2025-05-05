@@ -12,7 +12,7 @@ export default function PageFooter() {
             href="https://beian.miit.gov.cn"
             target="_blank"
             rel="noopener"
-            className="transition-colors hover:text-blue-600 dark:hover:text-blue-400"
+            className="hover:text-link transition-colors"
           >
             豫ICP备2022024874号-2
           </Link>
@@ -20,7 +20,7 @@ export default function PageFooter() {
 
         <div
           aria-label="footer-link"
-          className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm md:text-base"
+          className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-zinc-600 md:text-base dark:text-zinc-300"
         >
           {siteConfig.footerLink.map((item) => (
             <Link
@@ -28,7 +28,7 @@ export default function PageFooter() {
               href={item.href}
               target="_blank"
               rel="noopener"
-              className="text-zinc-600 transition-colors hover:text-blue-600 dark:text-zinc-300 dark:hover:text-blue-400"
+              className="hover:text-link transition-colors"
             >
               <span className="inline-flex items-center gap-x-2">
                 <item.icon className="size-5" /> {item.title}

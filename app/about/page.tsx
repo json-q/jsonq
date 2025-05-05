@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 const headingIntroduce = [
   '你好，我是 Jsonq（焦松奇），一名<span class="line-through">（API 调用）</span>前端开发人员，主要使用 React、Vue、TypeScript、antd 相关技术进行日常开发和工作。',
-  '三年工作经验，目前就职于北京某公司，工作中常用技术栈为 React + antd + <a class="text-blue-600 dark:text-blue-500" target="_blank" rel="noopener noreferrer" href="https://learn.microsoft.com/en-us/sharepoint/dev/schema/query-schema">SharePoint CamlQuery</a> + pnpjs（SharePoint Orm）',
+  '三年工作经验，目前就职于北京某公司，工作中常用技术栈为 React + antd + <a class="text-link" target="_blank" rel="noopener noreferrer" href="https://learn.microsoft.com/en-us/sharepoint/dev/schema/query-schema">SharePoint CamlQuery</a> + pnpjs（SharePoint Orm）',
 ];
 
 const workIntroduceContent = [
@@ -64,11 +64,7 @@ export default function AboutPage() {
         <h2 className="my-4 text-3xl font-semibold tracking-tight">Contact</h2>
         <p className="flex items-center">
           <Mail />
-          <a
-            className="ml-2 text-blue-600 underline dark:text-blue-500"
-            href="mailto:j996730508@163.com"
-            rel="noopener noreferrer"
-          >
+          <a className="text-link ml-2" href="mailto:j996730508@163.com" rel="noopener noreferrer">
             j996730508@163.com
           </a>
         </p>

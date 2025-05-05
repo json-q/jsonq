@@ -15,8 +15,8 @@ const siteConfig = {
   ],
   footerLink: [
     { icon: NextjsIcon, title: 'Nextjs', href: 'https://nextjs.org' },
-    { icon: JsDelivrIcon, title: 'jsDelivr ', href: 'https://www.jsdelivr.com/' },
-    { icon: NetfilyIcon, title: 'Netfily', href: 'https://app.netlify.com/' },
+    { icon: JsDelivrIcon, title: 'jsDelivr ', href: 'https://www.jsdelivr.com' },
+    { icon: NetfilyIcon, title: 'Netfily', href: 'https://app.netlify.com' },
   ],
   metadata: {
     metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_HOST!),
@@ -25,10 +25,10 @@ const siteConfig = {
     //   default: "Jsonq's Blog",
     //   template: `%s | Jsonq's Blog`,
     // },
-    description: 'documenting experiences and reflections during the process of work and study.',
+    description: '记录工作和学习过程中遇到的问题和相关解决思路以及部分随笔',
     openGraph: {
       title: 'Jsonq',
-      description: 'documenting experiences and reflections during the process of work and study.',
+      description: '记录工作和学习过程中遇到的问题和相关解决思路以及部分随笔',
       url: process.env.NEXT_PUBLIC_SITE_HOST,
       siteName: 'Jsonq',
       locale: 'zh-CN',

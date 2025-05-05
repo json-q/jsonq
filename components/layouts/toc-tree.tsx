@@ -104,12 +104,9 @@ export default function TocTree(props: TocTreeProps) {
           <li key={id} title={title || ''} className="mt-0 mb-2 w-full p-0">
             <a
               href={`#${id}`}
-              className={cn(
-                'text-foreground line-clamp-1 w-full no-underline hover:text-blue-400',
-                {
-                  'text-blue-400 dark:text-blue-500': i === activeIndex,
-                },
-              )}
+              className={cn('text-foreground hover:text-link line-clamp-1 w-full no-underline', {
+                'text-link': i === activeIndex,
+              })}
               style={{ paddingLeft: `${depth * 0.6}rem` }}
             >
               {title}

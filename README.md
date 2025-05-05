@@ -5,7 +5,7 @@
 
 # 特性
 
-- 纯 markdown 编写，无后台，基于 `rehpy` `remark` 等相关插件渲染，更低的资源消耗
+- 纯 markdown 编写，无后台，基于 `rehype` `remark` 等相关插件渲染，更低的资源消耗
 - markdown 修改后的页面热更新(hmr)
 - 基于 Github Action 的 CI CD 自动化部署
 - netfily 的镜像站点作为备用（vercel 域名境内基本无法访问，可自定义域名做 dns 解析）

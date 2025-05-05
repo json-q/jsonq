@@ -5,6 +5,7 @@ import { getPostList } from '~/utils/postData';
 
 export const metadata: Metadata = {
   title: "Post | Jsonq's Blog",
+  description: '学习过程和技术文章的内容记录以及其它随笔',
 };
 
 export default async function PostList() {
