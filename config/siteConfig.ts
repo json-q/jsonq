@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { JsDelivrIcon, NetfilyIcon, NextjsIcon } from '~/components/layouts/page-footer/icons';
+import { JsDelivrIcon, NetlifyIcon, NextjsIcon } from '~/components/layouts/page-footer/icons';
 import { Cnblog, Github } from '~/components/layouts/page-header/icons';
 
 const siteConfig = {
@@ -16,7 +16,7 @@ const siteConfig = {
   footerLink: [
     { icon: NextjsIcon, title: 'Nextjs', href: 'https://nextjs.org' },
     { icon: JsDelivrIcon, title: 'jsDelivr ', href: 'https://www.jsdelivr.com' },
-    { icon: NetfilyIcon, title: 'Netfily', href: 'https://app.netlify.com' },
+    { icon: NetlifyIcon, title: 'Netlify', href: 'https://app.netlify.com' },
   ],
   metadata: {
     metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_HOST!),

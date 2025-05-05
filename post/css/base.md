@@ -475,7 +475,7 @@ background-position 用于设置背景图片在水平、垂直方向上的具体
 - 垂直方向还可以设值：top、center、bottom
 - 如果只设置了 1 个方向，另一个方向默认是 center
 
-> 背景图片在浏览器拉伸的情况下只显示中间区域，设置 cneter 即可。
+> 背景图片在浏览器拉伸的情况下只显示中间区域，设置 center 即可。
 
 **`background-attachment`**
 
