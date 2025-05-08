@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { addBasePath } from 'next/dist/client/add-base-path';
 import { useDeferredValue, useEffect, useState } from 'react';
 import { CircleX, LoaderCircle, Search } from 'lucide-react';
-import { debounce } from 'lodash-es';
 import { Button } from '~/components/ui/button';
 import {
   Dialog,
@@ -110,13 +109,21 @@ export default function DocSearch() {
     }
   };
 
+  const onOpenChange = (open: boolean) => {
+    setOpen(open);
+  };
+
+  const closeModal = () => {
+    setOpen(false);
+  };
+
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogTrigger asChild>
         {!isMobile && (
           <Button
             variant="outline"
-            className="bg-muted/50 text-muted-foreground relative h-8 w-full justify-start rounded-[0.5rem] text-sm font-normal shadow-none sm:pr-12 md:w-32 lg:w-48 xl:w-56"
+            className="bg-muted/50 text-muted-foreground relative h-8 w-full cursor-pointer justify-start rounded-[0.5rem] text-sm font-normal shadow-none sm:pr-12 md:w-32 lg:w-48 xl:w-56"
           >
             <span className="inline-flex">Try Search</span>
             <kbd className="bg-muted pointer-events-none absolute top-[0.3rem] right-[0.3rem] hidden h-5 items-center gap-1 rounded border px-1.5 font-mono text-[10px] font-medium opacity-100 select-none sm:flex">
@@ -125,7 +132,7 @@ export default function DocSearch() {
           </Button>
         )}
       </DialogTrigger>
-      <DialogContent hideCloseIcon className="gap-0 p-0">
+      <DialogContent className="gap-0 p-0">
         {/* Header 仅仅防止报错 */}
         <DialogHeader>
           <DialogTitle className="sr-only"></DialogTitle>
@@ -137,7 +144,8 @@ export default function DocSearch() {
           <Input
             className="border-none focus-visible:ring-0"
             placeholder="搜索文章"
-            onChange={debounce(onSearch, 200)}
+            value={search}
+            onChange={onSearch}
           />
         </div>
         {error ? (
@@ -150,10 +158,12 @@ export default function DocSearch() {
         ) : results.length == 0 ? (
           <EmptyStatus tip="暂无结果" icon={<Search className="h-16 w-16 shrink-0 opacity-50" />} />
         ) : (
-          <ScrollArea className="text-foreground max-h-[300px] overflow-x-hidden overflow-y-auto px-2 py-1 md:max-h-[calc(100vh-300px)]">
-            {results.map((item) => (
-              <ResultList key={item.url} data={item} />
-            ))}
+          <ScrollArea className="text-foreground min-h-[300px] overflow-x-hidden overflow-y-auto px-2 py-1 md:max-h-[calc(100vh-300px)]">
+            <ul className="w-full">
+              {results.map((item) => (
+                <ResultList key={item.url} data={item} closeModal={closeModal} />
+              ))}
+            </ul>
           </ScrollArea>
         )}
       </DialogContent>
@@ -161,19 +171,23 @@ export default function DocSearch() {
   );
 }
 
-function ResultList({ data }: { data: PagefindResult }) {
+function ResultList({ data, closeModal }: { data: PagefindResult; closeModal: () => void }) {
   return data.sub_results.map((item) => {
     return (
-      <Link
+      <li
+        onClick={closeModal}
         key={item.url}
-        href={item.url}
-        className="hover:bg-accent hover:text-accent-foreground relative flex cursor-pointer items-center gap-2 rounded-sm px-4 py-3 text-sm text-inherit outline-none select-none [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
+        className="cursor-pointer gap-2 border-b text-sm text-inherit select-none"
       >
-        <div>
+        <Link
+          onKeyDown={(e) => e.key === 'Enter' && closeModal()}
+          href={item.url}
+          className="hover:bg-accent hover:text-accent-foreground inline-flex w-full flex-col rounded-sm px-3 py-2"
+        >
           <div className="line-clamp-2 w-full" dangerouslySetInnerHTML={{ __html: item.excerpt }} />
-          <div className="overflow-hidden text-xs font-bold">{item.title}</div>
-        </div>
-      </Link>
+          <div className="mt-1 overflow-hidden text-xs font-bold">{item.title}</div>
+        </Link>
+      </li>
     );
   });
 }
