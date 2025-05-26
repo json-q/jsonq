@@ -132,7 +132,7 @@ export default function DocSearch() {
           </Button>
         )}
       </DialogTrigger>
-      <DialogContent className="gap-0 p-0">
+      <DialogContent className="gap-0 p-0" hideCloseIcon>
         {/* Header 仅仅防止报错 */}
         <DialogHeader>
           <DialogTitle className="sr-only"></DialogTitle>
