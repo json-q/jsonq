@@ -9,7 +9,7 @@ date: 2025-05-26
 
 ## 背景
 
-在原有的开发模式下，以类似于 html 的方式使用 `react + babel` 编译进行开发，这也可能是当时最简单便捷的方式。因为 Sharepoint 提供的 `CamlQuery` ，只有在 `aspx` 页面中，才有权限调用，这也就为什么脚手架项目没有被使用。
+在原来的开发模式下，以类似于 html 的方式使用 `react + babel` 编译进行开发，这也可能是当时最简单便捷的方式。因为 Sharepoint 提供的 `CamlQuery` ，只有在 `aspx` 页面中，才有权限调用，这也就为什么脚手架项目没有被使用。
 
 由于初期对 Sharepoint 不了解，导致现有的开发模式维护极难。以及从项目开发初期到现在多年（六年以上）的历史遗留问题，可以说在原有开发模式的基础上再新增项目模块已经是摇摇欲坠了。由于某些事情，最终决定对较为特殊的移动端模块进行重写，痛定思痛摒弃之前的模式，也就有了这篇文章。
 
@@ -17,7 +17,9 @@ date: 2025-05-26
 
 好了，废话不多说，来聊聊本地项目如何使用 `pnpjs` 代理到 Sharepoint，其中也进行了很多的尝试，最终的方法简单的有点离谱，使用 [sp-rest-proxy](https://github.com/koltyakov/sp-rest-proxy) 即可。
 
-非 `aspx` 的页面是无权调用 REST API 的，因为 Sharepoint 根本不知道你是哪个用户，所以身份认证是必须的。但是 Sharepoint 自带的认证我们根本无法使用。因此思路方向就是做代理，在经历多次尝试基本放弃此方案的时候，我们发现了 `sp-rest-proxy` 这个库，而且使用非常简单。
+首先非 `aspx` 的页面是无权调用 REST API 的，意味着你的 `localhost` 无法访问 `mysharepoint.com` 的任何资源，因为 Sharepoint 根本不知道你是哪个用户，是不可能放行访问的。
+
+因此做账号认证是必须的，但是我们对 Sharepoint 的认证完全找不到接口，在经历多次尝试基本放弃此方案的时候，我们发现了 `sp-rest-proxy` 这个库，而且使用非常简单。
 
 1. 安装 `sp-rest-proxy`
 2. 新建一个 js 文件，并引入 `sp-rest-proxy`。
@@ -53,7 +55,9 @@ date: 2025-05-26
    );
    ```
 
-OK，此时我们就能愉快的调用 pnpjs 的方法了。比如 `sp.web.currentUser()` 等等
+OK，此时我们就能愉快的调用 pnpjs 的方法了。比如 `sp.web.currentUser()` 等等。
+
+> 在此方案下，本地使用代理请求 Sharepoint 资源，部署时，将构建好的资源放在 Sharepoint 中，并在 aspx 中引入（aspx 可以理解为一个 html 模板）
 
 ## v4 与 v3 的写法区别
 
