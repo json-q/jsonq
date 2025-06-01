@@ -43,7 +43,7 @@ export default function MImg({ src, alt, width, height, ...props }: ImageProps) 
             src={src}
             width={width || 0}
             height={height || 0}
-            className="h-auto w-full md:w-4/5"
+            className="h-auto w-full md:w-1/2"
             unoptimized={isGif}
           />
         </SheetMaskContent>
