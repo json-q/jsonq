@@ -4,29 +4,29 @@ const desc = [
   {
     heading: 'Feature',
     content: [
-      'Nextjs + shadcn （当前为静态导出，便于 pagefind 检索）',
+      'Nextjs + shadcn',
       'markdown 编写，使用 rehype remark 等相关插件渲染优化展示',
       '简单实现 markdown 内容更改后的页面 hmr',
       'Github Action 的 CI/CD 部署',
       '<a class="text-link" target="_blank" rel="noopener noreferrer" href="https://jsonq.netlify.app">镜像站点</a> 托管 netlify',
-      'pagefind 本地检索',
+      'pagefind 本地检索（pagefind 仅支持静态页面，因此 RSC 无法使用）',
       '优秀的性能和可访问性，Lighthouse 评分 95+（文章内容大小会影响 Perfermance）',
       '更多历史功能（目前移除）可移步 <a class="text-link" target="_blank" rel="noopener noreferrer" href="https://github.com/json-q/jsonq">Github</a>',
     ],
   },
   {
-    heading: 'Background',
+    heading: 'Platform',
     content: [
-      '基于 Next 搭建的原因之一是很早想接触 Next',
-      'Github Pages 和 Vercel 托管的服务经过 CNAME 解析后，访问效果依然不佳（敏感时无法访问），netlify 目前响应速度较好',
-      '图床使用 PicGo + jsdelivr',
+      '<a class="text-link" target="_blank" rel="noopener noreferrer" href="https://github.com/json-q">Github</a>',
+      '<a class="text-link" target="_blank" rel="noopener noreferrer" href="https://gitee.com/jsonqi">Gitee</a>',
+      '<a class="text-link" target="_blank" rel="noopener noreferrer" href="https://www.cnblogs.com/jsonq">博客园</a>（有意义的内容会同步）',
     ],
   },
 ];
 
 export const metadata: Metadata = {
-  title: "Post | Jsonq's Blog",
-  description: '基于 Nextjs 的博客, 简约, 专注于内容, 不断完善优化',
+  title: "Home | Jsonq's Blog",
+  description: '基于 Nextjs 的博客, 简约, 专注于内容',
 };
 
 export default function Home() {
