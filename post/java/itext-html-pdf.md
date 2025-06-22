@@ -247,7 +247,7 @@ public class ThymeleafRenderer {
 - `caption` 与浏览器相比默认多了一些边距，需注意
 - 其它样式细节自行发现即可
 - 使用 iText7 可以用 flex 布局，但是 iText5 不行，iText5 的样式甚至需要兼容到 IE11 以下
-- 若涉及到一些纯静态数据，可以转成 json，读取 json 文件并转成 Map，再传递给 Thymeleaf，引入 css 和 js 的写法我用上，有兴趣的可以尝试
+- 若涉及到一些纯静态数据，可以转成 json，读取 json 文件并转成 Map，再传递给 Thymeleaf，引入 css 和 js 的写法我没用上，有兴趣的可以尝试
 
 ### 批量打印 PDF 并返回 zip 流
 
@@ -273,7 +273,6 @@ public class ThymeleafRenderer {
             try (ZipOutputStream zos = new ZipOutputStream(response.getOutputStream())) {
                 for (MyList my : myList) {
                     String fileName = my.getId() + ".pdf";
-                    Path pdfPath = folderPath.resolve(fileName);
 
                     // 传递给 Thymeleaf 的参数（伪代码）
                     Map<String, Object> map = new HashMap<>();
