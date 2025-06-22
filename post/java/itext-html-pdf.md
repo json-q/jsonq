@@ -62,8 +62,6 @@ windows 系统字体统一都在 `C:\Windows\Fonts` 下，这里将字体拷贝�
 目前只用到了 `convertHtmlToPdfByte` 这个方法
 
 ```java
-package com.uckj.digit.utils;
-
 import com.itextpdf.html2pdf.ConverterProperties;
 import com.itextpdf.html2pdf.HtmlConverter;
 import com.itextpdf.io.font.FontProgram;
