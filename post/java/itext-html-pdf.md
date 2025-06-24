@@ -247,6 +247,202 @@ public class ThymeleafRenderer {
 - 使用 iText7 可以用 flex 布局，但是 iText5 不行，iText5 的样式甚至需要兼容到 IE11 以下
 - 若涉及到一些纯静态数据，可以转成 json，读取 json 文件并转成 Map，再传递给 Thymeleaf，引入 css 和 js 的写法我没用上，有兴趣的可以尝试
 
+贴一个 PDF 的导出样例
+
+![image](https://jsonq.top/cdn-static/2025/06/21/202506212136236.png)
+
+这里简单提取一些简单的 html 结构示例及样式吧，以便大家可以直接根据现有业务自行修改使用
+
+```html
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <style>
+      table,
+      div,
+      span {
+        font-size: 14px;
+        color: #333333;
+      }
+
+      table {
+        width: 100%;
+        display: table;
+        border-collapse: collapse;
+      }
+
+      table tbody td,
+      table tbody th {
+        padding: 14px 7px;
+        border: 1px solid #666;
+      }
+
+      table caption {
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        caption-side: top;
+      }
+
+      table tbody th {
+        font-weight: normal;
+        text-align: left;
+      }
+
+      th .label {
+        width: 100%;
+        white-space: nowrap;
+        text-align: left;
+      }
+
+      input[type='checkbox'] {
+        margin: 0;
+        padding: 0;
+      }
+
+      .flex {
+        display: flex;
+      }
+
+      .items-center {
+        align-items: center;
+      }
+
+      .flex-wrap {
+        flex-wrap: wrap;
+      }
+
+      .whitespace-nowrap {
+        white-space: nowrap;
+      }
+
+      .pl-1 {
+        padding-left: 4px;
+      }
+
+      .pr-4 {
+        padding-right: 16px;
+      }
+
+      .py-2 {
+        padding-top: 8px;
+        padding-bottom: 8px;
+      }
+
+      .mr-2 {
+        margin-right: 8px;
+      }
+
+      .font-bold {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <table>
+      <caption>
+        <h2 class="font-bold" style="margin:0 0 12px 0">xx填报单</h2>
+      </caption>
+
+      <!-- 24 列，24 列在占格布局上更为灵活，可以应对大部分的行布局 -->
+      <colgroup>
+        <th:block th:each="i : ${#numbers.sequence(1, 24)}">
+          <col th:width="${#numbers.formatDecimal(100/24, 1, 2) + '%'}" />
+        </th:block>
+      </colgroup>
+
+      <tbody>
+        <!-- 填报人 -->
+        <tr>
+          <td
+            colspan="24"
+            style="border: none;"
+            class="py-2"
+            th:text="'填报人：' + ${record.username}"
+          ></td>
+        </tr>
+
+        <!-- 巡视区域 -->
+        <tr>
+          <td colspan="24" th:text="'巡视巡检区域：' + ${record.fullname}"></td>
+        </tr>
+
+        <!-- 设施类型 -->
+        <tr>
+          <td colspan="24">
+            <div class="flex items-center">
+              <div class="whitespace-nowrap">处理设施类型：</div>
+              <div class="flex flex-wrap">
+                <div
+                  class="flex items-center"
+                  th:each="opt : ${#strings.arraySplit('一体化,人工湿地,一体化+人工湿地,提升泵站,生态沟,净化槽', ',')}"
+                >
+                  <input type="checkbox" th:checked="${record.facilityType == opt}" readonly />
+                  <span class="pr-4 pl-1" th:text="${opt}"></span>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+
+        <!-- 时间 -->
+        <tr>
+          <td colspan="12" th:text="'时间：' + ${createFormatTime}"></td>
+          <td colspan="12">&nbsp;</td>
+        </tr>
+
+        <!-- 动态内容 -->
+        <tr th:if="${record.facilityType == '提升泵站'}">
+          <td colspan="24" th:text="'提升泵站提升水量：' + ${record.waterIntake} + ' m³/h'"></td>
+        </tr>
+        <th:block th:unless="${record.facilityType == '提升泵站'}">
+          <tr>
+            <th colspan="3">
+              <div class="label">进水水量</div>
+            </th>
+            <td colspan="21" th:text="'设计进水水量：' + ${record.waterIntake} + ' m³/d'"></td>
+          </tr>
+          <tr>
+            <th colspan="3">
+              <div class="label">出水口</div>
+            </th>
+            <td colspan="21">
+              <div class="flex items-center">
+                <div class="whitespace-nowrap">颜色：</div>
+                <div
+                  class="flex flex-wrap items-center"
+                  th:each="opt : ${#strings.arraySplit('正常,异常（发黑）,异常（发黄）,异常（发白）',',')}"
+                >
+                  <input type="checkbox" th:checked="${record.waterOutlet == opt}" readonly />
+                  <span class="pr-4 pl-1" th:text="${opt}"></span>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </th:block>
+
+        <!-- 图片 -->
+        <tr>
+          <th colspan="3">
+            <div class="label">图片</div>
+          </th>
+          <td colspan="21">
+            <th:block th:if="${record.imgUrl}">
+              <img
+                th:each="url : ${#strings.arraySplit(record.imgUrl, ',')}"
+                th:src="${url}"
+                width="80"
+                class="mr-2"
+              />
+            </th:block>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
+```
+
 ### 批量打印 PDF 并返回 zip 流
 
 到这里只需要调用上边的工具类即可，注意：这里不太好设置 zip 的 `Content-Length`，因为 zip 的大小不固定，如果为了这个数值再去读一次 zip 的大小，有点得不偿失了。
@@ -328,7 +524,3 @@ a.click();
 URL.revokeObjectURL(a.href);
 a.remove();
 ```
-
-贴一个 PDF 的导出样例
-
-![image](https://jsonq.top/cdn-static/2025/06/21/202506212136236.png)
