@@ -1,5 +1,5 @@
 ---
-title: 使用 iText7(html2pdf) + Thymeleaf 批量打印 PDF 并导出 zip
+title: 使用 iText(html2pdf) + Thymeleaf 批量打印 PDF 并导出 zip
 date: 2025-06-21
 ---
 
@@ -19,7 +19,7 @@ date: 2025-06-21
 4. 导出 zip 文件
 5. 前端接收并显示已接收大小
 
-iText7 相比 iText5 的 PDF 渲染速度要快非常多（从 5 换到 7，导出速度提高了最少 5 倍），而且对 css 样式的可使用性有明显提高，`flex` 布局可以正常使用，开发体验已经很棒了
+最新的 iText 相比 `iText5` 的 PDF 渲染速度要快非常多（从最开始用 5 换到最新的，导出速度提高了最少 5 倍），而且对 css 样式的可使用性有明显提高，`flex` 布局可以正常使用，开发体验已经很棒了
 
 > 吐槽：iText 本身渲染 PDF 的写法跟坨屎一样，`new Paragraph("Hello Word")` 这种也就写一些简单的内容了，复杂一点的能把人累死
 
