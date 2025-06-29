@@ -120,7 +120,7 @@ export default function DocSearch() {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogTrigger asChild>
-        {!isMobile && (
+        {isMobile === false && (
           <Button
             variant="outline"
             className="bg-muted/50 text-muted-foreground relative h-8 w-full cursor-pointer justify-start rounded-[0.5rem] text-sm font-normal shadow-none sm:pr-12 md:w-32 lg:w-48 xl:w-56"
@@ -135,8 +135,8 @@ export default function DocSearch() {
       <DialogContent className="gap-0 p-0" hideCloseIcon>
         {/* Header 仅仅防止报错 */}
         <DialogHeader>
-          <DialogTitle className="sr-only"></DialogTitle>
-          <DialogDescription className="sr-only"></DialogDescription>
+          <DialogTitle className="sr-only" aria-describedby="search-mask-title" />
+          <DialogDescription className="sr-only" aria-describedby="search-mask-description" />
         </DialogHeader>
 
         <div className="flex items-center border-b px-3">
