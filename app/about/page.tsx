@@ -21,7 +21,7 @@ const workIntroduceContent = [
 
 export default function AboutPage() {
   return (
-    <div className="container py-6">
+    <div className="py-6">
       <div className="px-4 md:px-12">
         {headingIntroduce.map((item, index) => (
           <p className="py-2 first:pt-0" key={index} dangerouslySetInnerHTML={{ __html: item }} />

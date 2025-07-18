@@ -57,9 +57,6 @@ export default function MobileNav() {
         sideOffset={14}
       >
         <div className="flex flex-col gap-4 overflow-auto px-6 py-6">
-          <Link href="/" onClick={() => handleOpenChange(false)}>
-            首页
-          </Link>
           {siteConfig.navs.map((item) => (
             <Link href={item.href} key={item.href} onClick={() => handleOpenChange(false)}>
               {item.title}

@@ -1,7 +1,7 @@
 'use client';
 import { ReactElement, useCallback, useEffect, useState, Children } from 'react';
 import { Copy, CopyCheck } from 'lucide-react';
-import { cn } from '~/lib/utils';
+import { Button } from '../ui/button';
 
 type MPreProps = React.PropsWithChildren<React.JSX.IntrinsicElements['pre']>;
 
@@ -53,16 +53,15 @@ const MPre = (props: MPreProps): ReactElement => {
   return (
     <>
       <pre {...restProps}>{children}</pre>
-      <button onClick={handleClick} tabIndex={0} className="copy-btn">
-        <IconToUse
-          className={cn(
-            'block size-8 rounded border !bg-slate-200 p-1 text-slate-400 dark:!bg-slate-600',
-            {
-              '!bg-blue-200 text-blue-400 dark:!bg-blue-600': isCopied,
-            },
-          )}
-        />
-      </button>
+      <Button
+        variant="secondary"
+        size="icon"
+        className="copy-btn border-input absolute top-2 right-2 size-8 cursor-pointer border transition-opacity"
+        onClick={handleClick}
+        tabIndex={0}
+      >
+        <IconToUse />
+      </Button>
     </>
   );
 };

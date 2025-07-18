@@ -44,10 +44,7 @@ export default async function PostDetail({ params }: Props) {
 
   return (
     <div className="flex">
-      <main
-        data-pagefind-body
-        className="md-container w-full max-w-full py-4 pr-0 md:max-w-[75%] md:pr-4"
-      >
+      <main data-pagefind-body className="md-container w-full py-4 pr-0">
         <CustomMDX source={post.content} />
       </main>
       <TocTree />

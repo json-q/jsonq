@@ -8,14 +8,13 @@ module.exports = {
             'blockquote p:first-of-type::before': { content: 'none' },
             'blockquote p:first-of-type::after': { content: 'none' },
             a: {
-              color: 'var(--color-blue-600)',
-              '&:hover': {
-                color: 'var(--color-blue-800)',
-              },
-              code: { color: 'var(--color-blue-600)' },
+              color: 'var(--link)',
+              code: { color: 'var(--link)' },
             },
             code: {
-              color: 'var(--color-pink-600)',
+              backgroundColor: 'var(--muted)',
+              '&:before': { content: 'none !important' },
+              '&:after': { content: 'none !important' },
             },
             hr: {
               marginTop: '1rem',
@@ -25,17 +24,19 @@ module.exports = {
               marginTop: 0,
               marginBottom: 0,
             },
-            blockquote: {
-              p: {
-                color: 'var(--color-slate-600)',
-              },
-            },
             figure: {
               marginTop: '0.5rem',
               marginBottom: '0.5rem',
+              position: 'relative',
+              '&>button.copy-btn': {
+                opacity: 0,
+              },
+              '&:hover>button.copy-btn': {
+                opacity: 1,
+              },
             },
             ul: {
-              'padding-inline-start': '0.5rem',
+              'padding-inline-start': '0',
             },
           },
         },

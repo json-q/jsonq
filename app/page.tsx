@@ -31,7 +31,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className="container py-8">
+    <div className="py-8">
       <h1 className="mb-4 text-center text-4xl font-extrabold tracking-tight will-change-auto lg:text-5xl">
         Jsonq&apos;s Blog
       </h1>

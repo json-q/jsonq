@@ -2,8 +2,7 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { throttle } from 'lodash-es';
 import { cn } from '~/lib/utils';
-import { useIsMobile } from '~/hooks/use-mobile';
-import { CircleArrowLeft } from 'lucide-react';
+import { TableOfContents } from 'lucide-react';
 import {
   Sheet,
   SheetContent,
@@ -20,18 +19,12 @@ interface List {
   depth: number;
 }
 
-interface TocTreeProps {
-  className?: string;
-}
-
-export default function TocTree(props: TocTreeProps) {
-  const { className } = props;
+export default function TocTree() {
   const [list, setList] = useState<List[]>([]);
   const [activeIndex, setActiveIndex] = useState<number>();
   // const nodes = useRef<NodeListOf<Element>>(null); // 记录所有 h1,h2,h3 标签
   const tocRef = useRef<HTMLUListElement>(null); // TOC 组件 DOM
   const containerRef = useRef<HTMLElement>(null);
-  const isMobile = useIsMobile();
 
   const scrollHandler = useCallback(() => {
     if (!containerRef.current) return;
@@ -56,7 +49,6 @@ export default function TocTree(props: TocTreeProps) {
     }
   }, []);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const throttledScrollHandler = useCallback(throttle(scrollHandler, 100), []);
 
   function highlight(i: number) {
@@ -117,30 +109,18 @@ export default function TocTree(props: TocTreeProps) {
     );
   };
 
-  if (isMobile) {
-    return (
-      <Sheet>
-        <SheetTrigger>
-          <CircleArrowLeft className="fixed top-1/4 right-0 z-20 h-7 w-7 translate-y-1/4 text-blue-600" />
-        </SheetTrigger>
-        <SheetContent className="overflow-y-auto p-4">
-          <SheetHeader className="sr-only">
-            <SheetTitle></SheetTitle>
-            <SheetDescription></SheetDescription>
-          </SheetHeader>
-          <div className="flex flex-col gap-4">{renderList()}</div>
-        </SheetContent>
-      </Sheet>
-    );
-  }
-
   return (
-    <div className={cn('w-full max-w-[25%]', className)}>
-      {/* calc top offset: header: 3.5 container: pt-1 pb-1 rem*/}
-      {/* max-h header 3.5 top 5.5*/}
-      <nav className="sticky top-[5.5rem] max-h-[calc(100vh-9rem)] overflow-y-auto border-l border-l-zinc-200 px-4 dark:border-l-zinc-700">
-        {renderList()}
-      </nav>
-    </div>
+    <Sheet>
+      <SheetTrigger>
+        <TableOfContents className="hover:bg-accent bg-background text-foreground fixed right-6 bottom-12 z-10 h-10 w-10 cursor-pointer overflow-hidden rounded-full border p-2 shadow-sm transition-colors" />
+      </SheetTrigger>
+      <SheetContent className="overflow-y-auto p-4">
+        <SheetHeader className="sr-only">
+          <SheetTitle></SheetTitle>
+          <SheetDescription></SheetDescription>
+        </SheetHeader>
+        <div className="flex flex-col gap-4">{renderList()}</div>
+      </SheetContent>
+    </Sheet>
   );
 }

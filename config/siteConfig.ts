@@ -5,6 +5,7 @@ import { Cnblog, Github } from '~/components/layouts/page-header/icons';
 const siteConfig = {
   theme: 'system',
   navs: [
+    { title: '首页', href: '/' },
     { title: '文章', href: '/post' },
     { title: '关于我', href: '/about' },
   ],

@@ -85,7 +85,7 @@ export function MH4(props: React.JSX.IntrinsicElements['h4']) {
 
 export function MP(props: React.JSX.IntrinsicElements['p']) {
   const { className, ...restProps } = props;
-  return <p {...restProps} className={cn(className, 'leading-7 [&:not(:first-child)]:mt-6')} />;
+  return <p {...restProps} className={cn(className, 'leading-6 [&:not(:first-child)]:mt-6')} />;
 }
 
 export function MUl(props: React.JSX.IntrinsicElements['ul']) {
