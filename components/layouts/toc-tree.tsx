@@ -31,7 +31,7 @@ export default function TocTree() {
 
     const viewHeight = window.innerHeight;
     // nodes 和 list 其实是一一对应的，所以可以设置一个索引判断哪个目录高亮了
-    const nodes = Array.from(containerRef.current.querySelectorAll('h1, h2, h3'));
+    const nodes = Array.from(containerRef.current.querySelectorAll('h2, h3, h4'));
     for (let i = 0; i < nodes.length; i++) {
       const node = nodes[i];
       const rect = node.getBoundingClientRect();
