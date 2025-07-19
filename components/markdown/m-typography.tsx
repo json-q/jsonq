@@ -4,11 +4,11 @@ import { createElement } from 'react';
 
 type HeadingComponent = 'h1' | 'h2' | 'h3' | 'h4';
 
-type HeaderingProps<C extends HeadingComponent> = React.JSX.IntrinsicElements[C] & {
+type HeadingProps<C extends HeadingComponent> = React.JSX.IntrinsicElements[C] & {
   component: C;
 };
 
-const BaseHeadering = <C extends HeadingComponent>(props: HeaderingProps<C>) => {
+const BaseHeading = <C extends HeadingComponent>(props: HeadingProps<C>) => {
   const { component, className, id, children, ...restProps } = props;
 
   //  add anchor base icon
@@ -17,7 +17,7 @@ const BaseHeadering = <C extends HeadingComponent>(props: HeaderingProps<C>) => 
     {
       ...restProps,
       id,
-      className: cn(className, 'group flex  gap-1.5'),
+      className: cn('group flex  gap-1.5', className),
     },
     <>
       {children}
@@ -25,7 +25,7 @@ const BaseHeadering = <C extends HeadingComponent>(props: HeaderingProps<C>) => 
       <a
         href={`#${id}`}
         aria-label="anchor"
-        className="inline-flex cursor-pointer items-center opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100"
+        className="inline-flex cursor-pointer items-center opacity-0 transition-opacity group-hover:opacity-100"
       >
         <AnchorIcon width="1em" height="1em" aria-hidden focusable={false} />
       </a>
@@ -36,10 +36,10 @@ const BaseHeadering = <C extends HeadingComponent>(props: HeaderingProps<C>) => 
 export function MH1(props: React.JSX.IntrinsicElements['h1']) {
   const { className, ...restProps } = props;
   return (
-    <BaseHeadering
+    <BaseHeading
       component="h1"
       {...restProps}
-      className={cn(className, 'scroll-m-20text-4xl font-extrabold tracking-tight lg:text-5xl')}
+      className={cn('scroll-m-20 text-4xl font-extrabold tracking-tight', className)}
     />
   );
 }
@@ -48,12 +48,12 @@ export function MH2(props: React.JSX.IntrinsicElements['h2']) {
   const { className, ...restProps } = props;
 
   return (
-    <BaseHeadering
+    <BaseHeading
       component="h2"
       {...restProps}
       className={cn(
-        className,
         'scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0',
+        className,
       )}
     />
   );
@@ -63,10 +63,10 @@ export function MH3(props: React.JSX.IntrinsicElements['h3']) {
   const { className, ...restProps } = props;
 
   return (
-    <BaseHeadering
+    <BaseHeading
       component="h3"
       {...restProps}
-      className={cn(className, 'scroll-m-20 text-2xl font-semibold tracking-tight')}
+      className={cn('scroll-m-20 text-2xl font-semibold tracking-tight', className)}
     />
   );
 }
@@ -75,10 +75,10 @@ export function MH4(props: React.JSX.IntrinsicElements['h4']) {
   const { className, ...restProps } = props;
 
   return (
-    <BaseHeadering
+    <BaseHeading
       component="h4"
       {...restProps}
-      className={cn(className, 'scroll-m-20 text-xl font-semibold tracking-tight')}
+      className={cn('scroll-m-20 text-xl font-semibold tracking-tight', className)}
     />
   );
 }
