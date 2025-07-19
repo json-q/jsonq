@@ -3,7 +3,7 @@ title: Vue 路由 状态管理
 date: 2023-06-14
 ---
 
-# vue-router
+## vue-router
 
 安装 vue-router
 
@@ -11,7 +11,7 @@ date: 2023-06-14
 npm i vue-router
 ```
 
-## 路由基本使用
+### 路由基本使用
 
 1. **创建路由实例**  
    ![创建路由实例](https://jsonq.top/cdn-static/2025/02/25/1740465701055-q0d9p8gh.jpeg)
@@ -22,14 +22,14 @@ npm i vue-router
 
 > redirect 在 router 实例中的作用就是 **路由重定向**，访问 path 路径时，重定向到 redirect 对应的 path 路径
 
-### router-link
+#### router-link
 
 - `to`：可以是字符串 `to = "/home"` ，也可以是对象：`:to = {path:"/home",{...options} }`，对象属性的配置为如下几条
 - `replace`：默认为 push，直接在标签中写 replace，则是进行路由替换而非新添加路由地址，不会保留历史记录
 - `active-class`：设置激活 a 元素后应用的 class，默认是 `router-link-active`，可以通过该 class 设置点击后的激活样式。
 - `exact-active-class`：链接精准激活时，应用于渲染的 `<a>` 的 class，默认是 `router-link-exact-active`
 
-### 路由懒加载
+#### 路由懒加载
 
 ```js
 // 直接导入
@@ -42,7 +42,7 @@ const Home = () => import('@/views/Home.vue');
 const Home = () => import(/* webpackChunkName: 'home' */ '@/views/Home.vue');
 ```
 
-### 动态路由
+#### 动态路由
 
 类似 `xxx/:xx` ，以 `/:` 做匹配的路由都是动态路由
 
@@ -82,7 +82,7 @@ const Home = () => import(/* webpackChunkName: 'home' */ '@/views/Home.vue');
 </script>
 ```
 
-### NotFound
+#### NotFound
 
 用于路由匹配不到时显示的组件
 
@@ -107,7 +107,7 @@ const router = createRouter({
 
 在 NotFound 组件内部，在模板中，可以通过 `$route.params.pathMatch`
 
-### 路由嵌套
+#### 路由嵌套
 
 ```js
 const router = createRouter({
@@ -139,9 +139,9 @@ const router = createRouter({
 });
 ```
 
-## 编程式导航
+### 编程式导航
 
-### 路由跳转及传参
+#### 路由跳转及传参
 
 `router-link`的跳转为声明式导航,要通过 js 代码实现的路由跳转为编程式导航
 
@@ -180,9 +180,9 @@ router.go(100);
 router.go(-100);
 ```
 
-## 动态路由
+### 动态路由
 
-### 添加路由
+#### 添加路由
 
 根据用户权限不同,可以动态添加路由,使用 `addRoute({...})`
 
@@ -232,7 +232,7 @@ if (vip) {
 }
 ```
 
-### 动态管理路由的其他方法
+#### 动态管理路由的其他方法
 
 常用删除
 
@@ -252,11 +252,11 @@ router.removeRoute('about');
 - `router.hasRoute()`: 检查路由是否存在。
 - `router.getRoutes()`：获取一个包含所有路由记录的数组
 
-## 路由导航守卫
+### 路由导航守卫
 
 `vue-router` 提供的导航守卫主要用来通过**跳转或取消的方式守卫导航**。
 
-### beforEach
+#### beforEach
 
 - **全局前置守卫**，所有的路由切换都会被回调。
 - **参数**：`to`：即将进入的路由 Route 对象；`from`：即将离开的路由 Route 对象；
@@ -284,7 +284,7 @@ beforEach 回调有返回值：
 
 其它路由守卫可参考：[Vue Router-导航守卫](https://router.vuejs.org/zh/guide/advanced/navigation-guards.html)
 
-# Vuex
+## Vuex
 
 [Vuex 文档](https://vuex.vuejs.org/zh/)
 
@@ -292,7 +292,7 @@ Vuex 的数据流程图：
 
 ![Vuex数据流程图](https://jsonq.top/cdn-static/2025/02/25/1740465701632-qgepiy9o.png)
 
-## Vuex 基本使用
+### Vuex 基本使用
 
 安装 vuex (4.x)
 
@@ -302,7 +302,7 @@ npm install vuex
 
 使用 vuex 创建 store
 
-### 创建 store
+#### 创建 store
 
 ```js
 // store/index.js
@@ -321,7 +321,7 @@ import store from './store';
 app.use(store);
 ```
 
-### 访问 store 数据
+#### 访问 store 数据
 
 1. template 模板中访问
 
@@ -367,7 +367,7 @@ app.use(store);
 
 > options API 中，如果直接通过 `const { counter } = store.state` 解构出的数据，是**非响应式的**，需要使用`toRefs`，例如：`const { counter } = toRefs(store.state)`
 
-### 修改 store 数据: mutations
+#### 修改 store 数据: mutations
 
 在 store 实例中添加 `mutations`，在 `mutations` 中书写更改 store 数据的方法
 
@@ -398,7 +398,7 @@ function add() {
 }
 ```
 
-#### mutation 修改数据携带参数
+##### mutation 修改数据携带参数
 
 ```js
   mutations: {
@@ -423,9 +423,9 @@ store.commit({
 });
 ```
 
-### mapState 数据映射
+#### mapState 数据映射
 
-#### computed 使用 mapState
+##### computed 使用 mapState
 
 数据量少时，可以使用 computed 的写法，当数据量很多时，此种写法也会显得过于繁琐普通写法
 
@@ -483,7 +483,7 @@ mapState 不仅可以接收一个数组，也可以接收一个对象。
 
 ![mapState映射](https://jsonq.top/cdn-static/2025/02/25/1740465701727-g7pduqnr.jpeg)
 
-## setup 中使用 mapState
+### setup 中使用 mapState
 
 根据 `computed` 中 `mapState` 的使用方式，在 `setup` 中尝试使用，因为 `mapState` 解构出的都是函数，所以尝试使用 `computed`
 
@@ -527,7 +527,7 @@ useState 可以通过实例 `store.state` 的所有数据，和 `this.$store.sta
 
 ![bind绑定this](https://jsonq.top/cdn-static/2025/02/25/1740465702038-loevcm7i.jpeg)
 
-### setup 中 mapState hooks 封装
+#### setup 中 mapState hooks 封装
 
 封装一个 hooks，循环绑定 this
 
@@ -555,7 +555,7 @@ export default function useState(mapper) {
 </script>
 ```
 
-### setup 中最简单访问 store
+#### setup 中最简单访问 store
 
 通过解构将 store 数据拿出来。并用 toRefs 将其变成响应式
 
@@ -568,9 +568,9 @@ export default function useState(mapper) {
 </script>
 ```
 
-## setup 中的 Vuex API
+### setup 中的 Vuex API
 
-### getters
+#### getters
 
 某些属性我们可能需要经过变化后来使用，例如：store 中 `counter = 100`，需要对外提供的一份 `2 * counter` 数据，此时就可以使用 getters
 
@@ -603,7 +603,7 @@ const store = createStore({
 
 > getters 内部的函数默认接收两个参数，`function( state, getters ){...}` 第一个参数是 store 中的数据，第二个就是 getters 本身，可以通过 getters 访问内部的其它函数，`getters.fn` 。注：无需主动调用，vue 底层做了改动
 
-### mapGetters
+#### mapGetters
 
 顾名思义，既然可以使用 mapState 可以快速获取 sotre 中的值，也可以有获取 getters 的函数
 
@@ -627,7 +627,7 @@ const doubleCountFn = computed(doubleCount.bind({ $store: store }));  */
 const { doubleCount } = toRefs(store.getters); // 推荐
 ```
 
-### mapMutations
+#### mapMutations
 
 快速使用 mutation 来改变 store 中的值
 
@@ -648,7 +648,7 @@ methods:{
 <button @click="minus(10)">-</button>
 ```
 
-### actions
+#### actions
 
 mutation 是同步函数，执行异步操作，就无法追踪到数据的变化。若需要在 vuex 中发送异步请求，则需要使用 action。
 
@@ -697,7 +697,7 @@ action 也可以和 mutation 一样，也可以使用对象形式派发
 
 > mutation 提交事务使用 `store.commit("add")`，action 派发事务使用 `store.dispatch("addAction")`
 
-#### action 的异步操作
+##### action 的异步操作
 
 可以通过让 action 返回 Promise，在 Promise 的 then 完成链式调用，处理完成后的操作；
 
@@ -728,11 +728,11 @@ function actionBtnClick() {
 
 > actions 内部的函数支持 async 写法，调用时依旧通过 `.then` 链式调用
 
-### mapActions
+#### mapActions
 
 用法和 mapGetters、mapMutations 一样
 
-### module
+#### module
 
 当维护数据格外庞大时，所有数据集中于一个 js 文件略显臃肿，Vuex 允许将 store 分割成模块（module）；每个模块拥有自己的 state、mutation、action、getter、甚至是嵌套子模块；
 
@@ -816,7 +816,7 @@ export default store;
   }
   ```
 
-# Pinia
+## Pinia
 
 ```bash
 npm i pinia
@@ -824,7 +824,7 @@ npm i pinia
 yarn add pinia
 ```
 
-## Pinia 基本使用
+### Pinia 基本使用
 
 ```js
 // pinia/index.js
@@ -864,10 +864,9 @@ function btnClick() {
 }
 ```
 
-## state
+### state
 
 1. 读取和写入 state
-
    - 默认情况下，通过 store 实例访问状态来**直接读取和写入状态**
 
    ```js
@@ -878,7 +877,6 @@ function btnClick() {
    ```
 
 2. 重置 state
-
    - 通过调用 store 上的 `$reset()` 方法将**状态 重置 到其初始值**
 
    ```js
@@ -895,7 +893,6 @@ function btnClick() {
    });
    ```
 4. 替换 State
-
    - 可以通过将其 `$state` 属性设置为新对象来**替换 Store 的整个状态**
 
    ```js
@@ -909,7 +906,7 @@ function btnClick() {
 
    ![$state问题说明](https://jsonq.top/cdn-static/2025/02/25/1740465702238-lqf4vi9i.jpeg)
 
-## getters
+### getters
 
 和 vuex 的 getters 用法基本一致
 
@@ -962,7 +959,7 @@ export const useUserInfo = defineStore('userInfo', {
    <h2>{{ getUserId(1) }}</h2>
    ```
 
-## actions
+### actions
 
 actions 相当于组件中的 methods
 
@@ -979,7 +976,7 @@ function btnClick(){
 }
 ```
 
-### 异步 actions
+#### 异步 actions
 
 和 vuex 的 actions 一样，返回一个 Promise
 

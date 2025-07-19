@@ -3,8 +3,6 @@ title: 项目配置问题汇总
 date: 2024-11-07
 ---
 
-# 项目配置问题汇总
-
 ## vue+ts 项目使用 unplugin-auto-import 类型为 unknown
 
 这个问题默认已经安装了 `unplugin-auto-import` 及`unplugin-vue-components`，图中是一个使用 vue 脚手架创建的项目，运行后生成了 `components.d.ts`，但是 vue 文件中却缺少类型定义。

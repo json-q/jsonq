@@ -3,7 +3,7 @@ title: React 项目工程化搭建
 date: 2023-06-23
 ---
 
-# 前言
+## 前言
 
 对于文章涉及的内容，可直接看总结，对工程化没了解的小白，若从头看到尾，也可以搭建出来。
 
@@ -15,13 +15,13 @@ date: 2023-06-23
 
 > 本来这些规范化的配置是 vue 和 react 通用的，不过，`vue3` 有自己的一套基于 `vite` 的 cli 脚手架，eslint 和 prettier 都已经配置，文章中部分就不需要再配置。
 
-# eslint
+## eslint
 
 <b style={{color:"red"}}>需安装 `ESlint` 插件</b>
 
 vite 在安装 react 时就带了 eslint 的很多依赖，算是省去了对 eslint 的配置，其它脚手架可以参考 vite 的 eslint 规则进行配置。而且 esint 9 的变动挺大的，目前普及度并不高，此处用的还是 eslint^8。以下是对 eslint 的一些增强设置
 
-## eslint 忽略校验的文件
+### eslint 忽略校验的文件
 
 新建 `.eslintignore` 文件，写入以下内容，自己想要忽略检测的也可以写入该文件。
 
@@ -43,7 +43,7 @@ mock
 .stylelintcache
 ```
 
-## eslint 校验缓存
+### eslint 校验缓存
 
 缓存是为了减少 eslint 的校验时间，若项目过于庞大，每次都对整个项目进行 eslint 校验是相对浪费时间的。
 
@@ -59,7 +59,7 @@ mock
 }
 ```
 
-### 自定义 eslint 规则
+#### 自定义 eslint 规则
 
 eslint 默认在 TS 中是不允许出现 `any`，但这不合理，毕竟就算写体操也是需要 `any` 的。在 `.eslintrc.cjs` 中添加以下内容：
 
@@ -79,11 +79,11 @@ module.exports = {
 
 在写作的过程中，如果觉得有些规则没有必要，但是 eslint 给出了错误或警告提示，就可以根据提示去关闭这些 eslint 规则
 
-# prettier
+## prettier
 
 <b style={{color:"red"}}>需安装 `Prettier - Code formatter` 插件</b>
 
-## 安装相关依赖
+### 安装相关依赖
 
 安装三个包 `prettier eslint-config-prettier eslint-plugin-prettier`
 
@@ -96,9 +96,9 @@ npm i prettier eslint-config-prettier eslint-plugin-prettier -D
 - eslint-config-prettier: 解决 eslint 和 prettier 中的规则冲突
 - eslint-plugin-prettier: prettier 的格式化规则集成到 eslint 中，让 eslint 可以识别 prettier 的不规范写法，从而提示警告或者错误
 
-## 配置 prettier
+### 配置 prettier
 
-### 集成到 eslint 中
+#### 集成到 eslint 中
 
 此处也可以结合文档进行配置：https://github.com/prettier/eslint-plugin-prettier
 
@@ -127,7 +127,7 @@ module.exports = {
 
 **也可以看到 prettier 提示换行符的问题，几乎每个文件都有，此时就可以查看 <b style={{color:"red"}}>统一编码格式</b> 小节，接着跟流程也不影响**
 
-## prettier 规则
+### prettier 规则
 
 如果每个人的 prettier 格式化规则不一样，也会导致代码风格迥异，此时为了统一项目的整体代码风格，可以在根目录新建 `.prettierrc` 文件，这样 vscode 会优先读取该文件下的配置
 
@@ -146,7 +146,7 @@ module.exports = {
 
 > `semi`：使用单引号还是双引号，个人感觉双引号更规范一点
 
-## 自动格式化修复
+### 自动格式化修复
 
 vscode 的 prettier 插件可以修改设置保存时自动格式化代码，但这种属于手操 vscode 设置，我们可以让使用者在不手动设置的情况下，来实现代码保存自动格式化并自动修复
 
@@ -165,11 +165,11 @@ vscode 的 prettier 插件可以修改设置保存时自动格式化代码，但
 
 设置完这个，再次修改文件，然后保存时，就会自动修复一些 prettier 格式不规范的代码片段。
 
-# stylelint
+## stylelint
 
 <b style={{color:"red"}}>需安装 `Stylelint` 插件</b>
 
-## 安装 stylelint 及相关插件
+### 安装 stylelint 及相关插件
 
 安装五个插件（vue 可忽略 `css module` 插件）
 
@@ -184,7 +184,7 @@ npm i stylelint stylelint-config-standard stylelint-prettier stylelint-order sty
 - stylelint-config-recess-order: 现成的 css 排序规则，不用再去手写，与之相似的还有一个 `stylelint-config-idiomatic-order`，但是相对来说，`recess-order` 更符合开发人员的 css 书写顺序
 - stylelint-config-css-modules: 识别 `css module` 的样式（vue 可忽略）
 
-## stylelint 配置
+### stylelint 配置
 
 根目录下新建 `.stylelintrc` 文件，写入以下内容
 
@@ -206,7 +206,7 @@ npm i stylelint stylelint-config-standard stylelint-prettier stylelint-order sty
 
 可以看到，stylelint 已经对 css 的排序进行了校验，顺序不对的情况下会给出提示，但由于我们在 `settings.json` 中配置了自动修复，所以保存该文件时，vscode 会自动对这些 css 样式进行排序修复的，既避免开发人员一直在 css 的顺序上浪费时间，也统一了 css 代码风格
 
-## stylelint 忽略部分文件的校验
+### stylelint 忽略部分文件的校验
 
 新建 `.stylelintignore` 文件，不校验 js jsx 等文件
 
@@ -220,7 +220,7 @@ node_modules
 dist
 ```
 
-## 集成 less
+### 集成 less
 
 vite 的特殊处理，不需要像 `webpack` 那样安装 `less-loader`，安装 less 即可使用。
 
@@ -265,7 +265,7 @@ npm i less postcss-less -D
 
 ![stylelint 排序校验](https://jsonq.top/cdn-static/2025/02/25/1740465690004-ho45s89u.png)
 
-## 集成 postcss autoprefixer 实现自动添加浏览器前缀
+### 集成 postcss autoprefixer 实现自动添加浏览器前缀
 
 ```bash
 npm i postcss autoprefixer -D
@@ -283,20 +283,20 @@ export default {
 
 ![autoprefixer 用处](https://jsonq.top/cdn-static/2025/02/25/1740465690097-bqptkwbt.png)
 
-# 提交规范
+## 提交规范
 
 这里使用的提交和大众稍微不同，既没有 `husky`，也没有 `commitlint`
 
 - 使用 `pretty-quick` 进行代码提交前的自动格式化，可参考 [官方文档](https://github.com/prettier/pretty-quick#readme)
 - 使用 `simple-git-hooks` 进行类 `husky` 的提交方式。该插件同样在 [vuejs](https://github.com/vuejs/core/blob/main/package.json) 中使用
 
-## 安装相关插件
+### 安装相关插件
 
 ```bash
 npm i pretty-quick simple-git-hooks -D
 ```
 
-### 配置 git 提交校验
+#### 配置 git 提交校验
 
 `package.json` 配置
 
@@ -315,14 +315,14 @@ npm i pretty-quick simple-git-hooks -D
 }
 ```
 
-#### simple-git-hooks 简单介绍
+##### simple-git-hooks 简单介绍
 
 `simple-git-hooks` 中
 
 - `pre-commit` 是代码 commit 提交前预先对代码进行校验，格式化代码、eslint 校验、stylelint 校验，校验不通过的不允许提交
 - `commit-msg` 是对 commit 的信息进行校验，执行 scripts 文件夹下的 `verify-commit.ts`，可以参考 [vuejs](https://github.com/vuejs/core/blob/main/package.json) 对 `simple-git-hooks` 的用法
 
-#### simple-git-hooks 初始化
+##### simple-git-hooks 初始化
 
 `postinstall` 是让项目在初次安装过程完成时自动执行 `npx simple-git-hooks` 命令。如果初次没有执行，需手动执行该命令，不执行的话没有 git hook 的钩子校验。
 
@@ -334,7 +334,7 @@ git 拉取下来安装时自带 .git 文件，会自动执行 `postinstall` 命�
 
 ![自动初始化](https://jsonq.top/cdn-static/2025/02/25/1740465690297-gg4gsof4.png)
 
-### 对 git commit 的信息进行校验
+#### 对 git commit 的信息进行校验
 
 先安装 `@types/node`
 
@@ -388,7 +388,7 @@ if (!commitRE.test(msg)) {
  */
 ```
 
-### 提交测试
+#### 提交测试
 
 这里先检测格式化代码，然后进行 eslint 和 stylelint 的校验，故意写出一些 eslint 错误或警告，执行 `git commit`
 
@@ -406,7 +406,7 @@ eslint 执行通过之后开始执行 stylelint 校验
 
 ![正确的提交信息](https://jsonq.top/cdn-static/2025/02/25/1740465690783-v8u8b0nq.png)
 
-# git 提交忽略文件
+## git 提交忽略文件
 
 新建 `.gitignore` 文件，将你不想提交到 git 仓库的文件在这里写入即可，支持通配符格式
 
@@ -448,7 +448,7 @@ stats.html
 .stylelintcache
 ```
 
-# 统一编码格式 CRLF 或 LF
+## 统一编码格式 CRLF 或 LF
 
 lf 是 Unix 编码，crlf 是 windows 编码。
 
@@ -498,7 +498,7 @@ trim_trailing_whitespace = false
 
 ![lf编码格式](https://jsonq.top/cdn-static/2025/02/25/1740465691082-r66vxen5.png)
 
-# 配置路径别名
+## 配置路径别名
 
 先在 `vite.config.ts` 中添加如下内容，让项目识别该别名
 
@@ -535,9 +535,9 @@ export default defineConfig((mode) => {
 
 ![别名](https://jsonq.top/cdn-static/2025/02/25/1740465691176-pcrkh1qm.png)
 
-# 动态读取 env 环境变量
+## 动态读取 env 环境变量
 
-## env 内容
+### env 内容
 
 可以结合 vite 文档进行使用：https://vitejs.dev/guide/env-and-mode.html
 
@@ -585,7 +585,7 @@ VITE_API_BASE_URL = '/prodapi'
 VITE_API_URL = 'http://xxx:1111/api'
 ```
 
-## vite.config.ts 读取 env
+### vite.config.ts 读取 env
 
 使用 `loadEnv` 读取即可，需要注意的是，读取出来的值都是字符串，所以需要进行一些转换
 
@@ -638,7 +638,7 @@ function wrapperEnv(envConf: Record<string, string>) {
 }
 ```
 
-## 配置类型提示
+### 配置类型提示
 
 env 的环境变量再 ts 和 tsx 等文件中都可以直接访问，除了 `vite.config.ts`
 
@@ -663,7 +663,7 @@ interface ImportMeta {
 
 ![image](https://jsonq.top/cdn-static/2025/02/25/1740465691271-87ysuvv4.png)
 
-## index.html 标题使用 env 配置
+### index.html 标题使用 env 配置
 
 vite 本身都支持在 html 中读取 env 的环境变量，以下是官方文档的描述
 
@@ -675,9 +675,9 @@ vite 本身都支持在 html 中读取 env 的环境变量，以下是官方文�
 <title>%VITE_APP_TITLE%</title>
 ```
 
-# 打包相关内容
+## 打包相关内容
 
-## 手动分包
+### 手动分包
 
 ```js
 import { defineConfig, loadEnv } from 'vite';
@@ -704,7 +704,7 @@ export default defineConfig((mode) => {
 });
 ```
 
-## gzip 压缩，去除 console，代码体积分析
+### gzip 压缩，去除 console，代码体积分析
 
 ```bash
 npm i rollup-plugin-visualizer vite-plugin-compression2 terser -D
@@ -750,7 +750,7 @@ export default defineConfig((mode) => {
 });
 ```
 
-## vite.config.ts 完整配置
+### vite.config.ts 完整配置
 
 ```js
 import { defineConfig, loadEnv } from "vite";
@@ -830,7 +830,7 @@ function wrapperEnv(envConf: Record<string, string>) {
 }
 ```
 
-# 总结
+## 总结
 
 本文章主要内容如下
 

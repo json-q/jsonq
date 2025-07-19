@@ -3,17 +3,21 @@ title: react API层性能优化
 date: 2024-05-28
 ---
 
-react 无法做到像 vue 一样自动收集依赖更新（期待 react19 的 React Compiler），需要开发人员手动的进行性能优化，此时 `memo`、`useCallback`、`useMemo`、`useRef` 就是性能优化中的重要 API
+react 无法做到像 vue 一样自动收集依赖更新~~（期待 react19 的 React Compiler）~~，React 19 已正式发布，但有过多的 breakchange，建议观望等生态兼容，可使用 [react-compiler-runtime](https://www.npmjs.com/package/react-compiler-runtime) 作为 react19 以下的 compiler polyfill 体验。
 
-> 本文虽然介绍可应用场景，但是正常开发中，尤其是 `useCallback`。除非遇到性能问题或者组件封装，亦或是能力足够，否则不建议轻易各处使用 `useCallback`，迭代过程中滥用的话，很可能出现屎山，甚至导致问题难以排查
+开发过程中需要开发人员手动的进行性能优化，此时 `memo`、`useCallback`、`useMemo`、`useRef` 就是性能优化中的重要 API（其实就是缓存，减少 rerender 而已）
 
-# memo
+- 本文虽然介绍可应用场景，但是正常开发中，这些 API 要在适当场景下使用，滥用反而可能造成反向优化。
+- `useCallback`：除非遇到性能问题或者组件封装，亦或是能力足够抹平差异，否则不建议到处使用，很可能导致问题排查困难
+- `useMemo`：同样作为缓存 API，React 官方也是推荐在昂贵的计算下使用（更多使用场景建议去读一下官方文档）
+
+## memo
 
 正常情况下，父组件发生变化时，就算变化的 state 与子组件无关，但还是会导致子组件 rerender。这种情况下，可以使用 `memo` 包裹子组件
 
 `memo` 的作用：被 memo 包裹的组件，会自动对 props 进行浅比较，若传入的 props 没有改变，则不会重新 render
 
-## 简单场景
+### 简单场景
 
 代码示例：
 
@@ -25,7 +29,7 @@ react 无法做到像 vue 一样自动收集依赖更新（期待 react19 的 Re
 
 图中可以看到，虽然 `Child` 子组件的 name 没有发生任何变化，但是由于父组件的 state 改变导致整个组件重新渲染，子组件也无法避免 rerender（第一个打印是初始加载时的渲染）
 
-## 解决方法
+### 解决方法
 
 给子组件进行 `memo` 包裹，使其只有 props 相关发生改变时才重渲染
 
@@ -39,7 +43,7 @@ react 无法做到像 vue 一样自动收集依赖更新（期待 react19 的 Re
 
 子组件 `memo` 后，props 只要不发生变化就不会重渲染
 
-## 引用数据类型的 props 导致重渲染
+### 引用数据类型的 props 导致重渲染
 
 以上示例中，我们给子组件传入的 `name` 是基本数据类型，如果传入一个 obj 复杂数据类型，虽然值没发生变化，但是子组件依旧发生了重渲染
 
@@ -53,7 +57,7 @@ react 无法做到像 vue 一样自动收集依赖更新（期待 react19 的 Re
 
 图中结合代码可见，`obj` 是传入的不变值，看似 props 是没有发生变化的。但是：**`obj` 是引用数据类型，其数据是存到堆内存中的，和基本类型不同**，`state` 每发生一次变化，`obj` 的内存地址就会重新变动，生成的是一个全新的 `obj` 对象，这就导致了表面上看似 props 没变化，实际上是 `obj` 是一直在变，一直在 rerender
 
-### 解决方法一：数据提取至外部（推荐，最简单）
+#### 解决方法一：数据提取至外部（推荐，最简单）
 
 将静态不变的数据提取到组件外，组件重渲染时，由于对象是在组件外的，不会触发更新，若数据依赖了 state 等组件内数据，推荐第三种解决方法
 
@@ -70,7 +74,7 @@ function App() {
 }
 ```
 
-### 解决方法二：useMemo（不推荐）
+#### 解决方法二：useMemo（不推荐）
 
 使用 `useMemo` 缓存，和 `useEffect` 用法相似，不过第一个函数需要返回数据，第二个参数是依赖，空数组就是仅初始化执行，但是 `useMemo` 大部分是用于计算缓存的，纯静态值不推荐
 
@@ -87,7 +91,7 @@ function App() {
 />
 ```
 
-### 解决方法三：memo 手动深度对比（推荐）
+#### 解决方法三：memo 手动深度对比（推荐）
 
 memo 有第二个参数，是一个函数，函数第一个参数是更新前的 props，第二个参数是更新后的 props，可以自行对比，返回 true 不更新，返回 false 说明两次 props 不一致，更新。
 
@@ -107,11 +111,11 @@ const Child: React.FC<ChildProps> = memo((props) => {
 }, isDeep);
 ```
 
-# useMemo
+## useMemo
 
 `useMemo` 通常用来缓存不常变动的大量的逻辑计算结果，就像上文中，使用 `useMemo` 缓存了 obj 对象，其实就可以把 obj 当作很复杂的处理后的一个结果，但是静态数据提取至外部更简单。可以把 `useMemo` 理解为 vue 中的 `computed` 计算属性
 
-## 简单场景
+### 简单场景
 
 示例代码：
 
@@ -121,7 +125,7 @@ const Child: React.FC<ChildProps> = memo((props) => {
 
 ![image](https://jsonq.top/cdn-static/2025/02/25/1740465688682-t71n95ix.gif)
 
-## 解决方法
+### 解决方法
 
 使用 `useMemo` 进行计算结果缓存。
 
@@ -133,11 +137,11 @@ const Child: React.FC<ChildProps> = memo((props) => {
 
 ![image](https://jsonq.top/cdn-static/2025/02/25/1740476995829-8p69rv5d.gif)
 
-# useCallback
+## useCallback
 
 当父组件给子组件传递函数时，父组件状态更改，会导致子组件 rerender
 
-## 简单场景
+### 简单场景
 
 代码示例：
 
@@ -152,7 +156,7 @@ const Child: React.FC<ChildProps> = memo((props) => {
 - 函数无法进行对比，总不能 `JSON.stringify` 对比代码内容吧。
 - `timestamp` 更改，导致组件重新渲染，`getList` 函数的内存地址重新创建，memo 无法对比，所以重新 rerender
 
-## 解决方法
+### 解决方法
 
 使用 `useCallback` 缓存 `getList` 函数 <strong style={{color:"red"}}>不要依赖项无脑写空，如果函数内部用到了某个 state，必须写入依赖项，否则拿不到最新值</strong>
 
@@ -164,7 +168,7 @@ const Child: React.FC<ChildProps> = memo((props) => {
 
 ![image](https://jsonq.top/cdn-static/2025/02/25/1740476995960-cebv5f8i.gif)
 
-# useRef
+## useRef
 
 `useRef` 第一认知是用于获取 dom 元素，但 `useRef`也具有记忆功能， 可以用来进行变量记录。和 `useState` 不同的区别是：
 
@@ -182,7 +186,7 @@ const Child: React.FC<ChildProps> = memo((props) => {
 
 > 开发过程中，页码和页数使用 `useRef` 是非常常见的方式，不显示到视图的数据优先用 `useRef`，不仅使用比 `useEffect` 方便 ，且可以减少 rerender
 
-## 使用 useState 的效果
+### 使用 useState 的效果
 
 ![image](https://jsonq.top/cdn-static/2025/02/25/1740465689356-k6taeudx.png)
 
@@ -190,7 +194,7 @@ const Child: React.FC<ChildProps> = memo((props) => {
 
 这种写法，由于 `setState` 为异步，需要在 `useEffect` 中拿到页码改变后的最新值并请求（也可以有其它方式，暂不赘述），而且**每次页码 +1，都会导致组件 rerender，这也是一部分无用的性能开销，重要的是 rerender**
 
-## 使用 useRef 的效果
+### 使用 useRef 的效果
 
 `useRef` 最重要的就是**不会导致组件 reredner**
 

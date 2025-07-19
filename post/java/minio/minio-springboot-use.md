@@ -5,9 +5,9 @@ date: 2024-04-27
 
 由后端集中管理 minio 的 SDK 调用，而非前端对接 minio
 
-# 基本配置
+## 基本配置
 
-## 初始化项目
+### 初始化项目
 
 新建一个 SpringBoot 项目，集成 `lombok` `mybatis-plus` `minio` `hutool-core`（可有可无）。新建一个数据表 `attachement`，用于存储文件上传后在 minio 中的位置。
 
@@ -25,7 +25,7 @@ create table attachment
 ) comment '附件表';
 ```
 
-## 配置项目
+### 配置项目
 
 1. 新增 `attachment` 相关的 controller、mapper、entity、service
 
@@ -90,11 +90,11 @@ public class MinIOConfig {
 }
 ```
 
-# 图片/文件通用上传
+## 图片/文件通用上传
 
 建议把图片上传和文件上传分开，因为图片只关系 url 地址，而文件需要额外知道文件名，且两者的业务场景并不完全相同
 
-## 后端代码
+### 后端代码
 
 **`Controller`**
 
@@ -157,7 +157,7 @@ public class MinIOConfig {
 
 > 代码可优化项，封装/校验文件类型，如果 minio 设置了公开访问，可以将 url 带的签名去掉，如何创建**只读策略**的桶，可参考上一篇文章。 **什么是公共只读策略？文件可以不经过用户名密码直接访问，但没有其它访问权限。如果设置 `public`，可以不使用用户名密码，直接使用 SDK 对桶文件进行增删改，十分不安全**
 
-## 前端代码
+### 前端代码
 
 antd 组件，前端设置了跨域代理，以 `/api` 开头的请求都会代理转发到 `http://localhost:8080` 即后端代码运行地址，如果后端设置 `@CrossOrigin` 则无跨域问题
 
@@ -179,7 +179,7 @@ url 地址预览（需上传时设置 `Content-Type`）
 
 ![image](https://jsonq.top/cdn-static/2025/02/25/1740465687534-fxbg3bp2.png)
 
-# 文件下载
+## 文件下载
 
 在有预览功能的前提下，下载是非必须的，但不同的业务场景可能会需要直接下载，不走预览
 

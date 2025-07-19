@@ -7,7 +7,7 @@ date: 2024-05-24
 
 正常一个项目想要展示另一个项目，通常会用 iframe 进行嵌入，但是相比 iframe，`qiankun` 等微前端的接入表现形式会更加友好，如果要以 iframe 为基础的，可以尝试使用腾讯的 `无界` 框架。
 
-# 创建项目
+## 创建项目
 
 本文主要以 react + webpack 的接入为主，因为 `qiankun` 对于 vite 的支持度并不友好，vue3 同样首推 vite，虽然有社区插件 `vite-plugin-qiankun` 可以接入，但是出现的问题也是很多的，作为项目来开发并不是首选。
 
@@ -48,7 +48,7 @@ package.json 修改 script 命令
 
 项目根目录新建 `craco.config.js`，这里只修改项目的启动端口，和关闭允许项目自动打开浏览器，3 个项目是不同的启动端口，关于 qiankun 的配置在下一小节
 
-```bash
+```js
 // craco.config.js
 module.exports = {
   devServer: {
@@ -58,11 +58,11 @@ module.exports = {
 };
 ```
 
-# 接入 qiankun
+## 接入 qiankun
 
 这一部分可以结合 [qiankun 官网](https://qiankun.umijs.org/zh/guide/tutorial) 进行阅读.
 
-## 主应用注册微应用
+### 主应用注册微应用
 
 在主应用 `app` 的入口文件 `index.tsx` 中，添加如下内容
 
@@ -110,7 +110,7 @@ function App() {
 
 这里安装了 `react-router-dom`
 
-## 微应用对接主应用
+### 微应用对接主应用
 
 上述步骤，主应用的配置基本完毕，现在需要配置子应用。
 
@@ -222,7 +222,7 @@ module.exports = {
 
 修改 webpack 配置后重启项目，此时访问 `http://localhost:3000/micro-app1` ，以主应用的地址+子应用路由，就可以看到该子应用，另一个子应用配置同理
 
-# 主应用微应用路由注册
+## 主应用微应用路由注册
 
 ![image](https://jsonq.top/cdn-static/2025/02/25/1740465691797-a74iwugr.png)
 
@@ -240,7 +240,7 @@ module.exports = {
 
 ![image](https://jsonq.top/cdn-static/2025/02/25/1740465692468-2ckz17gv.gif)
 
-# Vue3 Webpack 子应用对接 qiankun
+## Vue3 Webpack 子应用对接 qiankun
 
 这部分属于追加内容，同样以 webpack 为主，可以使用 vue-cli，也可以自行搭建。
 
@@ -324,9 +324,9 @@ module.exports = defineConfig({
 
 **此时需要在主应用中注册 vue 子应用和添加 vue 子应用的挂在容器**
 
-# qiankun 应用部署
+## qiankun 应用部署
 
-## 前端部署准备
+### 前端部署准备
 
 跟正常项目部署基本一致，值得注意的是：主应用访问子应用时，需要配置 nginx 的代理访问。部署前准备，主应用注册的子应用地址需要更换为线上地址（可以在 env 中配置，避免频繁更改）
 
@@ -363,7 +363,7 @@ registerMicroApps([
 ]);
 ```
 
-## nginx 配置
+### nginx 配置
 
 需要注意的是，生产环境中主应用想要访问子应用，需要在 nginx 配置中手动添加允许访问，否则会出现 CROS 跨域问题，该 nginx 配置可直接使用，只需修改项目的存放地址即可，其它 nginx 相关内容暂不赘述。
 
@@ -420,15 +420,15 @@ server {
 
 重启 nginx 服务，就可以访问这三个应用，独立访问或者 qiankun 模式访问都可以
 
-# 问题记录
+## 问题记录
 
-## 由于 qiankun 子应用嵌套 div 导致无法设置高度 100%
+### 由于 qiankun 子应用嵌套 div 导致无法设置高度 100%
 
 如图所示，思路很清晰，给两个 div 设置高度 100%
 
 ![image](https://jsonq.top/cdn-static/2025/02/25/1740465692644-s0bfxcoo.png)
 
-### 给挂载节点设置高度 100%
+#### 给挂载节点设置高度 100%
 
 之前是直接在 jsx 中这么写的
 
@@ -448,7 +448,7 @@ server {
 
 > 其实渲染这部分更推荐将注册子应用的数据进行抽离，挂载容器循环渲染，减小耦合度
 
-### 给嵌套的 div 设置高度 100%
+#### 给嵌套的 div 设置高度 100%
 
 有人会疑问？这不是有 id 吗？直接用这个 id 进行样式重置不就行了？答：这个 div 的 id 是 `qiankun` 自动生成的，不建议直接使用此 id 进行 div 的样式修改
 
@@ -466,7 +466,7 @@ div[data-name='rc'] {
 }
 ```
 
-## 开启样式隔离导致首次加载 modal/drawer 等挂载类组件样式丢失
+### 开启样式隔离导致首次加载 modal/drawer 等挂载类组件样式丢失
 
 问题复现：
 

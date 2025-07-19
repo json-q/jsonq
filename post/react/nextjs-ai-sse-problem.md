@@ -11,7 +11,7 @@ date: 2025-04-26
 
 > 文中的解决方法并不一定是最优解，如果 Next 有相关的属性可配置就更好了。
 
-# 搭建简易的 SSE 服务
+## 搭建简易的 SSE 服务
 
 为了更真实，搭建一个简单的 `express` 服务，以此来模拟真实开发。
 
@@ -73,9 +73,9 @@ app.listen(9999, () => {
 });
 ```
 
-# 对接第三方接口服务
+## 对接第三方接口服务
 
-## 使用 fetch 调用
+### 使用 fetch 调用
 
 - 为啥不是 `EventSource` 呢？`EventSource` 只能调用 GET 请求，无法自定义请求头
 - 反正简单看了一下国内的 AI，对话全是 POST 请求
@@ -83,7 +83,7 @@ app.listen(9999, () => {
 
 > 可以使用 `@microsoft/fetch-event-source` 实现 POST 的 EventSource
 
-### 跨域问题及之后的踩坑
+#### 跨域问题及之后的踩坑
 
 跨域问题是前端再常见不过的了，要是以为解决跨域就能正常调用接口，那就大错特错了。
 
@@ -113,13 +113,13 @@ const nextConfig: NextConfig = {
 
 正常情况下，sse 推送是实时的，前端每 100ms 都可以接收到新的推送数据，但是在 Next 的代理下，会先将所有推送的数据进行缓冲，最后一次性接收，这显然不符合实时推送接收的情况下。
 
-### 如何解决 Next 对数据缓冲问题
+#### 如何解决 Next 对数据缓冲问题
 
 这个目前不知道是否存在可配置属性，现有的解决方法如下：
 
 使用 Next 的 Route Handler 进行接口中转，就是用 Next 写个接口来调用第三方的 SSE 接口，服务与服务之间是不存在跨域问题的，单独中转 SSE 接口，其它普通接口在跨域解决后可以正常调用。
 
-### 通过 Next 接口做中转
+#### 通过 Next 接口做中转
 
 ```js
 // app/api/proxy.ts
@@ -170,9 +170,9 @@ async function fetchNextAPIData() {
 
 ![image](https://jsonq.top/cdn-static/2025/04/26/202504261325260.gif)
 
-# 前端接收 SSE 数据
+## 前端接收 SSE 数据
 
-## 使用 fetch 请求 POST 方式的 SSE 并解析
+### 使用 fetch 请求 POST 方式的 SSE 并解析
 
 - 使用 `response.body` 先获取原始二进制流 `ReadableStream`
 - 将二进制流解析为文本字符串才能正常使用 `TextDecoderStream`
@@ -219,7 +219,7 @@ while (true) {
 }
 ```
 
-## 使用 fetch-event-source 请求 POST 方式的 SSE
+### 使用 fetch-event-source 请求 POST 方式的 SSE
 
 这个相比原生 fetch 使用更简单，毕竟 `EventSource` 本身就很简单无脑。
 
@@ -243,7 +243,7 @@ fetchEventSource('/api/proxy', {
 });
 ```
 
-# markdown 渲染
+## markdown 渲染
 
 这里其实也不算有踩坑，就是一些第三方包得体积特别大，然后做了部分取舍。
 

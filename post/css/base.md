@@ -3,7 +3,7 @@ title: 重学 CSS 基础
 date: 2022-10-21
 ---
 
-# CSS 认知概括
+## CSS 认知概括
 
 1. **_元素语义化的作用_**
 
@@ -15,7 +15,6 @@ date: 2022-10-21
 2. **_CSS 书写顺序（规范）_**
 
 - 定位（position）和布局（Layout）
-
   - `position`、`top/bottom/left/right`、`z-index`、`float/clear`、`flex（flex-direction、justify-content、align-item ...）`
 
 - 展示（display）和可见（visibility）
@@ -32,15 +31,14 @@ date: 2022-10-21
 
 ![浏览器渲染流程](https://jsonq.top/cdn-static/2025/02/25/1740465675500-gwgy42aw.jpg)
 
-# CSS 基本属性
+## CSS 基本属性
 
-## 文本属性
+### 文本属性
 
 1. **_text-decoration_** 文本添加横线（下划线：`underline`、删除线：`line-through`、上划线：`overline`、去除横线：`none`）
 2. **_text-transform_** 针对英文的大小写转换（首字母大写：`capitalize`、所有字符大写：`uppercase`、所有字符小写：`lowercase`、无影响：`none`）
 3. **_text-indent_** 首行文本缩进两个字符：`2em`
 4. **_text-align（重要）_** 定义**行内内容（例如文字[inline / inline-block]）**相对于它的**块级父元素**对齐
-
    - ` align`、`left`、`right`
    - `justify`：两端对齐，需配合其它 css 使用，只有一行情况下无法实现。
      ```css
@@ -55,7 +53,7 @@ date: 2022-10-21
 
 5. **_word/letter-spacing_** `letter-spacing`、`word-spacing` 分别用于设置字母、单词之间的间距
 
-## 字体属性
+### 字体属性
 
 1. **_font-size_** `px em`，其中，em 是对父元素字体的继承,`1em=父元素的font-size`
 2. **_font-family_** 设置文字的字体名称。浏览器会选择列表中第一个该计算机上有安装的字体。或者是通过 `@font-face` 指定的可以直接下载的字体
@@ -68,14 +66,13 @@ date: 2022-10-21
    - /line-height 可以省略，如果不省略，必须跟在 font-size 后面
    - font-size、font-family 不可以调换顺序，不可以省略
 
-## CSS 常见选择器
+### CSS 常见选择器
 
 1. **_通用选择器（universal selector）_**：\*
 2. **_元素选择器（type selectors）_**：`p span a`
 3. **_id 选择器（id selectors）_**：`#my-id`
 4. **_类选择器（class selectors）_**：`.my-class`
 5. **_属性选择器（attribute selectors）_**
-
    - 拥有某一个属性 `[att]`
    - 属性等于某个值 `[att=val]`
 
@@ -139,7 +136,6 @@ date: 2022-10-21
    ```
 
 9. **_伪类_**
-
    1. 动态伪类：
       - `a`：正常编写顺序为：`:link、:visited、:hover、:active`
         - `a:link` 未访问的链接
@@ -159,7 +155,6 @@ date: 2022-10-21
    6. 否定伪类：`:not()`
 
 10. **_伪元素_**：为了区分伪元素和伪类，**建议伪元素使用 2 个冒号**，比如`::first-line`。默认为行内元素
-
     1. `:first-line`、`::first-line`
 
     2. `:first-letter`、`::first-letter`
@@ -195,11 +190,11 @@ date: 2022-10-21
     }
     ```
 
-# CSS 特性
+## CSS 特性
 
 属性继承、层叠、元素类型。
 
-## 继承
+### 继承
 
 常见继承属性： `color`、`cursor`、`font-family`、`font-size`、`font-style`、`font-variant`、`font-weight`、`font` `letter-spacing`、`line-height`、`list-style`、`text-align`、`text-indent`、`text-shadow`、 `visibility`、`white-space`、`word-space`、`word-break`、`word-spacing`、`word-wrap`
 
@@ -224,7 +219,7 @@ date: 2022-10-21
 
 如下图所示
 
-## 层叠
+### 层叠
 
 权重越大，样式优先级更高同权重下，同样式下，后设置优先级更高
 
@@ -235,7 +230,7 @@ date: 2022-10-21
 - 元素选择器(`"p"`)、伪元素(`"::before"`)：1
 - 通配符(`"*"`)：0
 
-## 元素的类型
+### 元素的类型
 
 块级元素、行内元素、行内块元素可以通过 display 设置元素的类型
 
@@ -253,10 +248,9 @@ date: 2022-10-21
   - img、video 属于 **行内替换元素**，可以设置宽高，但不属于行内块级元素
 - `none`：隐藏元素
 
-## CSS 属性
+### CSS 属性
 
 1. **_HTML 编写注意事项_**
-
    - 块级元素、inline-block 元素
      - 一般情况下，**可以包含其他任何元素**（比如块级元素、行内级元素、inline-block 元素）
      - 特殊情况，p 元素不能包含其他块级元素
@@ -264,7 +258,6 @@ date: 2022-10-21
      - 一般情况下，只能**包含行内级元素**
 
 2. **_元素隐藏方法_**
-
    1. `display: none;`
       - 元素不显示出来, 并且也不占据位置, **不占据任何空间(和不存在一样)**;
    2. `visibility: hidden;`
@@ -276,19 +269,18 @@ date: 2022-10-21
       - 设置整个元素的透明度, 会影响所有的子元素。**会占据元素应该占据的空间**;
 
 3. **_overflow：用于控制内容溢出时的行为_**
-
    - `visible`：溢出的内容照样可见
    - `hidden`：溢出的内容直接裁剪
    - `scroll`：溢出的内容被裁剪，但可以通过滚动机制查看。会一直显示滚动条区域，滚动条区域占用的空间属于 width、height
    - `auto`：自动根据内容是否溢出来决定是否提供滚动机制
 
-# CSS 盒子模型
+## CSS 盒子模型
 
 HTML 中的每一个元素都可以看做是一个盒子，可以具备 4 个属性
 
 ![盒子](https://jsonq.top/cdn-static/2025/02/25/1740465675648-rmmzqf57.jpg)
 
-## 基础属性
+### 基础属性
 
 **width height 宽高**
 
@@ -324,12 +316,12 @@ HTML 中的每一个元素都可以看做是一个盒子，可以具备 4 个属
 <div class="border-class"></div>
 ```
 
-## margin
+### margin
 
 - margin 属性用于设置盒子的**外边距**, 通常用于**元素和元素之间的间距**
 - margin 四个属性缩写：` margin-(top/right/bottom/left)`
 
-### 上下 margin 的传递
+#### 上下 margin 的传递
 
 ![margin-top](https://jsonq.top/cdn-static/2025/02/25/1740465675770-51b3hm0a.jpg)
 
@@ -338,13 +330,13 @@ HTML 中的每一个元素都可以看做是一个盒子，可以具备 4 个属
 - margin-bottom 传递
   - 如果**块级元素的底部线和父元素的底部线重写**，并且**父元素的高度是 auto**，那么这个块级元素的 margin-bottom 值会传递给父元素
 
-#### 解决方法
+##### 解决方法
 
 - 不使用子元素设置 marigin，给**父元素设置 padding-top\padding-bottom**
 - 给**父元素设置 border**
 - **触发父元素的 BFC，使其独立空间，不受其它影响: 设置 overflow 为 auto**
 
-## 上下 margin 的折叠
+### 上下 margin 的折叠
 
 ![margin 的重叠问题](https://jsonq.top/cdn-static/2025/02/25/1740465675867-og4w8p7b.jpg)
 
@@ -360,7 +352,7 @@ HTML 中的每一个元素都可以看做是一个盒子，可以具备 4 个属
 - 父子块级元素之间 margin 的折叠
   - ![父子块级元素之间 margin 的折叠](https://jsonq.top/cdn-static/2025/02/25/1740465675972-t618s95x.jpg)
 
-## 常用属性
+### 常用属性
 
 **border-radius 圆角**
 
@@ -432,7 +424,7 @@ HTML 中的每一个元素都可以看做是一个盒子，可以具备 4 个属
 
 > 盒子模型分为 W3C 标准盒模型和 IE 盒模型。W3C 标准盒模型中设置的宽高，仅仅是对内容设置，而不包括 border、padding。IE 盒模型（IE8 以下浏览器）会默认设置 `box-sizng: border-box;`，设置的宽高包括内容、border、padding。
 
-# background
+## background
 
 **`background-image`**
 

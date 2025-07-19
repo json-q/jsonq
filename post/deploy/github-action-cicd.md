@@ -7,7 +7,7 @@ date: 2024-11-14
 
 使用 Github Action 的原因是，jenkins 占用的服务器资源较多，低配置服务器 jenkins 很容易资源打满。
 
-# 了解 Github Action
+## 了解 Github Action
 
 什么是 GitHub Action？其实也很容易理解，如果你用过 github pages 或者 vercel 的话就不陌生，就是一个 CI/CD 服务。提交代码自动触发部署。那么如何让 github action 连接远程服务器触发部署呢？
 
@@ -19,9 +19,9 @@ date: 2024-11-14
 
 > 其实脚本构建这一步和 Dockerfile 是一样的思路。
 
-# SSH 连接服务器
+## SSH 连接服务器
 
-## GitHub 需要的配置
+### GitHub 需要的配置
 
 使用 ssh 连接 服务器，需要 ssh 私钥，但是私钥不能直接写入配置文件，GitHub 提供了相关功能，可以理解为 `env`。
 
@@ -31,7 +31,7 @@ date: 2024-11-14
 
 > 比如 `new repository secret` 时添加了 key `SSH_PRIVATE_KEY`，那么在 GitHub Action 中访问时，就使用 `${{ secrets.SSH_PRIVATE_KEY }}`。
 
-## 生成 SSH
+### 生成 SSH
 
 ssh 公私钥在 `~/.ssh` 下，可以 cd 到该目录下 `ls` 查看。
 
@@ -43,7 +43,7 @@ ssh 公私钥在 `~/.ssh` 下，可以 cd 到该目录下 `ls` 查看。
 - `cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys`，设置公钥内容为 `authorized_keys` 文件的内容，
 - `cat ~/.ssh/id_rsa` 将私钥内容添加到 GitHub 仓库的 Secret 中。
 
-## 编写 Github Action
+### 编写 Github Action
 
 此处提供一个 nest 服务的 GitHub Action 示例：
 
@@ -113,9 +113,9 @@ jobs:
 
 > 最重要的就是 ` Deploy to server` 这个阶段的脚本。简单来说就是连接远程服务器，进入项目目录，执行安装运行脚本，其实就跟正常开发使用命令差不多了，值得注意的是 `git pull` 阶段增加了错误重试机制，因为国内服务器直接拉取 GitHub 代码失败率较高。
 
-# 服务器配置
+## 服务器配置
 
-## 安装 git node pm2
+### 安装 git node pm2
 
 由于有 node 服务，所以需要 node 和 pm2 来管理，如果项目为 java 或者其它，也是同理配置好环境即可。
 
@@ -158,12 +158,12 @@ jobs:
 
 ![命令示例](https://jsonq.top/cdn-static/2025/02/25/1740465678612-8gk8zqnt.png)
 
-# 提交代码
+## 提交代码
 
 此时提交代码就可以触发 GitHub Action 了。失败的话会有邮箱提示，详细信息可以查看 Action 控制台日志。
 
 ![cicd 成功示例](https://jsonq.top/cdn-static/2025/02/25/1740465678809-g33pqm6k.png)
 
-## SSL 证书
+### SSL 证书
 
 证书相关请查看 [免费无限续期 SSL 证书](/post/deploy/ssl-cert)

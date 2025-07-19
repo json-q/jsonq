@@ -3,7 +3,7 @@ title: Docker 学习
 date: 2024-11-02
 ---
 
-# 服务器安装 Docker
+## 服务器安装 Docker
 
 参考地址: https://docs.docker.com/engine/install/centos/
 
@@ -41,7 +41,7 @@ sudo yum install docker-ce docker-ce-cli containerd.io docker-buildx-plugin dock
 
 > 输入两次 y 确认即可等待安装成功
 
-# Docker 启动配置
+## Docker 启动配置
 
 1. 启动 docker
 
@@ -95,7 +95,7 @@ sudo systemctl daemon-reload
 sudo systemctl restart docker
 ```
 
-# 镜像操作（下载镜像）
+## 镜像操作（下载镜像）
 
 - `docker search <name>` : 搜索（docker hub）镜像
 - `docker pull <name>` : 拉取（docker hub）镜像
@@ -119,7 +119,7 @@ docker pull hub.uuuadc.top/library/mysql:5.7
 
 > 说明：library 是一个特殊的命名空间，它代表的是官方镜像。如果是某个用户的镜像就把 library 替换为镜像的用户名。
 
-# 容器操作命令（启动容器）
+## 容器操作命令（启动容器）
 
 - docker run : 运行镜像
 - docker ps : 查看运行中的容器
@@ -139,7 +139,7 @@ docker pull hub.uuuadc.top/library/mysql:5.7
 
 > 操作容器的那几个命令，都是以 `<容器 id | 容器名称>` 运行的，比如 `docker stop 896`（根据容器 id 停止容器） 或者 `docker stop quizzical_hertz`（根据容器运行名称停止容器）
 
-## docker run 启动容器
+### docker run 启动容器
 
 > 仅了解，正式启动容器需查看 [docker-run 详细使用](#docker-run-详细使用)
 
@@ -151,11 +151,11 @@ docker pull hub.uuuadc.top/library/mysql:5.7
 - 容器 id 可只写 3 位，只要能和其它容器 id 区分即可。
 - 默认不指定容器名称情况下，会随机生成
 
-## 删除容器
+### 删除容器
 
 `docker rm <容器id | 容器名称>`，执行该命令时，该容器必须是停止状态。如果想要强制删除容器，可以使用 `docker rm -f <容器id | 容器名称>`。
 
-## docker run 详细使用
+### docker run 详细使用
 
 启动容器时，目前有两种方式：
 
@@ -167,14 +167,14 @@ docker pull hub.uuuadc.top/library/mysql:5.7
 
 > 以上简单命令，无法满足正常的容器管理
 
-### 后台启动
+#### 后台启动
 
 例如 `docker run -d --name mynginx nginx`
 
 - `-d` 后台运行
 - `--name` 指定容器名称，不指定则系统随机分配一个名称
 
-### 容器外部访问
+#### 容器外部访问
 
 以 nginx 为例，当使用 `docker run` 启动 nginx 后，通过 80 端口依然无法在外网访问。
 
@@ -186,13 +186,13 @@ docker pull hub.uuuadc.top/library/mysql:5.7
 
 > **想要主机能够访问到容器，一定要为容器暴漏端口**。（容器端口可以重复，主机端口不能重复，因为每一个容器都可以当作一个虚拟机，容器之间互相隔离，所以端口可以相同，因为互不影响）
 
-## 进入容器
+### 进入容器
 
 以 nginx 为例，`docker exec -it <容器id | 容器名称> bash` 即可进入 nginx 容器
 
 进入之后，`ls /` 查看可知，容器内容就是一个小型的 linux 环境，就可以像正常操作 linux 一样操作容器了。退出容器时，使用 `exit` 即可。
 
-## 保存容器（加载容器）
+### 保存容器（加载容器）
 
 - docker commit : 提交镜像，将当前修改后的镜像提交
 - docker save : 将镜像保存为 tar 文件
@@ -214,7 +214,7 @@ docker pull hub.uuuadc.top/library/mysql:5.7
 
 这一步和 `docker pull` 下载镜像差不多，区别就是从社区下载和本地加载。
 
-# 镜像存储（目录挂载）
+## 镜像存储（目录挂载）
 
 每次删除镜像再运行镜像，都会重新下载镜像，可以把镜像某些数据保存下来，方便下次使用。
 
@@ -229,7 +229,7 @@ docker pull hub.uuuadc.top/library/mysql:5.7
 docker run -d -p 80:80 -v /data/nginx/html:/usr/share/nginx/html --name mynginx nginx
 ```
 
-# 卷映射
+## 卷映射
 
 卷映射和目录映射类似，但是卷映射是 docker 内部创建的，而目录映射是主机创建的。
 

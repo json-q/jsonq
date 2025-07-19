@@ -7,7 +7,7 @@ date: 2024-03-21
 
 > `ProComponent` 相较于 `Antd` 来说，使用曲线更为陡峭，且本文不介绍基础用法，仅结合业务来实现功能。
 
-# 权限
+## 权限
 
 由于此项目的权限精度并没那么高，后台采用 `ACL` 权限控制而不是 `RBAC`，仅根据角色来判断权限，因此可能无法适配所有业务场景，但是可以参考思路。
 
@@ -16,7 +16,7 @@ date: 2024-03-21
 - **权限组件**是基于 **hook** 进行的封装，内容极其简单。
 - hooks 的封装通常用于页面内部，**权限组件**无法满足场景需要。即：需要使用权限参与业务逻辑的场景
 
-## 权限 hook
+### 权限 hook
 
 项目内使用的是 zustand 作为数据管理，`redux`、`@redux/toolkit` 也是同理
 
@@ -84,7 +84,7 @@ function Page(){
 }
 ```
 
-## 权限组件
+### 权限组件
 
 权限组件的功能很简单，被该组件包裹的内容，有权限渲染，无权限则不渲染，和 `@umijs/max` 中提供的 `Access` 组件是一样的效果。当明白 `useAccess` 后，实现该功能很简单
 
@@ -116,9 +116,9 @@ function Page() {
 }
 ```
 
-# ProComponent 业务封装
+## ProComponent 业务封装
 
-## ProFormUploadDragger 组件封装
+### ProFormUploadDragger 组件封装
 
 需求背景：
 
@@ -132,7 +132,7 @@ function Page() {
 
 ![image](https://jsonq.top/cdn-static/2025/02/25/1740476578202-6g6awrqd.png)
 
-### 上传封装
+#### 上传封装
 
 封装后的功能：
 
@@ -237,7 +237,7 @@ const ProFormUploadDraggerToken: React.FC<ProFormUploadDraggerTokenProps> = (pro
 export default ProFormUploadDraggerToken;
 ```
 
-### 上传的工具函数
+#### 上传的工具函数
 
 - 新建使用时，直接拿该组件使用即可
 - 提交时，需要对 `antd` 的源数据类型进行转换（后端约定要求传递文件 id，多个 id 逗号分隔）
@@ -302,7 +302,7 @@ export const getFileListByFileData = (fileData: FileData[] = []): UploadFile[] =
 />
 ```
 
-# 流文件下载
+## 流文件下载
 
 前端给后端传递文件 id，后端返回文件流
 

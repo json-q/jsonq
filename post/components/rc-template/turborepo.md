@@ -7,7 +7,7 @@ date: 2024-11-14 15:32
 
 [`turborepo`](https://turbo.build/repo/docs) 就是专门做构建用的，对于 `monorepo` 项目来说更适合，构建缓存等可以大大优化开发体验。如果只是基本使用，甚至可以把它当作一个大号的 [`npm-run-all2`](https://www.npmjs.com/package/npm-run-all2)，基本功能会用就行，这里不过多介绍相关细节知识，大家自行探索。
 
-# 初始集成 turborepo
+## 初始集成 turborepo
 
 ```bash
 pnpm i turbo -D -w

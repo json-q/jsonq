@@ -3,9 +3,9 @@ title: TS 语法扩展
 date: 2024-05-03
 ---
 
-# TS 模块化
+## TS 模块化
 
-## TS 模块化使用
+### TS 模块化使用
 
 TypeScript 中最主要使用的模块化方案就是 ES Module，即 `import/export`
 
@@ -40,7 +40,7 @@ namespace API {
 const data: API.TableData = fetch('...');
 ```
 
-## 内置类型声明
+### 内置类型声明
 
 **类型的查找**
 
@@ -127,7 +127,7 @@ moudle.exports = {
 }
 ```
 
-### 外部定义声明
+#### 外部定义声明
 
 **第三方库**
 
@@ -209,7 +209,7 @@ $.ajax({
 })
 ```
 
-## tsconfig.json
+### tsconfig.json
 
 可以查看文档对于每个选项的解释：https://www.typescriptlang.org/zh/tsconfig
 

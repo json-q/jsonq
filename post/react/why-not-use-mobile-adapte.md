@@ -3,14 +3,14 @@ title: React 移动端适配的看法及技术选型
 date: 2024-04-10
 ---
 
-# 移动端适配的看法
+## 移动端适配的看法
 
 看了很多关于移动端适配的方案，是否选择移动端适配，有以下几个观点：
 
 - 该应用只可以在移动端使用，比如 app，
 - 如果是 h5 页面，且可以电脑访问的，**尽量放弃移动端适配方案**，不适合
 
-## 为什么放弃移动端适配
+### 为什么放弃移动端适配
 
 首先需要明白，什么是移动端适配。为了兼顾不同机型，在不同的比例下访问时，呈现的布局是一致的，网上大部分是 `rem + flexable` 或者 `viewport`，你问他们为什么，其实他们也说不出来，只是前人（比如淘宝团队）就是这么做的。
 
@@ -24,15 +24,15 @@ date: 2024-04-10
 
 该项目来源于 `alitajs`，由 umi 团队人员，基于 `umijs` 实现的移动端开箱即用的框架，内置了移动端适配（rem 方案）。整体架构风格和 `@umijs/max` 差不多。左侧是以电脑访问的，三个 `ListItem` 就占满了整个电脑屏幕，而在移动端则是很正常的显示，对比非常明显，电脑端体验极差！！！这也是为什么最终不采用移动端适配的原因。
 
-## 何时采用移动端适配，不适配时如何保证布局的自适应
+### 何时采用移动端适配，不适配时如何保证布局的自适应
 
 对我来说，除非该应用只在移动端能够访问，否则就尽量不采用适配方案。(电脑的类似大屏项目也是同理) 在不做移动端适配时，又要保证布局不会乱掉。在开发过程中，尽量使用 `flex` 布局，让布局跟随浏览器自动分布，不写死尺寸，这样就能保证 h5 和 PC 的视觉效果是一致的。
 
 也可以在限制 PC 端的显示宽度，相当于虽然 PC 访问，但还是手机的布局效果。
 
-# 项目技术总结
+## 项目技术总结
 
-## 技术选型
+### 技术选型
 
 公司以 react 技术栈为主，所以就正常选用 react 来开发。
 
@@ -51,11 +51,11 @@ date: 2024-04-10
 
 其他像 `eslint` `prettier` 这些耳熟能详的代码规范约束就不多介绍了，网上大把教程。
 
-## Vite 约定式路由
+### Vite 约定式路由
 
 Vite 生态中已有相关的库，就不自己手写了，文档清晰明了，用法很简单。[vite-plugin-pages](https://github.com/hannoeru/vite-plugin-pages)
 
-### 约定式路由规则
+#### 约定式路由规则
 
 1. 文件 `index` 不会显式声明为 `/index` 路由，而是根路由 `/`
 2. `[...all].(jsx|tsx)` 为 404 页面
@@ -65,7 +65,7 @@ Vite 生态中已有相关的库，就不自己手写了，文档清晰明了，
 
 `src/pages/users/center/index.jsx` ==> `/users/center` `src/pages/users/[id].jsx` ==> `/users/:id` `src/pages/[user]/settings.jsx` -> `/:user/settings` 当 `/my/:id` 和 `/my/center` 同时存在时，优先匹配 `/my/center`，匹配不到的会走入 `/my/:id`
 
-### vite.config.js
+#### vite.config.js
 
 可以在 `vite.config.js` 中对该库进行配置，此处仅做简单配置，更多配置可参考 [github 地址]()
 
@@ -79,7 +79,7 @@ Vite 生态中已有相关的库，就不自己手写了，文档清晰明了，
     ],
 ```
 
-### 使用
+#### 使用
 
 ```js
 import { Suspense, useReducer } from 'react';
@@ -94,7 +94,7 @@ function App() {
 export default App;
 ```
 
-### Vite 生态其他约定式路由库
+#### Vite 生态其他约定式路由库
 
 可尝试使用 `vite-plugin-react-pages`，[github 地址](https://github.com/vitejs/vite-plugin-react-pages) 该库由 `vitejs` 官方维护，支持 react 和 mdx，但是更偏向 SSR。
 
@@ -102,7 +102,7 @@ export default App;
 
 [generouted](https://github.com/oedotme/generouted)。该库也有相当高的 start，功能和 `vite-plugin-react-pages` 差不多，且最近一直在更新维护。
 
-## 错误边界
+### 错误边界
 
 页面中的异常错误会导致整个页面白屏，体验相当不好，且若复现不出也无法排查，而 react 提供了错误边界，以便能够捕获错误，知道错误的内容。
 
@@ -160,7 +160,7 @@ export default ErrorBoundary;
 
 ![image](https://jsonq.top/cdn-static/2025/02/25/1740465693411-wowqa6t9.png)
 
-## 签字组件封装
+### 签字组件封装
 
 基于 `signature_pad` 库，集成了常用的签字版功能，且该库不依赖任何框架，可以在 `react` `vue` 等诸多前端框架中使用。更多配置参考 [github 地址](https://github.com/szimek/signature_pad)
 
@@ -343,7 +343,7 @@ export default SIG;
 
 ![image](https://jsonq.top/cdn-static/2025/02/25/1740465693528-5fp7szxt.png)
 
-## 移动端 select 实现
+### 移动端 select 实现
 
 这里必须多 bb 两句，select 搜索框在移动端真的很反人类，常用于 web 端，但是功能又很好用，没有好的替代，只能做一个需求实现，支持单选和多选。由于以一个常规需求去写，额外拓展了很多内容，代码较多。
 
@@ -617,11 +617,11 @@ export default memo(SelectPicker);
 
 ![image](https://jsonq.top/cdn-static/2025/02/25/1740465693702-0iosezxr.png)
 
-## 简易 redux
+### 简易 redux
 
 小型项目，没有大量的数据缓存的情况下，可以直接使用 `useReducer` 和 `useContext` 实现一个全局的状态管理
 
-### context 核心内容
+#### context 核心内容
 
 ```js
 import { merge } from 'lodash-es';
@@ -659,7 +659,7 @@ export function appReducer(preState, action) {
 }
 ```
 
-### 结合 useReducer 使用 Context.Provider
+#### 结合 useReducer 使用 Context.Provider
 
 ```js
 import { Suspense, useReducer } from 'react';
@@ -684,7 +684,7 @@ function App() {
 export default App;
 ```
 
-### 使用
+#### 使用
 
 组件或者页面内是使用
 
@@ -703,6 +703,6 @@ export default function Index() {
     });
   };
 
-  return <>{JSON.stringfy(store)}</>;
+  return <>{JSON.stringify(store)}</>;
 }
 ```

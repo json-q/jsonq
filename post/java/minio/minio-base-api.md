@@ -3,8 +3,6 @@ title: MinIO 常用 API 快速入门
 date: 2024-04-25
 ---
 
-# 快速入门
-
 - [minio 中文网](https://www.minio.org.cn/)
 - [minio 官网](https://min.io/)
 

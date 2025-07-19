@@ -8,7 +8,7 @@ date: 2023-07-13
 - 此前并未接触过 linux，仅仅需要才使用，因此对部分理解不一定非常准确，望谅解。
 - 此文章中涉及到的安装包已提供**百度网盘链接**：https://pan.baidu.com/s/196D7sk4HFTC61yWY8ZNwJQ?pwd=ngnl
 
-# 工具选择
+## 工具选择
 
 选择合适的工具进行远程连接，如 Xshell、Xftp、putty、Terminus 等
 
@@ -26,9 +26,9 @@ cat /proc/version  # 查看系统版本
 
 > 首次进入的当前路径都是 /root，可以使用命令： pwd 查看当前所在路径所有的资源文件都在 / 路径下
 
-# JAVA 环境搭建安装
+## JAVA 环境搭建安装
 
-## 下载 JDK
+### 下载 JDK
 
 进入 JDK 官网，下载与**开发所需的系统版本对应的压缩包类型**：https://www.oracle.com/java/technologies/downloads/#java17
 
@@ -39,7 +39,7 @@ cat /proc/version  # 查看系统版本
 
 > 选择 `x64` 版本就是为了和 linux 的系统版本对应
 
-## 检查残留 JDK
+### 检查残留 JDK
 
 查看有关 java 的相关文件
 
@@ -59,7 +59,7 @@ rpm -qa | grep java |xargs rpm -e --nodeps
 java -version
 ```
 
-## 上传 JDK
+### 上传 JDK
 
 新建一个专门用来存放上传文件的文件夹。_当前处于 `/` 路径下_
 
@@ -79,7 +79,7 @@ scp test root@10.xx.xx.xxx:/data/software
 
 > 如果服务器系统进行了重装，再次连接需清除本地的关于远程服务器的缓存和公钥信息，执行命令：`ssh-keygen -R 10.xx.xx.xxx`
 
-## 安装 JDK
+### 安装 JDK
 
 进入上传 jdk 的文件夹并解压，最后对解压出来的文件夹重命名
 
@@ -92,7 +92,7 @@ mv jdk-17.0.8 jdk17  # 重命名为 jdk17
 
 > 默认解压到当前文件夹下，若需要指定解压路径，则可以输入 `tar -zxvf jdk-xxx -C /xxx/xxx/`
 
-### 配置环境变量
+#### 配置环境变量
 
 编辑 profile 文件。`/etc/profile` 的 profile 文件内部相当于 windows 的环境变量  
 也可以使用 Xftp 直接找到该文件进行编辑修改
@@ -122,7 +122,7 @@ java -version # 查看 jdk 环境是否安装成功
 
 ![jdk 版本](https://jsonq.top/cdn-static/2025/02/25/1740465679172-lnz0wsr4.jpg)
 
-### vi 编辑内容使用方式
+#### vi 编辑内容使用方式
 
 - 按 `insert` 键进入编辑模式，通过箭头移动编辑位置，在内容最后添加配置
 - 写完后,点击 `esc` 按钮退出编辑模式,用命令 `:wq!` 保存退出
@@ -131,11 +131,11 @@ java -version # 查看 jdk 环境是否安装成功
 - `:wq` ：保存修改后退出编辑器
 - `:e!` ：撤销修改
 
-# Mysql 环境搭建安装
+## Mysql 环境搭建安装
 
-## 删除残留 Mysql 和 Mariadb
+### 删除残留 Mysql 和 Mariadb
 
-### 删除残留 Mysql
+#### 删除残留 Mysql
 
 - 删除数据库残留文件
 
@@ -159,7 +159,7 @@ rm -rf /var/lib/mysql  # 依次将查找的文件删除
 
 ![image](https://jsonq.top/cdn-static/2025/02/25/1740465679365-mcggwd3c.jpg)
 
-### 删除自带的 Mariadb
+#### 删除自带的 Mariadb
 
 Centos7 默认安装的是 Mariadb 数据库，Mariadb 保留了和 MySQL 一模一样的配置，所以安装 MySQL 时可能会和 Mariadb 产生冲突，此时就要卸载自带的 Mariadb
 
@@ -177,7 +177,7 @@ find /etc -name "my.cnf"
 rm -rf /etc/my.cnf  # 若有路径输出，则执行删除命令
 ```
 
-## 下载上传 Mysql
+### 下载上传 Mysql
 
 进入 Mysql 下载网址：https://dev.mysql.com/downloads/mysql/
 
@@ -195,9 +195,9 @@ tar xvJf mysql-8.0.34-linux-glibc2.12-x86_64.tar.xz  # xvJf 属于以上两命�
 mv mysql-8.0.34-linux-glibc2.12-x86_64 mysql  # 重命名为 mysql
 ```
 
-## 配置 Mysql 环境
+### 配置 Mysql 环境
 
-### 初始化数据库
+#### 初始化数据库
 
 ```bash
 useradd mysql  # 添加 mysql 用户
@@ -220,7 +220,7 @@ cd bin  # 进入 mysql 文件 的 bin 目录下
 
 > **一定要保存 mysql 的临时登录密码** 系统所缺失的文件大部分都可以从该网站上搜索下载对应的 rpm 文件：https://pkgs.org
 
-## 启动数据库服务
+### 启动数据库服务
 
 ```bash
 ./mysqld_safe&  # 启动临时服务 进入 mysql bin 目录下执行
@@ -236,7 +236,7 @@ show databases;  # 执行 sql 正常会报错，需要修改 Mysql 密码
 
 > 此方式启动的 Mysql 服务为**临时服务**，回车就会结束该进程，所以在未进入 Mysql 时不能 `ctrl+c` 或者 `enter`
 
-### 修改 Mysql 初始密码
+#### 修改 Mysql 初始密码
 
 执行 `show databases;` 时出现如下错误，意思是必须先修改 mysql 密码
 
@@ -249,7 +249,7 @@ alter user 'root'@'localhost'  identified by 'Root123..';
 # 执行 quit 或者 exit 退出 mysql，重新进入输入的密码就是修改后的密码
 ```
 
-### 添加环境配置
+#### 添加环境配置
 
 <span style={{color:"red"}}>在配置环境变量之前，使用 `systemctl status mysqld` 之类的命令，系统是无法识别到的</span>
 
@@ -290,7 +290,7 @@ source /etc/profile
 
 ![配置 Mysql 环境变量](https://jsonq.top/cdn-static/2025/02/25/1740465680160-r397s6h4.jpg)
 
-### 设置 Mysql 服务
+#### 设置 Mysql 服务
 
 - 设置 Mysql 服务运行文件
 
@@ -338,7 +338,7 @@ ln -s /data/software/mysql/bin/mysql /usr/bin
 
 > 将 Mysql 的服务文件地址映射到 `/usr/bin` 的原因是：之前从 Mysql 拷贝到 `/etc/init.d/mysqld` 的服务进程文件默认读取的是 `/usr/bin/mysql` 的路径
 
-## 连接远程数据库
+### 连接远程数据库
 
 **开放项目运行所需端口，常见 80、Mysql：3306、后端程序运行端口等，并重启防火墙**
 
@@ -377,7 +377,7 @@ flush privileges;                           # 刷新
 alter user 'root'@'%' identified with mysql_native_password by 'xxx';
 ```
 
-# Nginx 环境搭建安装
+## Nginx 环境搭建安装
 
 **检查是否有 Nginx**
 
@@ -386,11 +386,11 @@ whereis nginx
 rm -rf ngin-xxxx  # 若有文件输出，则执行删除命令
 ```
 
-## 下载 Nginx 及依赖
+### 下载 Nginx 及依赖
 
-### 安装 Nginx 所需依赖
+#### 安装 Nginx 所需依赖
 
-#### 安装 gcc 和 gcc-c++
+##### 安装 gcc 和 gcc-c++
 
 下载如下依赖并上传服务器：下载地址（阿里云镜像）：http://mirrors.aliyun.com/centos/7/os/x86_64/Packages/
 
@@ -428,7 +428,7 @@ rpm -Uvh *.rpm --nodeps --force
 gcc -v
 ```
 
-#### 安装 pcre
+##### 安装 pcre
 
 下载地址：http://www.pcre.org/
 
@@ -443,12 +443,12 @@ cd pcre2-10.42  # 进入文件夹
 make && make install
 ```
 
-#### 下载安装 zlib
+##### 下载安装 zlib
 
 - 下载 zlib：http://www.zlib.net/
 - 上传解压安装包（操作和 安装 pcre 步骤一致）
 
-## 下载 Nginx
+### 下载 Nginx
 
 去 [Nginx 官网](http://nginx.org/en/download.html) 下载对应的版本
 
@@ -462,7 +462,7 @@ tar -zxvf nginx-1.24.0.tar.gz  # 解压
 mv nginx-1.24.0 nginx  # 重命名
 ```
 
-## 安装 Nginx
+### 安装 Nginx
 
 配置 nginx
 
@@ -487,7 +487,7 @@ cd ./sbin  #进入sbin文件
 
 **至此，linux 的基本环境搭建已全部完成**
 
-# 开启 https，安装 openssl 等相关依赖
+## 开启 https，安装 openssl 等相关依赖
 
 <strong style={{color:"red"}}>以下内容仅作为临时参考，无实际应用，更详细的 openssl 安装与配置，需查看该文章：[Nginx 离线配置 ssl 证书](/post/deploy/nignx-use-https)</strong>
 
@@ -511,11 +511,11 @@ ln -s /usr/local/lib64/libssl.so.1.1 /usr/lib64/libssl.so.1.1
 ln -s /usr/local/lib64/libcrypto.so.1.1 /usr/lib64/libcrypto.so.1.1
 ```
 
-# 前后端分离部署
+## 前后端分离部署
 
 在 data 文件夹下新建 project 文件，用来分别存放前后端的项目文件
 
-## 后端部署
+### 后端部署
 
 将打包的 jar 包上传至 `/data/project/server` 目录下
 
@@ -531,7 +531,7 @@ nohup java -jar xxx.jar >logs.log &  # 指定输出文件为 logs.log，不指�
 > 用 nohub 命令启动 jar 包，是在后台不挂断运行，关闭终端窗口或者 `CTRL + C` 命令也不会终止程序。  
 > 当用 nohub 命令启动 jar 包的时候，如果不指定日志输出文件，则所有的输出都会被重定向到当前目录的 `nohub.out` 文件中。
 
-### 重新部署
+#### 重新部署
 
 新旧 jar 包替换重新部署
 
@@ -546,11 +546,11 @@ kill -9 # 终止所在的进程 例如：kill -9 21097
 nohup java -jar xxx.jar >logs.log &
 ```
 
-## 前端部署
+### 前端部署
 
 同样打包上传至 `/data/project` 文件夹下，不需要做任何操作
 
-### 配置 Nginx 代理
+#### 配置 Nginx 代理
 
 Nginx 的配置文件一般在 `/usr/local/nginx/conf/nginx.conf`
 
@@ -585,9 +585,9 @@ cd /usr/local/nginx/sbin/
 ./nginx -s reload
 ```
 
-# 后端项目问题
+## 后端项目问题
 
-## 字体缺失
+### 字体缺失
 
 项目内部代码使用验证码时，linux 上没有对应的字体，会出现以下错误：
 
