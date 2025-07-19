@@ -5,7 +5,7 @@ date: 2024-02-26
 
 对以 Taro 框架开发的项目进行部分总结。
 
-# 快速上手
+## 快速上手
 
 快速搭建 Taro 项目
 
@@ -31,7 +31,7 @@ npm run build:h5 # h5 打包执行命令
 
 > 更多初始化细节参考 [taro 官网](https://taro-docs.jd.com/docs/GETTING-STARTED)
 
-## 使用路径别名
+### 使用路径别名
 
 ```js
 // config/index.ts
@@ -45,7 +45,7 @@ const baseConfig: UserConfigExport = {
 };
 ```
 
-## 区分生产和开发环境
+### 区分生产和开发环境
 
 生产和开发时调用的地址通常是不一样的，打包时直接自动替换，而非手动修改，也可尝试使用 .env 文件来做区分
 
@@ -61,7 +61,7 @@ const BASE_API = ENV_API[process.env.NODE_ENV];
 export default BASE_API;
 ```
 
-## Taro 项目版本更新
+### Taro 项目版本更新
 
 更新 Taro 项目所在的依赖
 
@@ -85,7 +85,7 @@ $ taro update project
 $ taro update project [版本号]
 ```
 
-## h5 跨域和区分生产环境进行项目打包
+### h5 跨域和区分生产环境进行项目打包
 
 运行和打包时，所有的资源都会被打包到 dist 文件夹下，这使得每次只能打包一个环境的文件。
 
@@ -140,17 +140,17 @@ project.config.json
 }
 ```
 
-# 社区产物
+## 社区产物
 
 taro 的社区确实不太好，由于 taro3 的破坏式更新，导致很多之前的社区库无法适配 taro3 而停止维护，勉强找了几个较为合适的。
 
-## 路由
+### 路由
 
 不管是 uniapp 或者 taro 开发，都离不开路由传参。少量参数可以通过 url 地址拼接，但是大量的复杂数据，想要通过 url 传参是不现实的，因为 url 传参的大小是有限制的，可能会造成数据截断。
 
 分析官方提供的常用路由传参方式。
 
-### url 拼接传参(Taro 版)
+#### url 拼接传参(Taro 版)
 
 传参
 
@@ -178,7 +178,7 @@ useLoad((options) => {
 });
 ```
 
-### eventChannel
+#### eventChannel
 
 适合大量参数传递，仅支持微信小程序。[微信小程序文档](https://developers.weixin.qq.com/miniprogram/dev/api/route/wx.navigateTo.html)
 
@@ -206,7 +206,7 @@ useLoad((option) => {
 });
 ```
 
-### tarojs-router-next
+#### tarojs-router-next
 
 - 自动生成带参数类型提示的路由方法
 - 允许传递任意类型、任意大小的参数数据
@@ -215,17 +215,17 @@ useLoad((option) => {
 
 [官网](https://lblblib.gitee.io/tarojs-router-next/)
 
-### 选择
+#### 选择
 
 页面之间传输的数据量大的情况下，如果只开发微信小程序端，可使用 enventChannel。若要兼容 h5 等多端，采用 `tarojs-router-next` 库。
 
-## 组件库
+### 组件库
 
 目前使用下来，`@antmjs/vantui` 是体验最好的 Taro 组件库，具有较为丰富的功能组件，支持 h5 和微信小程序。<span style={{color:"blue"}}>对于有表单的场景，该组件库的提供的表单相关的能力还是很强的，官方和很多社区的组件库表单，都只有排版（有的甚至排版功能都没有），没有校验功能</span>
 
 [文档地址](https://antmjs.github.io/vantui/main/#/home)
 
-### 按需引入组件
+#### 按需引入组件
 
 - 安装 `babel-plugin-import`。
 
@@ -252,7 +252,7 @@ module.exports = {
 };
 ```
 
-### 修改主题
+#### 修改主题
 
 此处可参考官方文档 [定制主题](https://antm-js.gitee.io/vantui/main/#/theme)
 
@@ -286,7 +286,7 @@ export default defineConfig(async (merge) => {
 })
 ```
 
-# 网络请求封装(TS 版本)
+## 网络请求封装(TS 版本)
 
 遵循小程序的网络请求标准，可以直接应用于原生小程序，也可以无缝切换为 uniapp。
 

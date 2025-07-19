@@ -3,9 +3,9 @@ title: 前后端分离宝塔部署
 date: 2023-05-08
 ---
 
-# 安装宝塔
+## 安装宝塔
 
-## 连接远程服务器
+### 连接远程服务器
 
 通过 xshell 等远程连接工具，连接到服务器，执行以下命令：
 
@@ -15,7 +15,7 @@ yum install -y wget && wget -O install.sh https://download.bt.cn/install/install
 
 ![xshell连接成功标识](https://jsonq.top/cdn-static/2025/02/25/1740465676590-n7tvagmx.jpg)
 
-## 安装宝塔
+### 安装宝塔
 
 1. 输入 y ，回车进行安装
 
@@ -31,27 +31,27 @@ yum install -y wget && wget -O install.sh https://download.bt.cn/install/install
 
 ![安装完成图片](https://jsonq.top/cdn-static/2025/02/25/1740465676931-k3n4i7kr.jpg)
 
-## 开放安全组
+### 开放安全组
 
 由 **第三步** 可知，宝塔端口为在 37855，因此我们需要在服务器的安全组放行该端口，这样外网才能访问到该地址。
 
 ![放行宝塔端口](https://jsonq.top/cdn-static/2025/02/25/1740465677061-rmtz9vqy.jpg)
 
-## 访问宝塔
+### 访问宝塔
 
 ![宝塔登录页面](https://jsonq.top/cdn-static/2025/02/25/1740476078938-ywosymfu.jpg)
 
 如果操作无误，可以通过 **第三步** 提供好的地址访问成功，输入账号和密码，登录即可。
 
-## 绑定手机号
+### 绑定手机号
 
 ![绑定手机号](https://jsonq.top/cdn-static/2025/02/25/1740465677160-89pg4d5x.jpg)
 
 若无账号，访问 [宝塔官网](https://www.bt.cn/new/index.html)注册即可。
 
-# 安装运行环境
+## 安装运行环境
 
-## 安装软件
+### 安装软件
 
 左侧菜单找到**软件商店**
 
@@ -59,13 +59,13 @@ yum install -y wget && wget -O install.sh https://download.bt.cn/install/install
 
 ![安装环境](https://jsonq.top/cdn-static/2025/02/25/1740465677248-62dq7h0w.jpg)
 
-## 安装 Tomcat
+### 安装 Tomcat
 
 spring 项目其实不需要安装 tomcat，宝塔在安装 tomcat 的时候会安装 java 环境，所以我们选择安装 tomcat8。
 
 ![tomcat安装](https://jsonq.top/cdn-static/2025/02/25/1740465677335-m7mfqi09.jpg)
 
-# 创建数据库
+## 创建数据库
 
 密码是 root 密码，可对 root 密码进行修改。
 
@@ -75,9 +75,9 @@ spring 项目其实不需要安装 tomcat，宝塔在安装 tomcat 的时候会�
 
 点击右侧的**工具**课查看表结构是否导入成功。
 
-# 前后端接口打包
+## 前后端接口打包
 
-## 后端打包
+### 后端打包
 
 在入口类对应的 pom 文件中加入以下内容
 
@@ -108,27 +108,27 @@ spring 项目其实不需要安装 tomcat，宝塔在安装 tomcat 的时候会�
 
 > 打包之前请将开发环境的配置，切换为服务器配置，比如连接服务器 mysql 的表名、用户名和密码等等。
 
-## 前端打包
+### 前端打包
 
 ```bash
 npm run build
 ```
 
-# 上传前后端内容到服务器
+## 上传前后端内容到服务器
 
-## 创建项目文件夹
+### 创建项目文件夹
 
 创建文件夹，用于存放前后端项目文件
 
 ![创建文件夹](https://jsonq.top/cdn-static/2025/02/25/1740465677672-sc2ows7p.jpg)
 
-## 上传项目文件
+### 上传项目文件
 
 进入 blog 文件夹，将后端的 jar 包和前端打包好的文件上传到此目录下
 
 ![上传前后端文件](https://jsonq.top/cdn-static/2025/02/25/1740465677815-ns5qz5p5.jpg)
 
-# 开放运行环境安全组和防火墙端口
+## 开放运行环境安全组和防火墙端口
 
 在访问宝塔时，开放了宝塔的端口，java 项目运行所需的端口，例如 MySQL（3306）、Redis（6379）、以及后端运行端口等等。
 
@@ -136,9 +136,9 @@ npm run build
 
 ![防火墙端口](https://jsonq.top/cdn-static/2025/02/25/1740476079160-wgfgeua8.jpg)
 
-# 启动后端服务
+## 启动后端服务
 
-## 查看与终止进程
+### 查看与终止进程
 
 点击左侧菜单**终端**，进入 blog 文件夹，查看当前已运行的 java 进程。
 
@@ -155,7 +155,7 @@ ps -ef | grep java # 查看 java 中运行的进程PID
 kill -9 # 终止所在的进程 例如：kill -9 21097
 ```
 
-## 运行 Java 项目
+### 运行 Java 项目
 
 ```bash
 nohup java -jar blog-api.jar > logs.log 2>&1 &
@@ -171,9 +171,9 @@ nohup java -jar blog-api.jar > logs.log 2>&1 &
 
 _或者先通过`java -jar blog-api.jar`直接运行查看是否有启动问题_
 
-# 配置 Nginx
+## 配置 Nginx
 
-## 查看 Nginx 配置
+### 查看 Nginx 配置
 
 先在终端输入以下命令
 
@@ -185,7 +185,7 @@ cat /www/server/nginx/conf/nginx.conf
 
 我们不直接写入 nginx.conf，而通过查看得知：nginx 还会读取 `/www/server/panel/vhost/nginx/*.conf`的配置，所以我们把此次的 nginx 配置写入该文件夹内部
 
-## 新建 nignx 配置文件
+### 新建 nignx 配置文件
 
 由 **第一步** 得出结论，找到所在文件夹，内部新建 blog.conf 文件，并写入以下内容。
 
@@ -208,16 +208,16 @@ server {
 }
 ```
 
-## 重启 Nginx
+### 重启 Nginx
 
 ```bash
 cd /www/server/nginx/sbin/
 ./nginx -s reload
 ```
 
-# 补充
+## 补充
 
-## 连接远程数据库
+### 连接远程数据库
 
 若想要在本地使用 Navicat 等工具去连接远程服务器，经历以上步骤之后，是无法连接成功的，会显示`1045 access denied for user root...`。解决方法：
 
@@ -278,12 +278,12 @@ select user,host from user;
 grant all privileges on *.* to 'root'@'%';
 ```
 
-## 更改部署
+### 更改部署
 
-### 后端项目更改
+#### 后端项目更改
 
 根据[启动后端服务](#启动后端服务)的步骤终止将要替换的 java 项目，将原本的 jar 包 删除，替换为新的 jar 包，并重新运行。
 
-### 前端项目更改
+#### 前端项目更改
 
 替换掉前端文件夹所有内容，重启 nginx。

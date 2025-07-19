@@ -3,15 +3,15 @@ title: html 搭建 vue 项目
 date: 2024-06-22
 ---
 
-# 前言
+## 前言
 
 奇怪的知识又增加了 `(⊙_⊙)`。
 
 使用原生 html 写 vue 项目。**注意：是项目，而不是页面**，此方式是不推荐的，毕竟有脚手架，但在一些及其特殊场景下，可能会需要类似的方式，因此作为一个记录。
 
-> 这种方式唯一的优点就是写完可以直接扔服务器上了－\_－
+> 这种方式唯一的优点就是写完可以直接扔服务器上了
 
-# 对 html 写 vue 的认知
+## 对 html 写 vue 的认知
 
 很多人对 在 html 中运行 vue 项目这种内容，认知只停留在引入 vue 的 cdn 文件，然后在 html 里一顿写，就觉得 <span style={{color:"blue"}}>html 写 vue 不是很简单嘛</span>，但请注意用词，是**项目**，而不是**页面**，你能写一个 `.vue` 页面引入让 html 去运行吗？显然不可以，而此文章就是说这个的。
 
@@ -19,11 +19,11 @@ date: 2024-06-22
 
 正常想要在原生 html 中直接写 `.vue` 文件是不现实的，因为 html 压根就不认识 .vue 文件，只有脚手架才能识别，那如何才能让 html 识别 `.vue` 文件呢？其实也很简单，核心就是一个包 `vue3-sfc-loader`
 
-# vue3-sfc-loader 使用场景
+## vue3-sfc-loader 使用场景
 
 因为 `vue3-sfc-loader` 可以直接解析 `.vue` 文件，所以可以使用在页面中远程加载 vue 组件的场景中
 
-# 如何获取 vue 等 npm 的离线包
+## 如何获取 vue 等 npm 的离线包
 
 - [jsdelivr](https://www.jsdelivr.com/) <strong style={{color:"red"}}>推荐</strong>
   - 优点：更新及时，所有 npm 包都可查询到
@@ -35,7 +35,7 @@ date: 2024-06-22
   - 优点：与以上两个相比，暂无
   - 缺点：需要知道想要下载的文件名，包括区分 es 和 umd
 
-## 什么是 es 包和 umd 包
+### 什么是 es 包和 umd 包
 
 es 包支持 import 导入的写法，比如这样
 
@@ -58,7 +58,7 @@ es 包支持 import 导入的写法，比如这样
 
 > es 包是需要 `script` 标签添加 `type="module"`，导入方式为`import`。而 umd 包引入之后，会自动挂载到 window 上，导入方式为解构 `const {...} = Vue`
 
-# 让 html 识别 `.vue` 文件
+## 让 html 识别 `.vue` 文件
 
 <strong style={{color:"red"}}>需由一个前提条件，由于下载的都是生产文件，打开 html 页面时需要使用 `Live Server` 插件打开，普通打开方式无法运行</strong>
 
@@ -160,7 +160,7 @@ createApp(loadComponent).mount('#app');
 
 ![image](https://jsonq.top/cdn-static/2025/02/25/1740465694414-rzbqadcg.png)
 
-# 使用第三方组件库
+## 使用第三方组件库
 
 这个需要对组件库有一定的熟悉程度，了解其构成结构，而且需要官方对 es 格式的组件库文件有相当完善的支持。目前测试下来，只有 `antd vue` 对此方式的支持度最完善，可以在 cdnjs 中搜索下载。 `element plus` `arco vue` 这些组件库对 es 的支持度并不是特别好，如果想要使用，只能退而求其次，使用 umd 格式，这种方式就不能 import 导入，而是从 window 上获取使用。
 

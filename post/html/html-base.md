@@ -3,11 +3,11 @@ title: HTML 基础
 date: 2022-10-19
 ---
 
-# html 元素
+## html 元素
 
-## 列表
+### 列表
 
-### 有序列表 ol
+#### 有序列表 ol
 
 - 有序列表，直接子元素只能是 li
 - li（list item）
@@ -33,7 +33,7 @@ date: 2022-10-19
 
 > 浏览器会自动加上序号 1. 2. 3.
 
-### 无序列表 ul
+#### 无序列表 ul
 
 ```html
 <style>
@@ -52,7 +52,7 @@ date: 2022-10-19
 
 > 无序列表默认会自动加上 ·
 
-### 定义列表 dl dt dd
+#### 定义列表 dl dt dd
 
 - dl（definition list）
   - 定义列表，直接子元素只能是 dt、dd
@@ -77,7 +77,7 @@ date: 2022-10-19
 </dl>
 ```
 
-## table
+### table
 
 表格最常见元素:
 
@@ -93,7 +93,7 @@ date: 2022-10-19
 
 `border-collapse: collapse;` 来决定 border 的边框是合并的
 
-### table 语义化标签
+#### table 语义化标签
 
 - thead 表格的表头
 - tbody 表格的主体
@@ -128,7 +128,7 @@ date: 2022-10-19
 </table>
 ```
 
-### 单元格合并
+#### 单元格合并
 
 - 跨列合并: 使用 colspan
   - 在最左边的单元格写上 colspan 属性, 并且省略掉合并的 td;
@@ -152,7 +152,7 @@ date: 2022-10-19
 </table>
 ```
 
-## 表单元素
+### 表单元素
 
 常见表单元素：
 
@@ -163,12 +163,11 @@ date: 2022-10-19
 - button 按钮
 - label 表单元素的标题
 
-### input 元素
+#### input 元素
 
 input 元素有如下常见的属性:
 
 - type：input 的类型
-
   - text：文本输入框（明文输入）
   - password：文本输入框（密文输入）
   - radio：单选框
@@ -189,7 +188,7 @@ input 元素有如下常见的属性:
 
 type 类型的其他取值和 input 的其他属性, [查看 MDN 文档](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/Input)
 
-#### 布尔属性
+##### 布尔属性
 
 - 常见的布尔属性有 disabled、checked、readonly、multiple、autofocus、selected
 - 布尔属性可以没有属性值，写上属性名就代表使用这个属性
@@ -201,7 +200,7 @@ type 类型的其他取值和 input 的其他属性, [查看 MDN 文档](https:/
 <input type="text" readonly="readonly" />
 ```
 
-#### 表单按钮
+##### 表单按钮
 
 - 普通按钮（type=button）：使用 value 属性设置按钮文字
 - 重置按钮（type=reset）：重置它所属 form 的所有表单元素（包括 input、textarea、select）
@@ -226,7 +225,7 @@ label 的 for 和 input 的 id 相同，点击 label 即可聚焦 input
 <label for="password"> 密码： <input id="password" type="password" /> </label>
 ```
 
-#### radio 的使用
+##### radio 的使用
 
 - type 设置为 radio 变成单选框:
 - name 值相同的 radio 才具备单选功能
@@ -237,7 +236,7 @@ label 的 for 和 input 的 id 相同，点击 label 即可聚焦 input
 <label for="female"> <input id="female" type="radio" name="sex" value="female" />女 </label>
 ```
 
-#### checkbox 的使用
+##### checkbox 的使用
 
 - 将 type 类型设置为 checkbox 变成多选框:
 - 属于同一种类型的 checkbox，name 值要保持一致
@@ -248,7 +247,7 @@ label 的 for 和 input 的 id 相同，点击 label 即可聚焦 input
 <label for="jump"> <input id="jump" type="checkbox" name="hobby" value="jump" />跳 </label>
 ```
 
-#### textarea 的使用
+##### textarea 的使用
 
 - textarea 的常用属性:
   - cols：列数
@@ -259,7 +258,7 @@ label 的 for 和 input 的 id 相同，点击 label 即可聚焦 input
   - 垂直缩放：resize: vertical;
   - 水平垂直缩放：resize: both;
 
-#### select 和 option 的使用
+##### select 和 option 的使用
 
 - multiple 多选
 - size 多选时展示的数量，默认全部展示

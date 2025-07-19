@@ -5,7 +5,7 @@ date: 2024-11-15 15:58
 
 点击查看此次 [commit](https://github.com/json-q/rc-library-templete/commit/afa917602d3578d229c8c02614bbf50a47ca24a8)
 
-# 了解流行组件库的 Icon 组件
+## 了解流行组件库的 Icon 组件
 
 > 本篇文章技术来源于 [`semi design`](https://semi.design/zh-CN/)，参考了 `semi design` 的 icon 组件库设计
 
@@ -16,11 +16,11 @@ date: 2024-11-15 15:58
   - 样式让 ui 库处理，能让 icon 的样式与 ui 设计统一
 - 所以我们在搭建 icon 组件库的时候，也采用只生成 icon 的方法
 
-## icon 图标生成 jsx 的思考
+### icon 图标生成 jsx 的思考
 
 svg 图标在 react 中不能直接作为组件使用，而是要将其转换成 jsx，这个过程总不能一个一个手写吧（如果有几十上百个 icon），那太麻烦了，我们可以利用 [`svgr`](https://react-svgr.com/) 去做一个自动化脚本去生成
 
-# 初始化 icon 组件库
+## 初始化 icon 组件库
 
 继续之前的章节，在 `packages` 下新建 `icons` 目录，并执行 `pnpm init` 初始化。
 
@@ -67,7 +67,7 @@ pnpm i rclt-tsconfig --workspace -D
 }
 ```
 
-# 编写 Icon 基础组件
+## 编写 Icon 基础组件
 
 新建 `src/components` 目录
 
@@ -172,11 +172,11 @@ export default IconContext;
 
 好了，这样我们的 Icon 基础组件就编写完成了，所有 icon 图标都会基于这个 Icon 组件去生成对应的 jsx
 
-# svg 转 icon jsx 脚本
+## svg 转 icon jsx 脚本
 
 新建一个 `scripts` 文件目录，并新建 `transSvgToComponent.ts` 文件，注意，这里的脚本直接用 ts 去编写了，运行时会使用 `tsx` 这个包去运行
 
-## 思路
+### 思路
 
 此时我们的目录结构如下
 
@@ -196,7 +196,7 @@ export default IconContext;
   - 将模板内容输出到指定的目录下
 - 所有新建的组件都写入到入口 `index.ts` 中
 
-### 读取 svg 图标
+#### 读取 svg 图标
 
 既然是编写脚本，那就涉及到文件的读写，再安装 `fs-extra`（个人喜欢用这个，也可以用 node 自带的 fs）
 
@@ -244,7 +244,7 @@ pnpm i tsx -D
 
 ![image](https://jsonq.top/cdn-static/2025/02/25/1740465675083-0l7dtpth.png)
 
-### 使用 svgr 转换组件
+#### 使用 svgr 转换组件
 
 可以结合 [svgr 文档](https://react-svgr.com/docs/node-api) 看
 
@@ -343,7 +343,7 @@ transSvgToComponent();
 
 执行 `pnpm gen:icon`，就可以观察到 icons 目录下生成了多个 icon 组件。
 
-### 自定义组件模板
+#### 自定义组件模板
 
 我们生成的组件内容如下：
 
@@ -392,7 +392,7 @@ function getOriginalSvgFileName(componentName: string) {
 pnpm i decamelize -D
 ```
 
-### svgr 使用自定义模板
+#### svgr 使用自定义模板
 
 ```js
 // ...
@@ -415,7 +415,7 @@ const jsxCode = await transform(
 
 可以看到所有的 svg 组件都使用了 Icon 组件的方法来创建，这样就相当于完成了 Icon 的创建，到这一步基本就属于大功告成了。
 
-### 细节上的优化
+#### 细节上的优化
 
 - 由于我们的 svg 为装饰元素（外部用 span 包裹），所以需要不被屏幕阅读器读取，及 svg 上设置 `aria-hidden={true}` 以及其它的一些属性需要关闭，`svgr` 支持直接设置 `svg` 的 props
 - 使用 `svgo` 移除/隐藏/编辑 svg 自带的一些影响渲染结果的元素
@@ -451,7 +451,7 @@ const jsxCode = await transform(
 // ...
 ```
 
-## 统一导出
+### 统一导出
 
 在 `src` 下新建 `index.ts`，导出所有的 SVGIcon 组件，同时导出基础的 Icon 组件，可以让外部的 svg 做集成。
 
@@ -464,12 +464,12 @@ export * from './icons';
 export default Icon;
 ```
 
-# 优化方向
+## 优化方向
 
 - 现在 `svgs` 目录下都是直接平铺的 svg 图标，可以考虑有嵌套结构下的 svg 图标读取
 - 可以给生成的 SVG 组件增加前缀 `perfix` 和后缀 `suffix`
 - 代码优化，目前所有的代码都堆积到一个文件里，杂揉了很多的不同代码，可以考虑抽离
 
-# 打包
+## 打包
 
 emm...，没什么好说的了，这一系列前边的文章以及把打包完整讲完了，可以作为参考，当然也可以选择 `rollup` 打包，因为 Icon 不涉及 css 的样式编排，所以使用 `rollup` 也是相当不错的选择，只是为了保持统一，尽量使用相同的打包工具，不然遇到一些奇奇怪怪的问题也不是不可能（但是可能性非常小）。

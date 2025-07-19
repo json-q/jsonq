@@ -3,7 +3,7 @@ title: TS 基础
 date: 2024-04-29
 ---
 
-# TS 认知
+## TS 认知
 
 安装 TypeScript 编译环境
 
@@ -14,10 +14,9 @@ npm install typescript -g
 tsc --version
 ```
 
-## ts 的运行环境
+### ts 的运行环境
 
 - 方式一：通过 `webpack`，配置本地的 TypeScript 编译环境和开启一个本地服务，可以直接运行在浏览器上。
-
   - 通过 webpack 配置 ts 运行环境可参考 coderwhy 文章：https://mp.weixin.qq.com/s/wnL1l-ERjTDykWM76l4Ajw
 
 - 方式二：通过 `ts-node` 库，为 TypeScript 的运行提供执行环境；
@@ -39,7 +38,7 @@ npm install tslib @types/node -g
 ts-node demo.ts
 ```
 
-## js 类型使用
+### js 类型使用
 
 **ts 常用类型约束和类型推导**
 
@@ -91,7 +90,7 @@ function foo(params: Params) {
 }
 ```
 
-## ts 数据类型
+### ts 数据类型
 
 - `any` 类型：实无法确定一个变量的类型，可用 any 类型，**相当于操作 js**
 - `unknown` 类型：`unknown` 是 TypeScript 中比较特殊的一种类型，它用于描述类型不确定的变量。
@@ -178,9 +177,9 @@ function useState<T>(state: T): [t, (newState: T) => void] {
 }
 ```
 
-# ts 常用语法
+## ts 常用语法
 
-## ts 类型语法
+### ts 类型语法
 
 **联合类型（|）**  
 一个参数可能有多个类型组成
@@ -412,7 +411,7 @@ function getAnimal(animal: Cat | Dog) {
 }
 ```
 
-## ts 函数类型
+### ts 函数类型
 
 ```ts
 type CalcFunc = (num1: number, num2: number) => void;
@@ -601,7 +600,7 @@ function getLength(arg: any) {
 
 > 在可能的情况下，尽量选择使用**联合类型**来实现
 
-### ts 可推导的 this 类型
+#### ts 可推导的 this 类型
 
 **函数中默认 this 类型**  
 在没有对 TS 进行特殊配置的情况下，this 是 any 类型
@@ -651,7 +650,7 @@ foo.call({ name: '张三' }, { name: '李四' });
 
 > 手动指定 this 指向的方式并不推荐
 
-### this 相关的内置工具
+#### this 相关的内置工具
 
 Typescript 提供了一些工具类型来辅助进行常见的类型转换，这些类型全局可用。
 

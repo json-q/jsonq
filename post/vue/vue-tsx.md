@@ -7,7 +7,7 @@ vue 的响应式数据 + jsx 开发体验简直不要太好，心智负担确实
 
 本文更侧重于 TS 类型的写法，毕竟初次接触 vue jsx 时，实在对其 TS 类型声明很不顺手。要说 vue 模板语法哪些 API 不能在 jsx 中使用，也就是一些 define 宏函数了，其它都正常使用。
 
-# v-model 双向绑定
+## v-model 双向绑定
 
 注意：在 jsx 场景下，仍然可以使用 `v-model`，但是不能使用 `v-model.lazy` 等修饰符
 
@@ -44,9 +44,9 @@ export default defineComponent({
 });
 ```
 
-# Props
+## Props
 
-## 基础例子
+### 基础例子
 
 最基础的例子，子组件接收一个 `message` 属性，并限制类型为 string | number
 
@@ -77,7 +77,7 @@ export default defineComponent({
 });
 ```
 
-### PropType
+#### PropType
 
 - 在 vue 模板的 setup 语法糖写法下，props 接收直接使用 `const props = defineProps<MyProps>()` 定义即可
 - 在 jsx 中，不能直接定义 TS 类型，需要使用 类型标注 + `PropType` 实现。
@@ -108,7 +108,7 @@ export default defineComponent({
 });
 ```
 
-#### 根据 props 的类型标注生成 TS 类型
+##### 根据 props 的类型标注生成 TS 类型
 
 之前使用的 props 标注是属于参数校验，是 Schema 数据，而非 TS。如果其它组件基于此组件进行二次封装，需要该组件的 TS 类型，此时可以使用 [`ExtractPublicPropTypes`](https://cn.vuejs.org/api/utility-types.html#extractpublicproptypes) 来将 props 类型标注转为 TS 类型，这样其它组件就可以使用了。
 
@@ -116,7 +116,7 @@ export default defineComponent({
 
 对于 vue 版本低于 3.3 的，可以使用 [`ExtractPropTypes`](https://cn.vuejs.org/api/utility-types.html#extractproptypes)，个人感觉两者的关系就是 `type ExtractPublicPropTypes = Patrial<ExtractPropTypes>`
 
-## props 传递事件
+### props 传递事件
 
 个人更推荐使用 props 来传递事件，而非 `emits` 属性接收，原因如下：
 
@@ -131,7 +131,7 @@ export default defineComponent({
 
 > 可能是为了区分，事件是事件（emits），属性是属性（props），不让属性和事件混在一起，从代码的结构上来说更严谨。
 
-# emits 事件接收
+## emits 事件接收
 
 template 写法，使用 `defineEmits`
 
@@ -191,11 +191,11 @@ export default defineComponent({
 
 ![image](https://jsonq.top/cdn-static/2025/02/25/1740465280956-dz61bpsb.png)
 
-# slot 插槽
+## slot 插槽
 
 在 jsx 中写插槽时，没有类型提示，想要存在类型提示，只能手动标注类型
 
-## 子组件接收插槽（默认插槽和传参插槽）
+### 子组件接收插槽（默认插槽和传参插槽）
 
 template 写法，使用 `defineSlots` 对插槽的类型进行标注，同时 IDE 也有友好的类型提示。
 
@@ -242,7 +242,7 @@ export default defineComponent({
 });
 ```
 
-## 父组件使用插槽（默认插槽和传参插槽）
+### 父组件使用插槽（默认插槽和传参插槽）
 
 template 写法
 
@@ -305,7 +305,7 @@ export default defineComponent({
 </ChildJSXComp>
 ```
 
-# v-bind 动态绑定多个值
+## v-bind 动态绑定多个值
 
 先说结论：多个值的绑定情况下，vue 的 `v-bind="myObject"` = jsx 的 `{...myObject}`
 
@@ -319,9 +319,9 @@ export default defineComponent({
 
 由于 `wrapperProps` 是一个 `computed` 计算结果，所以在使用时加 `.value`
 
-# 其它
+## 其它
 
-## 组件别名命名
+### 组件别名命名
 
 注意：该命名是在 vue devtool 中查看使用的，而非代码中组件的引用别名
 

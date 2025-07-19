@@ -3,7 +3,7 @@ title: 连接 Github 的 host 文件配置
 date: 2025-02-13
 ---
 
-# github 连接（代码提交）
+## github 连接（代码提交）
 
 如果需要实时获取最新的 host，可以访问 GitHub 仓库 https://github.com/fliu2476/gh-hosts
 

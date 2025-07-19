@@ -5,7 +5,7 @@ date: 2024-04-07
 
 纯离线的内网环境中使用 nginx 配置 ssl 并使用 https 访问网站。对于服务器中 nginx 及其它环境的搭建，可参考我的该文章 [Linux Centos7 离线部署 SpringBoot 前后端分离项目](/post/deploy/linux-offline-deploy)，该文章的环境是以此文章的基础上进行搭建的。同时，该文章涉及的部分安装包已提供在以上文章的开头部分。
 
-# 检查环境
+## 检查环境
 
 进入 nginx 的安装目录（一般是 `/usr/local/nginx`），检查是否有 ssl 模块
 
@@ -19,7 +19,7 @@ cd /sbin # 进入 sbin 目录
 
 ![image](https://jsonq.top/cdn-static/2025/02/25/1740465680546-oyhebmq7.png)
 
-# 安装 openssl
+## 安装 openssl
 
 想要使用 ssl 配置 https，环境中必须有 openssl。openssl 下载地址：https://www.openssl.org/source/ 。也可以去官方的 release 上寻找更多版本下载：https://github.com/openssl/openssl/releases
 
@@ -40,7 +40,7 @@ cd openssl-1.1.1u
 
 ![image](https://jsonq.top/cdn-static/2025/02/25/1740465680808-3z93wsht.png)
 
-## 安装 perl5
+### 安装 perl5
 
 去 perl 官网下载：https://www.perl.org/get.html
 
@@ -65,7 +65,7 @@ make install
 
 等待安装完成之后，就可以重新回到 openssl 安装的部分了。
 
-## 再次安装 openssl
+### 再次安装 openssl
 
 perl5 安装完毕，回到 opennssl 目录下，继续执行之前的操作，此时就不会报错了
 
@@ -74,7 +74,7 @@ cd openssl-1.1.1u
 ./config
 ```
 
-# 安装 ssl 模块
+## 安装 ssl 模块
 
 一般是没有 ssl 相关模块的，此时进入到 **解压缩目录** 注意：<strong style={{color:"red"}}>是解压缩目录，因为是离线安装，必定需要上传 nginx 的压缩包进行解压，然后执行完 `./configure` 之后，一般才会将 nginx 安装到 `/usr/local/nginx` 路径下</strong> **此处以我的安装目录为例**：解压缩 nginx 的目录是 `/data/software/nginx`，安装后的目录是 `/usr/local/nginx`，则此时我需要进入 `/data/software/nginx` 进行之后的操作
 
@@ -137,7 +137,7 @@ cp /data/software/nginx/objs/nginx /usr/local/nginx/sbin # 替换掉 sbin 下的
 
 再次执行 `./nginx` 即可
 
-# https 配置(80 跳 443)
+## https 配置(80 跳 443)
 
 部分浏览器，如果直接地址栏输入 ip 地址或者域名，会自动以 https 访问，若网站没有配置 `80(http)` 跳 `443(https)`，就会访问失败。以上步骤已经将 ssl 环境搭建完毕，该步骤只涉及两个东西：`ssl 证书` 和 `nginx.conf` 文件。
 

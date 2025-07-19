@@ -3,13 +3,13 @@ title: TS 泛型及类型体操
 date: 2024-05-02
 ---
 
-# TS 泛型认知
+## TS 泛型认知
 
 - 封装一个函数，传入一个参数，并且返回这个参数
   - 如果使用 `any`，就失去了类型限制
   - 如果写死参数和返回值，会造成其它类型的参数无法传入，且扩展性基本没有
 
-## 泛型的基本使用
+### 泛型的基本使用
 
 **类型参数化**
 
@@ -83,7 +83,7 @@ const p = new Person<number, string>(10, '张三');
 > - `E`：Element 的缩写，元素
 > - `O`：Object 的缩写，对象
 
-## 泛型约束
+### 泛型约束
 
 正传入的泛型 T 是无法控制传入的内容的，如果需要既保留传入的类型，又需要限制传入的类型上必须有某些属性，可以使用类型约束。使用 `extends` 来对传入的泛型进行约束
 
@@ -139,7 +139,7 @@ getObjProperty(info, 'name');
 
 ![keyof 使用](https://jsonq.top/cdn-static/2025/02/25/1740465694153-959mrc0i.jpeg)
 
-## 映射类型
+### 映射类型
 
 - 有的时候，一个类型需要基于另外一个类型，但是你又不想拷贝一份，这个时候可以考虑使用映射类型。
   - 大部分内置的工具都是通过映射类型来实现的
@@ -179,9 +179,9 @@ type MapPerson<T> = {
 };
 ```
 
-## 条件类型(extends 判断)
+### 条件类型(extends 判断)
 
-### 条件类型-判断
+#### 条件类型-判断
 
 条件类型的判断只有 `extends`，类似 js 的三目运算
 
@@ -220,7 +220,7 @@ function sum(a: any, b: any) {
 const res = sum(20, 30);
 ```
 
-### 函数返回值类型推断(ReturnType)
+#### 函数返回值类型推断(ReturnType)
 
 字面意思，推断出函数类型的返回值
 
@@ -237,7 +237,7 @@ type Fn1ReturnType = ReturnType<Fn1Type>;
 type fooReturnType = ReturnType<typeof foo>;
 ```
 
-### 条件类型-推断(infer)
+#### 条件类型-推断(infer)
 
 `infer` 关键字 就是用来推断某种类型的
 
@@ -262,7 +262,7 @@ type fooReturnType = MyReturnType<typeof foo>; // type fooReturnType = string
 type fooParamsType = MyParamType<typeof foo>; // []
 ```
 
-### 条件类型-联合类型分发
+#### 条件类型-联合类型分发
 
 在泛型中使用条件类型的时候，如果传入一个联合类型，会变成 **分发类型**
 
@@ -276,9 +276,9 @@ type newType1 = toArrayType<number>; // type newType1 = number[]
 type newType2 = toArrayType<number | string>; // type newType2 = number[] | string[]
 ```
 
-## 常用内置工具
+### 常用内置工具
 
-### Partial
+#### Partial
 
 `Partial<T>` 可以将一个类型的所有属性转变为**可选属性**
 
@@ -297,7 +297,7 @@ type MyPartial<T> = {
 type PartialPerson = Partial<Person>;
 ```
 
-### Required
+#### Required
 
 `Required<T>` 所有属性全都设置为必填的类型，跟 `Partial` 相反
 
@@ -310,7 +310,7 @@ type MyRequired<T> = {
 type RequiredPerson = Required<Person>;
 ```
 
-### Readonly
+#### Readonly
 
 `Readonly<T>` 的所有属性全都设置为**只读的类型**，只读类型不可赋值不可更改
 
@@ -322,7 +322,7 @@ type MyReadonly<T> = {
 type ReadonlyPerson = Readonly<Person>;
 ```
 
-### Record
+#### Record
 
 `Record<Keys,T>` 用于构造一个对象类型，它所有的 key(键)都是 Keys 类型，它所有的 value(值)都是 T 类型。  
 具体功能如图所示：
@@ -350,7 +350,7 @@ type MyRecord<Keys extends keyof any, T> = {
 type RecordPerson = Record<CityKeys, Person>;
 ```
 
-### Pick
+#### Pick
 
 `Pick<T,Keys>` 是从原类型 T 中挑选出部分 T 拥有的部分属性 Keys，生成一个新的类型
 
@@ -371,7 +371,7 @@ type MyPick<T, Keys extends keyof T> = {
 type PickPerson = Pick<Person, 'name' | 'age'>;
 ```
 
-### Omit
+#### Omit
 
 `Omit<T,keys>` 和 `Pick<T,keys>` 刚好相反，是排除掉 Keys 在 T 类型中的属性，生成新的类型
 
@@ -391,7 +391,7 @@ type MyOmit<T, Keys extends keyof T> = {
 type OmitPerson = Omit<Person, 'name'>;
 ```
 
-### Exclude
+#### Exclude
 
 `Exclude<T, U>` 从**联合类型**中排除掉 U 属性，此处的 U 不一定是 T 中的某个类型
 
@@ -412,7 +412,7 @@ type ExcludePerson = Exclude<CityType, 'aaaa'>;
 type MyOmit<T, Keys extends keyof T> = Pick<T, Exclude<keyof T, Keys>>;
 ```
 
-### Extract
+#### Extract
 
 `Extract<T, U>` 和 `Exclude` 刚好相反，提取**联合类型** T 中的某些属性 U
 
@@ -420,7 +420,7 @@ type MyOmit<T, Keys extends keyof T> = Pick<T, Exclude<keyof T, Keys>>;
 type MyExclude<T, U> = T extends U ? U : never;
 ```
 
-### NonNullable
+#### NonNullable
 
 `NonNullable<T>`从**联合类型** T 中排除了所有的 null、undefined 的类型
 
@@ -433,7 +433,7 @@ type MyNonNullable<T> = T extends null | undefined ? never : T;
 type NonNullablePerson = NonNullable<CityType>;
 ```
 
-### ReturnType
+#### ReturnType
 
 `ReturnType<T>` 推断出 T 函数的返回值的类型。
 

@@ -3,13 +3,13 @@ title: Vue 高级特性及过渡动画
 date: 2023-06-18
 ---
 
-# 自定义指令
+## 自定义指令
 
 类似 `v-for`、`v-show` 等指令，当标签上写入 `v-xxx` 时，希望执行某种功能，官方提供了可以自定义的指令操作。
 
 例如：`<input/>` 使用 `v-focus` 指令，可以自动获取输入框焦点
 
-## 局部自定义指令
+### 局部自定义指令
 
 ![局部自定义指令](https://jsonq.top/cdn-static/2025/02/25/1740465694618-z38xrcnq.jpg)
 
@@ -17,7 +17,7 @@ date: 2023-06-18
 >
 > 在 setup 中，自定义指令**必须以 v 开头**，vFa 对应的自定义指令就是 `v-fa`
 
-## 全局自定义指令
+### 全局自定义指令
 
 全局自定义指令需应用于 main.js 中
 
@@ -34,7 +34,7 @@ app.directive('focus', {
 
 ![自定义指令抽离](https://jsonq.top/cdn-static/2025/02/25/1740465694728-enm0e8ma.jpg)
 
-## 自定义指令生命周期
+### 自定义指令生命周期
 
 | 生命周期      | 描述                                                 |
 | ------------- | ---------------------------------------------------- |
@@ -46,17 +46,16 @@ app.directive('focus', {
 | beforeUnmount | 在卸载绑定元素的父组件之前调用                       |
 | unmounted     | 当指令与元素解除绑定且父组件已卸载时，只调用一次     |
 
-## 指令的参数和修饰符
+### 指令的参数和修饰符
 
 ![指令的参数和修饰符](https://jsonq.top/cdn-static/2025/02/25/1740465694843-59upf1ni.jpg)
 
-# Teleport
+## Teleport
 
 在组件化开发中，我们封装一个组件 A，在另外一个组件 B 中使用：
 
 - 那么组件 A 中 template 的元素，会被挂载到组件 B 中 template 的某个位置；
 - 最终我们的应用程序会形成一颗 DOM 树结构；但是某些情况下，我们希望组件不是挂载在这个组件树上的，可能是移动到 Vue app 之外的其他位置：
-
   - 比如移动到 body 元素上，或者我们有其他的 div#app 之外的元素上；
   - 这个时候我们就可以通过 teleport 来完成；
 
@@ -72,7 +71,7 @@ Teleport 是一个 Vue 提供的内置组件，类似于 react 的 `Portals`
 >
 > 当多个 `<teleport>` 的 to 属性都指向一个节点时，多个 `<teleport>` 内部的元素内容会进行合并
 
-# 异步组件和 Suspense
+## 异步组件和 Suspense
 
 和 react 的 Suspense 比较类似，当一个组件未挂载时，显示其它内容（比如 loading）进行展示。
 
@@ -93,7 +92,7 @@ Teleport 是一个 Vue 提供的内置组件，类似于 react 的 `Portals`
 
 > `<Suspense>` 在 vue 中是一项实验性功能。它不一定会最终成为稳定功能，并且在稳定之前相关 API 也可能会发生变化。
 
-# 插件
+## 插件
 
 ```js
 // 对象类型写法
@@ -114,7 +113,7 @@ app.use(function direactives(app, option) {
 > 函数类型：一个 function，这个函数会在安装插件时**自动执行**  
 > 执行的内部会自动传入两个参数 app 和 option
 
-# Vue 使用 jsx 语法
+## Vue 使用 jsx 语法
 
 - 如果希望在项目中使用 jsx，即 react 的 jsx 语法，那么需要添加对 jsx 的支持：
   - jsx 我们通常会通过 Babel 来进行转换（React 编写的 jsx 就是通过 babel 转换的）；
@@ -161,7 +160,7 @@ export default {
 
 ```
 
-# 过渡动画
+## 过渡动画
 
 React 框架本身并没有提供任何动画相关的 API，所以在 React 中使用过渡动画我们需要使用一个第三方库 `react-transition-group`  
 Vue 中为我们提供一些内置组件和对应的 API 来完成动画，利用它们我们可以方便的实现过渡动画效果
@@ -182,7 +181,7 @@ class 的 name 命名规则如下：
 - 如果我们使用的是一个没有 name 的 transition，那么所有的 class 是以 v- 作为默认前缀；
 - 如果我们添加了一个 name 属性，比如 `<transtion name="my">`，那么所有的 class 会以 my- 开头
 
-## transition
+### transition
 
 ```html
 <template>
@@ -242,7 +241,7 @@ class 的 name 命名规则如下：
 - number 类型：同时设置进入和离开的过渡时间 `:duration:"1000"`
 - object 类型：分别设置进入和离开的过渡时间 `:duration:{enter: 800, leave: 1000}`
 
-## transition-group
+### transition-group
 
 一组动画的实现，比如列表的添加与删除
 
@@ -308,9 +307,9 @@ class 的 name 命名规则如下：
 </style>
 ```
 
-# Vue2、Vue3 响应式原理
+## Vue2、Vue3 响应式原理
 
-## 响应式依赖收集
+### 响应式依赖收集
 
 收集函数主动调用
 
@@ -341,7 +340,7 @@ reactiveFns.forEach((fn) => {
 });
 ```
 
-## 类格式收集
+### 类格式收集
 
 设置单独的类专门管理收集的依赖
 
@@ -388,7 +387,7 @@ obj.name = '李四';
 dep.notify();
 ```
 
-## 监听属性变化
+### 监听属性变化
 
 主动通知过于繁琐，需手动调用。  
 需求：当属性变化时进行劫持自动通知
@@ -436,7 +435,7 @@ watchFn(function bar() {
 obj.name = '李四';
 ```
 
-## 自动收集依赖
+### 自动收集依赖
 
 当 name 发生改变时，此时 foo 和 bar 都会被调用，甚至与 obj 无关的函数都会调用，但是 bar 内部没有关于 name 的依赖。  
 原因：dep 收集依赖无法区分，只能传入的函数全部调用  
@@ -572,7 +571,7 @@ user.age = 30;
 3. 多个对象的 mao 对象，会被存放到一个 allMap 的对象中
 4. 依赖收集：当执行 get 函数，自动添加 fn 函数
 
-## 自动收集依赖 BUG 修改
+### 自动收集依赖 BUG 修改
 
 当一个函数内部，重复使用一个属性时，函数会被执行多次
 
@@ -608,7 +607,7 @@ class Depend {
 }
 ```
 
-## 多个对象响应式
+### 多个对象响应式
 
 在此之前，Object.keys 循环遍历的是一个写死的对象
 
@@ -664,7 +663,7 @@ console.log('course.first发生变化------');
 course.first = 'Vue';
 ```
 
-## Vue2 响应式监听完整源码
+### Vue2 响应式监听完整源码
 
 ```js
 class Depend {
@@ -775,7 +774,7 @@ console.log('course.first发生变化------');
 course.first = 'Vue';
 ```
 
-## Vue3 重构
+### Vue3 重构
 
 主要就是从 `Object.defineProperty` 更改为 `Proxy`
 
