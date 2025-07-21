@@ -1,22 +1,22 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { Button } from '~/components/ui/button';
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { Button } from "~/components/ui/button";
 
 interface ErrorResultProps {
-  status: '404' | '500';
-  back?: 'prev' | 'home';
+  status: "404" | "500";
+  back?: "prev" | "home";
 }
 
 const TipEnum = {
   404: {
-    title: '页面未找到',
-    tip: '您访问的页面可能已被移动或删除,请检查您的网址或返回首页。',
+    title: "页面未找到",
+    tip: "您访问的页面可能已被移动或删除,请检查您的网址或返回首页。",
   },
   500: {
-    title: '服务出错',
-    tip: '服务器出错，请稍后再试。',
+    title: "服务出错",
+    tip: "服务器出错，请稍后再试。",
   },
 };
 
@@ -36,7 +36,7 @@ export default function ErrorResult(props: ErrorResultProps) {
 
         <p className="text-muted-foreground mt-4 mb-6 text-sm">{TipEnum[props.status].tip}</p>
 
-        {props.back === 'prev' ? (
+        {props.back === "prev" ? (
           <Button variant="secondary" onClick={router.back}>
             返回上一页
           </Button>

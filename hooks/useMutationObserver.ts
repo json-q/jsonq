@@ -1,6 +1,6 @@
-import { useRef, useEffect } from 'react';
-import { debounce, isEqual } from 'lodash-es';
-import useLatest from './useLatest';
+import { debounce, isEqual } from "lodash-es";
+import { useEffect, useRef } from "react";
+import useLatest from "./useLatest";
 
 const DEFAULT_OPTIONS = {
   debounceTime: 0,
@@ -56,5 +56,5 @@ export default function useMutationObserver(
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [targetEl, signalRen.current]);
+  }, [targetEl, callbackRef.current]);
 }

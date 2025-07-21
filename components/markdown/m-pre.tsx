@@ -1,9 +1,9 @@
-'use client';
-import { ReactElement, useCallback, useEffect, useState, Children } from 'react';
-import { Copy, CopyCheck } from 'lucide-react';
-import { Button } from '../ui/button';
+"use client";
+import { Copy, CopyCheck } from "lucide-react";
+import { Children, type ReactElement, useCallback, useEffect, useState } from "react";
+import { Button } from "../ui/button";
 
-type MPreProps = React.PropsWithChildren<React.JSX.IntrinsicElements['pre']>;
+type MPreProps = React.PropsWithChildren<React.JSX.IntrinsicElements["pre"]>;
 
 const MPre = (props: MPreProps): ReactElement => {
   const { children, ...restProps } = props;
@@ -21,11 +21,10 @@ const MPre = (props: MPreProps): ReactElement => {
   }, [isCopied]);
 
   const handleClick = useCallback(async () => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const getTextContent = (children: any) => {
-      let textContent = '';
+      let textContent = "";
       Children.map(children, (child) => {
-        if (typeof child === 'string' || typeof child === 'number') {
+        if (typeof child === "string" || typeof child === "number") {
           textContent += child;
         }
         children = child?.props?.children;
@@ -37,14 +36,14 @@ const MPre = (props: MPreProps): ReactElement => {
     };
 
     if (!navigator?.clipboard) {
-      console.error('Access to clipboard rejected!');
+      console.error("Access to clipboard rejected!");
     }
 
     try {
       await navigator.clipboard.writeText(getTextContent(children));
       setCopied(true);
     } catch {
-      console.error('Failed to copy!');
+      console.error("Failed to copy!");
     }
   }, [children]);
 

@@ -1,6 +1,6 @@
-import Link from 'next/link';
-import SiteLogo from './icons/Logo';
-import siteConfig from '~/config/siteConfig';
+import Link from "next/link";
+import siteConfig from "~/config/siteConfig";
+import SiteLogo from "./icons/Logo";
 
 export default function PCNav() {
   return (
@@ -10,11 +10,7 @@ export default function PCNav() {
       </Link>
       <nav className="flex items-center gap-4 text-sm xl:gap-6">
         {siteConfig.navs.map((item) => (
-          <Link
-            className="text-foreground/80 hover:text-foreground/60 px-4 py-2"
-            href={item.href}
-            key={item.href}
-          >
+          <Link className="text-foreground/80 hover:text-foreground/60 px-4 py-2" href={item.href} key={item.href}>
             {item.title}
           </Link>
         ))}

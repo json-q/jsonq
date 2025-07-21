@@ -1,17 +1,10 @@
-'use client';
-import { useEffect, useState, useRef, useCallback } from 'react';
-import { throttle } from 'lodash-es';
-import { cn } from '~/lib/utils';
-import { TableOfContents } from 'lucide-react';
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '~/components/ui/sheet';
-import useMutationObserver from '~/hooks/useMutationObserver';
+"use client";
+import { throttle } from "lodash-es";
+import { TableOfContents } from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "~/components/ui/sheet";
+import useMutationObserver from "~/hooks/useMutationObserver";
+import { cn } from "~/lib/utils";
 
 interface List {
   title: string | null;
@@ -26,12 +19,24 @@ export default function TocTree() {
   const tocRef = useRef<HTMLUListElement>(null); // TOC 组件 DOM
   const containerRef = useRef<HTMLElement>(null);
 
+  const highlight = useCallback((i: number) => {
+    setActiveIndex(i);
+    // 包括可滚动区域的 top 值
+    const top = (tocRef.current?.children[i] as HTMLElement)?.offsetTop;
+    if (top) {
+      // 获取 TOC DOM 的高度
+      const tocHeight = tocRef.current?.clientHeight ?? 0;
+      // 使用 scrollTo 滚动到 TOC DOM 当前视图高度一半的位置
+      tocRef.current?.scrollTo({ top: top - tocHeight / 2 });
+    }
+  }, []);
+
   const scrollHandler = useCallback(() => {
     if (!containerRef.current) return;
 
     const viewHeight = window.innerHeight;
     // nodes 和 list 其实是一一对应的，所以可以设置一个索引判断哪个目录高亮了
-    const nodes = Array.from(containerRef.current.querySelectorAll('h2, h3, h4'));
+    const nodes = Array.from(containerRef.current.querySelectorAll("h2, h3, h4"));
     for (let i = 0; i < nodes.length; i++) {
       const node = nodes[i];
       const rect = node.getBoundingClientRect();
@@ -47,24 +52,12 @@ export default function TocTree() {
         break;
       }
     }
-  }, []);
+  }, [highlight]);
 
   const throttledScrollHandler = useCallback(throttle(scrollHandler, 100), []);
 
-  function highlight(i: number) {
-    setActiveIndex(i);
-    // 包括可滚动区域的 top 值
-    const top = (tocRef.current?.children[i] as HTMLElement)?.offsetTop;
-    if (top) {
-      // 获取 TOC DOM 的高度
-      const tocHeight = tocRef.current?.clientHeight ?? 0;
-      // 使用 scrollTo 滚动到 TOC DOM 当前视图高度一半的位置
-      tocRef.current?.scrollTo({ top: top - tocHeight / 2 });
-    }
-  }
-
   const handleToc = useCallback(() => {
-    const nodes = Array.from(containerRef.current?.querySelectorAll('h1, h2, h3') || []);
+    const nodes = Array.from(containerRef.current?.querySelectorAll("h1, h2, h3") || []);
     const newList = nodes.map((node) => ({
       title: node.textContent,
       id: node.id,
@@ -75,7 +68,7 @@ export default function TocTree() {
   }, []);
 
   useEffect(() => {
-    const container = document.querySelector('.md-container');
+    const container = document.querySelector(".md-container");
     if (!container) return;
 
     containerRef.current = container as HTMLElement;
@@ -83,8 +76,8 @@ export default function TocTree() {
     throttledScrollHandler();
     handleToc();
 
-    window.addEventListener('scroll', throttledScrollHandler);
-    return () => window.removeEventListener('scroll', throttledScrollHandler);
+    window.addEventListener("scroll", throttledScrollHandler);
+    return () => window.removeEventListener("scroll", throttledScrollHandler);
   }, [handleToc, throttledScrollHandler]);
 
   useMutationObserver(containerRef.current, handleToc);
@@ -93,11 +86,11 @@ export default function TocTree() {
     return (
       <ul ref={tocRef} className="m-0 list-none p-0 text-sm">
         {list.map(({ title, id, depth }, i) => (
-          <li key={id} title={title || ''} className="mt-0 mb-2 w-full p-0">
+          <li key={id} title={title || ""} className="mt-0 mb-2 w-full p-0">
             <a
               href={`#${id}`}
-              className={cn('text-foreground hover:text-link line-clamp-1 w-full no-underline', {
-                'text-link': i === activeIndex,
+              className={cn("text-foreground hover:text-link line-clamp-1 w-full no-underline", {
+                "text-link": i === activeIndex,
               })}
               style={{ paddingLeft: `${depth * 0.6}rem` }}
             >

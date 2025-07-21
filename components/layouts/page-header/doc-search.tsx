@@ -1,9 +1,9 @@
-'use client';
-import Link from 'next/link';
-import { addBasePath } from 'next/dist/client/add-base-path';
-import { useDeferredValue, useEffect, useState } from 'react';
-import { CircleX, LoaderCircle, Search } from 'lucide-react';
-import { Button } from '~/components/ui/button';
+"use client";
+import { CircleX, LoaderCircle, Search } from "lucide-react";
+import { addBasePath } from "next/dist/client/add-base-path";
+import Link from "next/link";
+import { useCallback, useDeferredValue, useEffect, useState } from "react";
+import { Button } from "~/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -11,14 +11,14 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '~/components/ui/dialog';
-import { Input } from '~/components/ui/input';
-import { ScrollArea } from '~/components/ui/scroll-area';
-import { useIsMobile } from '~/hooks/use-mobile';
+} from "~/components/ui/dialog";
+import { Input } from "~/components/ui/input";
+import { ScrollArea } from "~/components/ui/scroll-area";
+import { useIsMobile } from "~/hooks/use-mobile";
 
 export async function importPagefind() {
-  window.pagefind = await import(/* webpackIgnore: true */ addBasePath('/_pagefind/pagefind.js'));
-  await window.pagefind?.options({ baseUrl: '/' });
+  window.pagefind = await import(/* webpackIgnore: true */ addBasePath("/_pagefind/pagefind.js"));
+  await window.pagefind?.options({ baseUrl: "/" });
 }
 
 type PagefindResult = {
@@ -38,25 +38,16 @@ type PagefindResult = {
 export default function DocSearch() {
   const [open, setOpen] = useState(false);
   const [loading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [results, setResults] = useState<PagefindResult[]>([]);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
   const deferredSearch = useDeferredValue(search);
   const isMobile = useIsMobile();
 
-  useEffect(() => {
-    handleSearch(deferredSearch);
-  }, [deferredSearch]);
-
-  useEffect(() => {
-    document.addEventListener('keydown', down);
-    return () => document.removeEventListener('keydown', down);
-  }, []);
-
-  const handleSearch = async (value: string) => {
+  const handleSearch = useCallback(async (value: string) => {
     if (!value) {
       setResults([]);
-      setError('');
+      setError("");
       return;
     }
 
@@ -70,31 +61,31 @@ export default function DocSearch() {
         return;
       }
     }
-    const response = await window.pagefind!.debouncedSearch<PagefindResult>(value, {});
+    const response = await window.pagefind?.debouncedSearch<PagefindResult>(value, {});
     if (!response) return;
 
     const data = await Promise.all(response.results.map((o) => o.data()));
     setIsLoading(false);
-    setError('');
+    setError("");
 
     const _results = data.map((newData) => ({
       ...newData,
       sub_results: newData.sub_results.map((r) => {
-        const url = r.url.replace(/\.html$/, '').replace(/\.html#/, '#');
+        const url = r.url.replace(/\.html$/, "").replace(/\.html#/, "#");
 
         return { ...r, url };
       }),
     }));
 
     setResults(_results);
-  };
+  }, []);
 
-  const onSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
-  };
+  useEffect(() => {
+    handleSearch(deferredSearch);
+  }, [deferredSearch, handleSearch]);
 
-  const down = (e: KeyboardEvent) => {
-    if ((e.key === 'k' && (e.metaKey || e.ctrlKey)) || e.key === '/') {
+  const down = useCallback((e: KeyboardEvent) => {
+    if ((e.key === "k" && (e.metaKey || e.ctrlKey)) || e.key === "/") {
       if (
         (e.target instanceof HTMLElement && e.target.isContentEditable) ||
         e.target instanceof HTMLInputElement ||
@@ -107,6 +98,15 @@ export default function DocSearch() {
       e.preventDefault();
       setOpen((open) => !open);
     }
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener("keydown", down);
+    return () => document.removeEventListener("keydown", down);
+  }, [down]);
+
+  const onSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
   };
 
   const onOpenChange = (open: boolean) => {
@@ -152,11 +152,8 @@ export default function DocSearch() {
         {error ? (
           <EmptyStatus tip={error} icon={<CircleX className="h-16 w-16 shrink-0 opacity-50" />} />
         ) : loading ? (
-          <EmptyStatus
-            tip="加载中..."
-            icon={<LoaderCircle className="h-16 w-16 shrink-0 animate-spin opacity-50" />}
-          />
-        ) : results.length == 0 ? (
+          <EmptyStatus tip="加载中..." icon={<LoaderCircle className="h-16 w-16 shrink-0 animate-spin opacity-50" />} />
+        ) : results.length === 0 ? (
           <EmptyStatus tip="暂无结果" icon={<Search className="h-16 w-16 shrink-0 opacity-50" />} />
         ) : (
           <ScrollArea className="text-foreground min-h-[300px] overflow-x-hidden overflow-y-auto px-2 py-1 md:max-h-[calc(100vh-300px)]">
@@ -177,11 +174,12 @@ function ResultList({ data, closeModal }: { data: PagefindResult; closeModal: ()
     return (
       <li
         onClick={closeModal}
+        onKeyUp={closeModal}
         key={item.url}
         className="cursor-pointer gap-2 border-b text-sm text-inherit select-none"
       >
         <Link
-          onKeyDown={(e) => e.key === 'Enter' && closeModal()}
+          onKeyDown={(e) => e.key === "Enter" && closeModal()}
           href={item.url}
           className="hover:bg-accent hover:text-accent-foreground inline-flex w-full flex-col rounded-sm px-3 py-2"
         >

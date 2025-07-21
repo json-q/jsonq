@@ -1,6 +1,6 @@
-import type { PostJsonData } from '~/scripts/content';
+import type { PostJsonData } from "~/scripts/content";
 
-type BaseList = Omit<PostJsonData, 'content'>;
+type BaseList = Omit<PostJsonData, "content">;
 
 export async function getPostList() {
   const postList = await import(`~/generated/catalog.json`);

@@ -1,9 +1,9 @@
-import type { Metadata } from 'next';
-import siteConfig from '~/config/siteConfig';
-import ErrorResult from '~/components/layouts/error-result';
-import TocTree from '~/components/layouts/toc-tree';
-import CustomMDX from '~/components/markdown/custom-mdx';
-import { getPostBySlug, getPostList } from '~/utils/postData';
+import type { Metadata } from "next";
+import ErrorResult from "~/components/layouts/error-result";
+import TocTree from "~/components/layouts/toc-tree";
+import CustomMDX from "~/components/markdown/custom-mdx";
+import siteConfig from "~/config/siteConfig";
+import { getPostBySlug, getPostList } from "~/utils/postData";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -26,11 +26,11 @@ export async function generateMetadata({ params }: Props) {
 
   return {
     ...siteConfig.metadata,
-    title: `${post?.title || '404'} | ${siteConfig.metadata.title}`,
+    title: `${post?.title || "404"} | ${siteConfig.metadata.title}`,
     description: post?.title || siteConfig.metadata.description,
     openGraph: {
       ...siteConfig.metadata.openGraph,
-      title: `${post?.title || '404'} | ${siteConfig.metadata.title}`,
+      title: `${post?.title || "404"} | ${siteConfig.metadata.title}`,
     },
   } satisfies Metadata;
 }

@@ -1,14 +1,14 @@
-import Link from 'next/link';
+import Link from "next/link";
 
-const MLink = (props: React.JSX.IntrinsicElements['a']) => {
+const MLink = (props: React.JSX.IntrinsicElements["a"]) => {
   const { href } = props;
-  if (href!.startsWith('#')) return <a {...props} />;
+  if (href?.startsWith("#")) return <a {...props} />;
 
   // 外部链接
-  if (href!.startsWith('http')) {
+  if (href?.startsWith("http")) {
     props = {
-      target: '_blank',
-      rel: 'noopener noreferrer',
+      target: "_blank",
+      rel: "noopener noreferrer",
       ...props,
     };
   }

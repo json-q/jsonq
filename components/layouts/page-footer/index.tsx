@@ -1,12 +1,12 @@
-import Link from 'next/link';
-import siteConfig from '~/config/siteConfig';
+import Link from "next/link";
+import siteConfig from "~/config/siteConfig";
 
 export default function PageFooter() {
   return (
     <footer className="mt-auto box-border border-t bg-zinc-50 p-2 md:p-4 dark:bg-zinc-900">
       <div className="flex flex-col items-center space-y-4 text-center">
         <div className="flex flex-col items-center gap-4 text-sm text-zinc-600 md:flex-row md:text-base dark:text-zinc-300">
-          <span aria-label="copyright">©2025 Jsonq</span>
+          <span>©2025 Jsonq</span>
           <Link
             aria-label="beian"
             href="https://beian.miit.gov.cn"
@@ -18,10 +18,7 @@ export default function PageFooter() {
           </Link>
         </div>
 
-        <div
-          aria-label="footer-link"
-          className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-zinc-600 md:text-base dark:text-zinc-300"
-        >
+        <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-zinc-600 md:text-base dark:text-zinc-300">
           {siteConfig.footerLink.map((item) => (
             <Link
               key={item.href}

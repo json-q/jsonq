@@ -1,6 +1,6 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
-@import 'tw-animate-css';
+@import "tw-animate-css";
 
 @plugin "@tailwindcss/typography";
 @config "./tailwind.config.js";
@@ -171,24 +171,24 @@
 
 /* https://rehype-pretty.pages.dev/#multiple-themes-dark-and-light-mode */
 /* next 15.2.0, see: https://github.com/vercel/next.js/issues/76052#issuecomment-2676709996 */
-html[class='dark'] .prose code[data-theme],
-html[class='dark'] .prose code[data-theme] span {
+html[class="dark"] .prose code[data-theme],
+html[class="dark"] .prose code[data-theme] span {
   color: var(--shiki-dark);
   background-color: var(--shiki-dark-bg);
 }
 
-html[class='light'] .prose code[data-theme],
-html[class='light'] .prose code[data-theme] span {
+html[class="light"] .prose code[data-theme],
+html[class="light"] .prose code[data-theme] span {
   color: var(--shiki-light);
   background-color: var(--shiki-light-bg);
 }
 
-html[class='dark'] .prose :where(pre):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
+html[class="dark"] .prose :where(pre):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
   background-color: rgb(40, 44, 52);
   color: rgb(171, 178, 191);
 }
 
-html[class='light'] .prose :where(pre):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
+html[class="light"] .prose :where(pre):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
   background-color: rgb(250, 250, 250);
   color: rgb(56, 58, 66);
 }

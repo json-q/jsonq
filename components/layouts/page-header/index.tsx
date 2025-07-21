@@ -1,10 +1,10 @@
-import { Button } from '~/components/ui/button';
-import MobileNav from './mobile-nav';
-import PCNav from './pc-nav';
-import Link from 'next/link';
-import siteConfig from '~/config/siteConfig';
-import ThemeSwitcher from './theme-switcher';
-import DocSearch from './doc-search';
+import Link from "next/link";
+import { Button } from "~/components/ui/button";
+import siteConfig from "~/config/siteConfig";
+import DocSearch from "./doc-search";
+import MobileNav from "./mobile-nav";
+import PCNav from "./pc-nav";
+import ThemeSwitcher from "./theme-switcher";
 
 export default function PageHeader() {
   return (
@@ -19,13 +19,7 @@ export default function PageHeader() {
             </div>
             <nav className="flex items-center gap-0.5">
               {siteConfig.externalLink.map((item) => (
-                <Button
-                  key={item.title}
-                  asChild
-                  variant="ghost"
-                  size="icon"
-                  className="size-8 px-0"
-                >
+                <Button key={item.title} asChild variant="ghost" size="icon" className="size-8 px-0">
                   <Link href={item.href} target="_blank" rel="noreferrer">
                     <item.icon className="size-4" />
                     <span className="sr-only">{item.title}</span>

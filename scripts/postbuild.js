@@ -1,24 +1,24 @@
-const { execSync } = require('child_process');
-const { copySync } = require('fs-extra');
-const { join } = require('path');
+const { execSync } = require("node:child_process");
+const { copySync } = require("fs-extra");
+const { join } = require("node:path");
 
 try {
   // next-sitemap
-  execSync('next-sitemap', { stdio: 'inherit' });
+  execSync("next-sitemap", { stdio: "inherit" });
 
   // pagefind
-  execSync('pagefind --site .next/server/app --output-path public/_pagefind', {
-    stdio: 'inherit',
+  execSync("pagefind --site .next/server/app --output-path public/_pagefind", {
+    stdio: "inherit",
   });
 
-  const outputDir = join(process.cwd(), 'out');
-  const publicDir = join(process.cwd(), 'public');
+  const outputDir = join(process.cwd(), "out");
+  const publicDir = join(process.cwd(), "public");
 
   // === copy ===
 
-  copySync(join(publicDir, '_pagefind'), join(outputDir, '_pagefind'));
+  copySync(join(publicDir, "_pagefind"), join(outputDir, "_pagefind"));
 
-  const seoFiles = ['robots.txt', 'sitemap.xml'];
+  const seoFiles = ["robots.txt", "sitemap.xml"];
   for (const file of seoFiles) {
     copySync(join(publicDir, file), join(outputDir, file));
   }

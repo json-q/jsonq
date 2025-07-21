@@ -1,9 +1,0 @@
-**/.local
-**/node_modules/**
-
-**/*.svg
-**/*.sh
-
-pnpm-lock.yaml
-package-lock.json
-yarn.lock

@@ -1,8 +1,8 @@
-'use client';
-import { MoonIcon, SunIcon } from 'lucide-react';
-import { useTheme } from 'next-themes';
-import { useCallback, useEffect, useState } from 'react';
-import { Button } from '~/components/ui/button';
+"use client";
+import { MoonIcon, SunIcon } from "lucide-react";
+import { useTheme } from "next-themes";
+import { useCallback, useEffect, useState } from "react";
+import { Button } from "~/components/ui/button";
 
 export default function ThemeSwitcher() {
   const [mounted, setMounted] = useState(false);
@@ -13,7 +13,7 @@ export default function ThemeSwitcher() {
   }, []);
 
   const toggleTheme = useCallback(() => {
-    setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
+    setTheme(resolvedTheme === "dark" ? "light" : "dark");
   }, [resolvedTheme, setTheme]);
 
   if (!mounted) return null;

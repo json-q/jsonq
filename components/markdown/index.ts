@@ -1,10 +1,10 @@
-import { MDXRemoteProps } from 'next-mdx-remote/rsc';
-import MLink from './m-link';
-import MImage from './m-image';
-import MPre from './m-pre';
-import { MBlockquote, MH1, MH2, MH3, MH4, MP, MTd, MTh, MTr, MUl } from './m-typography';
+import type { MDXRemoteProps } from "next-mdx-remote/rsc";
+import MImage from "./m-image";
+import MLink from "./m-link";
+import MPre from "./m-pre";
+import { MBlockquote, MH1, MH2, MH3, MH4, MP, MTd, MTh, MTr, MUl } from "./m-typography";
 
-const CustomMDXComponents: MDXRemoteProps['components'] = {
+const CustomMDXComponents: MDXRemoteProps["components"] = {
   a: MLink,
   img: MImage,
   pre: MPre,

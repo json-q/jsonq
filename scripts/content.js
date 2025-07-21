@@ -1,8 +1,8 @@
-const { mkdirSync, readdirSync, readFileSync, writeFileSync, existsSync, rmSync } = require('fs');
-const { join, basename, extname } = require('path');
-const readingTime = require('reading-time');
+const { mkdirSync, readdirSync, readFileSync, writeFileSync, existsSync, rmSync } = require("node:fs");
+const { join, basename, extname } = require("node:path");
+const readingTime = require("reading-time");
 
-const POST_DIR = 'post';
+const POST_DIR = "post";
 
 /**
  * @typedef {Object} Metadata - 元数据对象。
@@ -33,24 +33,24 @@ function parseFrontmatter(fileContent) {
   const metadata = {};
   if (match) {
     const frontMatterBlock = match[1];
-    const frontMatterLines = frontMatterBlock.trim().split('\n');
+    const frontMatterLines = frontMatterBlock.trim().split("\n");
 
     frontMatterLines.forEach((line) => {
-      const [key, ...valueArr] = line.split(': ');
-      let value = valueArr.join(': ').trim();
-      value = value.replace(/^['"](.*)['"]$/, '$1');
+      const [key, ...valueArr] = line.split(": ");
+      let value = valueArr.join(": ").trim();
+      value = value.replace(/^['"](.*)['"]$/, "$1");
       metadata[key.trim()] = value;
     });
   }
 
-  const normalContent = fileContent.replace(frontmatterRegex, '').trim();
+  const normalContent = fileContent.replace(frontmatterRegex, "").trim();
 
-  const innerLinkReg = new RegExp(`\\[([^\\]]+)\\]\\(/${POST_DIR}/([^)]+)\\)`, 'g');
+  const innerLinkReg = new RegExp(`\\[([^\\]]+)\\]\\(/${POST_DIR}/([^)]+)\\)`, "g");
 
   // 替换链接中的中间路径部分（md 中指向的是本地文件，存在嵌套文件夹，但是生成的 url 不包含嵌套，会 404）
-  const content = normalContent.replace(innerLinkReg, (match, text, path) => {
+  const content = normalContent.replace(innerLinkReg, (_match, text, path) => {
     // 如果路径中的连接地址存在 .md 后缀，去掉
-    const filename = path.split('/').pop().replace(/\.md$/, '');
+    const filename = path.split("/").pop().replace(/\.md$/, "");
     return `[${text}](/${POST_DIR}/${filename})`;
   });
 
@@ -73,7 +73,7 @@ function getMDXFiles(dir) {
       const fullPath = join(currentDir, entry.name);
       if (entry.isDirectory()) {
         recurse(fullPath);
-      } else if (['.md', '.mdx'].find((item) => extname(entry.name) == item)) {
+      } else if ([".md", ".mdx"].find((item) => extname(entry.name) === item)) {
         files.push(fullPath);
       }
     });
@@ -89,7 +89,7 @@ function getMDXFiles(dir) {
  * @returns {{frontMatter: Metadata, content: string}} 包含解析出的元数据和正文内容的对象。
  */
 function readMDXFile(filePath) {
-  const rawContent = readFileSync(filePath, 'utf-8');
+  const rawContent = readFileSync(filePath, "utf-8");
   return parseFrontmatter(rawContent);
 }
 
@@ -97,24 +97,24 @@ function readMDXFile(filePath) {
  * @param {string} dir
  */
 function createMDXData(dir) {
-  const folder = join(__dirname, 'generated');
+  const folder = join(__dirname, "generated");
   if (existsSync(folder)) {
     rmSync(folder, { recursive: true, force: true });
   }
-  mkdirSync('generated', { recursive: true });
+  mkdirSync("generated", { recursive: true });
 
   const mdxFiles = getMDXFiles(dir);
 
-  const catalogFilePath = join(__dirname, '../generated', 'catalog.json');
+  const catalogFilePath = join(__dirname, "../generated", "catalog.json");
   const catalogs = [];
 
   mdxFiles.forEach((mdxPath) => {
     const { frontMatter, content } = readMDXFile(mdxPath);
     const slug = basename(mdxPath, extname(mdxPath));
 
-    if (slug === 'README') return;
+    if (slug === "README") return;
 
-    const outputFilePath = join(__dirname, '../generated', `${slug}.json`);
+    const outputFilePath = join(__dirname, "../generated", `${slug}.json`);
 
     const baseInfo = {
       title: frontMatter.title,
@@ -126,22 +126,22 @@ function createMDXData(dir) {
     };
     catalogs.push(baseInfo);
 
-    writeFileSync(outputFilePath, JSON.stringify({ ...baseInfo, content }), 'utf8');
+    writeFileSync(outputFilePath, JSON.stringify({ ...baseInfo, content }), "utf8");
   });
 
   writeFileSync(
     catalogFilePath,
     JSON.stringify(
       catalogs
-        .filter((item) => item.slug != 'README')
+        .filter((item) => item.slug !== "README")
         .sort((a, b) => {
           return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
         }),
     ),
-    'utf8',
+    "utf8",
   );
 
-  console.log('😊 post successfully generated!');
+  console.log("😊 post successfully generated!");
 }
 
 createMDXData(join(__dirname, `../${POST_DIR}`));
