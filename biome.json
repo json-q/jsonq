@@ -7,7 +7,17 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "includes": ["app/**", "components/**", "config/**", "hooks/**", "lib/**", "scripts/**", "utils/**", ".vscode"]
+    "includes": [
+      "app/**",
+      "components/**",
+      "config/**",
+      "hooks/**",
+      "lib/**",
+      "scripts/**",
+      "utils/**",
+      ".vscode",
+      "next.config.ts"
+    ]
   },
   "formatter": {
     "enabled": true,
