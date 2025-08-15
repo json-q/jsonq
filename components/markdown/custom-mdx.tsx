@@ -1,8 +1,7 @@
-import { MDXRemote, type MDXRemoteProps } from "next-mdx-remote/rsc";
-
-import remarkGfm from "remark-gfm";
+import { MDXRemote, type MDXRemoteProps } from "next-mdx-remote-client/rsc";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
+import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 
 import CustomMDXComponents from ".";
