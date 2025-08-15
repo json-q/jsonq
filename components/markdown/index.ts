@@ -1,4 +1,4 @@
-import type { MDXRemoteProps } from "next-mdx-remote/rsc";
+import type { MDXRemoteProps } from "next-mdx-remote-client/rsc";
 import MImage from "./m-image";
 import MLink from "./m-link";
 import MPre from "./m-pre";
