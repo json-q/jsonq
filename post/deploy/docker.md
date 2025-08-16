@@ -62,32 +62,23 @@ docker ps
 sudo systemctl enable docker
 ```
 
-4. 设置加速（默认 docker 下载镜像是从 docker hub 下载，设置镜像源）
+4. 设置加速（默认 docker 下载镜像是从 docker hub 下载，设置镜像源，2025.08 更新）
 
 ```bash
 sudo mkdir -p /etc/docker
 sudo tee /etc/docker/daemon.json <<-'EOF'
 {
   "registry-mirrors": [
+    "https://docker.1panel.live",
+    "https://docker.1ms.run",
     "https://hub.rat.dev",
-    "https://docker.wanpeng.top",
-    "https://doublezonline.cloud",
-    "https://docker.mrxn.net",
-    "https://lynn520.xyz",
-    "https://ginger20240704.asia",
-    "https://docker.wget.at",
-    "https://dislabaiot.xyz",
-    "https://dockerpull.com",
-    "https://docker.fxxk.dedyn.io",
-    "https://dhub.kubesre.xyz",
-    "https://atomhub.openatom.cn",
     "https://docker.m.daocloud.io",
-    "https://docker.udayun.com",
-    "https://docker.211678.top",
-    "https://docker.nju.edu.cn",
     "https://mirror.iscas.ac.cn",
     "https://docker.xuanyuan.me",
-    "https://docker.1ms.run"
+    "https://docker-0.unsee.tech",
+    "https://lispy.org",
+    "https://proxy.vvvv.ee",
+    "https://registry.cyou"
   ]
 }
 EOF
