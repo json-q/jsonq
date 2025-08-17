@@ -39,7 +39,7 @@ export function MH1(props: React.JSX.IntrinsicElements["h1"]) {
     <BaseHeading
       component="h1"
       {...restProps}
-      className={cn("scroll-m-20 text-4xl font-extrabold tracking-tight", className)}
+      className={cn("scroll-m-20 font-extrabold text-4xl tracking-tight", className)}
     />
   );
 }
@@ -51,7 +51,7 @@ export function MH2(props: React.JSX.IntrinsicElements["h2"]) {
     <BaseHeading
       component="h2"
       {...restProps}
-      className={cn("scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0", className)}
+      className={cn("scroll-m-20 border-b pb-2 font-semibold text-3xl tracking-tight first:mt-0", className)}
     />
   );
 }
@@ -63,7 +63,7 @@ export function MH3(props: React.JSX.IntrinsicElements["h3"]) {
     <BaseHeading
       component="h3"
       {...restProps}
-      className={cn("scroll-m-20 text-2xl font-semibold tracking-tight", className)}
+      className={cn("scroll-m-20 font-semibold text-2xl tracking-tight", className)}
     />
   );
 }
@@ -75,7 +75,7 @@ export function MH4(props: React.JSX.IntrinsicElements["h4"]) {
     <BaseHeading
       component="h4"
       {...restProps}
-      className={cn("scroll-m-20 text-xl font-semibold tracking-tight", className)}
+      className={cn("scroll-m-20 font-semibold text-xl tracking-tight", className)}
     />
   );
 }
@@ -97,7 +97,7 @@ export function MBlockquote(props: React.JSX.IntrinsicElements["blockquote"]) {
 
 export function MTr(props: React.JSX.IntrinsicElements["tr"]) {
   const { className, ...restProps } = props;
-  return <tr {...restProps} className={cn(className, "even:bg-muted m-0 border-t p-0")} />;
+  return <tr {...restProps} className={cn(className, "m-0 border-t p-0 even:bg-muted")} />;
 }
 export function MTd(props: React.JSX.IntrinsicElements["td"]) {
   const { className, ...restProps } = props;

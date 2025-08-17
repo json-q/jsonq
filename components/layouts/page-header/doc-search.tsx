@@ -123,11 +123,11 @@ export default function DocSearch() {
         {isMobile === false && (
           <Button
             variant="outline"
-            className="bg-muted/50 text-muted-foreground relative h-8 w-full cursor-pointer justify-start rounded-[0.5rem] text-sm font-normal shadow-none sm:pr-12 md:w-32 lg:w-48 xl:w-56"
+            className="relative h-8 w-full cursor-pointer justify-start rounded-[0.5rem] bg-muted/50 font-normal text-muted-foreground text-sm shadow-none sm:pr-12 md:w-32 lg:w-48 xl:w-56"
           >
             <Search className="h-16 w-16 shrink-0 opacity-50" />
             <span className="inline-flex">Search...</span>
-            <kbd className="bg-muted pointer-events-none absolute top-[0.3rem] right-[0.3rem] hidden h-5 items-center gap-1 rounded border px-1.5 font-mono text-[10px] font-medium opacity-100 select-none sm:flex">
+            <kbd className="pointer-events-none absolute top-[0.3rem] right-[0.3rem] hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-medium font-mono text-[10px] opacity-100 sm:flex">
               <span className="text-xs">⌘</span>K
             </kbd>
           </Button>
@@ -156,7 +156,7 @@ export default function DocSearch() {
         ) : results.length === 0 ? (
           <EmptyStatus tip="暂无结果" icon={<Search className="h-16 w-16 shrink-0 opacity-50" />} />
         ) : (
-          <ScrollArea className="text-foreground min-h-[300px] overflow-x-hidden overflow-y-auto px-2 py-1 md:max-h-[calc(100vh-300px)]">
+          <ScrollArea className="min-h-[300px] overflow-y-auto overflow-x-hidden px-2 py-1 text-foreground md:max-h-[calc(100vh-300px)]">
             <ul className="w-full">
               {results.map((item) => (
                 <ResultList key={item.url} data={item} closeModal={closeModal} />
@@ -176,15 +176,15 @@ function ResultList({ data, closeModal }: { data: PagefindResult; closeModal: ()
         onClick={closeModal}
         onKeyUp={closeModal}
         key={item.url}
-        className="cursor-pointer gap-2 border-b text-sm text-inherit select-none"
+        className="cursor-pointer select-none gap-2 border-b text-inherit text-sm"
       >
         <Link
           onKeyDown={(e) => e.key === "Enter" && closeModal()}
           href={item.url}
-          className="hover:bg-accent hover:text-accent-foreground inline-flex w-full flex-col rounded-sm px-3 py-2"
+          className="inline-flex w-full flex-col rounded-sm px-3 py-2 hover:bg-accent hover:text-accent-foreground"
         >
           <div className="line-clamp-2 w-full" dangerouslySetInnerHTML={{ __html: item.excerpt }} />
-          <div className="mt-1 overflow-hidden text-xs font-bold">{item.title}</div>
+          <div className="mt-1 overflow-hidden font-bold text-xs">{item.title}</div>
         </Link>
       </li>
     );

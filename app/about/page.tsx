@@ -8,14 +8,14 @@ export const metadata: Metadata = {
 };
 
 const headingIntroduce = [
-  '你好，我是 Jsonq（焦松奇），一名<span class="line-through">（API 调用）</span>前端开发人员，主要使用 React、Vue、TypeScript、antd 相关技术进行日常开发和工作。',
-  '三年工作经验，工作中常用技术栈为 React + antd + <a class="text-link" target="_blank" rel="noopener noreferrer" href="https://learn.microsoft.com/en-us/sharepoint/dev/schema/query-schema">SharePoint CamlQuery</a> + pnpjs（SharePoint Orm）',
+  '你好，我是 Jsonq（焦松奇），一名<span class="line-through">（API 调用）</span>前端开发人员，主要使用 React、Vue、TypeScript 相关技术进行日常开发和工作。',
+  '三年工作经验，工作常用技术栈为 React、antd、<a class="text-link" target="_blank" rel="noopener noreferrer" href="https://learn.microsoft.com/en-us/sharepoint/dev/schema/query-schema">SharePoint CamlQuery</a>、pnpjs（SharePoint ORM）',
 ];
 
 const workIntroduceContent = [
-  "需求分析、功能设计、技术选型、业务数据表结构设计（团队内部讨论）",
+  "需求分析、功能设计、业务表结构设计",
   "基于 SharePoint 进行需求功能开发",
-  "负责前端项目技术选型及搭建，基础建设功能开发和维护（本人负责）",
+  "负责前端项目技术选型及搭建，基础建设功能开发和维护",
   "参与后端 Java 技术栈开发的部分工作",
 ];
 
@@ -27,10 +27,8 @@ export default function AboutPage() {
           <p className="py-2 first:pt-0" key={index.toString()} dangerouslySetInnerHTML={{ __html: item }} />
         ))}
 
-        <h2 className="my-4 text-3xl font-semibold tracking-tight">Functions</h2>
-        <p className="text-foreground/60 mb-2 text-sm">
-          主要基于 SharePoint 内网平台的定制化功能开发，工作内容较杂，不局限于前端
-        </p>
+        <h2 className="my-4 font-semibold text-3xl tracking-tight">Functions</h2>
+        <p className="mb-2 text-foreground/60 text-sm">主要基于 SharePoint 进行内网办公平台的定制化开发</p>
         <ul className="list-disc">
           {workIntroduceContent.map((content, index) => (
             <li key={index.toString()} className="py-1">
@@ -39,7 +37,7 @@ export default function AboutPage() {
           ))}
         </ul>
 
-        <h2 className="my-4 text-3xl font-semibold tracking-tight">Tech Stack</h2>
+        <h2 className="my-4 font-semibold text-3xl tracking-tight">Tech Stack</h2>
         <ul className="flex flex-wrap gap-6 py-4">
           {commonTechStack.map((tech, index) => (
             <li key={index.toString()}>
@@ -50,7 +48,7 @@ export default function AboutPage() {
           ))}
         </ul>
 
-        <h2 className="my-4 text-3xl font-semibold tracking-tight">Learning</h2>
+        <h2 className="my-4 font-semibold text-3xl tracking-tight">Learning</h2>
         <ul className="flex flex-wrap gap-6 py-4">
           {otherTechStack.map((tech, index) => (
             <li key={index.toString()}>
@@ -59,12 +57,13 @@ export default function AboutPage() {
               </Link>
             </li>
           ))}
+          <li className="inline-flex items-end text-muted-foreground text-sm">and more...</li>
         </ul>
 
-        <h2 className="my-4 text-3xl font-semibold tracking-tight">Contact</h2>
+        <h2 className="my-4 font-semibold text-3xl tracking-tight">Contact</h2>
         <p className="flex items-center">
           <Mail />
-          <a className="text-link ml-2" href="mailto:j996730508@163.com" rel="noopener noreferrer">
+          <a className="ml-2 text-link" href="mailto:j996730508@163.com" rel="noopener noreferrer">
             j996730508@163.com
           </a>
         </p>

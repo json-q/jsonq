@@ -89,7 +89,7 @@ export default function TocTree() {
           <li key={id} title={title || ""} className="mt-0 mb-2 w-full p-0">
             <a
               href={`#${id}`}
-              className={cn("text-foreground hover:text-link line-clamp-1 w-full no-underline", {
+              className={cn("line-clamp-1 w-full text-foreground no-underline hover:text-link", {
                 "text-link": i === activeIndex,
               })}
               style={{ paddingLeft: `${depth * 0.6}rem` }}
@@ -105,7 +105,7 @@ export default function TocTree() {
   return (
     <Sheet>
       <SheetTrigger>
-        <TableOfContents className="hover:bg-accent bg-background text-foreground fixed right-6 bottom-12 z-10 h-10 w-10 cursor-pointer overflow-hidden rounded-full border p-2 shadow-sm transition-colors" />
+        <TableOfContents className="fixed right-6 bottom-12 z-10 h-10 w-10 cursor-pointer overflow-hidden rounded-full border bg-background p-2 text-foreground shadow-sm transition-colors hover:bg-accent" />
       </SheetTrigger>
       <SheetContent className="overflow-y-auto p-4">
         <SheetHeader className="sr-only">

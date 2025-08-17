@@ -46,6 +46,12 @@
       },
       "a11y": {
         "noSvgWithoutTitle": "off"
+      },
+      "nursery": {
+        "useSortedClasses": {
+          "level": "warn",
+          "fix": "safe"
+        }
       }
     }
   },

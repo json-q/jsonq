@@ -8,7 +8,7 @@ import ThemeSwitcher from "./theme-switcher";
 
 export default function PageHeader() {
   return (
-    <header className="border-grid bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 w-full border-b backdrop-blur">
+    <header className="sticky top-0 z-50 w-full border-grid border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="m-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-14 items-center">
           <PCNav />

@@ -1,4 +1,5 @@
 import {
+  TechCentos,
   TechDocker,
   TechJava,
   TechJavaScript,
@@ -20,14 +21,14 @@ export const commonTechStack = [
     href: "https://developer.mozilla.org/zh-CN/docs/Web/JavaScript",
   },
   {
-    icon: TechReact,
-    color: "#61dafb",
-    href: "https://react.dev",
-  },
-  {
     icon: TechTypeScript,
     color: "#3178C6",
     href: "https://www.typescriptlang.org",
+  },
+  {
+    icon: TechReact,
+    color: "#61dafb",
+    href: "https://react.dev",
   },
   {
     icon: TechPnpjs,
@@ -71,11 +72,11 @@ export const otherTechStack = [
     color: "#E0234E",
     href: "https://nestjs.com",
   },
-  // {
-  //   icon: TechCentos,
-  //   color: '#262577',
-  //   href: 'https://www.centos.org',
-  // },
+  {
+    icon: TechCentos,
+    color: "#262577",
+    href: "https://www.centos.org",
+  },
   // {
   //   icon: TechNginx,
   //   color: '#009639',

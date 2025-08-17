@@ -27,14 +27,14 @@ export default function ErrorResult(props: ErrorResultProps) {
     <div className="flex h-full flex-col items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-md text-center">
         <div className="p-4">
-          <div className="text-6xl font-bold">{props.status}</div>
+          <div className="font-bold text-6xl">{props.status}</div>
         </div>
 
-        <h1 className="text-foreground mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
+        <h1 className="mt-4 font-bold text-3xl text-foreground tracking-tight sm:text-4xl">
           {TipEnum[props.status].title}
         </h1>
 
-        <p className="text-muted-foreground mt-4 mb-6 text-sm">{TipEnum[props.status].tip}</p>
+        <p className="mt-4 mb-6 text-muted-foreground text-sm">{TipEnum[props.status].tip}</p>
 
         {props.back === "prev" ? (
           <Button variant="secondary" onClick={router.back}>

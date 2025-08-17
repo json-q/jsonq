@@ -55,7 +55,7 @@ const MPre = (props: MPreProps): ReactElement => {
       <Button
         variant="secondary"
         size="icon"
-        className="copy-btn border-input absolute top-2 right-2 size-8 cursor-pointer border transition-opacity"
+        className="copy-btn absolute top-2 right-2 size-8 cursor-pointer border border-input transition-opacity"
         onClick={handleClick}
         tabIndex={0}
       >

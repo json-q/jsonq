@@ -19,7 +19,6 @@
     "build": "npm run generate && next build --turbopack",
     "start": "next start",
     "lint": "biome lint --write --unsafe",
-    "format": "biome format --write",
     "watch": "onchange post/**/*.{md,mdx} -- npm run generate",
     "generate": "node ./scripts/content"
   },

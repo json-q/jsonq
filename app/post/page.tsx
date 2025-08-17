@@ -16,11 +16,11 @@ export default async function PostList() {
       {postList.map((post) => (
         <li
           key={post.url}
-          className="dark:hover:bg-accent mb-2 flex w-full flex-col rounded border p-0 hover:bg-slate-50 dark:border-slate-600"
+          className="mb-2 flex w-full flex-col rounded border p-0 hover:bg-slate-50 dark:border-slate-600 dark:hover:bg-accent"
         >
-          <Link href={post.url} className="p-4 !text-inherit no-underline hover:text-inherit dark:hover:text-inherit">
+          <Link href={post.url} className="!text-inherit p-4 no-underline hover:text-inherit dark:hover:text-inherit">
             <h5 className="font-bold">{post.title}</h5>
-            <div className="mt-2 flex justify-between text-sm text-slate-600 dark:text-slate-400">
+            <div className="mt-2 flex justify-between text-slate-600 text-sm dark:text-slate-400">
               <time>{dayjs(post.publishedAt).format("YYYY-MM-DD")}</time>
               <time>{post.readingTime}</time>
             </div>

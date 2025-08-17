@@ -21,7 +21,7 @@ export default function MobileNav() {
         <Button
           variant="ghost"
           className={cn(
-            "extend-touch-target h-8 touch-manipulation items-center justify-start gap-2.5 !p-0 hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 active:bg-transparent dark:hover:bg-transparent",
+            "extend-touch-target !p-0 h-8 touch-manipulation items-center justify-start gap-2.5 hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 active:bg-transparent dark:hover:bg-transparent",
             "flex md:hidden",
           )}
         >
@@ -29,13 +29,13 @@ export default function MobileNav() {
             <div className="relative size-4">
               <span
                 className={cn(
-                  "bg-foreground absolute left-0 block h-0.5 w-4 transition-all duration-100",
-                  open ? "top-[0.4rem] -rotate-45" : "top-1",
+                  "absolute left-0 block h-0.5 w-4 bg-foreground transition-all duration-100",
+                  open ? "-rotate-45 top-[0.4rem]" : "top-1",
                 )}
               />
               <span
                 className={cn(
-                  "bg-foreground absolute left-0 block h-0.5 w-4 transition-all duration-100",
+                  "absolute left-0 block h-0.5 w-4 bg-foreground transition-all duration-100",
                   open ? "top-[0.4rem] rotate-45" : "top-2.5",
                 )}
               />
@@ -46,11 +46,11 @@ export default function MobileNav() {
       </PopoverTrigger>
 
       <Link href="/" aria-label="site logo">
-        <SiteLogo className="block h-10 -translate-y-1.5 md:hidden" />
+        <SiteLogo className="-translate-y-1.5 block h-10 md:hidden" />
       </Link>
 
       <PopoverContent
-        className="bg-background/90 no-scrollbar h-(--radix-popper-available-height) w-(--radix-popper-available-width) overflow-y-auto rounded-none border-none p-0 shadow-none backdrop-blur duration-100"
+        className="no-scrollbar h-(--radix-popper-available-height) w-(--radix-popper-available-width) overflow-y-auto rounded-none border-none bg-background/90 p-0 shadow-none backdrop-blur duration-100"
         align="start"
         side="bottom"
         alignOffset={-16}
