@@ -174,7 +174,6 @@ function ResultList({ data, closeModal }: { data: PagefindResult; closeModal: ()
     return (
       <li
         onClick={closeModal}
-        onKeyUp={closeModal}
         key={item.url}
         className="cursor-pointer select-none gap-2 border-b text-inherit text-sm"
       >
