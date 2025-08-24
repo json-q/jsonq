@@ -8,7 +8,6 @@ const nextConfig: NextConfig = {
   transpilePackages: ["next-mdx-remote"],
   experimental: {
     reactCompiler: true,
-    turbopackPersistentCaching: true,
   },
   images: {
     // 静态导出无法优化
