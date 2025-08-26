@@ -27,7 +27,7 @@ sudo yum install -y yum-utils
 sudo yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
 ```
 
-3. 安装 docker 引擎
+3. 安装 docker 引擎（25 年 7 月靠后不能直接复制，请看下方的更新注意进行安装）
 
 ```bash
 sudo yum install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
@@ -40,6 +40,24 @@ sudo yum install docker-ce docker-ce-cli containerd.io docker-buildx-plugin dock
 - docker-compose-plugin: Docker Compose 批量构建工具
 
 > 输入两次 y 确认即可等待安装成功
+
+### 更新需知
+
+**2025-08-06 更新：若出现 `containerd.io-1.6.33-3.1.el7.x86_64: [Errno 256] No more mirrors to try.` 的错误，需按照以下步骤操作**
+
+```bash
+yum -y install containerd.io-1.6.18
+```
+
+`containerd.io` 这个最新版本的镜像文件虽然标记了 `el7` 但是其实和 Centos7/RHEL7 是不适配的，需要**降低版本**
+
+而与此版本适配的 `docker-ce` 的版本如下：
+
+```bash
+yum -y install docker-ce-24.0.5 docker-ce-cli-24.0.5
+```
+
+解决方案的出处来自：https://blog.csdn.net/avatar_2009/article/details/149273277
 
 ## Docker 启动配置
 
