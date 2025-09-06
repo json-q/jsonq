@@ -18,8 +18,8 @@ const desc = [
       "简单实现 markdown 编写保存时的页面 hmr",
       "Github Action 自动化部署",
       '<a class="text-link" target="_blank" rel="noopener noreferrer" href="https://jsonq.netlify.app">镜像站点</a> 托管 netlify',
-      "pagefind 本地检索（pagefind 仅支持静态页面，因此 RSC 无法使用）",
-      "优秀的性能和可访问性，Lighthouse 评分 95+（文章内容大小会影响 Perfermance）",
+      "pagefind 本地检索（pagefind 仅支持 SSG）",
+      "优秀的性能和可访问性，Lighthouse 评分 95+（文章内容大小会影响 Performance）",
     ],
   },
 ];
