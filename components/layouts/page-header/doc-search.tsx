@@ -4,14 +4,7 @@ import { addBasePath } from "next/dist/client/add-base-path";
 import Link from "next/link";
 import { useCallback, useDeferredValue, useEffect, useState } from "react";
 import { Button } from "~/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "~/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "~/components/ui/dialog";
 import { Input } from "~/components/ui/input";
 import { ScrollArea } from "~/components/ui/scroll-area";
 import { useIsMobile } from "~/hooks/use-mobile";
@@ -123,7 +116,7 @@ export default function DocSearch() {
         {isMobile === false && (
           <Button
             variant="outline"
-            className="relative h-8 w-full cursor-pointer justify-start rounded-[0.5rem] bg-muted/50 font-normal text-muted-foreground text-sm shadow-none sm:pr-12 md:w-32 lg:w-48 xl:w-56"
+            className="relative h-8 w-full cursor-pointer justify-start rounded bg-muted/50 font-normal text-muted-foreground text-sm shadow-none sm:pr-12 md:w-32 lg:w-48 xl:w-56"
           >
             <Search className="h-16 w-16 shrink-0 opacity-50" />
             <span className="inline-flex">Search...</span>
@@ -134,11 +127,11 @@ export default function DocSearch() {
         )}
       </DialogTrigger>
       <DialogContent className="gap-0 p-0" hideCloseIcon>
-        {/* Header 仅仅防止报错 */}
-        <DialogHeader>
-          <DialogTitle className="sr-only" aria-describedby="search-mask-title" />
-          <DialogDescription className="sr-only" aria-describedby="search-mask-description" />
-        </DialogHeader>
+        {/* Only fix error and warning */}
+        {/* https://stackoverflow.com/questions/78728117/shadcn-warning-missing-description-or-aria-describedby-undefined-for-dia */}
+        <DialogTitle className="sr-only">
+          <DialogDescription />
+        </DialogTitle>
 
         <div className="flex items-center border-b px-3">
           <Search className="mr-2 size-4 shrink-0 opacity-50" />

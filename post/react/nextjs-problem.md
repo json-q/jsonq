@@ -1,5 +1,5 @@
 ---
-title: Nextjs 部分问题汇总
+title: Nextjs windows 打包部分问题汇总
 date: 2025-08-03
 ---
 

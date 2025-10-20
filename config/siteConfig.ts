@@ -11,13 +11,13 @@ const siteConfig = {
   ],
   externalLink: [
     { icon: Github, title: "Github", href: "https://github.com/json-q/jsonq" },
-    { icon: Cnblog, title: "cnblog", href: "https://www.cnblogs.com/jsonq" },
+    { icon: Cnblog, title: "cnblog", href: "https://cnblogs.com/jsonq" },
     // { icon: Gitee, title: 'Gitee', href: 'https://gitee.com/jsonqi' },
   ],
   footerLink: [
     { icon: NextjsIcon, title: "Nextjs", href: "https://nextjs.org" },
-    { icon: JsDelivrIcon, title: "jsDelivr ", href: "https://www.jsdelivr.com" },
-    { icon: NetlifyIcon, title: "Netlify", href: "https://app.netlify.com" },
+    { icon: JsDelivrIcon, title: "jsDelivr ", href: "https://jsdelivr.com" },
+    { icon: NetlifyIcon, title: "Netlify", href: "https://netlify.com" },
   ],
   metadata: {
     metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_HOST!),
