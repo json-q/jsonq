@@ -6,18 +6,8 @@
     "useIgnoreFile": false
   },
   "files": {
-    "ignoreUnknown": false,
-    "includes": [
-      "app/**",
-      "components/**",
-      "config/**",
-      "hooks/**",
-      "lib/**",
-      "scripts/**",
-      "utils/**",
-      ".vscode",
-      "next.config.ts"
-    ]
+    "ignoreUnknown": true,
+    "includes": ["**", "!node_modules", "!.next", "!generated", "!out", "!public"]
   },
   "formatter": {
     "enabled": true,

@@ -1,0 +1,14 @@
+export { default as TechNextjs } from "@/components/layouts/page-footer/icons/NextjsIcon";
+export { default as TechCentos } from "./TechCentos";
+export { default as TechDocker } from "./TechDocker";
+export { default as TechJava } from "./TechJava";
+export { default as TechJavaScript } from "./TechJavaScript";
+export { default as TechMySQL } from "./TechMySQL";
+export { default as TechNestjs } from "./TechNestjs";
+export { default as TechNginx } from "./TechNginx";
+export { default as TechNodejs } from "./TechNodejs";
+export { default as TechPnpjs } from "./TechPnpjs";
+export { default as TechReact } from "./TechReact";
+export { default as TechTailwindcss } from "./TechTailwindcss";
+export { default as TechTypeScript } from "./TechTypeScript";
+export { default as TechVue } from "./TechVue";
