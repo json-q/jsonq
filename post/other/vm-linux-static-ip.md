@@ -353,8 +353,7 @@ yum makecache
 yum update
 ```
 
-## VM 安装教程
+## 教程
 
-https://blog.csdn.net/qq_45743985/article/details/121152504
-
-网络的静态 ip 不随教程走
+- vm 安装教程（网络的静态 ip 不随教程走）：https://blog.csdn.net/qq_45743985/article/details/121152504
+- Centos9 安装教程：https://blog.csdn.net/qq_44870331/article/details/129988704

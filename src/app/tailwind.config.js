@@ -9,6 +9,7 @@ module.exports = {
             "blockquote p:first-of-type::after": { content: "none" },
             a: {
               color: "var(--link)",
+              wordBreak: "break-word",
               code: { color: "var(--link)" },
             },
             code: {
