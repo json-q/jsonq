@@ -238,7 +238,7 @@ docker network ls
 minio 的 `docker-compose.yml`
 
 ```yaml
-name: 'minio'
+name: "minio"
 services:
   minio:
     networks:
@@ -534,7 +534,7 @@ jobs:
 - 停止容器，删除容器
 - 停止镜像，删除镜像
 
-为什么写了一大堆呢？其实就是 `git pull` 拉取代码失败后的重试机制，因为众所周知的问题，拉取 github 的代码经常失败（当时傻Ⅹ买了台国内服务器，结果自讨苦吃）
+为什么写了一大堆呢？其实就是 `git pull` 拉取代码失败后的重试机制，因为众所周知的问题，拉取 github 的代码经常失败（当时傻 Ⅹ 买了台国内服务器，结果自讨苦吃）
 
 ### Nextjs 开发中的踩坑
 
@@ -562,7 +562,7 @@ http 没法访问 https，目前这里有两种方法
 
 ## Postgresql
 
-先上 dockerc-compose.yml 文件
+先上 `docker-compose.yml` 文件
 
 ```yaml
 services:
@@ -571,14 +571,14 @@ services:
     container_name: postgres
     environment:
       POSTGRES_USER: postgres # 管理员用户不设置默认 postgres
-      POSTGRES_PASSWORD: xxxxx # 密码
+      POSTGRES_PASSWORD: 123456 # 密码
     ports:
-      - '5432:5432'
+      - "5432:5432"
     volumes:
       - ./data:/var/lib/postgresql/data
     restart: always
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U postgres']
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -629,3 +629,41 @@ volumes:
 ### 最终展示
 
 ![image](https://jsonq.top/cdn-static/2025/05/03/202505032216843.png)
+
+## Redis
+
+```yaml
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./data:/data
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+      - ./logs:/logs
+    restart: always
+
+volumes:
+  redis_data:
+```
+
+## Mysql
+
+```yaml
+services:
+  mysql:
+    image: mysql:8
+    container_name: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+      - TZ=Asia/Shanghai
+    volumes:
+      - ./log:/var/log/mysql
+      - ./data:/var/lib/mysql
+      - ./conf.d:/etc/mysql/conf.d
+    restart: always
+```

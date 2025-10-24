@@ -140,7 +140,7 @@ docker pull hub.uuuadc.top/library/mysql:5.7
 - docker logs : 查看容器日志
 - docker exec: 进入容器
 - docker rm : 删除容器
-- dokcer rmi : 删除镜像
+- docker rmi : 删除镜像
 
 其中 `docker run` 和 `docker exec` 相对操作较为复杂，详细命令使用 `docker run --help` 查看
 
