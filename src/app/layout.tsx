@@ -7,7 +7,7 @@ import "./globals.css";
 
 export const metadata: Metadata = siteConfig.metadata;
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="zh-CN" suppressHydrationWarning>
       <body className="flex min-h-screen flex-col antialiased">

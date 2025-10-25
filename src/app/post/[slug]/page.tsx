@@ -5,11 +5,6 @@ import CustomMDX from "@/components/markdown/custom-mdx";
 import siteConfig from "@/config/siteConfig";
 import { getPostBySlug, getPostList } from "@/utils/postData";
 
-type Props = {
-  params: Promise<{ slug: string }>;
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-};
-
 export async function generateStaticParams() {
   const posts = await getPostList();
 
@@ -19,7 +14,9 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata(props: PageProps<"/post/[slug]">) {
+  const { params } = props;
+
   const { slug } = await params;
   const posts = await getPostList();
   const post = posts.find((post) => post.slug === slug);
@@ -35,9 +32,10 @@ export async function generateMetadata({ params }: Props) {
   } satisfies Metadata;
 }
 
-export default async function PostDetail({ params }: Props) {
-  const { slug } = await params;
+export default async function PostDetail(props: PageProps<"/post/[slug]">) {
+  const { params } = props;
 
+  const { slug } = await params;
   const post = await getPostBySlug(slug);
 
   if (!post) return <ErrorResult status="404" back="prev" />;
