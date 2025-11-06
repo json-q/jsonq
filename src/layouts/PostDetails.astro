@@ -48,7 +48,13 @@ const nextPost = currentPostIndex !== allPosts.length ? allPosts[currentPostInde
   <BaseHeader/>
   <BackButton/>
   <main id="main-content" class="mx-auto w-full max-w-app px-4 pb-12 mt-8" , data-pagefind-body>
-    <h1 transition:name={slugifyStr(title)} class="inline-block text-2xl font-bold text-accent sm:text-3xl">{title}</h1>
+    <!--  transition:name 和 CardPostList 的 name 必须一致 home post -> detail post -->
+    <h1
+      transition:name={slugifyStr(allPosts[currentPostIndex].id.split("/").at(-1) || "")}
+      class="inline-block text-2xl font-bold text-accent sm:text-3xl"
+    >
+      {title}
+    </h1>
     <div class="my-2 flex items-center gap-2">
       <Datetime {pubDate} {updatedDate} size="lg"/>
     </div>
@@ -77,7 +83,7 @@ const nextPost = currentPostIndex !== allPosts.length ? allPosts[currentPostInde
           >
             <ChevronLeft class="inline-block flex-none rtl:rotate-180" />
             <div>
-              <span>Previous Post</span>
+              <span>上一篇</span>
               <div class="text-sm text-accent/85">{prevPost.title}</div>
             </div>
           </a>
@@ -90,7 +96,7 @@ const nextPost = currentPostIndex !== allPosts.length ? allPosts[currentPostInde
             class="flex w-full justify-end gap-1 text-end hover:opacity-75 sm:col-start-2"
           >
             <div>
-              <span>Next Post</span>
+              <span>下一篇</span>
               <div class="text-sm text-accent/85">{nextPost.title}</div>
             </div>
             <ChevronRight class="inline-block flex-none rtl:rotate-180" />

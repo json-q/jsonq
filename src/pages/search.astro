@@ -8,9 +8,9 @@ import BaseMain from "@/layouts/BaseMain.astro";
 
 const backUrl = `${Astro.url.pathname}`;
 ---
-<BaseLayout title={`Search | ${SITE.title}`}>
+<BaseLayout title={`搜索 | ${SITE.title}`}>
   <BaseHeader/>
-  <BaseMain pageTitle="Search" pageDesc="Search any article ...">
+  <BaseMain pageTitle="Search" pageDesc="在此处搜索所有文章 ...">
     <div id="pagefind-search" transition:persist data-backurl={backUrl}></div>
   </BaseMain>
   <BaseFooter/>

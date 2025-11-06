@@ -25,7 +25,9 @@ if (breadcrumbList[0] === "tags" && !Number.isNaN(Number(breadcrumbList[2]))) {
 function mapBreadcrumb(breadcrumbList: string[]): string[] {
   return breadcrumbList.map((item) => {
     const navLink = NAV_LINKS.find((link) => link.href === `/${item}`);
-    return navLink ? navLink.text : item;
+    if (navLink) return navLink.text;
+    if (item === "search") return "搜索";
+    return item;
   });
 }
 ---
