@@ -1,0 +1,43 @@
+---
+import { getCollection } from "astro:content";
+import type { GetStaticPathsOptions } from "astro";
+import CardPostList from "@/components/CardPostList.astro";
+import Pagination from "@/components/Pagination.astro";
+import { SITE } from "@/config";
+import BaseFooter from "@/layouts/BaseFooter.astro";
+import BaseHeader from "@/layouts/BaseHeader.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import BaseMain from "@/layouts/BaseMain.astro";
+import getPostsByTag from "@/utils/getPostsByTag";
+import getUniqueTags from "@/utils/getUniqueTags";
+
+export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
+  const posts = await getCollection("blog");
+  const tags = getUniqueTags(posts);
+
+  return tags.flatMap(({ tag, tagName }) => {
+    const tagPosts = getPostsByTag(posts, tag);
+
+    return paginate(tagPosts, {
+      params: { tag },
+      props: { tagName },
+      pageSize: SITE.postPerPage,
+    });
+  });
+}
+
+const params = Astro.params;
+const { tag } = params;
+const { page, tagName } = Astro.props;
+---
+<BaseLayout title={`Tag: ${tagName} | ${SITE.title}`}>
+  <BaseHeader/>
+  <BaseMain pageTitle={[`标签:`, `${tagName}`]} titleTransition={tag} pageDesc={`标签为 "${tagName}" 的文章集合`}>
+    <h1 slot="title" transition:name={tag}>{`标签：${tag}`}</h1>
+    <ul>{page.data.map((data) => <CardPostList {...data} />)}</ul>
+  </BaseMain>
+
+  <Pagination {page}/>
+
+  <BaseFooter noMarginTop={page.lastPage > 1}/>
+</BaseLayout>

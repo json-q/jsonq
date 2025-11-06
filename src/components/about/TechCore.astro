@@ -1,0 +1,40 @@
+---
+import IconJavaScript from "@/assets/JavaScript.svg";
+import IconReact from "@/assets/React.svg";
+import IconTypeScript from "@/assets/TypeScript.svg";
+import IconVue from "@/assets/Vue.svg";
+
+export const coreTechs = [
+  {
+    icon: IconJavaScript,
+    color: "#F7DF1E",
+    href: "https://developer.mozilla.org/zh-CN/docs/Web/JavaScript",
+  },
+  {
+    icon: IconTypeScript,
+    color: "#3178C6",
+    href: "https://www.typescriptlang.org",
+  },
+  {
+    icon: IconReact,
+    color: "#61dafb",
+    href: "https://react.dev",
+  },
+  {
+    icon: IconVue,
+    color: "#4FC08D",
+    href: "https://vuejs.org",
+  },
+];
+---
+<ul class="flex flex-wrap gap-4 p-0 m-0 list-none">
+  {
+    coreTechs.map((tech) => (
+      <li>
+        <a href={tech.href} target="_blank" rel="noopener">
+          <tech.icon style={{ color: tech.color }} class="size-8" />
+        </a>
+      </li>
+    ))
+  }
+</ul>

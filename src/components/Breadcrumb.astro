@@ -1,0 +1,60 @@
+---
+import { NAV_LINKS } from "@/constants";
+
+// 移除尾随斜杠
+const currentUrlPath = Astro.url.pathname.replace(/\/+$/, "");
+
+// /tags/tailwindcss => ['tags', 'tailwindcss']
+const breadcrumbList = currentUrlPath.split("/").slice(1);
+
+// 除 Home 的面包屑都会添加 Home 前缀，Post 存在分页
+// /post/2 --> [post, 2] --> Home > Posts (page number)
+if (breadcrumbList[0] === "posts") {
+  breadcrumbList.splice(0, 2, `文章 (第 ${breadcrumbList[1] || 1} 页)`);
+}
+
+// /tags/vue/2 --> [tags, vue, 2] --> Home > Tags > vue (page number)
+if (breadcrumbList[0] === "tags" && !Number.isNaN(Number(breadcrumbList[2]))) {
+  breadcrumbList.splice(
+    1,
+    3,
+    `${breadcrumbList[1]} ${Number(breadcrumbList[2]) === 1 ? "" : `(第 ${breadcrumbList[2]} 页)`}`,
+  );
+}
+
+function mapBreadcrumb(breadcrumbList: string[]): string[] {
+  return breadcrumbList.map((item) => {
+    const navLink = NAV_LINKS.find((link) => link.href === `/${item}`);
+    return navLink ? navLink.text : item;
+  });
+}
+---
+<nav class="mx-auto mt-8 mb-2 w-full max-w-app px-4" aria-label="breadcrumb">
+  <ul class="font-light [&>li]:inline [&>li:not(:last-child)>a]:hover:opacity-100">
+    <li>
+      <a href="/" class="opacity-80">首页</a>
+      <span aria-hidden="true" class="opacity-80">&raquo;</span>
+    </li>
+    {
+      mapBreadcrumb(breadcrumbList).map((breadcrumb, index) =>
+        index + 1 === breadcrumbList.length ? (
+          <li>
+            <span
+              class:list={["capitalize opacity-75", { lowercase: index > 0 }]}
+              aria-current="page"
+            >
+              {decodeURIComponent(breadcrumb)}
+            </span>
+          </li>
+        ) : (
+          <li>
+            <a href={`/${breadcrumb}/`} class="capitalize opacity-70">
+              {breadcrumb}
+            </a>
+            <span aria-hidden="true">&raquo;</span>
+          </li>
+        )
+      )
+    }
+  </ul>
+</nav>

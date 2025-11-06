@@ -1,0 +1,82 @@
+---
+import { getCollection } from "astro:content";
+import { Rss } from "@lucide/astro";
+import BetterHr from "@/components/BetterHr.astro";
+import CardPostList from "@/components/CardPostList.astro";
+import LinkButton from "@/components/LinkButton.astro";
+import Socials from "@/components/Socials.astro";
+import { SITE } from "@/config";
+import { SOCIALS } from "@/constants";
+import BaseFooter from "@/layouts/BaseFooter.astro";
+import BaseHeader from "@/layouts/BaseHeader.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import getSortedPosts from "@/utils/getSortedPosts";
+
+const posts = await getCollection("blog");
+
+const sortedPosts = getSortedPosts(posts);
+---
+<BaseLayout>
+  <BaseHeader/>
+  <main id="main-content" data-layout="index">
+    <section id="hero" class="pt-8 pb-6">
+      <h1 class="my-4 inline-block text-4xl font-bold sm:my-8 sm:text-5xl">Welcome</h1>
+      <a target="_blank" href="/rss.xml" class="inline-block" aria-label="rss feed" title="RSS Feed">
+        <Rss width={20} height={20} class="scale-125 stroke-accent stroke-3 rtl:-rotate-90"/>
+        <span class="sr-only">RSS Feed</span>
+      </a>
+      <p>
+        此网站主题基于
+        <LinkButton
+          target="_blank"
+          class="underline decoration-dashed underline-offset-4 hover:text-accent"
+          href="https://github.com/satnaing/astro-paper"
+        >
+          AstroPaper
+        </LinkButton>
+        模板进行简单的二次修改以作为个人博客使用，Thanks。
+      </p>
+      <p class="mt-2">
+        主要记录工作过程中遇到的问题和平时的学习记录（目前学习少了）以及扯皮，都是些没有含金量文章，反正也没人看，有时间就稍微写点。
+      </p>
+      <p class="mt-2">
+        通常情况下写文章优先放在此处，有意思的文章会同步至
+        <LinkButton
+          target="_blank"
+          class="underline decoration-dashed underline-offset-4 hover:text-accent"
+          href="https://www.cnblogs.com/jsonq"
+        >
+          博客园
+        </LinkButton>
+        并进行适当修改优化。
+      </p>
+      {
+        SOCIALS.length > 0 && (
+          <div class="mt-4 flex flex-col sm:flex-row sm:items-center">
+            <div class="mr-2 mb-1 whitespace-nowrap sm:mb-0">社交链接:</div>
+            <Socials />
+          </div>
+        )
+      }
+    </section>
+
+    <BetterHr/>
+
+    {
+      sortedPosts.length > 0 && (
+        <section id="recent-posts" class="pt-12 pb-6">
+          <h2 class="text-2xl font-semibold tracking-wide">最新文章</h2>
+          <ul>
+            {sortedPosts.map(
+              (data, index) =>
+                index < SITE.postPerIndex && (
+                  <CardPostList variant="h3" {...data} />
+                )
+            )}
+          </ul>
+        </section>
+      )
+    }
+  </main>
+  <BaseFooter/>
+</BaseLayout>

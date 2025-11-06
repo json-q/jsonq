@@ -1,0 +1,21 @@
+---
+import { getCollection } from "astro:content";
+import Tag from "@/components/Tag.astro";
+import { SITE } from "@/config";
+import BaseFooter from "@/layouts/BaseFooter.astro";
+import BaseHeader from "@/layouts/BaseHeader.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import BaseMain from "@/layouts/BaseMain.astro";
+import getUniqueTags from "@/utils/getUniqueTags";
+
+const posts = await getCollection("blog");
+
+const tags = getUniqueTags(posts);
+---
+<BaseLayout title={`标签 | ${SITE.title}`}>
+  <BaseHeader/>
+  <BaseMain pageTitle="Tags" pageDesc="文章使用的标签集合">
+    <ul>{tags.map(({ tag, tagName }) => <Tag {tag} {tagName} size="lg" />)}</ul>
+  </BaseMain>
+  <BaseFooter/>
+</BaseLayout>

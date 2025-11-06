@@ -1,0 +1,36 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { genPath } from "@/utils/genPath";
+import { slugifyStr } from "@/utils/slugify";
+import Datetime from "./Datetime.astro";
+
+export interface Props extends CollectionEntry<"blog"> {
+  variant?: "h2" | "h3";
+}
+
+const { variant = "h2", data, id, filePath } = Astro.props;
+
+const { title, description, pubDate, updatedDate } = data;
+
+const transitionName = id.split("/").at(-1) || "";
+const headerProps = {
+  style: { viewTransitionName: slugifyStr(transitionName) },
+  class: "text-lg font-medium decoration-dashed hover:underline",
+};
+---
+<li class="my-6">
+  <a
+    href={genPath(id, filePath)}
+    class="inline-block text-lg font-medium text-accent decoration-dashed underline-offset-4 focus-visible:no-underline focus-visible:underline-offset-0"
+  >
+    {
+      variant === "h2" ? (
+        <h2 {...headerProps}>{title}</h2>
+      ) : (
+        <h3 {...headerProps}>{title}</h3>
+      )
+    }
+  </a>
+  <Datetime class="my-1" {pubDate} {updatedDate}/>
+  <p>{description}</p>
+</li>

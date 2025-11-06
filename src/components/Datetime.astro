@@ -1,0 +1,42 @@
+---
+import { CalendarDays } from "@lucide/astro";
+import dayjs from "dayjs";
+import timezone from "dayjs/plugin/timezone";
+import utc from "dayjs/plugin/utc";
+import { SITE } from "@/config";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
+
+export interface Props {
+  class?: string;
+  size?: "sm" | "lg";
+  pubDate: string | Date;
+  updatedDate: string | Date | undefined | null;
+}
+
+const { pubDate, updatedDate, size = "sm", class: className = "" } = Astro.props;
+
+/* ========== Formatted Datetime ========== */
+const isModified = updatedDate && updatedDate > pubDate;
+
+const datetime = dayjs(isModified ? updatedDate : pubDate).tz(SITE.timezone);
+
+const date = datetime.format("YYYY-MM-DD");
+---
+<div class:list={["flex items-center gap-x-2 opacity-80", className]}>
+  <CalendarDays
+    class:list={[
+      "inline-block size-6 min-w-5.5",
+      { "scale-90": size === "sm" },
+    ]}
+  />
+  {
+    isModified && (
+      <span class:list={["text-sm", { "sm:text-base": size === "lg" }]}>
+        更新时间:
+      </span>
+    )
+  }
+  <time class:list={["text-sm", { "sm:text-base": size === "lg" }]} datetime={datetime.toISOString()}>{date}</time>
+</div>

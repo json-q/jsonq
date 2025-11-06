@@ -1,0 +1,58 @@
+---
+import IconCentos from "@/assets/Centos.svg";
+import IconDocker from "@/assets/Docker.svg";
+import IconJava from "@/assets/Java.svg";
+import IconMySql from "@/assets/MySql.svg";
+import IconNestjs from "@/assets/Nestjs.svg";
+import IconNextjs from "@/assets/Nextjs.svg";
+import IconNodejs from "@/assets/Nodejs.svg";
+
+export const learnTechs = [
+  {
+    icon: IconNextjs,
+    // color: "#000000",
+    href: "https://nextjs.org",
+  },
+  {
+    icon: IconNodejs,
+    color: "#5FA04E",
+    href: "https://nodejs.org",
+  },
+  {
+    icon: IconJava,
+    color: "#007396",
+    href: "https://www.java.com",
+  },
+  {
+    icon: IconMySql,
+    color: "#4479A1",
+    href: "https://www.mysql.com",
+  },
+  {
+    icon: IconNestjs,
+    color: "#E0234E",
+    href: "https://nestjs.com",
+  },
+  {
+    icon: IconCentos,
+    color: "#262577",
+    href: "https://www.centos.org",
+  },
+  {
+    icon: IconDocker,
+    color: "#2496ED",
+    href: "https://docker.com",
+  },
+];
+---
+<ul class="flex flex-wrap gap-4 p-0 m-0 list-none">
+  {
+    learnTechs.map((tech) => (
+      <li>
+        <a href={tech.href} target="_blank" rel="noopener">
+          <tech.icon style={{ color: tech.color }} class="size-8" />
+        </a>
+      </li>
+    ))
+  }
+</ul>

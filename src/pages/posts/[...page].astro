@@ -1,0 +1,29 @@
+---
+import { getCollection } from "astro:content";
+import type { GetStaticPaths } from "astro";
+import CardPostList from "@/components/CardPostList.astro";
+import Pagination from "@/components/Pagination.astro";
+import { SITE } from "@/config";
+import BaseFooter from "@/layouts/BaseFooter.astro";
+import BaseHeader from "@/layouts/BaseHeader.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import BaseMain from "@/layouts/BaseMain.astro";
+import getSortedPosts from "@/utils/getSortedPosts";
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = await getCollection("blog");
+  return paginate(getSortedPosts(posts), { pageSize: SITE.postPerPage });
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+---
+<BaseLayout title={`文章 | ${SITE.title}`}>
+  <BaseHeader/>
+  <BaseMain pageTitle="文章" pageDesc="写作的文章集合">
+    <ul>{page.data.map((data) => <CardPostList {...data} />)}</ul>
+  </BaseMain>
+
+  <Pagination {page}/>
+
+  <BaseFooter noMarginTop={page.lastPage > 1}/>
+</BaseLayout>
