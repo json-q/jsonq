@@ -1,4 +1,5 @@
 import mdx from "@astrojs/mdx";
+import netlify from "@astrojs/netlify";
 import sitemap from "@astrojs/sitemap";
 import {
   transformerNotationDiff,
@@ -44,4 +45,5 @@ export default defineConfig({
       tailwindcss(),
     ],
   },
+  adapter: netlify(),
 });
