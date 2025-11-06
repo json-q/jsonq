@@ -3,6 +3,7 @@
   "type": "module",
   "version": "1.0.0",
   "scripts": {
+    "prepare": "lefthook install",
     "dev": "astro dev",
     "build": "astro build && pagefind --site dist && cpr dist/pagefind public/pagefind",
     "preview": "astro preview",
@@ -30,6 +31,7 @@
     "@tailwindcss/vite": "^4.1.16",
     "@types/lodash.kebabcase": "^4.1.9",
     "cpr": "^3.0.1",
+    "lefthook": "^2.0.2",
     "pagefind": "^1.4.0",
     "tailwindcss": "^4.1.16",
     "vite": "^6.4.1"
