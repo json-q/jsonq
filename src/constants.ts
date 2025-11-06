@@ -1,4 +1,6 @@
-import { Mail } from "@lucide/astro";
+// import { Mail } from "@lucide/astro" 这种写法会使 dev 下的构建时间巨量增加
+// https://github.com/withastro/astro/issues/12793
+import Mail from "@lucide/astro/icons/mail";
 import type { Props } from "astro";
 import CnBlogs from "@/assets/CnBlogs.svg";
 import Github from "@/assets/Github.svg";

@@ -14,7 +14,7 @@ const tags = getUniqueTags(posts);
 ---
 <BaseLayout title={`标签 | ${SITE.title}`}>
   <BaseHeader/>
-  <BaseMain pageTitle="Tags" pageDesc="文章使用的标签集合">
+  <BaseMain pageTitle="标签" pageDesc="文章使用的标签集合">
     <ul>{tags.map(({ tag, tagName }) => <Tag {tag} {tagName} size="lg" />)}</ul>
   </BaseMain>
   <BaseFooter/>
