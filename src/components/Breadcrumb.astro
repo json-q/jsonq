@@ -1,6 +1,11 @@
 ---
 import { NAV_LINKS } from "@/constants";
 
+const textMapURL = {
+  文章: "posts",
+  标签: "tags",
+};
+
 // 移除尾随斜杠
 const currentUrlPath = Astro.url.pathname.replace(/\/+$/, "");
 
@@ -9,12 +14,12 @@ const breadcrumbList = currentUrlPath.split("/").slice(1);
 
 // 除 Home 的面包屑都会添加 Home 前缀，Post 存在分页
 // /post/2 --> [post, 2] --> Home > Posts (page number)
-if (breadcrumbList[0] === "posts") {
+if (breadcrumbList[0] === textMapURL.文章) {
   breadcrumbList.splice(0, 2, `文章 (第 ${breadcrumbList[1] || 1} 页)`);
 }
 
 // /tags/vue/2 --> [tags, vue, 2] --> Home > Tags > vue (page number)
-if (breadcrumbList[0] === "tags" && !Number.isNaN(Number(breadcrumbList[2]))) {
+if (breadcrumbList[0] === textMapURL.标签 && !Number.isNaN(Number(breadcrumbList[2]))) {
   breadcrumbList.splice(
     1,
     3,
@@ -50,7 +55,7 @@ function mapBreadcrumb(breadcrumbList: string[]): string[] {
           </li>
         ) : (
           <li>
-            <a href={`/${breadcrumb}/`} class="capitalize opacity-70">
+            <a href={`/${textMapURL[breadcrumb as keyof typeof textMapURL]}/`} class="capitalize opacity-70">
               {breadcrumb}
             </a>
             <span aria-hidden="true">&raquo;</span>
