@@ -3,9 +3,7 @@ const currentTheme = localStorage.getItem("theme");
 function getPreferTheme() {
   if (currentTheme) return currentTheme;
 
-  return window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
 
 let themeValue = getPreferTheme();
@@ -46,8 +44,6 @@ function reflectPreference() {
     const bgColor = computedStyles.backgroundColor;
 
     // <meta theme-color ... />
-    document
-      .querySelector("meta[name='theme-color']")
-      ?.setAttribute("content", bgColor);
+    document.querySelector("meta[name='theme-color']")?.setAttribute("content", bgColor);
   }
 }

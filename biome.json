@@ -7,7 +7,7 @@
   },
   "files": {
     "ignoreUnknown": true,
-    "includes": ["**", "!node_modules", "!.astro", "!!public"]
+    "includes": ["**", "!node_modules", "!.astro", "!!pagefind", "!!dist", "!!.netlify"]
   },
   "html": {
     "formatter": { "enabled": true },
