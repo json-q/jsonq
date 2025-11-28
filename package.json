@@ -11,12 +11,12 @@
     "format": "biome check --write ."
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.3.11",
-    "@astrojs/netlify": "^6.6.1",
-    "@astrojs/rss": "^4.0.13",
+    "@astrojs/mdx": "^4.3.12",
+    "@astrojs/netlify": "^6.6.3",
+    "@astrojs/rss": "^4.0.14",
     "@astrojs/sitemap": "^3.6.0",
-    "@lucide/astro": "^0.552.0",
-    "astro": "^5.15.9",
+    "@lucide/astro": "^0.555.0",
+    "astro": "^5.16.2",
     "dayjs": "^1.11.19",
     "lodash.kebabcase": "^4.1.1",
     "remark-collapse": "^0.1.2",
@@ -26,7 +26,7 @@
   "devDependencies": {
     "@biomejs/biome": "2.3.6",
     "@pagefind/default-ui": "^1.4.0",
-    "@shikijs/transformers": "^3.15.0",
+    "@shikijs/transformers": "^3.17.0",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.1.17",
     "@types/lodash.kebabcase": "^4.1.9",
