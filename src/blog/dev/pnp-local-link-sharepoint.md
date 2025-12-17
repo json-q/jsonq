@@ -4,7 +4,7 @@ pubDate: 2025-05-26
 description: 基于 Sharepoint 进行本地项目开发的 API 请求代理及联调
 tags:
   - 开发
-  - sharepoint
+  - Sharepoint
 ---
 
 网上没找到类似的解决方案，遂水一下。Sharepoint 虽然有提供 [web 开发的文档](https://learn.microsoft.com/zh-cn/sharepoint/dev/spfx/web-parts/get-started/build-a-hello-world-web-part)，但必须使用 microsoft 官方的脚手架，且页面的定制化能力极低（自带 Sharepoint 的部分导航内容），这与我们期望的大相径庭。
