@@ -4,6 +4,7 @@ pubDate: 2025-12-17
 description: 前端 web 项目利用 pnpjs + node 实现项目打包后自动资源上传至 Sharepoint 及发版
 tags:
   - 开发
+  - Sharepoint
 ---
 
 结合 [Sharepoint 本地代理](/posts/dev/pnp-local-link-sharepoint) 实现，这个功能很早就写好了并始终在使用，还算稳定，不过 Sharepoint 也因为国产化要丢掉了，也算是做一个记录留存吧。
