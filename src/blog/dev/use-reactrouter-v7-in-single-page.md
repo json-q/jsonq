@@ -1,6 +1,6 @@
 ---
 title: react router v7(6.4+) 新 API 在单页应用中的使用
-pubDate: 2026-01-09
+pubDate: 2026-01-11
 description: 使用 react router v7 新特性 API 实现权限认证、懒加载等以及部分踩坑
 tags:
   - 开发
@@ -25,7 +25,7 @@ tags:
 
 ### loader 数据预加载及获取
 
-loader 的执行时机**早于页面加载渲染**。比如以下代码的输出顺序是 `loader load` -> `page load`
+loader 会在每次页面加载前触发，**早于页面加载渲染**。比如以下代码的输出顺序是 `loader load` -> `page load`
 
 ```tsx
 const router = createBrowserRouter([
@@ -42,18 +42,16 @@ const router = createBrowserRouter([
 ]);
 ```
 
-因此 loader 可以进行数据提前请求，而 loader 返回的数据可以当作全局状态来使用。
+因此 loader 可以进行数据提前请求，而 loader 返回的数据在某种程度上也可以当作全局状态来使用。
 
 - 如果想要获取 loader 中的数据，可以使用 [`useLoaderData`](https://reactrouter.com/api/hooks/useLoaderData)，但仅限于和当前 loader 对应的 Component 组件中获取
-- 如果 A 页面想要获取 Layout 的 loader 数据
-  - 将 Layout 组件的 router 配置项上添加唯一 id 标识 `{ id: "root", path: "/", Component: Layout, loader: () => {},... }`
-  - 在 A 页面中，使用 [`useRouteLoaderData`](https://reactrouter.com/api/hooks/useRouteLoaderData) 通过路由 id 获取对应的页面 loader 数据，即 `useRouteLoaderData("root")`
 - 如果需要在页面上重新执行 loader，可以使用 [`useRevalidator`](https://reactrouter.com/api/hooks/useRevalidator)
 
 ```tsx
 const loader = async () => {
-  const res = await fetch("xxx");
-  return res.json();
+  const response = await fetch("xxx");
+  const data = await response.json();
+  return { data };
 };
 
 function App() {
@@ -68,6 +66,37 @@ function App() {
     </div>
   );
 }
+```
+
+- 如果子路由想要获取父路由的 loader 数据
+  - 将父路由的 router 配置项上添加唯一 id 标识 `{ id: "root", path: "/", Component: Layout, loader: () => {},... }`
+  - 在子路由中，使用 [`useRouteLoaderData`](https://reactrouter.com/api/hooks/useRouteLoaderData) 通过父路由 id 获取其 loader 数据，即 `useRouteLoaderData("root")`
+
+```tsx
+const router = createBrowserRouter([
+  {
+    id: "root",
+    path: "/",
+    loader: async () => {
+      return { currentUser: "张三" }
+    },
+    Component: Layout,
+    children: [
+      {
+        path: "/dashboard",
+        Component: () => {
+          const { currentUser } = useRouteLoaderData("root");
+          return (
+            <>
+              <h1>Page Dashboard</h1>
+              <p>当前用户：{currentUser}</p>
+            </>
+          )
+        };
+      }
+    ]
+  }
+])
 ```
 
 ### 异步 loader 造成的白屏问题
@@ -477,5 +506,3 @@ export default function PageLayout() {
 ## 结语
 
 这篇文章也算是最近对 react router 使用的一个小结，网上文章和官方文档也看了一些，在单页应用中的使用体验上确实比 v6 要好不少，但是文档太烂了。
-
-文章有些地方写的可能不是那么易懂，我已经尽力了。
