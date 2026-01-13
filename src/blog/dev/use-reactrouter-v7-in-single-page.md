@@ -7,9 +7,9 @@ tags:
   - react
 ---
 
-与其说是 v7 的新 API，倒不如说是 v6.4 的，而且不涉及框架模式的用法，只有数据模式，列举常用的几个，着重讲 loader，因为这个 API 确实有用。网上好多文章讲 loader 的都太浅了，基本只是介绍了最基础的使用（数据预加载），不如不写。
+与其说是 v7 的新 API，倒不如说是 v6.4+ 的，而且不涉及框架模式的用法，只有数据模式，列举常用的几个，着重讲 loader，因为这个 API 确实有用。网上好多文章讲 loader 的都太浅了，基本只是介绍了最基础的使用（数据预加载），没啥用。
 
-如果需要比较全的基础入门文章，可以看 [掘金](https://juejin.cn/post/7573699930259849242) 这篇，我个人觉得介绍的还是比较全面的，推一下，好文不能被埋没。
+如果需要比较全的基础入门文章，可以看 [掘金](https://juejin.cn/post/7573699930259849242) 这篇，我个人觉得介绍的还是比较全面的。
 
 这些东西其实都可以在 react router 文档上找到，我也会尽量标注相关文档出处，但是文档写的好谁会来找教程呢。其实对比 `tanstack-router` 的官方文档来说，react router 文档已经很不错了，tsr 的文档更是稀碎，只能说比烂这一块，tsr 还是更胜一筹。
 
@@ -19,7 +19,7 @@ tags:
 
 这个不算知识点，就是一些 v7 中的小细节，在单页应用中，官方推荐从 `react-router/dom` 中导入 `RouterProvider`。相关文档: [RouterProvider](https://reactrouter.com/api/data-routers/RouterProvider)
 
-![RouterProvider](https://testingcf.jsdelivr.net/gh/json-q/picture-blog@main/2025/10/22/202601092323046.png)
+![RouterProvider](https://jsonq.top/cdn-static/2025/10/22/202601092323046.png)
 
 ## loader 进行数据预加载和鉴权
 
@@ -505,4 +505,4 @@ export default function PageLayout() {
 
 ## 结语
 
-这篇文章也算是最近对 react router 使用的一个小结，网上文章和官方文档也看了一些，在单页应用中的使用体验上确实比 v6 要好不少，但是文档太烂了。
+这篇文章也算是最近对 react router 使用的一个小结，网上文章和官方文档也看了一些，在单页应用中的使用体验上确实比 v6 要好不少，但是文档太烂了，也算是对最近被 react router 折磨的一个记录。
