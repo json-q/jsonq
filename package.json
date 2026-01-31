@@ -16,7 +16,7 @@
     "@astrojs/rss": "^4.0.15",
     "@astrojs/sitemap": "^3.7.0",
     "@lucide/astro": "^0.555.0",
-    "astro": "^5.16.11",
+    "astro": "^5.17.1",
     "dayjs": "^1.11.19",
     "lodash.kebabcase": "^4.1.1",
     "remark-collapse": "^0.1.2",
@@ -26,12 +26,12 @@
   "devDependencies": {
     "@biomejs/biome": "2.3.10",
     "@pagefind/default-ui": "^1.4.0",
-    "@shikijs/transformers": "^3.21.0",
+    "@shikijs/transformers": "^3.22.0",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.1.18",
     "@types/lodash.kebabcase": "^4.1.9",
     "cpr": "^3.0.1",
-    "lefthook": "^2.0.15",
+    "lefthook": "^2.0.16",
     "pagefind": "^1.4.0",
     "tailwindcss": "^4.1.18",
     "vite": "^6.4.1"
