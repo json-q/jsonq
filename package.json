@@ -8,7 +8,7 @@
     "build": "astro build && pagefind --site dist && cpr dist/pagefind public/pagefind",
     "preview": "astro preview",
     "astro": "astro",
-    "format": "biome check --write ."
+    "format": "biome check --write"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.13",
@@ -16,7 +16,7 @@
     "@astrojs/rss": "^4.0.15",
     "@astrojs/sitemap": "^3.7.0",
     "@lucide/astro": "^0.555.0",
-    "astro": "^5.17.3",
+    "astro": "^5.18.0",
     "dayjs": "^1.11.19",
     "lodash.kebabcase": "^4.1.1",
     "remark-collapse": "^0.1.2",
@@ -24,14 +24,14 @@
     "sharp": "^0.34.5"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.4.4",
+    "@biomejs/biome": "2.4.6",
     "@pagefind/default-ui": "^1.4.0",
-    "@shikijs/transformers": "^3.22.0",
+    "@shikijs/transformers": "^3.23.0",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.2.1",
     "@types/lodash.kebabcase": "^4.1.9",
     "cpr": "^3.0.1",
-    "lefthook": "^2.1.1",
+    "lefthook": "^2.1.3",
     "pagefind": "^1.4.0",
     "tailwindcss": "^4.2.1",
     "vite": "^6.4.1"
