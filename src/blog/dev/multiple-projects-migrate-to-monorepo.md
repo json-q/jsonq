@@ -54,7 +54,7 @@ tags:
 
 ```json
 {
-  "name": "@@my-repo/api",
+  "name": "@my-repo/api",
   "version": "0.0.1",
   "type": "module",
   "exports": {
