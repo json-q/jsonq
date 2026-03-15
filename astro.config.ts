@@ -24,6 +24,11 @@ export default defineConfig({
   devToolbar: {
     enabled: false,
   },
+  experimental: {
+    queuedRendering: {
+      enabled: true,
+    },
+  },
   markdown: {
     remarkPlugins: [remarkToc, [remarkCollapse, { test: "Table of contents" }]],
     shikiConfig: {
@@ -40,10 +45,7 @@ export default defineConfig({
     },
   },
   vite: {
-    plugins: [
-      // https://github.com/withastro/astro/issues/14030
-      tailwindcss(),
-    ],
+    plugins: [tailwindcss()],
   },
   adapter: netlify(),
 });
