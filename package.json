@@ -11,30 +11,30 @@
     "format": "biome check --write"
   },
   "dependencies": {
-    "@astrojs/mdx": "^5.0.0",
-    "@astrojs/netlify": "^7.0.2",
-    "@astrojs/rss": "^4.0.17",
-    "@astrojs/sitemap": "^3.7.1",
+    "@astrojs/mdx": "^5.0.3",
+    "@astrojs/netlify": "^7.0.5",
+    "@astrojs/rss": "^4.0.18",
+    "@astrojs/sitemap": "^3.7.2",
     "@lucide/astro": "^0.577.0",
-    "astro": "^6.0.4",
-    "dayjs": "^1.11.19",
+    "astro": "^6.1.1",
+    "dayjs": "^1.11.20",
     "lodash.kebabcase": "^4.1.1",
     "remark-collapse": "^0.1.2",
     "remark-toc": "^9.0.0",
     "sharp": "^0.34.5"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.4.6",
+    "@biomejs/biome": "2.4.9",
     "@pagefind/default-ui": "^1.4.0",
     "@shikijs/transformers": "^3.23.0",
     "@tailwindcss/typography": "^0.5.19",
-    "@tailwindcss/vite": "^4.2.1",
+    "@tailwindcss/vite": "^4.2.2",
     "@types/lodash.kebabcase": "^4.1.9",
     "@types/node": "^25.5.0",
     "cpr": "^3.0.1",
     "lefthook": "^2.1.4",
     "pagefind": "^1.4.0",
-    "tailwindcss": "^4.2.1",
-    "vite": "^7"
+    "tailwindcss": "^4.2.2",
+    "vite": "^7.3.1"
   }
 }
