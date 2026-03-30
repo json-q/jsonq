@@ -24,6 +24,7 @@ const datetime = dayjs(isModified ? updatedDate : pubDate).tz(SITE.timezone);
 
 const date = datetime.format("YYYY-MM-DD");
 ---
+
 <div class:list={["flex items-center gap-x-2 opacity-80", className]}>
   <CalendarDays
     class:list={[
@@ -31,12 +32,10 @@ const date = datetime.format("YYYY-MM-DD");
       { "scale-90": size === "sm" },
     ]}
   />
-  {
-    isModified && (
+  {isModified && (
       <span class:list={["text-sm", { "sm:text-base": size === "lg" }]}>
         更新时间:
       </span>
-    )
-  }
+    )}
   <time class:list={["text-sm", { "sm:text-base": size === "lg" }]} datetime={datetime.toISOString()}>{date}</time>
 </div>

@@ -16,13 +16,14 @@ const posts = await getCollection("blog");
 
 const sortedPosts = getSortedPosts(posts);
 ---
+
 <BaseLayout>
-  <BaseHeader/>
+  <BaseHeader />
   <main id="main-content" data-layout="index">
     <section id="hero" class="pt-8 pb-6">
       <h1 class="my-4 inline-block text-4xl font-bold sm:my-8 sm:text-5xl">Welcome</h1>
       <a target="_blank" href="/rss.xml" class="inline-block" aria-label="rss feed" title="RSS Feed">
-        <Rss width={20} height={20} class="scale-125 stroke-accent stroke-3 rtl:-rotate-90"/>
+        <Rss width={20} height={20} class="scale-125 stroke-accent stroke-3 rtl:-rotate-90" />
         <span class="sr-only">RSS Feed</span>
       </a>
       <p>
@@ -50,20 +51,17 @@ const sortedPosts = getSortedPosts(posts);
         </LinkButton>
         并进行适当修改优化。
       </p>
-      {
-        SOCIALS.length > 0 && (
+      {SOCIALS.length > 0 && (
           <div class="mt-4 flex flex-col sm:flex-row sm:items-center">
             <div class="mr-2 mb-1 whitespace-nowrap sm:mb-0">社交链接:</div>
             <Socials />
           </div>
-        )
-      }
+        )}
     </section>
 
-    <BetterHr/>
+    <BetterHr />
 
-    {
-      sortedPosts.length > 0 && (
+    {sortedPosts.length > 0 && (
         <section id="recent-posts" class="pt-12 pb-6">
           <h2 class="text-2xl font-semibold tracking-wide">最新文章</h2>
           <ul>
@@ -75,8 +73,7 @@ const sortedPosts = getSortedPosts(posts);
             )}
           </ul>
         </section>
-      )
-    }
+      )}
   </main>
-  <BaseFooter/>
+  <BaseFooter />
 </BaseLayout>

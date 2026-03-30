@@ -12,10 +12,13 @@ const posts = await getCollection("blog");
 
 const tags = getUniqueTags(posts);
 ---
+
 <BaseLayout title={`标签 | ${SITE.title}`}>
-  <BaseHeader/>
+  <BaseHeader />
   <BaseMain pageTitle="标签" pageDesc="文章使用的标签集合">
-    <ul>{tags.map(({ tag, tagName }) => <Tag {tag} {tagName} size="lg" />)}</ul>
+    <ul>
+      {tags.map((item) => <Tag tag={item.tag} tagName={item.tagName} size="lg" />)}
+    </ul>
   </BaseMain>
-  <BaseFooter/>
+  <BaseFooter />
 </BaseLayout>

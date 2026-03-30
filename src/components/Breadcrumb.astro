@@ -36,14 +36,14 @@ function mapBreadcrumb(breadcrumbList: string[]): string[] {
   });
 }
 ---
+
 <nav class="mx-auto mt-8 mb-2 w-full max-w-app px-4" aria-label="breadcrumb">
   <ul class="font-light [&>li]:inline [&>li:not(:last-child)>a]:hover:opacity-100">
     <li>
       <a href="/" class="opacity-80">首页</a>
       <span aria-hidden="true" class="opacity-80">&raquo;</span>
     </li>
-    {
-      mapBreadcrumb(breadcrumbList).map((breadcrumb, index) =>
+    {mapBreadcrumb(breadcrumbList).map((breadcrumb, index) =>
         index + 1 === breadcrumbList.length ? (
           <li>
             <span
@@ -61,7 +61,6 @@ function mapBreadcrumb(breadcrumbList: string[]): string[] {
             <span aria-hidden="true">&raquo;</span>
           </li>
         )
-      )
-    }
+      )}
   </ul>
 </nav>

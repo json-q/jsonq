@@ -27,14 +27,13 @@ export const coreTechs = [
   },
 ];
 ---
+
 <ul class="flex flex-wrap gap-4 p-0 m-0 list-none">
-  {
-    coreTechs.map((tech) => (
+  {coreTechs.map((tech) => (
       <li>
         <a href={tech.href} target="_blank" rel="noopener">
           <tech.icon style={{ color: tech.color }} class="size-8" />
         </a>
       </li>
-    ))
-  }
+    ))}
 </ul>

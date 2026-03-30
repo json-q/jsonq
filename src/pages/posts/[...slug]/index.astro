@@ -23,4 +23,5 @@ const { post } = Astro.props;
 const posts = await getCollection("blog");
 const sortedPosts = getSortedPosts(posts);
 ---
-<PostDetails post={post} posts={sortedPosts}/>
+
+<PostDetails post={post} posts={sortedPosts} />

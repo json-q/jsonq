@@ -11,8 +11,8 @@ export interface Props {
 
 const { page } = Astro.props;
 ---
-{
-  page.lastPage > 1 && (
+
+{page.lastPage > 1 && (
     <nav class="mt-auto mb-8 flex justify-center" aria-label="Pagination">
       <LinkButton
         disabled={!page.url.prev}
@@ -34,5 +34,4 @@ const { page } = Astro.props;
         <ArrowRight class="inline-block rtl:rotate-180" />
       </LinkButton>
     </nav>
-  )
-}
+  )}

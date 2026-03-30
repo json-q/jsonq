@@ -30,14 +30,17 @@ const params = Astro.params;
 const { tag } = params;
 const { page, tagName } = Astro.props;
 ---
+
 <BaseLayout title={`Tag: ${tagName} | ${SITE.title}`}>
-  <BaseHeader/>
+  <BaseHeader />
   <BaseMain pageTitle={[`标签:`, `${tagName}`]} titleTransition={tag} pageDesc={`标签为 "${tagName}" 的文章集合`}>
     <h1 slot="title" transition:name={tag}>{`标签：${tag}`}</h1>
-    <ul>{page.data.map((data) => <CardPostList {...data} />)}</ul>
+    <ul>
+      {page.data.map((data) => <CardPostList {...data} />)}
+    </ul>
   </BaseMain>
 
-  <Pagination {page}/>
+  <Pagination {page} />
 
-  <BaseFooter noMarginTop={page.lastPage > 1}/>
+  <BaseFooter noMarginTop={page.lastPage > 1} />
 </BaseLayout>

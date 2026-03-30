@@ -18,19 +18,18 @@ const headerProps = {
   class: "text-lg font-medium decoration-dashed hover:underline",
 };
 ---
+
 <li class="my-6">
   <a
     href={genPath(id, filePath)}
     class="inline-block text-lg font-medium text-accent decoration-dashed underline-offset-4 focus-visible:no-underline focus-visible:underline-offset-0"
   >
-    {
-      variant === "h2" ? (
+    {variant === "h2" ? (
         <h2 {...headerProps}>{title}</h2>
       ) : (
         <h3 {...headerProps}>{title}</h3>
-      )
-    }
+      )}
   </a>
-  <Datetime class="my-1" {pubDate} {updatedDate}/>
+  <Datetime class="my-1" {pubDate} {updatedDate} />
   <p>{description}</p>
 </li>

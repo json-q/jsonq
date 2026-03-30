@@ -17,13 +17,16 @@ export const getStaticPaths = (async ({ paginate }) => {
 
 const { page } = Astro.props;
 ---
+
 <BaseLayout title={`文章 | ${SITE.title}`}>
-  <BaseHeader/>
+  <BaseHeader />
   <BaseMain pageTitle="文章" pageDesc="写作的文章集合">
-    <ul>{page.data.map((data) => <CardPostList {...data} />)}</ul>
+    <ul>
+      {page.data.map((data) => <CardPostList {...data} />)}
+    </ul>
   </BaseMain>
 
-  <Pagination {page}/>
+  <Pagination {page} />
 
-  <BaseFooter noMarginTop={page.lastPage > 1}/>
+  <BaseFooter noMarginTop={page.lastPage > 1} />
 </BaseLayout>
