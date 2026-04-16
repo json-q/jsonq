@@ -12,11 +12,11 @@
   },
   "dependencies": {
     "@astrojs/mdx": "^5.0.3",
-    "@astrojs/netlify": "^7.0.6",
+    "@astrojs/netlify": "^7.0.7",
     "@astrojs/rss": "^4.0.18",
     "@astrojs/sitemap": "^3.7.2",
-    "@lucide/astro": "^0.577.0",
-    "astro": "^6.1.5",
+    "@lucide/astro": "^1.8.0",
+    "astro": "^6.1.7",
     "dayjs": "^1.11.20",
     "lodash.kebabcase": "^4.1.1",
     "remark-collapse": "^0.1.2",
@@ -24,18 +24,18 @@
     "sharp": "^0.34.5"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.4.9",
-    "@pagefind/default-ui": "^1.5.0",
-    "@shikijs/transformers": "^3.23.0",
+    "@biomejs/biome": "2.4.11",
+    "@pagefind/default-ui": "^1.5.2",
+    "@shikijs/transformers": "^4.0.2",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.2.2",
     "@types/lodash.kebabcase": "^4.1.9",
     "@types/node": "^25.6.0",
     "cpr": "^3.0.1",
-    "lefthook": "^2.1.5",
-    "pagefind": "^1.5.0",
+    "lefthook": "^2.1.6",
+    "pagefind": "^1.5.2",
     "tailwindcss": "^4.2.2",
-    "typescript": "^5",
+    "typescript": "^5.9.3",
     "vite": "^7.3.2"
   }
 }
