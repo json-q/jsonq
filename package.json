@@ -35,6 +35,7 @@
     "lefthook": "^2.1.5",
     "pagefind": "^1.5.0",
     "tailwindcss": "^4.2.2",
+    "typescript": "^5",
     "vite": "^7.3.2"
   }
 }
