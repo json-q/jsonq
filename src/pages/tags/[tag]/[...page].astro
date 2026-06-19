@@ -13,10 +13,11 @@ import getUniqueTags from "@/utils/getUniqueTags";
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
   const posts = await getCollection("blog");
-  const tags = getUniqueTags(posts);
+  const publishedPosts = posts.filter((post) => !post.data.draft);
+  const tags = getUniqueTags(publishedPosts);
 
   return tags.flatMap(({ tag, tagName }) => {
-    const tagPosts = getPostsByTag(posts, tag);
+    const tagPosts = getPostsByTag(publishedPosts, tag);
 
     return paginate(tagPosts, {
       params: { tag },

@@ -10,7 +10,8 @@ import getUniqueTags from "@/utils/getUniqueTags";
 
 const posts = await getCollection("blog");
 
-const tags = getUniqueTags(posts);
+const publishedPosts = posts.filter((post) => !post.data.draft);
+const tags = getUniqueTags(publishedPosts);
 ---
 
 <BaseLayout title={`标签 | ${SITE.title}`}>
