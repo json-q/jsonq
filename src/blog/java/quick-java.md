@@ -1,7 +1,7 @@
 ---
 title: 快速过 Java
 pubDate: 2026-06-19
-description: 使用 itext + thymeleaf 实现批量打印 PDF 并压缩为 zip 联调前端进行下载
+description: Java 速学
 draft: true
 tags:
   - Java

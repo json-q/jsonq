@@ -10,7 +10,8 @@ export interface Props {
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
-  const postResult = posts.map((post) => ({
+  const publishedPosts = posts.filter((post) => !post.data.draft);
+  const postResult = publishedPosts.map((post) => ({
     params: { slug: genPath(post.id, post.filePath, false) },
     props: { post },
   }));
