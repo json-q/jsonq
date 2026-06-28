@@ -394,7 +394,7 @@ export default defineConfig({
 {
   "serve": "rsbuild dev",
   "build:prod": "rsbuild build",
-  "build:stage": "vue-cli-service build --env-mode staging",
+  "build:stage": "rsbuild build --env-mode staging",
   "preview": "rsbuild preview"
 }
 ```
