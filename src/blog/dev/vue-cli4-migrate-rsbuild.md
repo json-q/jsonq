@@ -312,8 +312,6 @@ export default defineConfig({
 
 可以使用 rsbuild 的 [`output.inlineScripts`](https://v1.rsbuild.rs/zh/config/output/inline-scripts#outputinlinescripts) 配置
 
-这个我在打包后看了一下，其实没有内联到 html，仍然是以 js 形式引入的，不知道是不是这个正则不对，影响很小，可忽略。
-
 ```js
 export default defineConfig({
   html: {
@@ -401,7 +399,7 @@ export default defineConfig({
 
 ### 移除无用依赖
 
-由于使用 rsbuild 部分依赖 vue-cli 的依赖或者 webpack 的 loader 依赖可以安全移除。
+由于使用 rsbuild，部分依赖 vue-cli 的依赖或者 webpack 的 loader 依赖可以安全移除。
 
 如果你不移除以下依赖，这些依赖在安装时会将 webpack@4 版本带入项目，而 rsbuild 兼容的是 webpack@5，运行会报错的。
 
