@@ -8,7 +8,7 @@ import {
   transformerNotationWordHighlight,
 } from "@shikijs/transformers";
 import tailwindcss from "@tailwindcss/vite";
-import { defineConfig } from "astro/config";
+import { defineConfig, fontProviders } from "astro/config";
 import remarkCollapse from "remark-collapse";
 import remarkToc from "remark-toc";
 import { loadEnv } from "vite";
@@ -24,11 +24,6 @@ export default defineConfig({
   integrations: [sitemap(), mdx()],
   devToolbar: {
     enabled: false,
-  },
-  experimental: {
-    queuedRendering: {
-      enabled: true,
-    },
   },
   markdown: {
     processor: unified({

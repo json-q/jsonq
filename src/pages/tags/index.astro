@@ -17,7 +17,7 @@ const tags = getUniqueTags(publishedPosts);
 <BaseLayout title={`标签 | ${SITE.title}`}>
   <BaseHeader />
   <BaseMain pageTitle="标签" pageDesc="文章使用的标签集合">
-    <ul>
+    <ul class="flex flex-wrap gap-6">
       {tags.map((item) => <Tag tag={item.tag} tagName={item.tagName} size="lg" />)}
     </ul>
   </BaseMain>
