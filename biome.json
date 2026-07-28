@@ -7,7 +7,7 @@
   },
   "files": {
     "ignoreUnknown": true,
-    "includes": ["**", "!node_modules", "!.astro", "!!pagefind", "!!dist", "!!.netlify"]
+    "includes": ["**", "!node_modules", "!.astro", "!!pagefind", "!!dist", "!!.netlify", "!src/assets"]
   },
   "html": {
     "formatter": { "enabled": true },
@@ -22,7 +22,7 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true
+      "preset": "recommended"
     }
   },
   "javascript": {

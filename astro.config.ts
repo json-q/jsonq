@@ -8,7 +8,7 @@ import {
   transformerNotationWordHighlight,
 } from "@shikijs/transformers";
 import tailwindcss from "@tailwindcss/vite";
-import { defineConfig, fontProviders } from "astro/config";
+import { defineConfig } from "astro/config";
 import remarkCollapse from "remark-collapse";
 import remarkToc from "remark-toc";
 import { loadEnv } from "vite";
@@ -46,5 +46,5 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  adapter: netlify(),
+  adapter: process.env.NODE_ENV !== "development" ? netlify() : undefined,
 });
