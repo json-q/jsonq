@@ -7,7 +7,7 @@ tags:
   - Java
 ---
 
-非常基础的东西略过，因为本来就会且没意义，此次可以当作详细学习巩固基础，以便应对后端项目的深入开发。记一点比较重要的内容，感觉基本用不上的就不记录了，
+非常基础的东西略过，因为本来就会且没意义，此次可以当作详细学习巩固基础，以便应对后端项目的深入开发。记一点比较重要的内容，感觉基本用不上的就不记录了
 
 > 一个 Java 文件中只能有一个 public 类，且被修饰的类名必须与文件名一致。
 
@@ -347,6 +347,31 @@ public interface Person {
 System.out.println(Person.NAME);
 ```
 
+如果方法的形参是一个 interface 接口，想要传入参数，就需要一个实现此 interface 的实现类。结合匿名内部类看
+
+```java
+// Person 是一个 interface
+interface Person{
+  void eat();
+}
+
+public static void main(String[] args){
+  usePerson();
+}
+
+public static void usePerson(Person p){
+  p.eat(new Coder());
+}
+
+// interface 无法 new，只能通过实现类来传入
+class Coder implements Person{
+  @Override
+  public void eat() {
+    System.out.println("码农吃东西");
+  }
+}
+```
+
 #### 多态
 
 有以下特点的才是多态：
@@ -404,3 +429,162 @@ useAnimal(new Cat());
 ```
 
 #### 内部类
+
+- 成员内部类：类中套类，用处不大，常用于 JavaBean 实体类的嵌套
+- 静态内部类：鸡肋，用不到
+
+```java
+// 成员内部类
+class Outer{
+  class Inner{}
+}
+Outer.Inner oi= new Outer.new Inner()
+
+// 静态内部类
+class Outer{
+  static class Inner{}
+}
+
+Outer.Inner oi = new Outer.Inner();
+```
+
+- 匿名内部类（重要，结合 Lamba 表达式）
+
+```java
+interface Person{
+  void eat();
+}
+
+public static void main(String[] args){
+  // 没有 implements Person，直接 new Person(){} 没有名字，这就是一个匿名内部类
+  // 将 继承(extends)/实现(implements)、方法重写、创建对象合并成一行代码
+  new Person(){
+    @Override
+    public void eat() {
+      System.out.println("匿名内部类在吃");
+    }
+  }.eat(); // new 之后就是一个对象了，可以调用方法，只是不直观
+}
+```
+
+常用举例：
+
+```java
+interface Person{
+  void eat();
+}
+
+// 👍 new Person 的时候 IDEA 会自动补全 Override 的方法
+// 重写的方法少了这么些可以，太多尽量抽出去
+usePerson(new Person(){
+  @Override
+  public void eat() {
+    System.out.println("匿名内部类在吃");
+  }
+})
+
+public static void usePerson(Person person){
+  person.eat();
+}
+```
+
+#### Lamba 表达式
+
+Lamba 表达式是 JDK8 引入，**只能简化函数式接口的匿名内部类写法**。`(匿名内部类被重写的方法形参)-> {}`
+
+满足以下条件的是函数式接口：
+
+- 必须是接口 interface，接口中有且只有一个抽象方法
+- 通常会添加注解 `@FunctionalInterface`，不加也可以，加是为了校验是否满足，不报错就说明满足函数式接口的条件，反之则不满足
+
+```java
+@FunctionalInterface
+interface Person{
+  void eat();
+}
+
+public static void main(String[] args){
+  // 匿名内部类写法
+  usePerson(new Person(){
+    @Override
+    public void eat() {
+      System.out.println("匿名内部类在吃");
+    }
+  })
+
+// eat 没有形参，因此为空
+  usePerson(() -> {
+    System.out.println("匿名内部类在吃");
+  })
+  // 由于只有一行代码，因此可以省略 {}，跟 JS 的箭头函数差不多
+  usePerson(() -> System.out.println("匿名内部类在吃"));
+}
+
+public static void usePerson(Person person){
+  person.eat();
+}
+```
+
+匿名内部类在警经过编译之后，会生成单独的字节码文件，而 Lamba 不会。
+
+### 常用 API
+
+#### String
+
+```java
+String str = "Hello";
+System.out.println(str.length()); // 5
+System.out.println(str.charAt(0)); // H
+System.out.println(str.toCharArray()); // [H, e, l, l, o]
+System.out.println(str.equals("Hello")); // true
+System.out.println(str.equalsIgnoreCase("hello")); // true
+System.out.println(str.substring(0, 2)); // He
+System.out.println(str.substring(2)); // llo
+System.out.println(str.replace('l', 'x'));
+System.out.println(str); // Hello 不会更改原始字符串
+System.out.println(str.toUpperCase()); // HELLO
+System.out.println(str.toLowerCase()); // hello
+System.out.println(str.startsWith("H")); // true
+System.out.println(str.endsWith("o")); // true
+System.out.println(str.contains("el")); // true
+System.out.println(str.indexOf('l')); // 2
+System.out.println(str.lastIndexOf('l')); // 2
+System.out.println(str.isEmpty()); //  false
+System.out.println(str.hashCode()); // 69609650
+System.out.println(str.concat(" World")); // Hello World
+System.out.println(str.split(" / ")); // [Ljava.lang.String;@2f4d3709
+```
+
+#### ArrayList
+
+- add 若以索引添加，索引超出 ArrayList.size() 的范围则会抛出异常
+- remove 若索引超出 ArrayList.size() 的范围则会抛出异常
+- set 更改的索引对应值必须存在
+
+```java
+ArrayList<Object> arrayList = new ArrayList<>();
+arrayList.add("A");
+arrayList.add(1, "B"); // 此时数组为 {'A', 'B'}，index 不能大于 数组集合 size
+System.out.println(arrayList.get(1)); // 输出 B
+System.out.println(arrayList.size()); // 输出 2
+arrayList.remove("A"); // 此时数组为 {'B'}
+arrayList.remove(0); // 此时数组为 {}
+arrayList.add("A1"); // 此时数组为 {'A1'}
+arrayList.set(0, "C"); // 此时数组为 {'C'}，set 的索引必须存在
+```
+
+#### StringBuilder/StringBuffer
+
+- `StringBuilder` 更适合**频繁修改**字符串的场景，性能比 String 更高。
+- `StringBuffer` 和 `StringBuilder`用法完全一样。 `StringBuilder` 线程是不安全的，`StringBuffer` 线程安全。
+
+```java
+StringBuilder sb = new StringBuilder();
+System.out.println(sb.append("Hello"));
+System.out.println(sb.append("World")); // 输出 HelloWorld
+System.out.println(sb.insert(2, "Java")); // 输出 HeJavalloWorld
+System.out.println(sb.delete(2, 5)); // 输出 HealloWorld 删除索引 2~5不包含5索引的字符
+System.out.println(sb.reverse()); // 输出 dlroWollaeH 反转字符串
+```
+
+#### StringJoiner
