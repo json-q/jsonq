@@ -475,7 +475,7 @@ interface Person{
 }
 
 // 👍 new Person 的时候 IDEA 会自动补全 Override 的方法
-// 重写的方法少了这么些可以，太多尽量抽出去
+// 重写的方法少了这样写是可以的，如果太多尽量抽出去
 usePerson(new Person(){
   @Override
   public void eat() {
@@ -588,3 +588,455 @@ System.out.println(sb.reverse()); // 输出 dlroWollaeH 反转字符串
 ```
 
 #### StringJoiner
+
+在循环拼接字符串时，StringJoiner 的代码会更加简洁。
+
+```java
+// StringBuilder 拼接字符串
+StringBuilder sb = new StringBuilder();
+sb.append("[");
+for (int i = 0; i < 10; i++) {
+    if (i == 9) {
+        sb.append(i);
+    } else {
+        sb.append(i).append(",");
+    }
+}
+sb.append("]");
+System.out.println(sb);
+
+// StringJoiner 拼接字符串
+StringJoiner sj = new StringJoiner(",", "[", "]");
+for (int i = 0; i < 10; i++) {
+    sj.add(i + "");
+}
+System.out.println(sj);
+```
+
+#### Math System Runtime BigDecimal
+
+Math 部分 API 跟 js 差不多。
+
+| API           | 描述                                          |
+| ------------- | --------------------------------------------- |
+| Math.abs(x)   | 返回 x 的绝对值                               |
+| Math.ceil(x)  | 返回 x 的最接近的整数，且不小于 x（向上取整） |
+| Math.floor(x) | 返回 x 的最接近的整数，且不大于 x（向下取整） |
+| Math.max(x,y) | 返回 x 和 y 中的最大值                        |
+| Math.min(x,y) | 返回 x 和 y 中的最小值                        |
+| Math.random() | 返回 0 到 1 之间的随机数不包含 1              |
+| Math.pow(x,y) | 返回 x 的 y 次方                              |
+
+Runtime 是一个单例，指 Java 所在的运行环境（系统内部使用）
+
+| API                           | 描述                                       |
+| ----------------------------- | ------------------------------------------ |
+| Runtime.getRuntime()          | 获取 Runtime 实例                          |
+| Runtime.availableProcessors() | 获取当前运行环境可用的 CPU 数              |
+| Runtime.freeMemory()          | 获取当前运行环境可用内存                   |
+| Runtime.totalMemory()         | 获取当前运行环境总内存                     |
+| Runtime.maxMemory()           | 获取当前运行环境最大内存                   |
+| Runtime.gc()                  | 运行垃圾回收器                             |
+| Runtime.exec(command)         | 运行命令                                   |
+| Runtime.exit(status)          | 终止当前运行的进程 非 0 状态码表示异常终止 |
+
+System 指当前系统环境（一般对外使用）
+
+| API                        | 描述               |
+| -------------------------- | ------------------ |
+| System.getProperty(key)    | 获取系统属性       |
+| System.out.println(x)      | 输出 x             |
+| System.currentTimeMillis() | 获取当前系统时间戳 |
+
+BigDecimal 是 Java 语言中用于解决浮点数运算精度丢失的问题的类。
+
+```java
+// 1. 正确的初始化方式：使用 String，避免精度丢失
+BigDecimal num1 = new BigDecimal("10.5");
+BigDecimal num2 = new BigDecimal("3.2");
+
+BigDecimal sum = num1.add(num2); // 10.5 + 3.2 = 13.7
+BigDecimal difference = num1.subtract(num2); //  10.5 - 3.2 = 7.3
+BigDecimal product = num1.multiply(num2);  // 10.5 * 3.2 = 33.60 精度(scale)变成 2 位时自动计算的结果
+
+BigDecimal num3 = new BigDecimal("10");
+BigDecimal num4 = new BigDecimal("3");
+
+// 场景 A：❌ 10 / 3? 不行，这会报错，因为除不尽  必须指定 精度(小数位数) 和 舍入模式(RoundingMode)
+//  BigDecimal divideExact = num3.divide(num4);
+// 场景 B：除不尽，指定保留2位小数，四舍五入
+BigDecimal divide1 = num3.divide(num4, 2, RoundingMode.HALF_UP);  // 10 / 3 = 3.33
+// 场景 C：除不尽，指定保留4位小数，直接截断（不四舍五入）
+BigDecimal divide2 = num3.divide(num4, 4, RoundingMode.DOWN); // 10 / 3 = 3.3333
+
+// ==================== 常用工具方法：setScale（设置小数位数） ====================
+BigDecimal money = new BigDecimal("123.4567");
+// 保留2位小数，四舍五入（常用于金额）
+BigDecimal roundedMoney = money.setScale(2, RoundingMode.HALF_UP); // 123.46
+
+// ==================== 比较大小 ====================
+BigDecimal a = new BigDecimal("2.0");
+BigDecimal b = new BigDecimal("2.00");
+
+// 比较大小必须使用 compareTo：返回 0 相等，1 大于，-1 小于
+System.out.println("a.equals(b): " + a.equals(b)); // false equals 会比较数值精度
+System.out.println("a.compareTo(b): " + a.compareTo(b)); // 0 (表示相等)
+```
+
+#### JDK 8 的时间类
+
+1. LocalDate：日期，如 2023-01-01。
+2. LocalTime：时间，如 10:30:00。
+3. LocalDateTime：日期和时间，如 2023-01-01 10:30:00。
+4. ZoneId：时区，如 UTC、Asia/Shanghai 等。
+5. ZoneDateTime：日期和时间和时区，如 2023-01-01 10:30:00 UTC。
+6. Duration：时间间隔，如 1 小时 30 分钟。
+7. Period：日期间隔，如 1 年 2 个月 3 天。
+8. Instant：时间戳，如 2023-01-01T10:30:00Z。
+9. DateTimeFormatter：用于格式化和解析日期和时间。
+
+```java
+// 1. LocalDate —— 只含日期（年-月-日）
+LocalDate date = LocalDate.of(2023, 1, 1);          // 创建指定日期
+System.out.println(date);                           // 2023-01-01
+System.out.println(date.plusDays(10));              // 加10天 → 2023-01-11
+System.out.println(date.minusMonths(2));            // 减2个月 → 2022-11-01
+
+// 2. LocalTime —— 只含时间（时:分:秒）
+LocalTime time = LocalTime.of(10, 30, 0);           // 创建指定时间
+System.out.println(time);                           // 10:30:00
+System.out.println(time.plusHours(1));              // 加1小时 → 11:30:00
+System.out.println(time.minusMinutes(15));          // 减15分钟 → 10:15:00
+
+// 3. LocalDateTime —— 日期 + 时间
+LocalDateTime dateTime = LocalDateTime.of(2023, 1, 1, 10, 30); // 创建指定日期时间
+System.out.println(dateTime);                       // 2023-01-01T10:30
+System.out.println(dateTime.plusDays(5).plusHours(2)); // 加5天再+2小时 → 2023-01-06T12:30
+
+// 4. ZoneId —— 时区标识
+ZoneId zone1 = ZoneId.of("UTC");                    // 获取UTC时区
+ZoneId zone2 = ZoneId.of("Asia/Shanghai");          // 获取上海时区
+System.out.println(zone1);                          // UTC
+System.out.println(zone2);                          // Asia/Shanghai
+
+// 5. ZonedDateTime —— 带时区的日期时间
+ZonedDateTime zdt = ZonedDateTime.of(2023, 1, 1, 10, 30, 0, 0, zone2);
+System.out.println(zdt);                            // 2023-01-01T10:30+08:00[Asia/Shanghai]
+System.out.println(zdt.withZoneSameInstant(zone1)); // 转换到UTC时区同一时刻 → 2023-01-01T02:30Z[UTC]
+
+// 6. Duration —— 秒/纳秒级的时间间隔（适合时、分、秒）
+LocalTime t1 = LocalTime.of(8, 0);
+LocalTime t2 = LocalTime.of(9, 30);
+Duration duration = Duration.between(t1, t2);       // 计算两个时间之间的间隔
+System.out.println(duration);                       // PT1H30M（表示1小时30分）
+System.out.println(duration.toMinutes() + " minutes"); // 转为总分钟数 → 90 minutes
+
+// 7. Period —— 年/月/日的日期间隔（适合年、月、日）
+LocalDate d1 = LocalDate.of(2023, 1, 1);
+LocalDate d2 = LocalDate.of(2024, 3, 15);
+Period period = Period.between(d1, d2);             // 计算两个日期之间的间隔（年/月/日）
+System.out.println(period);                         // P1Y2M14D（1年2个月14天）
+System.out.println(period.getYears() + " years, " + period.getMonths() + " months, " + period.getDays() + " days");
+// → 1 years, 2 months, 14 days
+
+// 8. Instant —— 时间戳（从1970-01-01T00:00:00Z开始的秒数）
+Instant now = Instant.now();                        // 获取当前UTC时间戳
+System.out.println(now);                            // 例如 2026-08-06T10:30:00.123Z
+Instant epoch = Instant.ofEpochSecond(0);           // 从1970-01-01开始的0秒
+System.out.println(epoch);                          // 1970-01-01T00:00:00Z
+
+// 9. DateTimeFormatter —— 自定义日期时间的格式化和解析
+DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+LocalDateTime dt = LocalDateTime.of(2023, 1, 1, 10, 30);
+String formatted = dt.format(formatter);            // 按指定格式输出
+System.out.println(formatted);                      // 2023-01-01 10:30:00
+LocalDateTime parsed = LocalDateTime.parse("2023-01-01 10:30:00", formatter); // 按格式解析字符串
+System.out.println(parsed);                         // 2023-01-01T10:30
+```
+
+## 集合
+
+### Collection
+
+Collection 是所有集合的父接口。
+
+- `Collection<E>` 父接口
+
+  - `List<E>` 继承 `Collection<E>` 的接口
+    - `ArrayList<E>` 实现类
+    - `LinkedList<E>` 实现类，和 `ArrayList` 的区别是：LinkedList 是双链表结构，ArrayList 是数组结构。
+  - `Set<E>` 继承 `Collection<E>` 的接口
+    - `HashSet<E>` 实现类
+      - `LinkedHashSet<E>` 实现类
+    - `TreeSet<E>` 实现类
+
+- List 集合：添加的元素有索引、有序、可重复
+  - ArrayList、LinkedList 有索引、有序、可重复
+- Set 集合：添加的元素无索引、无序、不可重复
+  - HashSet 无索引、无序、不可重复
+  - LinkedHashSet 无索引、**有序**、不可重复
+  - TreeSet 无索引、**按照大小默认升序排序**、不可重复
+
+List 和 Set 的区别就是 Set 会自动去重。
+
+```java
+List<String> list = new ArrayList<>();
+list.add("a");
+list.add("b");
+System.out.println(list); // [a, b, b]
+
+Set<String> set = new HashSet<>();
+set.add("a");
+set.add("b");
+set.add("b");
+System.out.println(set); // [a, b]
+```
+
+Collection 常用方法：
+
+1. `add(E e)`：添加元素。相关的有 `addAll(Collection<? extends E> c)` 把目标集合中的元素添加到当前集合中。
+2. `clear()`：清空集合。
+3. `contains(Object o)`：判断集合中是否包含某个元素。
+4. `isEmpty()`：判断集合是否为空。
+5. `remove(Object o)`：删除集合中的某个元素。
+6. `size()`：获取集合的长度。
+7. `toArray()`：将集合转换为数组。
+
+Collection 迭代器：
+
+1. `iterator()`：获取迭代器。鸡肋，不如直接用 for 循环。
+2. `for` 循环，跟 js 一样。
+3. `hasNext()`：判断是否还有下一个元素。
+4. `next()`：获取下一个元素。
+5. `forEach(Consumer<? super E> action)`：遍历集合。
+6. `removeIf(Predicate<? super E> filter)`：删除符合条件的元素。
+7. `removeAll(Collection<?> c)`：删除集合中的所有元素。
+
+```java
+ArrayList<String> list = new ArrayList<>(List.of("Apple", "Banana", "Cherry"));
+
+// Iterator + next // 如果需要在循环过程中 add remove 使用 list.listIterator()，不然会出现并发异常
+Iterator<String> iterator = list.iterator();
+System.out.println(iterator.next()); // Apple 取当前位置的数据并移位
+System.out.println(iterator.next()); // Banana
+
+// hasNext 这个示例不如直接用 for 循环
+while (iterator.hasNext()) {
+    System.out.print(iterator.next() + " ");
+}
+
+// for 循环
+for (String s : list) {
+    System.out.print(s + " ");
+}
+
+// for 循环的 Lamba 写法 正常写法 list.forEach(item->{ System.out.println(item); });
+// 最简写法：方法引用写法 跟 js 的函数简写思路差不多 onChange={setValue}
+list.forEach(System.out::println);
+// 完整写法：匿名内部类 这个建议看一下 forEach 源码，本质就是方法回调。
+// 传入 action 然后回调 action.accept(item)
+list.forEach(new Consumer<String>() {
+    @Override
+    public void accept(String s) {
+        System.out.println(s);
+    }
+  });
+```
+
+### 数据结构
+
+数组和链表的区别
+
+- 由于数组存储索引，所以查询是很快的，但是插入和删除效率低，因为这两个操作会造成数组中元素的大批量的索引所记录的数据的移动。
+- 链表存储指针，所以查询效率低，但是插入和删除效率相较于数组高，因为只会修改临近的元素指针，不会造成大量元素移动。
+
+#### 栈/队列
+
+- 栈：先进后出
+- 队列：先进先出
+
+#### 链表
+
+每个链表包含两部分，数据域和指针域。数据域存放数据，指针域存放下一个节点的指针。
+
+- 单向链表
+
+每个节点的指针指向下一个节点的地址。在查找时，只能从头开始查找。
+
+比如找元素 D，则从头开始，头存储指向 A 指针地址，找到 A 指向下一个节点 B 的指针地址，B 再找到 C 的地址，一次类推找到 D。
+
+- 双向链表
+
+每个节点有两个指针，一个指向前一个节点，一个指向下一个节点。
+
+在查找时，通过判断当前节点是距离头部还是距离尾部更近，从而选择从哪开始查找。
+
+### 泛型类
+
+JDK5 引入的泛型，跟 TS 的泛型差不多，不过由于 js 的灵活性，ts 泛型的可操作性比 Java 要更高。
+
+常用的泛型命名：`E` 表示 element 元素，`T` 表示 type 类型，`K` 表示 key 键，`V` 表示 value 值。
+
+#### 泛型类
+
+- 非静态方法泛型：跟着类的泛型匹配，而类的泛型，是在创建对象时就确定下来的
+- 静态方法泛型：跟着方法泛型匹配，而方法泛型，是在调用方法时才确定下来
+
+```java
+// ====== 非静态泛型 ======
+class Pair<K, V> {
+  private K key;
+  private V value;
+
+  public Pair(K key, V value) {
+    this.key = key;
+    this.value = value;
+  }
+}
+
+// 创建时就确定了方法的泛型
+// 如果声明了泛型但是没传入，那么 K 和 V 都会变成 Object
+Pair<String, Integer> pair = new Pair<>("Apple", 1);
+
+System.out.println(pair.getKey());
+System.out.println(pair.getValue());
+System.out.println(pair);
+
+// ====== 静态泛型 ======
+class Pair {
+  // 静态方法泛型
+  public static<T> printArray(T[] arr) {
+    for (T t : arr) {
+      System.out.println(t);
+    }
+  }
+}
+```
+
+#### 泛型接口
+
+跟泛型类差不多，类实现有泛型的 interface 时，有两种操作方式：
+
+- 类实现接口时直接确定泛型
+- 报纸接口泛型，在类创建对象（new）时再确定。
+
+```java
+// 方法一：常规 interface 泛型
+interface Inter<T> {
+  boolean compare(T a, T b);
+}
+
+class Apple implements Inter<Integer> {
+  @Override
+  public boolean compare(Integer a, Integer b) {
+    return false;
+  }
+}
+
+// 方法二：实现类 泛型
+class Apple<T> implements Inter<T> {
+  @Override
+  public boolean compare(T a, T b) {
+    return false;
+  }
+}
+
+Apple<Integer> apple = new Apple<>();// 此时 compare 方法的泛型 T 被指定为 Integer
+Apple<String> apple = new Apple<>(); // 此时 compare 方法的泛型 T 被指定为 String
+```
+
+### 泛型通配符
+
+当泛型类型不知道，或者传入的类型比较多，无法确定具体类型时，可以使用通配符，`?` 表示任意类型，在实际使用中，如果不想让任意类型传入，可以使用 `extends` 或 `super` 来约束传入的类型。
+
+- `? extends T` 表示传入的类必须是 T 或者 T 的**子类**
+- `? super T` 表示传入的类必须是 T 或者 T 的**父类**
+
+```java
+interface Employee {
+ void work();
+}
+
+class Leader implements Employee {
+  @Override
+  public void work() {
+    System.out.println("Leader is working");
+  }
+}
+class Manager implements Employee {
+  @Override
+  public void work() {
+    System.out.println("Manager is working");
+  }
+}
+class Coder implements Employee {
+  @Override
+  public void work() {
+    System.out.println("Coder is working");
+  }
+}
+
+ArrayList<Coder> coders = new ArrayList<>();
+coders.add(new Coder());
+ArrayList<Manager> managers = new ArrayList<>();
+managers.add(new Manager());
+ArrayList<Leader> leaders = new ArrayList<>();
+leaders.add(new Leader());
+
+method(coders);
+method(managers);
+method(leaders);
+
+// 1. 这是第一种封装泛型的方法
+public static<T> void method(ArrayList<T> arrayList){
+  arrayList.forEach(Employee::work);
+}
+
+// 2. 还可以使用通配符，用 ? 表示任意类型，如果不想类型太广泛，可以使用 extends 或 super 进行约束
+// ? extends Employee 表示传入的类型必须是 Employee 或是继承 Employee 子类
+public static void method(ArrayList<? extends Employee> arrayList){
+  arrayList.forEach(Employee::work);
+}
+```
+
+### Set
+
+存储无序，没有索引，数据不重复。
+
+- TreeSet 有排序规则
+- HashSet 保证元素唯一性
+- LinkedHashSet 保证元素唯一性，并且按照插入顺序排序
+
+```java
+TreeSet<String> treeSet = new TreeSet<>();
+treeSet.add("c");
+treeSet.add("a");
+treeSet.add("b");
+treeSet.add("q");
+treeSet.add("a");
+System.out.println(treeSet); // [a, b, c, q]
+
+HashSet<String> hashSet = new HashSet<>();
+hashSet.add("c");
+hashSet.add("a");
+hashSet.add("b");
+hashSet.add("q");
+treeSet.add("a");
+System.out.println(hashSet); // [a, q, b, c] 注意和 TreeSet 的打印不一样
+
+LinkedHashSet<String> linkedHashSet = new LinkedHashSet<>();
+linkedHashSet.add("c");
+linkedHashSet.add("a");
+linkedHashSet.add("b");
+linkedHashSet.add("q");
+linkedHashSet.add("a");
+System.out.println(linkedHashSet); // [c, a, b, q] 按插入顺序排序
+```
+
+#### TreeSet 底层结构
+
+TreeSet 底层结构是红黑树，红黑树是一种自平衡的二叉查找树，它与普通二叉树不同的是：
+
+- 普通二叉树的节点都是无序的，而二叉查找树，每个节点左侧的子节点的值都小于该节点的值，右侧的子节点的值都大于该节点的值。
+  - 这种结构在查找数据时，效率更高
+- 两个结构共有的就是二叉树的特点，每个二叉树的节点最多只有两个分叉
