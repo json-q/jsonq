@@ -248,7 +248,7 @@ public class ThymeleafRenderer {
 
 贴一个 PDF 的导出样例
 
-![image](https://jsonq.top/cdn-static/2025/06/21/202506212136236.png)
+![image](./assets/itext-html-pdf/202506212136236.png)
 
 这里简单提取一些简单的 html 结构示例及样式吧，以便大家可以直接根据现有业务自行修改使用
 

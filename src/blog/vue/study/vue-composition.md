@@ -94,7 +94,7 @@ setup 是一个函数
 </script>
 ```
 
-![count打印](https://jsonq.top/cdn-static/2025/02/25/1740465697550-909pefro.jpg)
+![count打印](./assets/vue-composition/1740465697550-909pefro.jpg)
 
 > 在 **template 模板**中引入 ref 的值时，Vue 会自动进行解包操作，所以并**不需要在模板中通过 `ref.value` 的方式**来使用。
 >
@@ -173,7 +173,7 @@ export default function useCount() {
 
 `reactive` 要求必须传入的是一个**对象或者数组类型**,如果传入基本类型`Number、String、Boolean`等，控制台会报警告
 
-![reactive警告](https://jsonq.top/cdn-static/2025/02/25/1740465697680-s9efgvow.jpg)
+![reactive警告](./assets/vue-composition/1740465697680-s9efgvow.jpg)
 
 ```html
 <template>
@@ -233,7 +233,7 @@ const refName = ref("666");
 const readonlyName = readonly(refName);
 ```
 
-![readonly示例](https://jsonq.top/cdn-static/2025/02/25/1740465697782-c00i6oad.jpg)
+![readonly示例](./assets/vue-composition/1740465697782-c00i6oad.jpg)
 
 #### toRefs
 
@@ -362,7 +362,7 @@ export default {
 </script>
 ```
 
-![computed修饰的返回结果](https://jsonq.top/cdn-static/2025/02/25/1740465697986-8buln3yb.jpg)
+![computed修饰的返回结果](./assets/vue-composition/1740465697986-8buln3yb.jpg)
 
 > computed 修饰后，返回的结果就是一个 Ref 修饰的响应式值
 
@@ -408,7 +408,7 @@ export default {
 </script>
 ```
 
-![ref绑定节点](https://jsonq.top/cdn-static/2025/02/25/1740465698070-0g1s3zo7.jpg)
+![ref绑定节点](./assets/vue-composition/1740465698070-0g1s3zo7.jpg)
 
 ## 生命周期
 
@@ -591,7 +591,7 @@ watchEffect 的原理和 React 的 useEffect 比较类似，不同的是：watch
 </script>
 ```
 
-![watchEffect基本使用](https://jsonq.top/cdn-static/2025/02/25/1740465698169-4quy6e4v.jpg)
+![watchEffect基本使用](./assets/vue-composition/1740465698169-4quy6e4v.jpg)
 
 #### 停止侦听
 
@@ -608,7 +608,7 @@ const stopWatch = watchEffect(() => {
 });
 ```
 
-![watchEffect 停止侦听](https://jsonq.top/cdn-static/2025/02/25/1740465698268-8izi3zed.jpg)
+![watchEffect 停止侦听](./assets/vue-composition/1740465698268-8izi3zed.jpg)
 
 ## script setup 语法糖
 
@@ -639,7 +639,7 @@ setup 语法糖，是在 Vue3.2 版本才成为正式版。
 </script>
 ```
 
-![setup 语法糖基本使用](https://jsonq.top/cdn-static/2025/02/25/1740465698400-9h2dpofa.jpg)
+![setup 语法糖基本使用](./assets/vue-composition/1740465698400-9h2dpofa.jpg)
 
 ### defineProps()和 defineEmits()
 
@@ -687,7 +687,7 @@ defineEmits 使用：
 </script>
 ```
 
-![defineEmits使用](https://jsonq.top/cdn-static/2025/02/25/1740465698515-2ugpqfsx.jpg)
+![defineEmits使用](./assets/vue-composition/1740465698515-2ugpqfsx.jpg)
 
 ### defineExpose()
 

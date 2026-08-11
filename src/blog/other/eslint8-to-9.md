@@ -16,7 +16,7 @@ eslint 8 到 9 属于破坏性更新（Break Change），因此导致 eslint 8 �
 
 不支持 Node 19 所有版本，Node 18 最低要求 `18.8.0`，Node 20 最低要求 `20.9.0` 及 Node 21.1.0 以上。
 
-![image](https://jsonq.top/cdn-static/2025/02/25/1740465682578-45remhzb.png)
+![image](./assets/eslint8-to-9/1740465682578-45remhzb.png)
 
 ## 升级 eslint 至最新版
 
@@ -50,7 +50,7 @@ npm i globals -D
 
 ## 旧 eslint 配置文件改名为 eslint.config.js
 
-![image](https://jsonq.top/cdn-static/2025/02/25/1740465682741-dcgggutn.png)
+![image](./assets/eslint8-to-9/1740465682741-dcgggutn.png)
 
 在 8 版本及之前，eslint8 及之前默认读取的以上配置文件中，**以上约定式文件已在 eslint9 中移除，可使用兼容包，但是兼容模式在 10 会移除**
 
@@ -102,7 +102,7 @@ export default tseslint.config({
 
 最好重启一下 vscode。
 
-![image](https://jsonq.top/cdn-static/2025/02/25/1740465682832-tlgg3079.png)
+![image](./assets/eslint8-to-9/1740465682832-tlgg3079.png)
 
 ## 移除 .eslintignore 文件
 

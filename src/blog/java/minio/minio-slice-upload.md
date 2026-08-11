@@ -41,19 +41,19 @@ tags:
 
 展示及请求
 
-![image](https://jsonq.top/cdn-static/2025/02/25/1740465686426-2zexl8gi.gif)
+![image](./assets/minio-slice-upload/1740465686426-2zexl8gi.gif)
 
 前端控制台
 
-![image](https://jsonq.top/cdn-static/2025/02/25/1740476995150-w6keufbi.png)
+![image](./assets/minio-slice-upload/1740476995150-w6keufbi.png)
 
 浏览器可支持的文件预览
 
-![image](https://jsonq.top/cdn-static/2025/02/25/1740465686709-b6kqi6gn.png)
+![image](./assets/minio-slice-upload/1740465686709-b6kqi6gn.png)
 
 目录结构
 
-![image](https://jsonq.top/cdn-static/2025/02/25/1740476995259-ggwse6gu.png)
+![image](./assets/minio-slice-upload/1740476995259-ggwse6gu.png)
 
 一个文件的上传，对接后端的请求有三个
 
@@ -64,7 +64,7 @@ tags:
 
 ### 大文件分片流程
 
-![image](https://jsonq.top/cdn-static/2025/02/25/1740465686912-cnaq033q.png)
+![image](./assets/minio-slice-upload/1740465686912-cnaq033q.png)
 
 整体步骤：
 
@@ -92,11 +92,11 @@ tags:
 
 未优化前，一个 2.1G 的文件上传耗时 18s
 
-![image](https://jsonq.top/cdn-static/2025/02/25/1740465687007-5scnspb0.png)
+![image](./assets/minio-slice-upload/1740465687007-5scnspb0.png)
 
 优化后，仅 2s
 
-![image](https://jsonq.top/cdn-static/2025/02/25/1740476995390-726vfgxk.png)
+![image](./assets/minio-slice-upload/1740476995390-726vfgxk.png)
 
 ##### 缺点
 
@@ -110,8 +110,8 @@ tags:
 
 下载及暂停操作展示
 
-![image](https://jsonq.top/cdn-static/2025/02/25/1740465687166-h8kpiik8.gif)
+![image](./assets/minio-slice-upload/1740465687166-h8kpiik8.gif)
 
 下载内容展示
 
-![image](https://jsonq.top/cdn-static/2025/02/25/1740476995459-445g8to6.png)
+![image](./assets/minio-slice-upload/1740476995459-445g8to6.png)

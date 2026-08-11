@@ -415,13 +415,13 @@ npm remove html-webpack-plugin script-ext-html-webpack-plugin @vue/cli-plugin-un
 
 运行 `npm run serve` 启动项目，可能会出现如下错误：
 
-![image](https://jsonq.top/cdn-static/2026/0620260620021103360.png)
+![image](./assets/vue-cli4-migrate-rsbuild/0620260620021103360.png)
 
 这个看起来像是 jsx 语法 Babel 插件没识别到，手动在报错文件的 script 添加 `lang="jsx"` 就解决了。
 
 下一个报错：
 
-![image](https://jsonq.top/cdn-static/2026/0620260620021517385.png)
+![image](./assets/vue-cli4-migrate-rsbuild/0620260620021517385.png)
 
 这个错误是将 sass 的 `:export` 样式作为 js 进行使用，而正常情况下，这种应用方式只允许 css module 使用。
 
@@ -429,7 +429,7 @@ npm remove html-webpack-plugin script-ext-html-webpack-plugin @vue/cli-plugin-un
 
 将 `element-variables.scss` 拆分：
 
-![image](https://jsonq.top/cdn-static/2026/0620260620145150933.png)
+![image](./assets/vue-cli4-migrate-rsbuild/0620260620145150933.png)
 
 ```scss
 // _theme-vars.scss

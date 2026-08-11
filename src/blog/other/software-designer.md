@@ -47,7 +47,7 @@ tags:
    - **程序计数器（指令计数器）（PC）**：跟踪指令的地址。PC 在顺序执行的时候加 1，在转移执行的时候加上一个位移量
    - 地址寄存器（AR）：保存当前 CPU 所访问的内存单元的地址
    - 指令译码器（ID）：指令包含操作码和地址码。对指令中的操作码进行分析解释
-   - ![CPU基本组成](https://jsonq.top/cdn-static/2025/03/09/202503092058342.png)
+   - ![CPU基本组成](./assets/software-designer/202503092058342.png)
 
 **补充：指令 == 操作码 + 地址码**
 
@@ -85,7 +85,7 @@ tags:
 
 #### 各种码制带符号数的范围
 
-![带符号数的范围](https://jsonq.top/cdn-static/2025/03/09/202503092100967.png)
+![带符号数的范围](./assets/software-designer/202503092100967.png)
 
 #### 浮点数
 
@@ -98,7 +98,7 @@ tags:
 - 规格化就是将尾数的绝对值限定在区间 `[0.5,1]`
 - 一般浮点数阶码用 R 位的移码表示，尾数用 M 位的补码表示。这种表示的数值范围为：
 
-![image](https://jsonq.top/cdn-static/2025/03/09/202503092102427.png)
+![image](./assets/software-designer/202503092102427.png)
 
 #### 寻址
 
@@ -212,20 +212,20 @@ Cache 存储器部分用来存放主存的部分拷贝（副本）信息。控�
    - **CPU 和 I/O（外设）只能串行工作** ，CPU 需要一直轮询检查，长期处于忙等状态。CPU 利用率低
      - 一次只能读/写一个字
      - 由 CPU 将数放入内存
-     - ![image](https://jsonq.top/cdn-static/2025/03/09/202503092102019.png)
+     - ![image](./assets/software-designer/202503092102019.png)
 2. 中断驱动方式
    - I/O 设备通过中断信号主动向 CPU 报告 I/O 操作已完成
      - **CPU 和 I/O（外设）可并行工作**
      - CPU 利用率得到提升
      - 一次只能 读/写 一个字
      - 由 CPU 将数据放入内存
-     - ![image](https://jsonq.top/cdn-static/2025/03/09/202503092103305.png)
+     - ![image](./assets/software-designer/202503092103305.png)
 3. 直接存储器方式（DMA）
    - CPU 和 I/O（外设）可并行工作
    - 仅在传送数据块的开始和结束时才需要 CPU 的干预
    - 由外设直接将数据放入内存
    - 一次读写的单位为”块“而不是字
-   - ![image](https://jsonq.top/cdn-static/2025/03/09/202503092103636.png)
+   - ![image](./assets/software-designer/202503092103636.png)
 
 #### 总线
 
@@ -298,10 +298,10 @@ SHA-1 安全散列算法
 #### 可靠性
 
 1. 串联系统。假设一个系统由 N 个子系统组成，当且仅当所有子系统都能正常工作时系统才能正常工作，这样的系统称为串联系统。
-   - ![image](https://jsonq.top/cdn-static/2025/03/09/202503092104428.png)
+   - ![image](./assets/software-designer/202503092104428.png)
    - 系统可靠性 `R = R₁R₂···Rn`
 2. 并联系统。假设一个系统由 N 个子系统组成，只要有一个子系统正常工作，系统就能正常工作，这样的系统称为并联系统。
-   1. ![image](https://jsonq.top/cdn-static/2025/03/09/202503092110952.png)
+   1. ![image](./assets/software-designer/202503092110952.png)
    2. 系统可靠性 `R = 1 - (1-R₁)(1-R₂)···(1-Rn)`
 
 ### 补充列题说明
@@ -367,7 +367,7 @@ SHA-1 安全散列算法
 - 编译器方式中中间代码生成和代码优化不是必要，可省略。
 - 即编译器方式可以在词法分析、语法分析、语义分析阶段后直接生成目标代码
 
-![image](https://jsonq.top/cdn-static/2025/03/09/202503092110167.png)
+![image](./assets/software-designer/202503092110167.png)
 
 **符号表**：不断收集、记录和使用源程序中一些相关符号的类型和特征等信息，并将其存入符号表中。记录源程序中各个字符的必要信息，以辅助语义的正确性检查和代码生成。
 
@@ -417,7 +417,7 @@ SHA-1 安全散列算法
 
 ### 正规式
 
-![image](https://jsonq.top/cdn-static/2025/03/09/202503092111000.png)
+![image](./assets/software-designer/202503092111000.png)
 
 ### 有限自动机
 
@@ -468,7 +468,7 @@ SHA-1 安全散列算法
 
 操作系统在计算机系统中的地位：
 
-![image](https://jsonq.top/cdn-static/2025/03/09/202503092112897.png)
+![image](./assets/software-designer/202503092112897.png)
 
 操作系统是用户与计算机之间的接口，它在计算机系统中占据重要而特殊的地位，所有其他软件，如编辑程序、汇编程序、编译程序、数据库管理系统等系统软件，以及大量的应用软件都是建立在操作系统基础上的，并得到它的支持和取得它的服务。
 
@@ -486,7 +486,7 @@ SHA-1 安全散列算法
 - **就绪**：一个进程获得了除处理机外的一切所需资源，一旦得到处理机即可运行（还未得到）。
 - **阻塞**（等待或睡眠）：一个进程正在等待某一事件发生而暂时停止运行，这时即使把处理机分配给进程也无法运行。
 
-![image](https://jsonq.top/cdn-static/2025/03/09/202503092112802.png)
+![image](./assets/software-designer/202503092112802.png)
 
 | 进程 | CPU | 资源 |
 | :--: | :-: | :--: |
@@ -659,7 +659,7 @@ P 操作和 V 操作是低级通信原语，在执行期间不可分割。其中
 
 地址结构：
 
-![image](https://jsonq.top/cdn-static/2025/03/09/202503092114987.png)
+![image](./assets/software-designer/202503092114987.png)
 
 其中，页内地址是同一页（页号）中的偏移量。
 
@@ -677,7 +677,7 @@ P 操作和 V 操作是低级通信原语，在执行期间不可分割。其中
 
 段页式地址空间的结构：
 
-![image](https://jsonq.top/cdn-static/2025/03/09/202503092114613.png)
+![image](./assets/software-designer/202503092114613.png)
 
 ### 设备管理
 
@@ -692,11 +692,11 @@ P 操作和 V 操作是低级通信原语，在执行期间不可分割。其中
 
 单缓冲工作过程图：
 
-![image](https://jsonq.top/cdn-static/2025/03/09/202503092114256.png)
+![image](./assets/software-designer/202503092114256.png)
 
 当第 1 块数据送入用户工作区后（进行数据处理），缓冲区是空闲的，可以传送第 2 块数据（输入）。即第 1 块数据的处理 C1 与第 2 块数据的输入 T2 是可以并行的，以此类推：
 
-![image](https://jsonq.top/cdn-static/2025/03/09/202503092115412.png)
+![image](./assets/software-designer/202503092115412.png)
 
 > （前提是 c 要小于 T）计算公式为：`（T + M）* n + c`
 
@@ -734,17 +734,17 @@ P 操作和 V 操作是低级通信原语，在执行期间不可分割。其中
 
 双缓冲工作过程图：
 
-![image](https://jsonq.top/cdn-static/2025/03/09/202503092116455.png)
+![image](./assets/software-designer/202503092116455.png)
 
 双缓冲的工作特点是，可以实现对缓冲中数据的输入 T 和提取 M，与 CPU 的计算 C，三者并行工作：
 
-![image](https://jsonq.top/cdn-static/2025/03/09/202503092116088.png)
+![image](./assets/software-designer/202503092116088.png)
 
 > （前提是 M +c ＜ T）计算公式为：`T * n + M + c`
 
 #### 多级索引结构
 
-![image](https://jsonq.top/cdn-static/2025/03/09/202503092118348.png)
+![image](./assets/software-designer/202503092118348.png)
 
 #### 文件目录
 
@@ -831,7 +831,7 @@ P 操作和 V 操作是低级通信原语，在执行期间不可分割。其中
 
 例如：
 
-![image](https://jsonq.top/cdn-static/2025/03/09/202503092118042.png)
+![image](./assets/software-designer/202503092118042.png)
 
 位示图的大小由磁盘空间的大小（物理块总数）决定。
 
@@ -979,7 +979,7 @@ CMMI 中包括 6 个过程域能力等级：
 
 开发原型系统首先确定用户需求，开发初始原型，然后征求用户对初始原型的改进意见，并根据意见修改原型:
 
-![image](https://jsonq.top/cdn-static/2025/03/09/202503092148484.png)
+![image](./assets/software-designer/202503092148484.png)
 
 1. 交流：目的是定义软件的总体目标，标识需求，然后
 2. 快速计划：快速制订原型开发的计划，确定原型的目标和范围
@@ -1002,7 +1002,7 @@ CMMI 中包括 6 个过程域能力等级：
 
 螺旋模型将开发过程分为几个螺旋周期，每个螺旋周期大致和瀑布模型相符合：
 
-![image](https://jsonq.top/cdn-static/2025/03/09/202503092148686.png)
+![image](./assets/software-designer/202503092148686.png)
 
 螺旋模型属于面向对象开发模型。
 
@@ -1360,7 +1360,7 @@ XP 由价值观、原则、实践和行为 4 个部分组成，他们之间彼�
 
 #### McCabe 度量法（边 - 节 + 2）
 
-![image](https://jsonq.top/cdn-static/2025/03/09/202503092149939.png)
+![image](./assets/software-designer/202503092149939.png)
 
 #### 白盒测试（结构测试）
 
@@ -1735,7 +1735,7 @@ ISO/IEC 9126 软件质量模型由 3 个层次组成：
 2. 第二层：**质量子特性**
 3. 第三层：**度量指标**
 
-![image](https://jsonq.top/cdn-static/2025/03/09/202503092149098.png)
+![image](./assets/software-designer/202503092149098.png)
 
 **质量子特性**的含义：
 
@@ -1781,7 +1781,7 @@ Mc Call 也给出了一个三层模型框架：
 2. 第二层：评价准则
 3. 第三层：度量指标
 
-![image](https://jsonq.top/cdn-static/2025/03/09/202503092150751.png)
+![image](./assets/software-designer/202503092150751.png)
 
 ### 软件评审
 
@@ -1914,7 +1914,7 @@ Mc Call 也给出了一个三层模型框架：
 
 耦合取决于各个模块之间接口的**复杂程度、调用模块的方式以及通过接口的信息类型**等。
 
-![image](https://jsonq.top/cdn-static/2025/03/09/202503092150351.png)
+![image](./assets/software-designer/202503092150351.png)
 
 - 无直接耦合：指两个模块之间**没有直接**的关系，属于不同模块
 - 数据耦合：指两个模块之间有调用关系，传递的是**简单的数据值**
@@ -1928,7 +1928,7 @@ Mc Call 也给出了一个三层模型框架：
 
 内聚是对一个模块内部各个元素彼此结合的紧密程度的度量。
 
-![image](https://jsonq.top/cdn-static/2025/03/09/202503092151266.png)
+![image](./assets/software-designer/202503092151266.png)
 
 - 偶然内聚（巧合内聚）：各处理元素之间**没有任何联系**。
 - 逻辑内聚：模块内执行若干个**逻辑上**相似的功能。
@@ -2200,19 +2200,19 @@ UML 中有 4 中事物：
 
 1. 结构事物：结构事物是 UML 模型中的**名词**，通常是模型的**静态部分**，描述概念或物理元素。
 
-   ![image](https://jsonq.top/cdn-static/2025/03/09/202503092151109.png)
+   ![image](./assets/software-designer/202503092151109.png)
 
 2. 行为事物：行为事物是 UML 模型的**动态部分**，它们是模型中的**动词**，描述了跨越时间和空间的行为。
 
-   ![image](https://jsonq.top/cdn-static/2025/03/09/202503092151549.png)
+   ![image](./assets/software-designer/202503092151549.png)
 
 3. 分组事物：分组事物是 UML 模型的**组织部分**，是一些由模型分解成“盒子”。
 
-   ![image](https://jsonq.top/cdn-static/2025/03/09/202503092152926.png)
+   ![image](./assets/software-designer/202503092152926.png)
 
 4. 注释事物：注释事物是 UML 模型的解释部分。这些注释事物用来描述、说明和标注模型的任何元素。
 
-   ![image](https://jsonq.top/cdn-static/2025/03/09/202503092152984.png)
+   ![image](./assets/software-designer/202503092152984.png)
 
 #### 关系
 
@@ -2220,27 +2220,27 @@ UML 中有 4 种关系：依赖、关联、泛化和实现。
 
 1. 依赖：依赖是两个事物间的**语义关系**，其中一个事物（独立事物）发生变化会影响另一个事物（依赖事物）的语义。
 
-   ![image](https://jsonq.top/cdn-static/2025/03/09/202503092206769.png)
+   ![image](./assets/software-designer/202503092206769.png)
 
 2. 关联：关联是一种**结构关系**，它描述了一组链，链是对象之间的连接。
 
-![image](https://jsonq.top/cdn-static/2025/03/09/202503092207624.png)
+![image](./assets/software-designer/202503092207624.png)
 
 - 聚合：部分和整体的生命周期不一致，整体消失了，部分仍然存在，部分可以脱离整体存在。
 
-  ![image](https://jsonq.top/cdn-static/2025/03/09/202503092207704.png)
+  ![image](./assets/software-designer/202503092207704.png)
 
 - 组合：部分和整体的生命周期一致，整体消失了，部分也消失了，部分不可以脱离整体存在。
 
-  ![image](https://jsonq.top/cdn-static/2025/03/09/202503092208644.png)
+  ![image](./assets/software-designer/202503092208644.png)
 
 1. 泛化：泛化是一种特殊/一般关系，特殊元素（子元素）的对象可替代一般元素（父元素）的对象。子元素共享了父元素的结构和行为。
 
-   ![image](https://jsonq.top/cdn-static/2025/03/09/202503092209515.png)
+   ![image](./assets/software-designer/202503092209515.png)
 
 1. 实现（了解）：实现是类元之间的语义关系，其中一个类元指定了由另一个类元保证执行的契约。
 
-   ![image](https://jsonq.top/cdn-static/2025/03/09/202503092209382.png)
+   ![image](./assets/software-designer/202503092209382.png)
 
 ### UML
 
@@ -2284,7 +2284,7 @@ UML 中有 4 种关系：依赖、关联、泛化和实现。
 2. 对简单的协作建模。
 3. 对逻辑数据库模式建模。
 
-![image](https://jsonq.top/cdn-static/2025/03/09/202503092216018.png)
+![image](./assets/software-designer/202503092216018.png)
 
 #### 对象图
 
@@ -2292,7 +2292,7 @@ UML 中有 4 种关系：依赖、关联、泛化和实现。
 
 对象图给出系统的**静态设计视图**或**静态进程视图**。
 
-![image](https://jsonq.top/cdn-static/2025/03/09/202503092216654.png)
+![image](./assets/software-designer/202503092216654.png)
 
 #### 用例图
 
@@ -2311,7 +2311,7 @@ UML 中有 4 种关系：依赖、关联、泛化和实现。
   - 对系统的语境建模。
   - 对系统的需求建模。
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202503100906083.png)
+![image](./assets/software-designer/202503100906083.png)
 
 #### 交互图（序列图、通信图）
 
@@ -2327,7 +2327,7 @@ UML 中有 4 种关系：依赖、关联、泛化和实现。
    - 序列图有对象生命线
    - 序列图有控制焦点
 
-     ![image](https://jsonq.top/cdn-static/2025/03/10/202503100908637.png)
+     ![image](./assets/software-designer/202503100908637.png)
 
 2. **通信图**（协作图）：通信图强调**收发消息的对象的结构组织**，在早期的版本中也被称作协作图。
 
@@ -2338,7 +2338,7 @@ UML 中有 4 种关系：依赖、关联、泛化和实现。
    - 通信图有路径
    - 通信图有顺序号
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202503100908461.png)
+![image](./assets/software-designer/202503100908461.png)
 
 3. 交互概览图 （不考）
 4. 计时图 （不考）
@@ -2359,7 +2359,7 @@ UML 中有 4 种关系：依赖、关联、泛化和实现。
 
 事件，监护条件，动作
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202503100908441.png)
+![image](./assets/software-designer/202503100908441.png)
 
 **事件触发转换（迁移）**
 
@@ -2376,23 +2376,23 @@ UML 中有 4 种关系：依赖、关联、泛化和实现。
   - 对工作流建模。
   - 对操作建模。
 
-  ![image](https://jsonq.top/cdn-static/2025/03/09/202503092217681.png)
+  ![image](./assets/software-designer/202503092217681.png)
 
 #### 构件图（组件图）
 
 - **构件图展现了一组构件之间的组织和依赖。**
 - 构件图专注于系统的静态**实现**试图。
 
-![image](https://jsonq.top/cdn-static/2025/03/09/202503092218969.png)
+![image](./assets/software-designer/202503092218969.png)
 
-![image](https://jsonq.top/cdn-static/2025/03/09/202503092218729.png)
+![image](./assets/software-designer/202503092218729.png)
 
 #### 部署图
 
 - 部署图是用来对面向对象系统的**物理方面**建模的方法，展现了运行时处理结点以及其中构件（制品）的配置。
 - **部署图展现了系统的软件和硬件之间的关系，在实施阶段使用。**
 
-  ![image](https://jsonq.top/cdn-static/2025/03/09/202503092218698.png)
+  ![image](./assets/software-designer/202503092218698.png)
 
 #### UML 图汇总
 
@@ -2414,7 +2414,7 @@ UML 中有 4 种关系：依赖、关联、泛化和实现。
 - 解决方案（Solution）
 - 效果（Consequences）
 
-![image](https://jsonq.top/cdn-static/2025/03/09/202503092218908.png)
+![image](./assets/software-designer/202503092218908.png)
 
 ### 创建型设计模式（5 种）
 
@@ -2424,7 +2424,7 @@ UML 中有 4 种关系：依赖、关联、泛化和实现。
 - 定义：定义一个工厂类，他可以根据参数的不同返回不同类的实例，被创建的实例通常都具有共同的父类。在简单工厂模式中用于被创建实例的方法通常为静态(static)方法，因此简单工厂模式又被成为静态工厂方法
 - 简单工厂模式违反了开放封闭原则，即对扩展开放对修改也开放。
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202503100848734.png)
+![image](./assets/software-designer/202503100848734.png)
 
 ```java
 /**
@@ -2487,7 +2487,7 @@ class ProductB extends Product{
 
 2）结构：创建型类模式
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202503100849184.png)
+![image](./assets/software-designer/202503100849184.png)
 
 ```java
 /**
@@ -2565,7 +2565,7 @@ class ProductB implements Product{
 
 2）结构：创建型对象模式
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202503100910597.png)
+![image](./assets/software-designer/202503100910597.png)
 
 ```java
 /**
@@ -2680,7 +2680,7 @@ class ProductB2 implements ProductB{
 
 2）结构：创建型对象模式
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202503100914785.png)
+![image](./assets/software-designer/202503100914785.png)
 
 ```java
 /**
@@ -2786,7 +2786,7 @@ class Product{
 - ConcretePrototype 实现一个复制自身的操作。
 - Client 让一个原型复制自身从而创建一个新的对象
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202503100914473.png)
+![image](./assets/software-designer/202503100914473.png)
 
 ```java
 /**
@@ -2854,7 +2854,7 @@ class Product implements Prototype{
 
 2）结构：创建型对象模式
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202503100914285.png)
+![image](./assets/software-designer/202503100914285.png)
 
 其中：Singleton 指定一个 Instance 操作，允许客户访问它的唯一实例，Instance 是一个类
 
@@ -2887,7 +2887,7 @@ class Singleton{
 }
 ```
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202503100915622.png)
+![image](./assets/software-designer/202503100915622.png)
 
 3）适用性 Singleton 模式适用于：
 
@@ -2904,7 +2904,7 @@ class Singleton{
 
 2）结构
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202503100915333.png)
+![image](./assets/software-designer/202503100915333.png)
 
 其中：
 
@@ -2964,7 +2964,7 @@ Adapter 模式适用于：
 
 2）结构
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202503100915690.png)
+![image](./assets/software-designer/202503100915690.png)
 
 ```java
 /**
@@ -3051,7 +3051,7 @@ class Blue implements Color{
 
 2）结构
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202503100849276.png)
+![image](./assets/software-designer/202503100849276.png)
 
 其中：
 
@@ -3176,7 +3176,7 @@ Composite 模式下适用于：
 
 2）结构
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202503100850876.png)
+![image](./assets/software-designer/202503100850876.png)
 
 其中：
 
@@ -3268,7 +3268,7 @@ Decorator 模式适用于：
 
 2）结构
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202503100850127.png)
+![image](./assets/software-designer/202503100850127.png)
 
 其中：
 
@@ -3349,7 +3349,7 @@ Facade 模式适用于：
 
 2）结构
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202503100850410.png)
+![image](./assets/software-designer/202503100850410.png)
 
 其中：
 
@@ -3499,7 +3499,7 @@ Flyweight 模式适用于：
 
 2）结构
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202503100851986.png)
+![image](./assets/software-designer/202503100851986.png)
 
 ```java
 /**
@@ -3560,7 +3560,7 @@ class RealSubject implements Subject{
 
 2）结构
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202503100851778.png)
+![image](./assets/software-designer/202503100851778.png)
 
 其中：
 
@@ -3661,7 +3661,7 @@ Chain of Responsibility 模式适用于以下条件：
 
 2）结构
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202503100852595.png)
+![image](./assets/software-designer/202503100852595.png)
 
 其中：
 
@@ -3766,7 +3766,7 @@ Command 模式适用于：
 
 2）结构
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202503100852578.png)
+![image](./assets/software-designer/202503100852578.png)
 
 ```java
 /**
@@ -3867,7 +3867,7 @@ Interpreter 模式适用于当有一个语言需要解释执行，并且可将�
 
 2）结构
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202503100852373.png)
+![image](./assets/software-designer/202503100852373.png)
 
 其中：
 
@@ -3993,7 +3993,7 @@ Iterator 模式适用于：
 
 2）结构
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202503100853644.png)
+![image](./assets/software-designer/202503100853644.png)
 
 其中：
 
@@ -4098,7 +4098,7 @@ Mediator 模式适用于：
 
 2）结构
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202503100853909.png)
+![image](./assets/software-designer/202503100853909.png)
 
 ```java
 /**
@@ -4203,7 +4203,7 @@ Mement 模式适用于：
 
 2）结构
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202503100854955.png)
+![image](./assets/software-designer/202503100854955.png)
 
 其中：
 
@@ -4326,7 +4326,7 @@ Observer 模式适用于：
 
 2）结构
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202503100854972.png)
+![image](./assets/software-designer/202503100854972.png)
 
 ```java
 /**
@@ -4442,7 +4442,7 @@ State 模式适用于：
 
 2）结构
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202503100854765.png)
+![image](./assets/software-designer/202503100854765.png)
 
 ```java
 /**
@@ -4521,7 +4521,7 @@ Strategy 模式适用于：
 
 2）结构
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202503100855379.png)
+![image](./assets/software-designer/202503100855379.png)
 
 其中：
 
@@ -4602,7 +4602,7 @@ Template Method 模式适用于：
 
 2）结构
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202503100855181.png)
+![image](./assets/software-designer/202503100855181.png)
 
 其中：
 
@@ -4783,13 +4783,13 @@ Visitor 模式适用于：
 
 ---
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202503100855998.png)
+![image](./assets/software-designer/202503100855998.png)
 
 递归式时间复杂度：递归的次数 x 每次递归的时间复杂度
 
 主方法。主方法也称为主定理，给出了求解以下形式的递归式的快速方法。
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202503100855197.png)
+![image](./assets/software-designer/202503100855197.png)
 
 #### 空间复杂度
 
@@ -4799,7 +4799,7 @@ Visitor 模式适用于：
 
 ##### n 皇后问题
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202503100855716.png)
+![image](./assets/software-designer/202503100855716.png)
 
 ```c
 #include<stdio.h>
@@ -4921,11 +4921,11 @@ int main(){
 }
 ```
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202503100856671.png)
+![image](./assets/software-designer/202503100856671.png)
 
 ##### 最大字段和问题
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202503100856408.png)
+![image](./assets/software-designer/202503100856408.png)
 
 ```c
 #include<stdio.h>
@@ -4989,7 +4989,7 @@ int main(){
 }
 ```
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202503100856816.png)
+![image](./assets/software-designer/202503100856816.png)
 
 #### 动态规划法
 
@@ -5124,7 +5124,7 @@ int main(){
     - 一对多联系（1：n）。班和学生之间是一对多联系。
     - 多对多联系（m：n）。课程和学生之间是多对多联系。
 
-      ![image](https://jsonq.top/cdn-static/2025/03/10/202503100857753.png)
+      ![image](./assets/software-designer/202503100857753.png)
 
 ### 三级模式结构
 
@@ -5165,7 +5165,7 @@ int main(){
 
 ### 关系代数运算符
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202503100857953.png)
+![image](./assets/software-designer/202503100857953.png)
 
 - 投影：投影运算是从关系的**垂直方向**进行运算，在关系 R 中选出若干属性列 A 组成新的关系，记作**πA(R)**
 - 选择：选择运算是从关系的**水平方向**进行运算，是从关系 R 中选择满足给定条件的的元组，记作**σF(R)**
@@ -5187,11 +5187,11 @@ int main(){
 
 - SQL 不支持列的序号
 - 投影、选择转 SQL 语言
-  - ![image](https://jsonq.top/cdn-static/2025/03/10/202503100857691.png)
+  - ![image](./assets/software-designer/202503100857691.png)
 - 笛卡尔积转 SQL 语言
-  - ![image](https://jsonq.top/cdn-static/2025/03/10/202503100857584.png)
+  - ![image](./assets/software-designer/202503100857584.png)
 - 自然连接转 SQL 语言
-  - ![image](https://jsonq.top/cdn-static/2025/03/10/202503100858276.png)
+  - ![image](./assets/software-designer/202503100858276.png)
 
 #### SQL 语言的分类
 
@@ -5221,7 +5221,7 @@ int main(){
 
 #### 范式之间的关系
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202503100858907.png)
+![image](./assets/software-designer/202503100858907.png)
 
 #### 1NF（第一范式）
 
@@ -5268,7 +5268,7 @@ NF 到 4NF 之间的转换关系：
 | BCNF | 3NF 消除了主属性对候选码的部分和传递函数依赖后满足 BCNF |
 | 4NF  |     BCNF 消除非平凡且非函数依赖的多值依赖后满足 4NF     |
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202503100858329.png)
+![image](./assets/software-designer/202503100858329.png)
 
 ### 数据库设计
 
@@ -5350,9 +5350,9 @@ E-R 图之间的冲突
 
 ### 协议簇
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202503100859964.png)
+![image](./assets/software-designer/202503100859964.png)
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202503100859702.png)
+![image](./assets/software-designer/202503100859702.png)
 
 - FTP 的端口号：20（数据端口）、21（控制端口）
 - http 的端口号：80
@@ -5465,7 +5465,7 @@ IP 地址有两种：
 
 每个 IPv4 地址都由 4 个小于 256 的数字组成（每个数字 8 位，共 32 位），数字之间用`.`分开，可分为 5 类：
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202503100900668.png)
+![image](./assets/software-designer/202503100900668.png)
 
 补充：
 
@@ -5482,7 +5482,7 @@ IP 地址有两种：
 - 所有对应网络号的部分用`1`填上；
 - 所有对应主机号的部分用`0`填上。
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202503100900144.png)
+![image](./assets/software-designer/202503100900144.png)
 
 #### IPv6
 
@@ -5636,7 +5636,7 @@ worm 表示蠕虫病毒、Trojan 表示特洛伊木马（秘密潜伏且能够�
 
 数据流图的基本图形元素包括数据流、加工、数据存储和外部实体。
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202503100900622.png)
+![image](./assets/software-designer/202503100900622.png)
 
 - **外部实体（实体只能是唯一的）**：当前系统之外的**人、物、外部系统**
   - **人**：学生、老师、员工、主管、医生、客户、供应商......
@@ -5684,7 +5684,7 @@ D1：销售订单表 D2：库存表 D3：生产计划表 D 4：配方表 D5：�
 
 答题格式：
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202503100901546.png)
+![image](./assets/software-designer/202503100901546.png)
 
 - 如何保持数据流图平衡？
   - 父图中加工的输入数据流必须与子图中的输入输出数据流在数量上和名字上相同；
@@ -5714,7 +5714,7 @@ D1：销售订单表 D2：库存表 D3：生产计划表 D 4：配方表 D5：�
 
 - 子实体：又称为子类，它会有一个超类，并且能继承超类的属性，超类的属性是实体集中所有子实体的相同属性。
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202503100901892.png)
+![image](./assets/software-designer/202503100901892.png)
 
 - 超类和子类的转化
 
@@ -5726,11 +5726,11 @@ D1：销售订单表 D2：库存表 D3：生产计划表 D 4：配方表 D5：�
 
 - 转关系模式
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202503100901762.png)
+![image](./assets/software-designer/202503100901762.png)
 
 - 归并到任一方实体
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202503100901929.png)
+![image](./assets/software-designer/202503100901929.png)
 
 `1：*`:
 
@@ -5755,27 +5755,27 @@ D1：销售订单表 D2：库存表 D3：生产计划表 D 4：配方表 D5：�
 
 - 依赖
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202503100902127.png)
+![image](./assets/software-designer/202503100902127.png)
 
 - 关联：是一种结构关系，描述了一个组链，链是对象之间的连接
 
-  ![image](https://jsonq.top/cdn-static/2025/03/10/202503100902984.png)
+  ![image](./assets/software-designer/202503100902984.png)
 
   - 聚合：部分和整体的生命周期不一样，整体消失了，部分仍存在，部分可以脱离整体存在。
 
-    ![image](https://jsonq.top/cdn-static/2025/03/10/202503100902736.png)
+    ![image](./assets/software-designer/202503100902736.png)
 
   - 组合 ：部分和整体的生命周期一样，整体消失了，部分也消失，部分不可以脱离整体存在。
 
-    ![image](https://jsonq.top/cdn-static/2025/03/10/202503100903669.png)
+    ![image](./assets/software-designer/202503100903669.png)
 
 - 泛化（继承） ：父类泛化子类
 
-  ![image](https://jsonq.top/cdn-static/2025/03/10/202503100903558.png)
+  ![image](./assets/software-designer/202503100903558.png)
 
 - 实现：类实现一个接口
 
-  ![image](https://jsonq.top/cdn-static/2025/03/10/202503100903898.png)
+  ![image](./assets/software-designer/202503100903898.png)
 
 #### UML 的图
 
@@ -5792,7 +5792,7 @@ D1：销售订单表 D2：库存表 D3：生产计划表 D 4：配方表 D5：�
    - 用例。
    - 参与者。
    - 用例之间的扩展关系（`<<extend>>`）和包含关系（`<<include>>`），参与者和用例之间的关联关系，用例与用例以及参与者与参与者之间的泛化关系。
-     - ![image](https://jsonq.top/cdn-static/2025/03/10/202503100903958.png)
+     - ![image](./assets/software-designer/202503100903958.png)
 
 ## 试题四
 

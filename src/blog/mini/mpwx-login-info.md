@@ -12,7 +12,7 @@ tags:
 
 先上官方的经典登录流程图：
 
-![登录流程时序](https://jsonq.top/cdn-static/2025/02/25/1740465687700-0qn8z6y5.jpg)
+![登录流程时序](./assets/mpwx-login-info/1740465687700-0qn8z6y5.jpg)
 
 步骤拆分解析：
 
@@ -273,7 +273,7 @@ Page({
 });
 ```
 
-![获取用户昵称示意图](https://jsonq.top/cdn-static/2025/02/25/1740465687801-ovyhe0pq.png)
+![获取用户昵称示意图](./assets/mpwx-login-info/1740465687801-ovyhe0pq.png)
 
 ### 获取用户头像
 
@@ -305,4 +305,4 @@ Page({
 });
 ```
 
-![获取用户头像示意图](https://jsonq.top/cdn-static/2025/02/25/1740465687906-gh4ssuxo.png)
+![获取用户头像示意图](./assets/mpwx-login-info/1740465687906-gh4ssuxo.png)

@@ -19,7 +19,7 @@ tags:
 
 这个不算知识点，就是一些 v7 中的小细节，在单页应用中，官方推荐从 `react-router/dom` 中导入 `RouterProvider`。相关文档: [RouterProvider](https://reactrouter.com/api/data-routers/RouterProvider)
 
-![RouterProvider](https://jsonq.top/cdn-static/2025/10/22/202601092323046.png)
+![RouterProvider](./assets/use-reactrouter-v7-in-single-page/202601092323046.png)
 
 ## loader 进行数据预加载和鉴权
 

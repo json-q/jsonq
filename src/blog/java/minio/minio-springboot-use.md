@@ -175,15 +175,15 @@ antd 组件，前端设置了跨域代理，以 `/api` 开头的请求都会代�
 
 前端展示效果
 
-![image](https://jsonq.top/cdn-static/2025/02/25/1740465687402-71lodgs3.png)
+![image](./assets/minio-springboot-use/1740465687402-71lodgs3.png)
 
 minio 后台文件结构
 
-![image](https://jsonq.top/cdn-static/2025/02/25/1740476995534-u4qhi8a4.png)
+![image](./assets/minio-springboot-use/1740476995534-u4qhi8a4.png)
 
 url 地址预览（需上传时设置 `Content-Type`）
 
-![image](https://jsonq.top/cdn-static/2025/02/25/1740465687534-fxbg3bp2.png)
+![image](./assets/minio-springboot-use/1740465687534-fxbg3bp2.png)
 
 ## 文件下载
 

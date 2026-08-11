@@ -33,13 +33,13 @@ tags:
 
   具体安装流程图如下：
 
-  - ![选择安装方式](https://jsonq.top/cdn-static/2025/02/25/1740465698615-n16bxyvc.jpg)
-  - ![自定义安装选项](https://jsonq.top/cdn-static/2025/02/25/1740475766663-0pyu35yv.jpg)
-  - ![选择Vue版本](https://jsonq.top/cdn-static/2025/02/25/1740465698715-n8pqoaf0.jpg)
-  - ![选择ESLint规范](https://jsonq.top/cdn-static/2025/02/25/1740475766829-9so9iw5t.jpg)
-  - ![代码检测时机](https://jsonq.top/cdn-static/2025/02/25/1740465698817-2f2374re.jpg)
-  - ![配置文件保存位置](https://jsonq.top/cdn-static/2025/02/25/1740475766996-qk1zpgc4.jpg)
-  - ![保存此次配置](https://jsonq.top/cdn-static/2025/02/25/1740465698995-qxexugyk.jpg)
+  - ![选择安装方式](./assets/vue-know/1740465698615-n16bxyvc.jpg)
+  - ![自定义安装选项](./assets/vue-know/1740475766663-0pyu35yv.jpg)
+  - ![选择Vue版本](./assets/vue-know/1740465698715-n8pqoaf0.jpg)
+  - ![选择ESLint规范](./assets/vue-know/1740475766829-9so9iw5t.jpg)
+  - ![代码检测时机](./assets/vue-know/1740465698817-2f2374re.jpg)
+  - ![配置文件保存位置](./assets/vue-know/1740475766996-qk1zpgc4.jpg)
+  - ![保存此次配置](./assets/vue-know/1740465698995-qxexugyk.jpg)
 
   > 该配置是自定义创建项目，即**第三个选项**，若选择前两个，则直接创建默认项目配置。
 
@@ -50,7 +50,7 @@ tags:
   - 当 data 中的数据发生改变时，对应的内容也会发生更新。
   - Mustache 中不仅仅可以是 data 中的属性，也可以是一个 JavaScript 的表达式
 
-  ![模板语法使用](https://jsonq.top/cdn-static/2025/02/25/1740465699144-i0b45pvu.jpg)
+  ![模板语法使用](./assets/vue-know/1740465699144-i0b45pvu.jpg)
 
 ## data 属性
 
@@ -68,7 +68,7 @@ tags:
   - 在该方法中，我们可以**使用 this 关键字**来直接访问到 data 中返回的对象的属性；
 - 官方文档有这么一段描述：
 
-![原因](https://jsonq.top/cdn-static/2025/02/25/1740465699252-14u5iyxd.jpg)
+![原因](./assets/vue-know/1740465699252-14u5iyxd.jpg)
 
 简单使用：
 
@@ -111,7 +111,7 @@ tags:
   - 二个参数： `"(value, key) in object"`
   - 三个参数： `"(value, key, index) in object"`
 
-![列表渲染](https://jsonq.top/cdn-static/2025/02/25/1740465699342-dvg2ga5p.jpg)
+![列表渲染](./assets/vue-know/1740465699342-dvg2ga5p.jpg)
 
 > 当我们需要遍历渲染的是**内容区域时**，可以使用`template`元素，例如：`<template v-for="item in arr">...</template>`
 
@@ -199,7 +199,7 @@ tags:
   </script>
   ```
 
-  ![结果](https://jsonq.top/cdn-static/2025/02/25/1740465699445-hozbm4oc.jpg)
+  ![结果](./assets/vue-know/1740465699445-hozbm4oc.jpg)
 
   - **数组语法**
 
@@ -239,7 +239,7 @@ tags:
   </script>
   ```
 
-  ![结果](https://jsonq.top/cdn-static/2025/02/25/1740465699533-pcthn8wv.jpg)
+  ![结果](./assets/vue-know/1740465699533-pcthn8wv.jpg)
 
 #### 绑定动态 style
 
@@ -276,7 +276,7 @@ tags:
   </script>
   ```
 
-  ![结果](https://jsonq.top/cdn-static/2025/02/25/1740465699639-3caau1yg.jpg)
+  ![结果](./assets/vue-know/1740465699639-3caau1yg.jpg)
 
 - 数组语法：
   ```html
@@ -322,7 +322,7 @@ tags:
   </script>
   ```
 
-  ![结果](https://jsonq.top/cdn-static/2025/02/25/1740465699748-f27hr8o4.jpg)
+  ![结果](./assets/vue-know/1740465699748-f27hr8o4.jpg)
 
 #### 绑定动态对象属性
 
@@ -345,7 +345,7 @@ tags:
 </script>
 ```
 
-![结果](https://jsonq.top/cdn-static/2025/02/25/1740465699834-k5ahw4ye.jpg)
+![结果](./assets/vue-know/1740465699834-k5ahw4ye.jpg)
 
 ### v-on 事件绑定（重要）
 
@@ -491,7 +491,7 @@ tags:
 
 如图所示：
 
-![结果](https://jsonq.top/cdn-static/2025/02/25/1740465699924-vkvhemun.jpg)
+![结果](./assets/vue-know/1740465699924-vkvhemun.jpg)
 
 #### template 元素
 
@@ -523,7 +523,7 @@ tags:
 </script>
 ```
 
-![结果](https://jsonq.top/cdn-static/2025/02/25/1740465700019-2lgoyk9d.jpg)
+![结果](./assets/vue-know/1740465700019-2lgoyk9d.jpg)
 
 #### v-show
 
@@ -568,7 +568,7 @@ tags:
 </script>
 ```
 
-![结果](https://jsonq.top/cdn-static/2025/02/25/1740465700105-ogtgu3ae.jpg)
+![结果](./assets/vue-know/1740465700105-ogtgu3ae.jpg)
 
 #### v-model 的原理
 
@@ -628,7 +628,7 @@ tags:
    </script>
    ```
 
-   ![结果](https://jsonq.top/cdn-static/2025/02/25/1740465700246-dfgcq4w1.jpg)
+   ![结果](./assets/vue-know/1740465700246-dfgcq4w1.jpg)
 
 3. radio
    ```html
@@ -686,19 +686,19 @@ tags:
 </script>
 ```
 
-![v-html](https://jsonq.top/cdn-static/2025/02/25/1740465700361-g35zyvti.jpg)
+![v-html](./assets/vue-know/1740465700361-g35zyvti.jpg)
 
 ### v-pre
 
 v-pre 用于**跳过元素和它的子元素的编译过程**，显示原始的 Mustache 标签跳过不需要编译的节点，加快编译的速度
 
-![v-pre](https://jsonq.top/cdn-static/2025/02/25/1740465700450-cgpz76db.jpg)
+![v-pre](./assets/vue-know/1740465700450-cgpz76db.jpg)
 
 ### v-cloak
 
 **这个指令保持在元素上直到关联组件实例结束编译** 和 CSS 规则如`[v-cloak] { display: none }`一起用时，这个指令可以隐藏未编译的 Mustache 标签直到组件实例准备完毕
 
-![v-cloak](https://jsonq.top/cdn-static/2025/02/25/1740465700568-33tgu8dr.jpg)
+![v-cloak](./assets/vue-know/1740465700568-33tgu8dr.jpg)
 
 > 页面在渲染时，当编译时间过长，未解析到模板语法的时候，页面实际显示的是`{{info}}`，编译完成时，才会替换为属性值。为了防止这种现象，可以使用`v-cloak`
 
@@ -895,7 +895,7 @@ Vue 将被侦听的数组的变更方法进行了包裹，所以它们也将会�
 </script>
 ```
 
-![结果](https://jsonq.top/cdn-static/2025/02/25/1740465700682-20z04uvn.jpg)
+![结果](./assets/vue-know/1740465700682-20z04uvn.jpg)
 
 由图可得：渲染同样个数多个标签，`methods`调用了 3 次，而`computed`只调用了 1 次，区别就在于**计算属性的缓存**。
 
@@ -905,7 +905,7 @@ Vue 将被侦听的数组的变更方法进行了包裹，所以它们也将会�
 2. 在**数据不发生变化**时，计算属性是**不需要重新计算**的
 3. 但是如果**依赖的数据发生变化**，在使用时，计算属性依然**会重新进行计算**
 
-![对比](https://jsonq.top/cdn-static/2025/02/25/1740465700811-5uduifg7.jpg)
+![对比](./assets/vue-know/1740465700811-5uduifg7.jpg)
 
 #### 计算属性的 setter 和 getter
 
@@ -971,7 +971,7 @@ computed: {
 </script>
 ```
 
-![结果](https://jsonq.top/cdn-static/2025/02/25/1740465700925-9k1krqpi.jpg)
+![结果](./assets/vue-know/1740465700925-9k1krqpi.jpg)
 
 > `watch`内部的监听的函数会接收到两个值，第一个是监听的值的**最新值**，第二个是监听的值的**上一次的值**
 

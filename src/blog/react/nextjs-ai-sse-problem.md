@@ -110,11 +110,11 @@ const nextConfig: NextConfig = {
 
 跨域问题解决后，我们来请求接口 `fetch("/test/stream", { method: "POST" })`，结果就会发现事情不对，node 服务设置每 100ms 间隔推送一次数据，而前端却在所有服务端将所有数据推送完成之后才看到了返回的值。
 
-![image](https://jsonq.top/cdn-static/2025/04/25/202504252326353.gif)
+![image](./assets/nextjs-ai-sse-problem/202504252326353.gif)
 
 这里用简易 Postman 测试对比一下，就可以发现问题所在了
 
-![image](https://jsonq.top/cdn-static/2025/04/26/202504261113414.gif)
+![image](./assets/nextjs-ai-sse-problem/202504261113414.gif)
 
 正常情况下，sse 推送是实时的，前端每 100ms 都可以接收到新的推送数据，但是在 Next 的代理下，会先将所有推送的数据进行缓冲，最后一次性接收，这显然不符合实时推送接收的情况下。
 
@@ -173,7 +173,7 @@ async function fetchNextAPIData() {
 }
 ```
 
-![image](https://jsonq.top/cdn-static/2025/04/26/202504261325260.gif)
+![image](./assets/nextjs-ai-sse-problem/202504261325260.gif)
 
 ## 前端接收 SSE 数据
 

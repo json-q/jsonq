@@ -18,39 +18,39 @@ tags:
 yum install -y wget && wget -O install.sh https://download.bt.cn/install/install_6.0.sh && sh install.sh ed8484bec
 ```
 
-![xshell连接成功标识](https://jsonq.top/cdn-static/2025/02/25/1740465676590-n7tvagmx.jpg)
+![xshell连接成功标识](./assets/bt-deploy/1740465676590-n7tvagmx.jpg)
 
 ### 安装宝塔
 
 1. 输入 y ，回车进行安装
 
-![安装宝塔步骤](https://jsonq.top/cdn-static/2025/02/25/1740465676710-gugmaudz.jpg)
+![安装宝塔步骤](./assets/bt-deploy/1740465676710-gugmaudz.jpg)
 
 2. 根据需要是否配置 SSL，这里选择否(n)，等待安装
 
-![SSL证书配置提醒](https://jsonq.top/cdn-static/2025/02/25/1740465676814-fg4z0n3d.jpg)
+![SSL证书配置提醒](./assets/bt-deploy/1740465676814-fg4z0n3d.jpg)
 
 3. 安装完成如图所示
 
    **请一定要复制并保存该地址，以及账号名和密码**
 
-![安装完成图片](https://jsonq.top/cdn-static/2025/02/25/1740465676931-k3n4i7kr.jpg)
+![安装完成图片](./assets/bt-deploy/1740465676931-k3n4i7kr.jpg)
 
 ### 开放安全组
 
 由 **第三步** 可知，宝塔端口为在 37855，因此我们需要在服务器的安全组放行该端口，这样外网才能访问到该地址。
 
-![放行宝塔端口](https://jsonq.top/cdn-static/2025/02/25/1740465677061-rmtz9vqy.jpg)
+![放行宝塔端口](./assets/bt-deploy/1740465677061-rmtz9vqy.jpg)
 
 ### 访问宝塔
 
-![宝塔登录页面](https://jsonq.top/cdn-static/2025/02/25/1740476078938-ywosymfu.jpg)
+![宝塔登录页面](./assets/bt-deploy/1740476078938-ywosymfu.jpg)
 
 如果操作无误，可以通过 **第三步** 提供好的地址访问成功，输入账号和密码，登录即可。
 
 ### 绑定手机号
 
-![绑定手机号](https://jsonq.top/cdn-static/2025/02/25/1740465677160-89pg4d5x.jpg)
+![绑定手机号](./assets/bt-deploy/1740465677160-89pg4d5x.jpg)
 
 若无账号，访问 [宝塔官网](https://www.bt.cn/new/index.html)注册即可。
 
@@ -62,19 +62,19 @@ yum install -y wget && wget -O install.sh https://download.bt.cn/install/install
 
 搜索 MySql、Java（Java 项目一键部署）、Nginx、Redis 等等运行环境所需配置，等待安装完成。
 
-![安装环境](https://jsonq.top/cdn-static/2025/02/25/1740465677248-62dq7h0w.jpg)
+![安装环境](./assets/bt-deploy/1740465677248-62dq7h0w.jpg)
 
 ### 安装 Tomcat
 
 spring 项目其实不需要安装 tomcat，宝塔在安装 tomcat 的时候会安装 java 环境，所以我们选择安装 tomcat8。
 
-![tomcat安装](https://jsonq.top/cdn-static/2025/02/25/1740465677335-m7mfqi09.jpg)
+![tomcat安装](./assets/bt-deploy/1740465677335-m7mfqi09.jpg)
 
 ## 创建数据库
 
 密码是 root 密码，可对 root 密码进行修改。
 
-![创建数据库](https://jsonq.top/cdn-static/2025/02/25/1740465677423-hoo3z2gh.jpg)
+![创建数据库](./assets/bt-deploy/1740465677423-hoo3z2gh.jpg)
 
 创建完成之后，点击**导入**，将自己开发所使用的 SQL 表导入即可。
 
@@ -109,7 +109,7 @@ spring 项目其实不需要安装 tomcat，宝塔在安装 tomcat 的时候会�
 
 打包成功如图所示
 
-![打包成功截图](https://jsonq.top/cdn-static/2025/02/25/1740465677544-ah7sc4e5.jpg)
+![打包成功截图](./assets/bt-deploy/1740465677544-ah7sc4e5.jpg)
 
 > 打包之前请将开发环境的配置，切换为服务器配置，比如连接服务器 mysql 的表名、用户名和密码等等。
 
@@ -125,21 +125,21 @@ npm run build
 
 创建文件夹，用于存放前后端项目文件
 
-![创建文件夹](https://jsonq.top/cdn-static/2025/02/25/1740465677672-sc2ows7p.jpg)
+![创建文件夹](./assets/bt-deploy/1740465677672-sc2ows7p.jpg)
 
 ### 上传项目文件
 
 进入 blog 文件夹，将后端的 jar 包和前端打包好的文件上传到此目录下
 
-![上传前后端文件](https://jsonq.top/cdn-static/2025/02/25/1740465677815-ns5qz5p5.jpg)
+![上传前后端文件](./assets/bt-deploy/1740465677815-ns5qz5p5.jpg)
 
 ## 开放运行环境安全组和防火墙端口
 
 在访问宝塔时，开放了宝塔的端口，java 项目运行所需的端口，例如 MySQL（3306）、Redis（6379）、以及后端运行端口等等。
 
-![开放安全组端口](https://jsonq.top/cdn-static/2025/02/25/1740465677933-bgtpdnhi.jpg)
+![开放安全组端口](./assets/bt-deploy/1740465677933-bgtpdnhi.jpg)
 
-![防火墙端口](https://jsonq.top/cdn-static/2025/02/25/1740476079160-wgfgeua8.jpg)
+![防火墙端口](./assets/bt-deploy/1740476079160-wgfgeua8.jpg)
 
 ## 启动后端服务
 
@@ -152,7 +152,7 @@ cd /www/blog  # 进入项目所在文件夹
 ps -ef | grep java # 查看 java 中运行的进程PID
 ```
 
-![查看进程](https://jsonq.top/cdn-static/2025/02/25/1740465678049-bk3c9hrf.jpg)
+![查看进程](./assets/bt-deploy/1740465678049-bk3c9hrf.jpg)
 
 若存在其它运行的 java 进程（不包括已部署的 java 项目进程），可以将其终止，使用如下命令
 
@@ -170,7 +170,7 @@ nohup java -jar blog-api.jar > logs.log 2>&1 &
 
 下图中没有报错即为启动成功
 
-![启动成功](https://jsonq.top/cdn-static/2025/02/25/1740465678194-ikpgzlsn.jpg)
+![启动成功](./assets/bt-deploy/1740465678194-ikpgzlsn.jpg)
 
 **请严格检查运行日志，有时虽然运行成功，但是可能会出现端口被占用，请求时报错无法连接到数据库的问题。本地很少会出现这种情况，但在服务器可能会遇到**。
 
@@ -186,7 +186,7 @@ _或者先通过`java -jar blog-api.jar`直接运行查看是否有启动问题_
 cat /www/server/nginx/conf/nginx.conf
 ```
 
-![查看Nginx的配置](https://jsonq.top/cdn-static/2025/02/25/1740465678295-274t1yn9.jpg)
+![查看Nginx的配置](./assets/bt-deploy/1740465678295-274t1yn9.jpg)
 
 我们不直接写入 nginx.conf，而通过查看得知：nginx 还会读取 `/www/server/panel/vhost/nginx/*.conf`的配置，所以我们把此次的 nginx 配置写入该文件夹内部
 

@@ -28,7 +28,7 @@ cd /  # 进入文件主目录，所有的文件资源都在主目录下
 cat /proc/version  # 查看系统版本
 ```
 
-![系统版本](https://jsonq.top/cdn-static/2025/02/25/1740465678972-gs6mcduk.jpg)
+![系统版本](./assets/linux-offline-deploy/1740465678972-gs6mcduk.jpg)
 
 > 首次进入的当前路径都是 /root，可以使用命令： pwd 查看当前所在路径所有的资源文件都在 / 路径下
 
@@ -38,7 +38,7 @@ cat /proc/version  # 查看系统版本
 
 进入 JDK 官网，下载与**开发所需的系统版本对应的压缩包类型**：https://www.oracle.com/java/technologies/downloads/#java17
 
-![下载 JDK17](https://jsonq.top/cdn-static/2025/02/25/1740465679061-s0enuhiu.jpg)
+![下载 JDK17](./assets/linux-offline-deploy/1740465679061-s0enuhiu.jpg)
 
 - `.tar.gz` 类似 windows 的 压缩包
 - `.rpm` 解压出来的文件是类似 exe 默认安装即可使用的 rpm 文件
@@ -126,7 +126,7 @@ java -version # 查看 jdk 环境是否安装成功
 
 出现 jdk 的版本号等内容，即安装成功
 
-![jdk 版本](https://jsonq.top/cdn-static/2025/02/25/1740465679172-lnz0wsr4.jpg)
+![jdk 版本](./assets/linux-offline-deploy/1740465679172-lnz0wsr4.jpg)
 
 #### vi 编辑内容使用方式
 
@@ -153,7 +153,7 @@ rpm -ev --nodeps mysql-community-client-plugins-8.0.33-1.el7.x86_64
 # .....
 ```
 
-![删除数据库安装文件](https://jsonq.top/cdn-static/2025/02/25/1740465679262-rd1xl8uk.jpg)
+![删除数据库安装文件](./assets/linux-offline-deploy/1740465679262-rd1xl8uk.jpg)
 
 - 删除数据库相关的文件
 
@@ -163,7 +163,7 @@ rm -rf /var/lib/mysql  # 依次将查找的文件删除
 # ...
 ```
 
-![image](https://jsonq.top/cdn-static/2025/02/25/1740465679365-mcggwd3c.jpg)
+![image](./assets/linux-offline-deploy/1740465679365-mcggwd3c.jpg)
 
 #### 删除自带的 Mariadb
 
@@ -187,11 +187,11 @@ rm -rf /etc/my.cnf  # 若有路径输出，则执行删除命令
 
 进入 Mysql 下载网址：https://dev.mysql.com/downloads/mysql/
 
-![tar.xz压缩包](https://jsonq.top/cdn-static/2025/02/25/1740465679480-6pvnsw80.jpg)
+![tar.xz压缩包](./assets/linux-offline-deploy/1740465679480-6pvnsw80.jpg)
 
 通过输入：`rpm -qa | grep glibc`，可查看当前 linux 系统内置的 `glibc` 版本
 
-![image](https://jsonq.top/cdn-static/2025/02/25/1740465679604-4xztgk91.jpg)
+![image](./assets/linux-offline-deploy/1740465679604-4xztgk91.jpg)
 
 下载对应版本完成之后上传 Mysql 至 `data/software` 路径下并解压
 
@@ -216,13 +216,13 @@ cd bin  # 进入 mysql 文件 的 bin 目录下
 
 - 如果初始化时出现如下错误（libaio 缺失）
 
-![libaio 缺失](https://jsonq.top/cdn-static/2025/02/25/1740465679702-eayvnp4l.jpg)
+![libaio 缺失](./assets/linux-offline-deploy/1740465679702-eayvnp4l.jpg)
 
 - 下载 `libaio` 的 rpm 文件：点击 [链接](http://mirror.centos.org/centos/7/os/x86_64/Packages/libaio-0.3.109-13.el7.x86_64.rpm) 直接下载 `liabio` 的 `x86_64` 位 rpm 包
 - 上传到服务器并进入所在文件夹安装该 rpm：`rpm -ivf libaio-0.3.109-13.el7.x86_64.rpm`
 - 再次执行初始化 Mysql 的命令，出现类似如下内容即成功
 
-![mysql 初始化完成](https://jsonq.top/cdn-static/2025/02/25/1740465679794-1lqmiilk.jpg)
+![mysql 初始化完成](./assets/linux-offline-deploy/1740465679794-1lqmiilk.jpg)
 
 > **一定要保存 mysql 的临时登录密码** 系统所缺失的文件大部分都可以从该网站上搜索下载对应的 rpm 文件：https://pkgs.org
 
@@ -238,7 +238,7 @@ show databases;  # 执行 sql 正常会报错，需要修改 Mysql 密码
 
 如图所示：
 
-![Mysql 服务启动](https://jsonq.top/cdn-static/2025/02/25/1740465679901-k3wisa8u.jpg)
+![Mysql 服务启动](./assets/linux-offline-deploy/1740465679901-k3wisa8u.jpg)
 
 > 此方式启动的 Mysql 服务为**临时服务**，回车就会结束该进程，所以在未进入 Mysql 时不能 `ctrl+c` 或者 `enter`
 
@@ -246,7 +246,7 @@ show databases;  # 执行 sql 正常会报错，需要修改 Mysql 密码
 
 执行 `show databases;` 时出现如下错误，意思是必须先修改 mysql 密码
 
-![修改 mysql 密码](https://jsonq.top/cdn-static/2025/02/25/1740465680037-gqg7gs9f.jpg)
+![修改 mysql 密码](./assets/linux-offline-deploy/1740465680037-gqg7gs9f.jpg)
 
 - 修改 mysql 密码
 
@@ -294,7 +294,7 @@ source /etc/profile
 
 如图所示：
 
-![配置 Mysql 环境变量](https://jsonq.top/cdn-static/2025/02/25/1740465680160-r397s6h4.jpg)
+![配置 Mysql 环境变量](./assets/linux-offline-deploy/1740465680160-r397s6h4.jpg)
 
 #### 设置 Mysql 服务
 
@@ -340,7 +340,7 @@ ln -s /data/software/mysql/bin/mysql /usr/bin
 
 启动 Mysql 服务如图所示：
 
-![启动 Mysql 服务](https://jsonq.top/cdn-static/2025/02/25/1740465680248-64s6g8en.jpg)
+![启动 Mysql 服务](./assets/linux-offline-deploy/1740465680248-64s6g8en.jpg)
 
 > 将 Mysql 的服务文件地址映射到 `/usr/bin` 的原因是：之前从 Mysql 拷贝到 `/etc/init.d/mysqld` 的服务进程文件默认读取的是 `/usr/bin/mysql` 的路径
 
@@ -458,7 +458,7 @@ make && make install
 
 去 [Nginx 官网](http://nginx.org/en/download.html) 下载对应的版本
 
-![Nginx 下载](https://jsonq.top/cdn-static/2025/02/25/1740465680343-k58drs0g.jpg)
+![Nginx 下载](./assets/linux-offline-deploy/1740465680343-k58drs0g.jpg)
 
 将 nginx 上传至服务器 `/data/software` 文件夹下解压
 
@@ -489,7 +489,7 @@ cd ./sbin  #进入sbin文件
 
 直接访问 IP 地址如下出现 Nginx 的页面就算 Nginx 环境部署完成
 
-![ngixn安装成功](https://jsonq.top/cdn-static/2025/02/25/1740465680450-gnyx0e8h.jpg)
+![ngixn安装成功](./assets/linux-offline-deploy/1740465680450-gnyx0e8h.jpg)
 
 **至此，linux 的基本环境搭建已全部完成**
 

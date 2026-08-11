@@ -8,7 +8,7 @@ tags:
 
 1. 去 [npm](https://www.npmjs.com) 创建账号，如果提示需要 2FA 认证，可以去完善，选择第一个（第二个是扫码什么的，不会弄）
 
-![image](https://jsonq.top/cdn-static/2025/10/22/202510221043357.png)
+![image](./assets/use-npm-publish-pkg/202510221043357.png)
 
 2. 新建一个项目，写点内容
 3. 补充 `package.json`
@@ -48,17 +48,17 @@ tags:
 
 发布完大概就是如下所示的目录结构
 
-![image](https://jsonq.top/cdn-static/2025/10/22/202510221048196.png)
+![image](./assets/use-npm-publish-pkg/202510221048196.png)
 
 4. 上传至 github
 5. 如果使用 npm 镜像，需要切换会 npm 源 `npm config set registry https://registry.npmjs.org/`
 6. `npm login` 登录 npm，这里现在是直接让你 Enter 打开浏览器进行认证登录，比较方便
 
-![image](https://jsonq.top/cdn-static/2025/10/22/202510221038798.png)
+![image](./assets/use-npm-publish-pkg/202510221038798.png)
 
 7. `npm publish` 发布
 
-![image](https://jsonq.top/cdn-static/2025/10/22/202510221040976.png)
+![image](./assets/use-npm-publish-pkg/202510221040976.png)
 
 此时就可以去 npm 上查看到发布的包了，由于数据同步不是实时的，所以刚开始是搜索不到的
 
@@ -66,6 +66,6 @@ tags:
 
 > 发布 主版本号(major).次版本号(minor).补丁版本号(patch) 也是同理执行对应的命令即可
 
-![image](https://jsonq.top/cdn-static/2025/10/22/202510221044821.png)
+![image](./assets/use-npm-publish-pkg/202510221044821.png)
 
 9. `npm publish` 发布小版本

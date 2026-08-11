@@ -43,6 +43,9 @@ export default defineConfig({
       ],
     },
   },
+  image: {
+    responsiveStyles: true,
+  },
   vite: {
     plugins: [tailwindcss()],
   },

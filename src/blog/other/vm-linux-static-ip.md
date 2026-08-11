@@ -16,11 +16,11 @@ vmware 总是给虚拟机变化 ip，经常连接出错，索性固定一下 ip�
 
 点击【编辑】> 点击【虚拟网络编辑器】
 
-![image](https://jsonq.top/cdn-static/2025/04/27/202505032051190.png)
+![image](./assets/vm-linux-static-ip/202505032051190.png)
 
 选中【VMnet8】> 点击【更改设置】
 
-![image](https://jsonq.top/cdn-static/2025/05/03/202505032055735.png)
+![image](./assets/vm-linux-static-ip/202505032055735.png)
 
 更改【子网 IP】> 更改【子网掩码】> 点击【NAT 设置】
 
@@ -28,13 +28,13 @@ vmware 总是给虚拟机变化 ip，经常连接出错，索性固定一下 ip�
 >
 > **子网掩码必须为 `255.255.255.0`**
 
-![image](https://jsonq.top/cdn-static/2025/05/03/202505032057923.png)
+![image](./assets/vm-linux-static-ip/202505032057923.png)
 
 更改【网关 IP】> 点击【确定】
 
 > 这里直接点击 【确定】 即可。
 
-![image](https://jsonq.top/cdn-static/2025/05/03/202505032100414.png)
+![image](./assets/vm-linux-static-ip/202505032100414.png)
 
 ## 修改虚拟机中的网卡配置文件
 
@@ -58,7 +58,7 @@ vi /etc/sysconfig/network-scripts/ifcfg-ens33
 - GATEWAY：网关，与刚才 NAT 设置中的网关 IP 保持一致
 - DNS1：域名解析服务器，与网关保持一致即可
 
-![image](https://jsonq.top/cdn-static/2025/05/03/202505032105980.png)
+![image](./assets/vm-linux-static-ip/202505032105980.png)
 
 ### Centos 9
 
@@ -103,7 +103,7 @@ nmcli c reload ens160 # 或 systemctl restart NetworkManager.service
 ip addr
 ```
 
-![image](https://jsonq.top/cdn-static/2025/05/03/202505032110019.png)
+![image](./assets/vm-linux-static-ip/202505032110019.png)
 
 ## 设置镜像 yum 源
 

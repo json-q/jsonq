@@ -166,7 +166,7 @@ createApp(loadComponent).mount("#app");
 
 效果如图所示
 
-![image](https://jsonq.top/cdn-static/2025/02/25/1740465694414-rzbqadcg.png)
+![image](./assets/html-vue/1740465694414-rzbqadcg.png)
 
 ## 使用第三方组件库
 
@@ -217,7 +217,7 @@ const options = {
 </template>
 ```
 
-![image](https://jsonq.top/cdn-static/2025/02/25/1740465694488-8k2kn1ge.png)
+![image](./assets/html-vue/1740465694488-8k2kn1ge.png)
 
 至此，离线方式搭建 vue 项目就此完成。
 

@@ -77,7 +77,7 @@ Emitter.dispatch("A 发布了新视频");
 
 代码运行效果如下：
 
-![image](https://jsonq.top/cdn-static/2025/06/12/202506121009399.png)
+![image](./assets/impl-responsive-observe/202506121009399.png)
 
 ## 实现 ResponsiveObserve
 
@@ -101,7 +101,7 @@ window.matchMedia("(max-width: 768px)").addListener(function (MediaQueryList) {
 
 运行效果如下：
 
-![image](https://jsonq.top/cdn-static/2025/06/12/202506121055890.gif)
+![image](./assets/impl-responsive-observe/202506121055890.gif)
 
 ### 实现简版 ResponsiveObserve
 
@@ -173,7 +173,7 @@ ResponsiveObserve.subscribe((screens) => {
 });
 ```
 
-![image](https://jsonq.top/cdn-static/2025/06/12/202506121157973.gif)
+![image](./assets/impl-responsive-observe/202506121157973.gif)
 
 #### 实现卸载逻辑
 

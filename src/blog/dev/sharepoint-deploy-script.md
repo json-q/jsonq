@@ -170,7 +170,7 @@ deployAssets();
 
 其次，其实打包好的 html 结构和母版页是非常接近的，以下是对比图
 
-![html-to-aspx](https://jsonq.top/cdn-static/2025/10/22/202512161755879.png)
+![html-to-aspx](./assets/sharepoint-deploy-script/202512161755879.png)
 
 那么我们实际上就可以把母版页不变的内容作为纯静态内容，然后把动态内容`script` `link` 等提取出来插入进入即可，这里借助 [cheerio](https://cheerio.js.org) 就可以实现，它专门提取 xml 和 html 的结构内容，代码见最后部分
 

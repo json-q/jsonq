@@ -213,7 +213,7 @@ server {
 
 去域名的运营商那里对域名的 DNS 解析一下，一级域名 `example.com`，如果有二级域名，也都添加一下，域名级别解析的都是 A 记录，CNAME 是做域名转发（代理）的，以阿里云为例，大致如下所示：
 
-![image](https://jsonq.top/cdn-static/2025/03/10/202504201542755.png)
+![image](./assets/docker-env-install/202504201542755.png)
 
 #### 访问域名验证正确性
 
@@ -559,7 +559,7 @@ http 没法访问 https，目前这里有两种方法
 
 虽然 next-auth 官方说可以自动推断 redirect_uri，本地确实没问题，但是 Docker 部署后的 Next 项目推断失败（笑死）
 
-![image](https://jsonq.top/cdn-static/2025/02/25/1740559560949-6nlv08er.png)
+![image](./assets/docker-env-install/1740559560949-6nlv08er.png)
 
 出现问题的时候，推断出来的 `redirect_uri` 是 `https//: 容器id:容器端口`，但是这种显然是无法公网访问的，而且和 Github 里配置的路径不一致，所以会出错，那就没办法了，就去 `env` 里明确一下呗
 
@@ -597,7 +597,7 @@ volumes:
 
 这是通过 `Navicat` 连接 Postgresql 的报错
 
-![image](https://jsonq.top/cdn-static/2025/05/03/202505032134122.png)
+![image](./assets/docker-env-install/202505032134122.png)
 
 这个错误是因为 Postgres 从 15 开始，从 `pg_database` 表中删除了 `datlastsysoid` 字段引发此错误。
 
@@ -611,30 +611,30 @@ volumes:
 
 1. 打开安装 Navicat 的文件夹，找到 `libcc.dll` 文件
 
-![image](https://jsonq.top/cdn-static/2025/05/03/202505032139411.png)
+![image](./assets/docker-env-install/202505032139411.png)
 
 2. 备份 `libcc.dll` 文件，将其复制并粘贴改为任意名称（这里是为了以防万一搞炸了恢复用）
 
-![image](https://jsonq.top/cdn-static/2025/05/03/202505032142225.png)
+![image](./assets/docker-env-install/202505032142225.png)
 
 3. 在任何十六进制编辑器中打开此文件，可使用在线工具，如 https://hexed.it ，这里使用 vscode 插件 `Hex Editor`
 4. 将 `libcc.dll` 使用 vscode 打开，使用 `Hex Editor` 插件预览
 
-![image](https://jsonq.top/cdn-static/2025/05/03/202505032154752.png)
+![image](./assets/docker-env-install/202505032154752.png)
 
 5.  `ctrl+f` 检索内容 `SELECT DISTINCT datlastsysoid`
 
-![image](https://jsonq.top/cdn-static/2025/05/03/202505032155490.png)
+![image](./assets/docker-env-install/202505032155490.png)
 
 6. 将 `datlastsysoid` 替换为 `dattablespace`
 
 > 注意更改的时候，要切换 INS 模式，有光标变为插入才能正常替换内容
 
-![image](https://jsonq.top/cdn-static/2025/05/03/202505032211517.png)
+![image](./assets/docker-env-install/202505032211517.png)
 
 ### 最终展示
 
-![image](https://jsonq.top/cdn-static/2025/05/03/202505032216843.png)
+![image](./assets/docker-env-install/202505032216843.png)
 
 ## Redis
 
