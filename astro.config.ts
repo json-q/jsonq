@@ -19,7 +19,7 @@ import { transformerFileName } from "./src/utils/transformers/fileName";
 const env = loadEnv(process.env.NODE_ENV || "", process.cwd(), "");
 
 // Only optimize image in netlify
-const imageCDN = process.env.IMAGE_CDN !== "false";
+const isNetlify = process.env.IN_NETLIFY !== "false";
 
 // https://astro.build/config
 export default defineConfig({
@@ -55,5 +55,5 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  adapter: process.env.NODE_ENV !== "development" ? netlify({ imageCDN }) : undefined,
+  adapter: process.env.NODE_ENV !== "development" && isNetlify ? netlify() : undefined,
 });

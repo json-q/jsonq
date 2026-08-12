@@ -3,4 +3,4 @@
   publish = "dist"
 
 [build.environment]
-  IMAGE_CDN = "true"
+  IN_NETLIFY = "true"

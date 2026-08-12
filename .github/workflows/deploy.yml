@@ -42,7 +42,7 @@ jobs:
       - name: Build project
         env:
           PUBLIC_SITE_URL: ${{ secrets.PUBLIC_SITE_URL }}
-          IMAGE_CDN: "false"
+          IN_NETLIFY: "false"
         run: pnpm run build
 
       - name: Copy file via ssh key
