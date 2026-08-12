@@ -8,7 +8,7 @@ import {
   transformerNotationWordHighlight,
 } from "@shikijs/transformers";
 import tailwindcss from "@tailwindcss/vite";
-import { defineConfig } from "astro/config";
+import { defineConfig, svgoOptimizer } from "astro/config";
 import remarkCollapse from "remark-collapse";
 import remarkToc from "remark-toc";
 import { loadEnv } from "vite";
@@ -45,6 +45,9 @@ export default defineConfig({
   },
   image: {
     responsiveStyles: true,
+  },
+  experimental: {
+    svgOptimizer: svgoOptimizer(),
   },
   vite: {
     plugins: [tailwindcss()],
