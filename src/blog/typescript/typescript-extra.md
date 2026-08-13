@@ -1,6 +1,6 @@
 ---
 title: TS 语法扩展
-pubDate: 2024-05-03
+pubDatetime: 2024-05-03
 description: TypeScript 模块化使用、类型兼容性、声明文件及命名空间等高级语法
 tags:
   - typescript

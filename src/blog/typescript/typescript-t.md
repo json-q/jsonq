@@ -1,6 +1,6 @@
 ---
 title: TS 泛型及类型体操
-pubDate: 2024-05-02
+pubDatetime: 2024-05-02
 description: TypeScript 泛型解析，泛型约束、条件类型、映射类型等高级类型操作
 tags:
   - typescript

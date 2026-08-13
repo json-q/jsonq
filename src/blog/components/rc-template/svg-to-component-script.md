@@ -1,6 +1,6 @@
 ---
 title: 从零到一构建并打包 React + TypeScript + Less组件库系列（四、Icon 图标组件库自动生成 svg 组件）
-pubDate: 2024-11-15 15:58
+pubDatetime: 2024-11-15 15:58
 description: 使用 svgr 自动将 SVG 图标转换为 React 组件，构建 Icon 组件库
 tags:
   - react

@@ -1,6 +1,6 @@
 ---
 title: 如何修改第三方包
-pubDate: 2025-02-11
+pubDatetime: 2025-02-11
 description: 使用 pnpm patch 命令修改第三方包源码，解决包版本兼容性问题
 tags:
   - 其它

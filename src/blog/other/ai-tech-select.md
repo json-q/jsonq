@@ -1,6 +1,6 @@
 ---
 title: 记录一次项目组 AI 项目的技术选型
-pubDate: 2025-03-28
+pubDatetime: 2025-03-28
 description: 开发 AI 项目初期的技术选型
 tags:
   - 其它

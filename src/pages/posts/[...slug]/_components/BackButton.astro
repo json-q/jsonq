@@ -1,0 +1,34 @@
+---
+import IconChevronLeft from "@lucide/astro/icons/chevron-left";
+import LinkButton from "@/components/LinkButton.astro";
+import config from "@/config";
+import { t } from "@/strings";
+import { getAssetPath } from "@/utils/withBase";
+---
+
+{config.features.showBackButton && (
+  <div class="app-layout flex items-center justify-start">
+    <LinkButton
+      id="back-button"
+      href={getAssetPath("")}
+      class="focus-outline hover:text-foreground/75 -ms-2 mt-8 mb-2"
+      >
+      <IconChevronLeft class="inline-block size-6 rtl:rotate-180" />
+      <span>{t.post.goBack}</span>
+    </LinkButton>
+  </div>
+)}
+<script>
+function updateGoBackUrl() {
+  const backButton: HTMLAnchorElement | null = document.querySelector("#back-button");
+
+  const backUrl = sessionStorage.getItem("backUrl");
+
+  if (backUrl && backButton) {
+    backButton.href = backUrl;
+  }
+}
+
+document.addEventListener("astro:page-load", updateGoBackUrl);
+updateGoBackUrl();
+</script>

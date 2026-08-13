@@ -1,6 +1,6 @@
 ---
-import ArrowUp from "@lucide/astro/icons/arrow-up";
-import ChevronLeft from "@lucide/astro/icons/chevron-left";
+import IconArrowUp from "@lucide/astro/icons/arrow-up";
+import { t } from "@/strings";
 ---
 
 <div
@@ -15,7 +15,7 @@ import ChevronLeft from "@lucide/astro/icons/chevron-left";
     type="button"
     data-button="back-to-top"
     class:list={[
-      "group relative bg-background px-2 py-1",
+      "group bg-background relative px-2 py-1",
       "size-14 rounded-full shadow-xl",
       "md:h-8 md:w-fit md:rounded-md md:shadow-none md:focus-visible:rounded-none",
       "md:bg-background/35 md:bg-clip-padding md:backdrop-blur-lg",
@@ -25,17 +25,15 @@ import ChevronLeft from "@lucide/astro/icons/chevron-left";
       id="progress-indicator"
       class="absolute inset-0 -z-10 block size-14 scale-110 rounded-full bg-transparent md:hidden md:h-8 md:rounded-md"
     ></span>
-    <ChevronLeft class="inline-block rotate-90 md:hidden" />
-    <span class="sr-only text-sm group-hover:text-accent md:not-sr-only">
-      <ArrowUp class="inline-block size-4" />
-      Back To Top
+    <IconArrowUp class="inline-block md:hidden" />
+    <span class="group-hover:text-accent sr-only text-sm md:not-sr-only">
+      <IconArrowUp class="inline-block size-4" />
+      {t.post.backToTop}
     </span>
   </button>
 </div>
 
 <script is:inline data-astro-rerun>
-/** Scrolls the document to the top when
- * the "Back to Top" button is clicked. */
 function backToTop() {
   const rootElement = document.documentElement;
   const btnContainer = document.querySelector("#btt-btn-container");
@@ -44,13 +42,11 @@ function backToTop() {
 
   if (!rootElement || !btnContainer || !backToTopBtn || !progressIndicator) return;
 
-  // Attach click event handler for back-to-top button
   backToTopBtn.addEventListener("click", () => {
-    document.body.scrollTop = 0; // For Safari
-    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
   });
 
-  // Handle button visibility according to scroll position
   let lastVisible = null;
   function handleScroll() {
     const scrollTotal = rootElement.scrollHeight - rootElement.clientHeight;

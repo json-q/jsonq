@@ -1,6 +1,6 @@
 ---
 title: vue-element-admin 迁移至 rsbuild v1
-pubDate: 2026-06-20
+pubDatetime: 2026-06-20
 description: 将 vue-element-admin(vue-cli 4) 迁移到 rsbuild v1
 tags:
   - 开发

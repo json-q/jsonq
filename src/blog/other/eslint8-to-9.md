@@ -1,6 +1,6 @@
 ---
 title: ESlint 8 升级至 9
-pubDate: 2024-08-13
+pubDatetime: 2024-08-13
 description: ESlint 8 升级至 9 的详细过程
 tags:
   - 其它

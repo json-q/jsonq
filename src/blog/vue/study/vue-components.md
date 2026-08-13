@@ -1,6 +1,6 @@
 ---
 title: Vue 组件
-pubDate: 2023-06-09
+pubDatetime: 2023-06-09
 description: Vue组件化开发，组件注册、Props通信、插槽使用及动态组件等
 tags:
   - vue

@@ -1,6 +1,6 @@
 ---
 title: 多端项目整合为 monorepo
-pubDate: 2026-03-08
+pubDatetime: 2026-03-08
 description: 将 web 管理端和 Taro 小程序端整合为 monorepo
 tags:
   - 开发

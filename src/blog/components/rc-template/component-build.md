@@ -1,6 +1,6 @@
 ---
 title: 从零到一构建并打包 React + TypeScript + Less 组件库系列（二、组件库编译多产物及文档编写）
-pubDate: 2024-11-14 11:45
+pubDatetime: 2024-11-14 11:45
 description: 对组件库进行编译打包、多产物输出、Less样式处理、按需加载、TypeScript 类型声明生成等
 tags:
   - react

@@ -1,6 +1,6 @@
 ---
 title: 微信小程序集成腾讯地图 SDK
-pubDate: 2023-08-25
+pubDatetime: 2023-08-25
 description: 微信小程序对接腾讯地图 SDK 全流程
 tags:
   - 小程序

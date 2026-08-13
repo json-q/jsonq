@@ -1,32 +1,33 @@
 ---
-import CalendarDays from "@lucide/astro/icons/calendar-days";
+import IconCalendar from "@lucide/astro/icons/calendar-days";
 import dayjs from "dayjs";
 import timezone from "dayjs/plugin/timezone";
 import utc from "dayjs/plugin/utc";
-import { SITE } from "@/config";
+import config from "@/config";
+import { t } from "@/strings";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-export interface Props {
+type Props = {
   class?: string;
   size?: "sm" | "lg";
-  pubDate: string | Date;
-  updatedDate: string | Date | undefined | null;
-}
+  pubDatetime: string | Date;
+  timezone?: string;
+  modDatetime?: string | Date | null;
+};
 
-const { pubDate, updatedDate, size = "sm", class: className = "" } = Astro.props;
+const { pubDatetime, modDatetime, size = "sm", class: className = "", timezone: postTimezone } = Astro.props;
 
-/* ========== Formatted Datetime ========== */
-const isModified = updatedDate && updatedDate > pubDate;
+const isModified = modDatetime && modDatetime > pubDatetime;
 
-const datetime = dayjs(isModified ? updatedDate : pubDate).tz(SITE.timezone);
+const datetime = dayjs(isModified ? modDatetime : pubDatetime).tz(postTimezone ?? config.site.timezone);
 
 const date = datetime.format("YYYY-MM-DD");
 ---
 
-<div class:list={["flex items-center gap-x-2 opacity-80", className]}>
-  <CalendarDays
+<div class:list={["text-muted-foreground flex items-center gap-x-2", className]}>
+  <IconCalendar
     class:list={[
       "inline-block size-6 min-w-5.5",
       { "scale-90": size === "sm" },
@@ -34,8 +35,10 @@ const date = datetime.format("YYYY-MM-DD");
   />
   {isModified && (
       <span class:list={["text-sm", { "sm:text-base": size === "lg" }]}>
-        更新时间:
+        {t.post.updatedAt}:
       </span>
     )}
-  <time class:list={["text-sm", { "sm:text-base": size === "lg" }]} datetime={datetime.toISOString()}>{date}</time>
+  <time class:list={["text-sm", { "sm:text-base": size === "lg" }]} datetime={datetime.toISOString()}>
+    {date}
+  </time>
 </div>

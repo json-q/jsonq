@@ -1,12 +1,13 @@
 {
   "extends": "astro/tsconfigs/strict",
   "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist", "public/pagefind"],
+  "exclude": ["dist", "public/pagefind", "astro-paper"],
   "compilerOptions": {
     "strictNullChecks": true,
 
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@/astro-paper.config": ["./astro-paper.config"]
     }
   }
 }

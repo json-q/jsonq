@@ -1,18 +1,19 @@
 ---
-import Hash from "@lucide/astro/icons/hash";
+import IconHash from "@lucide/astro/icons/hash";
+import { getAssetPath } from "@/utils/withBase";
 
-export interface Props {
+type Props = {
   tag: string;
   tagName: string;
   size?: "sm" | "lg";
-}
+};
 
-const { tag, tagName, size = "sm" } = Astro.props;
+const { tag, tagName, size = "lg" } = Astro.props;
 ---
 
 <li>
   <a
-    href={`/tags/${tag}/`}
+    href={getAssetPath(`tags/${tag}/`)}
     transition:name={tag}
     class:list={[
       "flex items-center gap-0.5",
@@ -23,13 +24,13 @@ const { tag, tagName, size = "sm" } = Astro.props;
       { "text-lg": size === "lg" },
     ]}
   >
-    <Hash
+    <IconHash
       class:list={[
         "opacity-80",
         { "size-5": size === "lg" },
         { "size-4": size === "sm" },
       ]}
     />
-    &nbsp;<span>{tagName}</span>
+    {tagName}
   </a>
 </li>

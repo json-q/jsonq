@@ -1,6 +1,6 @@
 ---
 title: Springboot 集成 MinIO
-pubDate: 2024-04-27
+pubDatetime: 2024-04-27
 description: 在 Springboot 项目中集成 MinIO 的基础配置及使用
 tags:
   - SpringBoot

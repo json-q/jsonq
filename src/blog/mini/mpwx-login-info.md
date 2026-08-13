@@ -1,6 +1,6 @@
 ---
 title: 微信授权登录及信息填写
-pubDate: 2023-09-03
+pubDatetime: 2023-09-03
 description: springboot 整合微信小程序登录流程
 tags:
   - 小程序

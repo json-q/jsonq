@@ -1,6 +1,6 @@
 ---
 title: MinIO 常用 API 快速入门
-pubDate: 2024-04-25
+pubDatetime: 2024-04-25
 description: minio 常用 API 介绍及简单示例
 tags:
   - SpringBoot

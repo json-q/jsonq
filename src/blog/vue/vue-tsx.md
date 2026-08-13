@@ -1,6 +1,6 @@
 ---
 title: vue tsx 与 template 的相互使用
-pubDate: 2025-01-23
+pubDatetime: 2025-01-23
 description: vue3中 template 对应的 jsx/tsx 语法使用
 tags:
   - vue

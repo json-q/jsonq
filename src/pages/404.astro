@@ -1,22 +1,26 @@
 ---
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
 import LinkButton from "@/components/LinkButton.astro";
-import { SITE } from "@/config";
-import BaseFooter from "@/layouts/BaseFooter.astro";
-import BaseHeader from "@/layouts/BaseHeader.astro";
-import BaseLayout from "@/layouts/BaseLayout.astro";
+import config from "@/config";
+import Layout from "@/layouts/Layout.astro";
+import { t } from "@/strings";
+import { getAssetPath } from "@/utils/withBase";
 ---
 
-<BaseLayout title={`404 Not Found | ${SITE.title}`}>
-  <BaseHeader />
+<Layout title={`${t.notFound.title} | ${config.site.title}`}>
+  <Header />
 
-  <main id="main-content" class="mx-auto flex max-w-app flex-1 items-center justify-center">
+  <main id="main-content" class="app-layout my-1 flex flex-1 items-center justify-center">
     <div class="mb-14 flex flex-col items-center justify-center">
-      <h1 class="text-9xl font-bold text-accent">404</h1>
-      <span aria-hidden="true" class="text-xl">_(:з」∠)_</span>
-      <p class="mt-4 text-2xl sm:text-3xl">Page Not Found</p>
-      <LinkButton href="/" class="my-6 text-lg underline decoration-dashed underline-offset-8">Go back home</LinkButton>
+      <h1 class="text-accent text-9xl font-bold">404</h1>
+      <span aria-hidden="true"> _(:з」∠)_ </span>
+      <p class="mt-4 text-2xl sm:text-3xl">{t.notFound.message}</p>
+      <LinkButton href={getAssetPath("")} class="my-6 text-lg underline decoration-dashed underline-offset-8">
+        {t.notFound.goHome}
+      </LinkButton>
     </div>
   </main>
 
-  <BaseFooter />
-</BaseLayout>
+  <Footer />
+</Layout>

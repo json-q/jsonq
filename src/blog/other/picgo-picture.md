@@ -1,6 +1,6 @@
 ---
 title: 使用 PicGo + Github + jsdelivr 搭建图床
-pubDate: 2025-02-27
+pubDatetime: 2025-02-27
 description: 使用 PicGo Github jsdelivr 搭建免费图片托管仓库
 tags:
   - 其它

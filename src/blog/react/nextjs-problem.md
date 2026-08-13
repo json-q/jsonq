@@ -1,6 +1,6 @@
 ---
 title: Nextjs windows 打包部分问题汇总
-pubDate: 2025-08-03
+pubDatetime: 2025-08-03
 description: Next.js 在 Windows 环境下使用 pnpm 打包时 symlink 错误和静态资源 404 等问题
 tags:
   - next

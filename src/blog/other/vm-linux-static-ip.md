@@ -1,6 +1,6 @@
 ---
 title: Vmware 的 Linux 系统配置静态IP
-pubDate: 2025-05-03
+pubDatetime: 2025-05-03
 description: 在 Vmware 中 Linux 系统（Centos7/9）配置静态IP地址，避免IP变动导致的连接问题
 tags:
   - 其它

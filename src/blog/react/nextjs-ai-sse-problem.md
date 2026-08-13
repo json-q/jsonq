@@ -1,6 +1,6 @@
 ---
 title: Nextjs 对接第三方 AI 接口使用及问题踩坑
-pubDate: 2025-04-26
+pubDatetime: 2025-04-26
 description: Next.js 对接第三方 AI 接口时的 SSE 流式数据传输问题及示例，跨域和数据缓冲的处理方案
 tags:
   - next

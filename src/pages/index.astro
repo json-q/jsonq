@@ -1,80 +1,106 @@
 ---
 import { getCollection } from "astro:content";
-import Rss from "@lucide/astro/icons/rss";
-import BetterHr from "@/components/BetterHr.astro";
-import CardPostList from "@/components/CardPostList.astro";
+import IconArrowRight from "@lucide/astro/icons/arrow-right";
+import IconRss from "@lucide/astro/icons/rss";
+import Card from "@/components/Card.astro";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
 import LinkButton from "@/components/LinkButton.astro";
 import Socials from "@/components/Socials.astro";
-import { SITE } from "@/config";
-import { SOCIALS } from "@/constants";
-import BaseFooter from "@/layouts/BaseFooter.astro";
-import BaseHeader from "@/layouts/BaseHeader.astro";
-import BaseLayout from "@/layouts/BaseLayout.astro";
-import getSortedPosts from "@/utils/getSortedPosts";
+import config from "@/config";
+import Layout from "@/layouts/Layout.astro";
+import { t } from "@/strings";
+import { getSortedPosts } from "@/utils/getSortedPosts";
+import { getAssetPath } from "@/utils/withBase";
 
-const posts = await getCollection("blog");
+const { socials, posts: postsConfig } = config;
 
-const publishedPosts = posts.filter((post) => !post.data.draft);
-const sortedPosts = getSortedPosts(publishedPosts);
+const posts = await getCollection("posts");
+const sortedPosts = getSortedPosts(posts);
+const recentPosts = sortedPosts;
+const homePath = getAssetPath("");
 ---
 
-<BaseLayout>
-  <BaseHeader />
-  <main id="main-content" data-layout="index">
-    <section id="hero" class="pt-8 pb-6">
+<Layout>
+  <Header />
+  <main id="main-content" data-layout="index" data-home-path={homePath} class="app-layout my-1">
+    <section id="hero" class="border-border border-b pt-8 pb-6">
       <h1 class="my-4 inline-block text-4xl font-bold sm:my-8 sm:text-5xl">Welcome</h1>
-      <a target="_blank" href="/rss.xml" class="inline-block ms-2" aria-label="rss feed" title="RSS Feed">
-        <Rss width={20} height={20} class="scale-125 stroke-accent stroke-3 rtl:-rotate-90" />
-        <span class="sr-only ">RSS Feed</span>
+      <a
+        target="_blank"
+        href={`${import.meta.env.BASE_URL.replace(/\/?$/, "/")}rss.xml`}
+        class="inline-block"
+        aria-label="RSS Feed"
+        title="RSS Feed"
+      >
+        <IconRss width={20} height={20} class="stroke-accent scale-125 stroke-3 rtl:-rotate-90" />
+        <span class="sr-only">RSS Feed</span>
       </a>
+
       <p>
-        此网站主题基于{' '}
+        此网站主题基于{" "}
         <LinkButton
           target="_blank"
-          class="underline decoration-dashed underline-offset-4 hover:text-accent"
+          class="hover:text-accent underline decoration-dashed underline-offset-4"
           href="https://github.com/satnaing/astro-paper"
         >
           AstroPaper
-        </LinkButton>
-        {' '}模板进行简单的二次修改以作为个人 Blog 使用，Thanks。
+        </LinkButton>{" "}
+        模板进行简单的二次修改以作为个人 Blog 使用，Thanks。
       </p>
       <p class="mt-2">
         主要记录工作过程中遇到的问题和平时的学习记录（目前学习少了）以及扯皮，都是些没有含金量文章，反正也没人看，有时间就稍微写点。
       </p>
       <p class="mt-2">
-        通常情况下写文章优先放在此处，有意思的文章会同步至{' '}
+        通常情况下写文章优先放在此处，有意思的文章会同步至{" "}
         <LinkButton
           target="_blank"
-          class="underline decoration-dashed underline-offset-4 hover:text-accent"
+          class="hover:text-accent underline decoration-dashed underline-offset-4"
           href="https://www.cnblogs.com/jsonq"
         >
           博客园
-        </LinkButton>
-        {' '}并进行适当修改优化。
+        </LinkButton>{" "}
+        并进行适当修改优化。
       </p>
-      {SOCIALS.length > 0 && (
-          <div class="mt-4 flex flex-col sm:flex-row sm:items-center">
-            <div class="mr-2 mb-1 whitespace-nowrap sm:mb-0">社交链接:</div>
+      {socials.length > 0 && (
+          <div class="mt-4 flex max-sm:flex-col sm:items-center">
+            <div class="me-2 mb-1 whitespace-nowrap sm:mb-0">
+              {t.home.socialLinks}:
+            </div>
             <Socials />
           </div>
         )}
     </section>
 
-    <BetterHr />
-
-    {sortedPosts.length > 0 && (
+    {recentPosts.length > 0 && (
         <section id="recent-posts" class="pt-12 pb-6">
-          <h2 class="text-2xl font-semibold tracking-wide">最新文章</h2>
+          <h2 class="text-2xl font-semibold tracking-wide">
+            {t.home.recentPosts}
+          </h2>
           <ul>
-            {sortedPosts.map(
-              (data, index) =>
-                index < SITE.postPerIndex && (
-                  <CardPostList variant="h3" {...data} />
-                )
-            )}
+            {recentPosts.slice(0, postsConfig.perIndex).map(data => (
+              <Card variant="h3" {...data} />
+            ))}
           </ul>
         </section>
       )}
+
+    <div class="my-8 text-center">
+      <LinkButton href={getAssetPath("posts")}>
+        {t.home.allPosts}
+        <IconArrowRight class="inline-block rtl:-rotate-180" />
+      </LinkButton>
+    </div>
   </main>
-  <BaseFooter />
-</BaseLayout>
+  <Footer />
+</Layout>
+
+<script>
+document.addEventListener("astro:page-load", () => {
+  const indexLayout = (document.querySelector("#main-content") as HTMLElement)?.dataset;
+  const baseRoot = import.meta.env.BASE_URL.replace(/\/?$/, "/");
+  if (indexLayout?.layout) {
+    sessionStorage.setItem("backUrl", indexLayout.homePath ?? baseRoot);
+  }
+});
+</script>

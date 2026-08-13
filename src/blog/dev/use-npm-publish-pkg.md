@@ -1,6 +1,6 @@
 ---
 title: 如何发布一个 npm 包
-pubDate: 2025-10-22
+pubDatetime: 2025-10-22
 description: 使用 npmjs 创建一个 npm 包的全流程步骤以及发布补丁的方式
 tags:
   - 开发

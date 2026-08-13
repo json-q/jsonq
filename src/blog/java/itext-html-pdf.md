@@ -1,6 +1,6 @@
 ---
 title: 使用 iText(html2pdf) + Thymeleaf 批量打印 PDF 并导出 zip
-pubDate: 2025-06-21
+pubDatetime: 2025-06-21
 description: 使用 itext + thymeleaf 实现批量打印 PDF 并压缩为 zip 联调前端进行下载
 tags:
   - SpringBoot

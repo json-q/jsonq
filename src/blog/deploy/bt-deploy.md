@@ -1,6 +1,6 @@
 ---
 title: 前后端分离宝塔部署
-pubDate: 2023-05-08
+pubDatetime: 2023-05-08
 description: 使用宝塔面板部署前后端分离的Web项目、环境配置、数据库设置和 Nginx 配置
 tags:
   - 部署

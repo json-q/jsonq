@@ -1,6 +1,6 @@
 ---
 title: 免费无限续期 SSL 证书
-pubDate: 2024-11-12
+pubDatetime: 2024-11-12
 description: 使用 acme 在云服务器上对网站域名的 SSL 证书进行自动续期
 tags:
   - 部署

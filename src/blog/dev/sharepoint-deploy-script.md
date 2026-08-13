@@ -1,6 +1,6 @@
 ---
 title: 使用 node 脚本与 Sharepoint 集成实现项目发版更新
-pubDate: 2025-12-17
+pubDatetime: 2025-12-17
 description: 前端 web 项目利用 pnpjs + node 实现项目打包后自动资源上传至 Sharepoint 及发版
 tags:
   - 开发

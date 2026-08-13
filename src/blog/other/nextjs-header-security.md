@@ -1,6 +1,6 @@
 ---
 title: Next.js 中间件鉴权漏洞（吃瓜）
-pubDate: 2025-04-12
+pubDatetime: 2025-04-12
 description: Next.js 被曝 CVSS 9.9 分漏洞，结合 b 站某 up 视频分析随便记录一下
 tags:
   - 其它

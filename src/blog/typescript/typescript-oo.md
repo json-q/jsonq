@@ -1,6 +1,6 @@
 ---
 title: TS 面向对象
-pubDate: 2024-04-30
+pubDatetime: 2024-04-30
 description: TypeScript 面向对象编程，类的定义、继承、多态及访问修饰符等特性
 tags:
   - typescript

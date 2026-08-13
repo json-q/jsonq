@@ -1,6 +1,6 @@
 ---
 title: Taro 框架快速上手
-pubDate: 2024-02-26
+pubDatetime: 2024-02-26
 description: taro3 快速入门以及常用配置
 tags:
   - 小程序

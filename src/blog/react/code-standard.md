@@ -1,6 +1,6 @@
 ---
 title: React 项目工程化搭建
-pubDate: 2023-06-23
+pubDatetime: 2023-06-23
 description: 基于 Vite + React + TypeScript 的项目工程化搭建，包括ESLint、Prettier、Stylelint等代码规范配置
 tags:
   - react

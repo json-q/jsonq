@@ -1,6 +1,6 @@
 ---
 title: IDEA 代码规范设置
-pubDate: 2024-03-25
+pubDatetime: 2024-03-25
 description: 自用 IDEA 代码格式化规范
 tags:
   - SpringBoot

@@ -1,6 +1,6 @@
 ---
 title: 项目 Lint 配置问题汇总
-pubDate: 2024-11-07
+pubDatetime: 2024-11-07
 description: 平常开发的杂项放置，主要针对 Linter 和 Formatter 的问题
 tags:
   - 开发

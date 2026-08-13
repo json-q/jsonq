@@ -1,6 +1,6 @@
 ---
 title: Github Action CICD 自动部署
-pubDate: 2024-11-14
+pubDatetime: 2024-11-14
 description: 使用 Github Action 实现 CD 自动部署项目至云服务器
 tags:
   - 部署

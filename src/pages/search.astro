@@ -1,27 +1,45 @@
 ---
 import "@pagefind/default-ui/css/ui.css";
-import { SITE } from "@/config";
-import BaseFooter from "@/layouts/BaseFooter.astro";
-import BaseHeader from "@/layouts/BaseHeader.astro";
-import BaseLayout from "@/layouts/BaseLayout.astro";
-import BaseMain from "@/layouts/BaseMain.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import Main from "@/components/Main.astro";
+import config from "@/config";
+import Layout from "@/layouts/Layout.astro";
+import { t } from "@/strings";
+import { getAssetPath } from "@/utils/withBase";
 
-const backUrl = `${Astro.url.pathname}`;
+// Redirect to 404 page if `search` feature is not enabled
+const notFoundUrl = getAssetPath("404");
+if (config.features.search !== "pagefind" && notFoundUrl) {
+  return Astro.rewrite(notFoundUrl);
+}
+
+const backUrl = config.features.showBackButton ? `${Astro.url.pathname}` : getAssetPath("");
+
+const pagefindBundlePath = getAssetPath("pagefind/");
 ---
 
-<BaseLayout title={`搜索 | ${SITE.title}`}>
-  <BaseHeader />
-  <BaseMain pageTitle="Search" pageDesc="在此处搜索所有文章 ...">
-    <div id="pagefind-search" transition:persist data-backurl={backUrl}></div>
-  </BaseMain>
-  <BaseFooter />
-</BaseLayout>
+<Layout title={`${t.pages.searchTitle} | ${config.site.title}`}>
+  <Header />
+
+  <Breadcrumb />
+
+  <Main pageTitle={t.pages.searchTitle} pageDesc={t.pages.searchDesc}>
+    <div id="pagefind-search" transition:persist data-backurl={backUrl} data-bundle-path={pagefindBundlePath}></div>
+  </Main>
+
+  <Footer />
+</Layout>
 
 <script>
 function initSearch() {
   const pageFindSearch: HTMLElement | null = document.querySelector("#pagefind-search");
 
   if (!pageFindSearch) return;
+
+  const bundlePath = pageFindSearch?.dataset?.bundlePath;
+  if (!bundlePath) return;
 
   const params = new URLSearchParams(window.location.search);
 
@@ -44,13 +62,14 @@ function initSearch() {
     // Init pagefind ui
     const search = new PagefindUI({
       element: "#pagefind-search",
-      showSubResults: true,
+      bundlePath,
       showImages: false,
+      showSubResults: true,
       processTerm: (term: string) => {
         params.set("q", term); // Update the `q` parameter in the URL
         history.replaceState(history.state, "", `?${params.toString()}`); // Push the new URL without reloading
 
-        const backUrl = pageFindSearch?.dataset?.backurl;
+        const backUrl = pageFindSearch?.dataset?.backurl ?? window.location.pathname;
         sessionStorage.setItem("backUrl", `${backUrl}?${params.toString()}`);
 
         return term;
@@ -90,7 +109,7 @@ initSearch();
 
 <style is:global>
 #pagefind-search {
-  --pagefind-ui-font: var(--font-mono);
+  --pagefind-ui-font: var(--font-app);
   --pagefind-ui-text: var(--foreground);
   --pagefind-ui-background: var(--background);
   --pagefind-ui-border: var(--border);
@@ -118,6 +137,8 @@ initSearch();
     color: var(--accent);
     outline-offset: 1px;
     outline-color: var(--accent);
+    text-decoration-style: dashed;
+    text-underline-offset: 4px;
   }
 
   .pagefind-ui__result-title a:focus-visible,

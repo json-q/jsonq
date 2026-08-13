@@ -1,6 +1,6 @@
 ---
 title: 2025 年终总结
-pubDate: 2026-01-02
+pubDatetime: 2026-01-02
 description: 非常普通的前端开发人员 2025 年终总结
 tags:
   - 其它

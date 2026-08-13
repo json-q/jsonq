@@ -1,28 +1,26 @@
 ---
 import Breadcrumb from "@/components/Breadcrumb.astro";
-import { SITE } from "@/config";
-import BaseHeader from "@/layouts/BaseHeader.astro";
-import BaseFooter from "./BaseFooter.astro";
-import BaseLayout from "./BaseLayout.astro";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import Main from "@/components/Main.astro";
+import config from "@/config";
+import Layout from "./Layout.astro";
 
-export interface Props {
-  frontmatter: {
-    title: string;
-    description?: string;
-  };
+interface Props {
+  frontmatter: { title: string; description?: string };
 }
 
 const { frontmatter } = Astro.props;
 ---
 
-<BaseLayout title={`${frontmatter.title} | ${SITE.title}`}>
-  <BaseHeader />
+<Layout title={`${frontmatter.title} | ${config.site.title}`} description={frontmatter.description}>
+  <Header />
+
   <Breadcrumb />
-  <main id="main-content">
-    <section id="about" class="app-prose mb-28 max-w-app prose-img:border-0">
-      <h1 class="text-2xl tracking-wider sm:text-3xl">{frontmatter.title}</h1>
-      <slot />
-    </section>
-  </main>
-  <BaseFooter />
-</BaseLayout>
+
+  <Main pageTitle={frontmatter.title} class="app-prose">
+    <slot />
+  </Main>
+
+  <Footer />
+</Layout>

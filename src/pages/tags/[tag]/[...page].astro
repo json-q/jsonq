@@ -1,47 +1,49 @@
 ---
 import { getCollection } from "astro:content";
 import type { GetStaticPathsOptions } from "astro";
-import CardPostList from "@/components/CardPostList.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import Card from "@/components/Card.astro";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import Main from "@/components/Main.astro";
 import Pagination from "@/components/Pagination.astro";
-import { SITE } from "@/config";
-import BaseFooter from "@/layouts/BaseFooter.astro";
-import BaseHeader from "@/layouts/BaseHeader.astro";
-import BaseLayout from "@/layouts/BaseLayout.astro";
-import BaseMain from "@/layouts/BaseMain.astro";
-import getPostsByTag from "@/utils/getPostsByTag";
-import getUniqueTags from "@/utils/getUniqueTags";
+import config from "@/config";
+import Layout from "@/layouts/Layout.astro";
+import { t } from "@/strings";
+import { getSortedPosts } from "@/utils/getSortedPosts";
+import { getUniqueTags } from "@/utils/getUniqueTags";
+import { slugifyAll } from "@/utils/slugify";
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
-  const posts = await getCollection("blog");
-  const publishedPosts = posts.filter((post) => !post.data.draft);
-  const tags = getUniqueTags(publishedPosts);
+  const posts = await getCollection("posts", ({ data }) => !data.draft);
+  const tags = getUniqueTags(posts);
 
   return tags.flatMap(({ tag, tagName }) => {
-    const tagPosts = getPostsByTag(publishedPosts, tag);
+    const tagPosts = getSortedPosts(posts.filter(({ data }) => slugifyAll(data.tags).includes(tag)));
 
     return paginate(tagPosts, {
       params: { tag },
       props: { tagName },
-      pageSize: SITE.postPerPage,
+      pageSize: config.posts.perPage,
     });
   });
 }
 
-const params = Astro.params;
-const { tag } = params;
 const { page, tagName } = Astro.props;
 ---
 
-<BaseLayout title={`Tag: ${tagName} | ${SITE.title}`}>
-  <BaseHeader />
-  <BaseMain pageTitle={[`标签:`, `${tagName}`]} titleTransition={tag} pageDesc={`标签为 "${tagName}" 的文章集合`}>
-    <h1 slot="title" transition:name={tag}>{`标签：${tag}`}</h1>
+<Layout title={`${t.pages.tagTitle}: ${tagName} | ${config.site.title}`}>
+  <Header />
+
+  <Breadcrumb />
+
+  <Main pageTitle={`${t.pages.tagTitle}: ${tagName}`} pageDesc={`${t.pages.tagDesc} "${tagName}".`}>
     <ul>
-      {page.data.map((data) => <CardPostList {...data} />)}
+      {page.data.map(data => <Card {...data} />)}
     </ul>
-  </BaseMain>
+  </Main>
 
   <Pagination {page} />
 
-  <BaseFooter noMarginTop={page.lastPage > 1} />
-</BaseLayout>
+  <Footer noMarginTop={page.lastPage > 1} />
+</Layout>

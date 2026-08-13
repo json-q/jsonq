@@ -1,6 +1,6 @@
 ---
 title: html 搭建 vue 项目
-pubDate: 2024-06-22
+pubDatetime: 2024-06-22
 description: 整活式的在 html 中运行 vue 项目
 tags:
   - vue

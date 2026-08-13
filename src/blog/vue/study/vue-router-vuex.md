@@ -1,6 +1,6 @@
 ---
 title: Vue 路由 状态管理
-pubDate: 2023-06-14
+pubDatetime: 2023-06-14
 description: Vue路由和状态管理，vue-router 使用、路由守卫及 Vuex 状态管理模式
 tags:
   - vue

@@ -1,6 +1,6 @@
 ---
 title: 前端本地开发使用 pnpjs 代理 Sharepoint 联调
-pubDate: 2025-05-26
+pubDatetime: 2025-05-26
 description: 基于 Sharepoint 进行本地项目开发的 API 请求代理及联调
 tags:
   - 开发

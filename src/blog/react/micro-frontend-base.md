@@ -1,6 +1,6 @@
 ---
 title: 乾坤框架基本使用
-pubDate: 2024-05-24
+pubDatetime: 2024-05-24
 description: 介绍微前端框架 qiankun 的基本用法、主应用和子应用的配置及部署流程
 tags:
   - react

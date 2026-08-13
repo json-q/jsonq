@@ -1,6 +1,6 @@
 ---
 title: Nginx 离线配置 ssl 证书使用 https
-pubDate: 2024-04-07
+pubDatetime: 2024-04-07
 description: 内网环境对 Nginx 配置 ssl 证书以使用 https 访问
 tags:
   - 部署

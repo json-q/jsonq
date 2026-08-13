@@ -1,6 +1,6 @@
 ---
 title: React 后台系统的部分业务封装
-pubDate: 2024-03-21
+pubDatetime: 2024-03-21
 description: 后台管理系统中权限控制和业务组件的封装实践
 tags:
   - react

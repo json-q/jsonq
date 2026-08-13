@@ -1,6 +1,6 @@
 ---
 title: Docker 下安装多种环境
-pubDate: 2025-01-26
+pubDatetime: 2025-01-26
 description: Docker 本机下简要安装 Minio、Nginx、acme、Redis、Mysql、部署 Next.js
 tags:
   - 部署

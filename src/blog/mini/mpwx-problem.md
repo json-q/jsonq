@@ -1,6 +1,6 @@
 ---
 title: 微信小程序项目构建问题
-pubDate: 2023-08-16
+pubDatetime: 2023-08-16
 description: 微信小程序 typescript 项目构建 npm 失败、lodash 使用报错排坑
 tags:
   - 小程序

@@ -12,19 +12,21 @@ import { defineConfig, svgoOptimizer } from "astro/config";
 import remarkCollapse from "remark-collapse";
 import remarkToc from "remark-toc";
 import { loadEnv } from "vite";
+import config from "./astro-paper.config";
 import { transformerFileName } from "./src/utils/transformers/fileName";
-
-// https://github.com/withastro/astro/issues/12667
-// https://docs.astro.build/en/guides/environment-variables/#in-the-astro-config-file
-const env = loadEnv(process.env.NODE_ENV || "", process.cwd(), "");
 
 // Only optimize image in netlify
 const isNetlify = process.env.IN_NETLIFY !== "false";
 
+// .env vars are not auto-loaded into `import.meta.env` while evaluating
+// astro-paper.config.ts from the config loader, so load them explicitly.
+// https://github.com/withastro/astro/issues/12667
+const env = loadEnv(process.env.NODE_ENV || "", process.cwd(), "");
+
 // https://astro.build/config
 export default defineConfig({
-  site: env.PUBLIC_SITE_URL,
-  integrations: [sitemap(), mdx()],
+  site: env.PUBLIC_SITE_URL || config.site.url,
+  integrations: [mdx(), sitemap()],
   devToolbar: {
     enabled: false,
   },
@@ -32,7 +34,6 @@ export default defineConfig({
     processor: unified({
       remarkPlugins: [remarkToc, [remarkCollapse, { test: "Table of contents" }]],
     }),
-    // remarkPlugins: [remarkToc, [remarkCollapse, { test: "Table of contents" }]],
     shikiConfig: {
       // For more themes, visit https://shiki.style/themes
       themes: { light: "min-light", dark: "night-owl" },
@@ -49,11 +50,11 @@ export default defineConfig({
   image: {
     responsiveStyles: true,
   },
-  experimental: {
-    svgOptimizer: svgoOptimizer(),
-  },
   vite: {
     plugins: [tailwindcss()],
+  },
+  experimental: {
+    svgOptimizer: svgoOptimizer(),
   },
   adapter: process.env.NODE_ENV !== "development" && isNetlify ? netlify() : undefined,
 });

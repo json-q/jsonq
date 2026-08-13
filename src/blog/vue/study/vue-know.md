@@ -1,6 +1,6 @@
 ---
 title: 初识 Vue3
-pubDate: 2023-06-08
+pubDatetime: 2023-06-08
 description: Vue3基础入门，介绍Vue核心概念、模板语法、响应式原理及开发环境搭建
 tags:
   - vue

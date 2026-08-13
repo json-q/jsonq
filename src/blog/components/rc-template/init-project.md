@@ -1,6 +1,6 @@
 ---
 title: 从零到一构建并打包 React + TypeScript + Less组件库系列（一、项目初始化搭建+代码规范集成）
-pubDate: 2024-11-14 11:38
+pubDatetime: 2024-11-14 11:38
 description: 从零开始搭建 react monorepo 组件库项目并集成代码规范
 tags:
   - react

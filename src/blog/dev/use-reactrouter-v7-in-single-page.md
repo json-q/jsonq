@@ -1,6 +1,6 @@
 ---
 title: react router v7(6.4+) 新 API 在单页应用中的使用
-pubDate: 2026-01-11
+pubDatetime: 2026-01-11
 description: 使用 react router v7 新特性 API 实现权限认证、懒加载等以及部分踩坑
 tags:
   - 开发

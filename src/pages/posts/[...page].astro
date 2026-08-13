@@ -1,33 +1,37 @@
 ---
 import { getCollection } from "astro:content";
 import type { GetStaticPaths } from "astro";
-import CardPostList from "@/components/CardPostList.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import Card from "@/components/Card.astro";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import Main from "@/components/Main.astro";
 import Pagination from "@/components/Pagination.astro";
-import { SITE } from "@/config";
-import BaseFooter from "@/layouts/BaseFooter.astro";
-import BaseHeader from "@/layouts/BaseHeader.astro";
-import BaseLayout from "@/layouts/BaseLayout.astro";
-import BaseMain from "@/layouts/BaseMain.astro";
-import getSortedPosts from "@/utils/getSortedPosts";
+import config from "@/config";
+import Layout from "@/layouts/Layout.astro";
+import { t } from "@/strings";
+import { getSortedPosts } from "@/utils/getSortedPosts";
 
 export const getStaticPaths = (async ({ paginate }) => {
-  const posts = await getCollection("blog");
-  const publishedPosts = posts.filter((post) => !post.data.draft);
-  return paginate(getSortedPosts(publishedPosts), { pageSize: SITE.postPerPage });
+  const posts = await getCollection("posts", ({ data }) => !data.draft);
+  return paginate(getSortedPosts(posts), { pageSize: config.posts.perPage });
 }) satisfies GetStaticPaths;
 
 const { page } = Astro.props;
 ---
 
-<BaseLayout title={`文章 | ${SITE.title}`}>
-  <BaseHeader />
-  <BaseMain pageTitle="文章" pageDesc="写作的文章集合">
+<Layout title={`${t.pages.postsTitle} | ${config.site.title}`}>
+  <Header />
+
+  <Breadcrumb />
+
+  <Main pageTitle={t.pages.postsTitle} pageDesc={t.pages.postsDesc}>
     <ul>
-      {page.data.map((data) => <CardPostList {...data} />)}
+      {page.data.map(data => <Card {...data} />)}
     </ul>
-  </BaseMain>
+  </Main>
 
   <Pagination {page} />
 
-  <BaseFooter noMarginTop={page.lastPage > 1} />
-</BaseLayout>
+  <Footer noMarginTop={page.lastPage > 1} />
+</Layout>

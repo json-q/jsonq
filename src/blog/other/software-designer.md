@@ -1,6 +1,6 @@
 ---
 title: 软件设计师（转载自用）
-pubDate: 2025-03-09
+pubDatetime: 2025-03-09
 description: 软考中级软件设计师考试知识点总结
 tags:
   - 其它

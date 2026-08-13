@@ -1,6 +1,6 @@
 ---
 title: Vue 高级特性及过渡动画
-pubDate: 2023-06-18
+pubDatetime: 2023-06-18
 description: Vue高级特性，自定义指令、Teleport、异步组件、插件及过渡动画的使用方法
 tags:
   - vue

@@ -1,6 +1,6 @@
 ---
 title: Centos7 离线部署 SpringBoot 前后端分离项目
-pubDate: 2023-07-13
+pubDatetime: 2023-07-13
 description: 内网私有环境部署 SpringBoot 前后端分离项目以及部分踩坑
 tags:
   - 部署

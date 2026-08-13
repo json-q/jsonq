@@ -1,6 +1,6 @@
 ---
 title: TS 基础
-pubDate: 2024-04-29
+pubDatetime: 2024-04-29
 description: TypeScript 基础语法，数据类型、函数类型、类型断言、联合类型等
 tags:
   - typescript

@@ -1,6 +1,6 @@
 ---
 title: MinIO 分片上传下载/断点续传/妙传
-pubDate: 2024-05-14
+pubDatetime: 2024-05-14
 description: 基于 minio 实现前后端分离下的分片上传、下载、断点续传、妙传
 tags:
   - SpringBoot

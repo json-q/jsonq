@@ -1,6 +1,6 @@
 ---
 title: Java 基础学习
-pubDate: 2026-07-21
+pubDatetime: 2026-07-21
 description: 深入学习一下 Java，以便后续的项目开发
 draft: true
 tags:

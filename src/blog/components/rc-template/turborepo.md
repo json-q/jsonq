@@ -1,6 +1,6 @@
 ---
 title: 从零到一构建并打包 React + TypeScript + Less组件库系列（三、turborepo 集成）
-pubDate: 2024-11-14 15:32
+pubDatetime: 2024-11-14 15:32
 description: monorepo 项目集成 truborepo
 tags:
   - react

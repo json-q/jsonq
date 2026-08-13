@@ -1,6 +1,6 @@
 ---
 title: 了解发布订阅模式并实现 responsive observe
-pubDate: 2025-06-12
+pubDatetime: 2025-06-12
 description: 学习发布订阅模式，实现媒体查询 responsiveObserve
 tags:
   - javascript

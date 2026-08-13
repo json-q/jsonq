@@ -1,6 +1,6 @@
 ---
 title: Vue3 组合式 API
-pubDate: 2023-06-11
+pubDatetime: 2023-06-11
 description: Vue3组合式API，setup 函数、响应式 API、生命周期钩子及逻辑复用等
 tags:
   - vue
