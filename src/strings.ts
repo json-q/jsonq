@@ -29,7 +29,7 @@ export const t = {
     allPosts: "全部文章",
   },
   footer: {
-    copyright: "版权",
+    copyright: "Copyright",
     allRightsReserved: "All rights reserved.",
   },
   pages: {
