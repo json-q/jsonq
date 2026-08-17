@@ -1,6 +1,7 @@
 ---
 title: Java 基础学习
 pubDatetime: 2026-07-21
+updDatetime: 2026-08-14
 description: 深入学习一下 Java，以便后续的项目开发
 draft: true
 tags:
@@ -1035,8 +1036,42 @@ System.out.println(linkedHashSet); // [c, a, b, q] 按插入顺序排序
 
 #### TreeSet 底层结构
 
-TreeSet 底层结构是红黑树，红黑树是一种自平衡的二叉查找树，它与普通二叉树不同的是：
+TreeSet 底层结构是红黑树，红黑树是一种自平衡的二叉查找树，是增删改查性能相对比都较好的数据结构。
 
-- 普通二叉树的节点都是无序的，而二叉查找树，每个节点左侧的子节点的值都小于该节点的值，右侧的子节点的值都大于该节点的值。
-  - 这种结构在查找数据时，效率更高
-- 两个结构共有的就是二叉树的特点，每个二叉树的节点最多只有两个分叉
+- 任意节点，左边的节点都比当前节点小，右边的节点都比当前节点大
+- 每次添加节点，都从根节点开始，如果比根节点小，则向左子树添加。如果比根节点大，则向右子树添加。一样的不存
+
+![image](./assets/basic/20260816155358.png)
+
+#### TreeSet 排序方式
+
+TreeSet 默认排序规则是自然排序，也可以指定比较器排序。
+
+TreeSet 在添加对象时，对象必须实现 `Comparable` 接口，并重写 `compareTo` 方法，否则会报错，因为对象本身不具有比较性。
+
+重写 `compareTo` 方法时，return 的值：负数去左边，正数去右边，**0 忽略**
+
+```java
+// × 使用 TreeSet 时报错
+class Student {
+//...
+}
+
+// √ 实现 Comparable 接口
+class Student implements Comparable<Student> {
+  // ...
+  @Override
+  public int compareTo(Student o) {
+    return this.age - o.age; // 年龄升序
+  }
+}
+
+TreeSet<Student> treeSet = new TreeSet<>();
+treeSet.add(new Student("张三", 20));
+treeSet.add(new Student("李四", 22));
+treeSet.add(new Student("王五", 18));
+treeSet.add(new Student("赵六", 22));
+// [Student{name='王五', age=18}, Student{name='张三', age=20}, Student{name='李四', age=22}]
+// “赵六” 的数据并没有被添加，因为 “赵六” 的年龄和 李四 的年龄相同，所以不存。
+System.out.println(treeSet);
+```
