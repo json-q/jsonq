@@ -28,13 +28,9 @@ tags:
 
 ![image](./assets/yys-game-temp/20260817222216.png)
 
-打开 “阵容御魂预设” 的界面
+打开 “阵容御魂预设” 的界面，点击 “预设”
 
 ![image](./assets/yys-game-temp/20260817222239.png)
-
-点击 “预设”
-
-![image](./assets/yys-game-temp/20260817222305.png)
 
 将保存的 “御魂预设” 应用到式神身上（让式神穿戴），以此类推
 
