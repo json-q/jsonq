@@ -1,6 +1,6 @@
 ---
 title: 阴阳师游戏部分指南教程
-pubDatetime: 2025-08-17
+pubDatetime: 2026-08-17
 description: 临时使用教程
 tags:
   - 其它
