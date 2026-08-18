@@ -1047,6 +1047,8 @@ TreeSet 底层结构是红黑树，红黑树是一种自平衡的二叉查找树
 
 TreeSet 默认排序规则是自然排序，也可以指定比较器排序。
 
+- 自然排序
+
 TreeSet 在添加对象时，对象必须实现 `Comparable` 接口，并重写 `compareTo` 方法，否则会报错，因为对象本身不具有比较性。
 
 重写 `compareTo` 方法时，return 的值：负数去左边，正数去右边，**0 忽略**
@@ -1075,3 +1077,110 @@ treeSet.add(new Student("赵六", 22));
 // “赵六” 的数据并没有被添加，因为 “赵六” 的年龄和 李四 的年龄相同，所以不存。
 System.out.println(treeSet);
 ```
+
+以上会出现一个问题，虽然通过 `compareTo` 方法指定了以 age 为排序规则防止了报错，但是也出现了一个问题：
+
+不同的人，同样的年龄就无法添加，这是不合理的，因此需要将 name 也参与进排序规则中。
+
+```java
+class Student implements Comparable<Student> {
+  // ...
+  @Override
+  public int compareTo(Student o) {
+    // 需求：age 作为主要排序，name次要排序，当 age 和 name 相同时，不删除数据，保留
+    const ageResult = this.age - o.age;
+    // 如果 age 相等，则比较 name
+    const nameResult = ageResult == 0 ? this.name.compareTo(o.name): ageResult;
+    // 如果 name 仍然相等，则返回 1 或者任意非 0 数据，表示不删除数据，保留
+    return nameResult == 0 ? 1: nameResult;
+  }
+}
+```
+
+- 比较器排序：如果同时具有自然排序、比较器排序，则比较器排序优先级高
+
+比如以下情况，默认情况下，TreeSet 对 Integer 类型的数据进行排序时，会使用 Integer 内部 `compareTo` 自然排序方式进行排序，只能是是升序（从小到大），无法让 Integer 再添加的时候降序排序。
+
+```java
+TreeSet<Integer> treeSet = new TreeSet<>();
+treeSet.add(1);
+treeSet.add(2);
+treeSet.add(3);
+treeSet.add(4);
+System.out.println(treeSet); // [1, 2, 3, 4]
+```
+
+TreeSet 可以接收 Comparator 对象作为构造参数，用于自定义排序规则。
+
+```java
+// 简化的 Lambda 表达式写法
+// TreeSet<Integer> treeSet = new TreeSet<>((o1, o2) -> o2 - o1);
+TreeSet<Integer> treeSet = new TreeSet<>(new Comparator<Integer>() {
+    @Override
+    public int compare(Integer o1, Integer o2) {
+        return o2 - o1;
+    }
+});
+
+treeSet.add(1);
+treeSet.add(2);
+treeSet.add(3);
+treeSet.add(4);
+System.out.println(treeSet); // [4, 3, 2, 1]
+```
+
+#### HashSet
+
+- HashSet 底层结构是哈希表，是增删改查性能相对比都较好的数据结构。
+- JDK 8 之前是数组 + 链表，JDK 8 之后是数组 + 链表 + 红黑树
+
+HashSet 比较对象时，要保证两个对象数据唯一，**必须同时重写** `equals` 和 `hashCode` 方法
+
+```java
+class Student {
+  //...
+  // IDEA 中 Alt + Insert 快捷键生成
+  @Override
+  public boolean equals(Object o) {
+      if (o == null || getClass() != o.getClass()) return false;
+      Student student = (Student) o;
+      return Objects.equals(name, student.name) && Objects.equals(age, student.age);
+  }
+
+  @Override
+  public int hashCode() {
+      return Objects.hash(name, age);
+  }
+}
+
+HashSet<Student> hashSet = new HashSet<>();
+
+hashSet.add(new Student("张三", 20));
+hashSet.add(new Student("李四", 22));
+hashSet.add(new Student("王五", 18));
+hashSet.add(new Student("王五", 18));
+
+// 最后一条数据被去重了
+System.out.println(hashSet); // [Student{name='张三', age=20}, Student{name='王五', age=18}, Student{name='李四', age=22}]
+```
+
+HashSet 原理：
+
+- HashSet 底层一部分是数组，可以类比成电影院的座位号
+- 张三进入，`hashCode` 默认返回的是 C++ 的随机地址值（随机座位） ，张三随便坐，李四进来也随机座位，随便坐。以此类推，进来的人永远不会重复，也就没有机会调用 `equals` 来对比是不是一个人重复进入。
+- 重写 `hashCode`，`Objects.hash` 可以根据内容生成 hash，类似 md5。这样，当李四重复进入时，hash 值相同（人一样，座位一样），此时就需要调用 `equals` 进行对比（看是不是一个人）。
+- 如果 `equals` 返回 true，则说明是同一个人，同一个人同一个座位号，那就是他自己，此时 HashSet 就不会再添加这个数据。
+
+为什么当 `hashCode` 相同时，还需要再调用 `equals` 方法进行对比？因为存在 hash 碰撞
+
+以下例子，`重地` 和 `通话` 不是相同内容，但是 hash 值却相同，因此需要 `equals` 来做二次对比。
+
+```java
+System.out.println("你好".hashCode()); // 652829
+System.out.println("重地".hashCode()); // 1179395
+System.out.println("通话".hashCode()); // 1179395
+```
+
+#### LinkedHashSet
+
+唯一一个可以保证存取顺序的集合，内部使用链表结构。同样的，再对比对象时想要去重，和 HashSet 一样，必须同时重写 `equals` 和 `hashCode` 方法
