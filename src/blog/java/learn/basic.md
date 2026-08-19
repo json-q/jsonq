@@ -1,16 +1,13 @@
 ---
 title: Java 基础学习
 pubDatetime: 2026-07-21
-updDatetime: 2026-08-14
-description: 深入学习一下 Java，以便后续的项目开发
-draft: true
+updDatetime: 2026-08-19
+description: 基于以前的 Java 知识补一下细节知识点以便后续开发
 tags:
   - Java
 ---
 
-非常基础的东西略过，因为本来就会且没意义，此次可以当作详细学习巩固基础，以便应对后端项目的深入开发。记一点比较重要的内容，感觉基本用不上的就不记录了
-
-> 一个 Java 文件中只能有一个 public 类，且被修饰的类名必须与文件名一致。
+所有笔记内容基于网络上的黑马视频课程进行记录...
 
 ## Table of contents
 
@@ -1002,7 +999,7 @@ public static void method(ArrayList<? extends Employee> arrayList){
 
 ### Set
 
-存储无序，没有索引，数据不重复。
+存储无序，没有索引（没有提供索引相关的 API），数据不重复。
 
 - TreeSet 有排序规则
 - HashSet 保证元素唯一性
@@ -1129,7 +1126,7 @@ treeSet.add(4);
 System.out.println(treeSet); // [4, 3, 2, 1]
 ```
 
-#### HashSet
+#### HashSet（使用最多）
 
 - HashSet 底层结构是哈希表，是增删改查性能相对比都较好的数据结构。
 - JDK 8 之前是数组 + 链表，JDK 8 之后是数组 + 链表 + 红黑树
@@ -1184,3 +1181,55 @@ System.out.println("通话".hashCode()); // 1179395
 #### LinkedHashSet
 
 唯一一个可以保证存取顺序的集合，内部使用链表结构。同样的，再对比对象时想要去重，和 HashSet 一样，必须同时重写 `equals` 和 `hashCode` 方法
+
+- LinkedHashSet 依然基于哈希表（数组+链表+红黑树）
+- 但是它的每一个节点除了存储数据外，还存储了前一个节点和后一个节点的引用位置，这样才保证了插入的顺序
+
+### Collections 工具类
+
+#### 可变参数（js args）
+
+类似 js 的 arguments 写法:`sums(...args)`，args 本质是一个类数组。
+
+```java
+sums(1);
+sums(1, 2);
+sums(1, 2, 3);
+sums(1, 2, 3, 4);
+
+public static int sums(int... nums) {
+    int total = 0;
+    for (int num : nums) {
+        total += num;
+    }
+    return total;
+}
+```
+
+#### 常用工具类
+
+求最大、最小值，需要对象实现 `Comparable` 接口，否则无法比较，报错。
+
+```java
+ArrayList<Integer> list = new ArrayList<>();
+// 批量添加
+Collections.addAll(list, 3, 1, 6, 9, 5, 7);
+System.out.println(list); // [3, 1, 6, 9, 5, 7]
+
+// 洗牌
+Collections.shuffle(list);
+System.out.println(list); // [5, 1, 6, 7, 3, 9]
+
+// 最值，对象需要实现 Comparable 接口
+System.out.println(Collections.max(list)); // 9
+System.out.println(Collections.min(list)); // 1
+
+// 排序（默认自然排序）
+Collections.sort(list);
+System.out.println(list); // [1, 3, 5, 6, 7, 9]
+// 自定义排序规则（降序）
+Collections.sort(list, (o1, o2) -> o2 - o1);
+System.out.println(list); // [9, 7, 6, 5, 3, 1]
+```
+
+### Map
