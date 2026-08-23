@@ -7,7 +7,7 @@ tags:
   - Java
 ---
 
-所有笔记内容基于网络上的黑马视频课程进行记录...
+所有笔记内容基于网络上的黑马视频课程自行整理...
 
 ## Table of contents
 
@@ -1233,3 +1233,65 @@ System.out.println(list); // [9, 7, 6, 5, 3, 1]
 ```
 
 ### Map
+
+key value 键值对，key 不允许重复
+
+- TreeMap key 自动排序 （红黑树）
+- HashMap key 无序，唯一，无索引（哈希表）
+- LinkedHashMap key 插入有序，唯一，无索引（哈希表 + 双向链表）
+
+```java
+HashMap<String, String> hashMap = new HashMap<>();
+hashMap.put("1", "张三");
+hashMap.put("2", "李四");
+hashMap.put("3", "王五");
+System.out.println(hashMap); // {1=张三, 2=李四, 3=王五}
+hashMap.size(); // 3
+hashMap.get("1"); // 张三
+hashMap.containsKey("1"); // true
+hashMap.containsValue("张三"); // true
+hashMap.clear();
+hashMap.isEmpty(); // true
+```
+
+Map 常用遍历方式
+
+```java
+// Plan 1
+Set<String> keySet = hashMap.keySet(); // [1, 2, 3]
+for (String key : keySet) {
+    hashMap.get(key);
+}
+
+// Plan 2
+Set<Map.Entry<Integer, String>> entrySet = hashMap.entrySet(); // [1=张三, 2=李四, 3=王五]
+for (Map.Entry<Integer, String> entry : entrySet) {
+    System.out.println(entry.getKey() + ":" + entry.getValue()); // key:value
+}
+
+// Plan 3
+hashMap.forEach((key, value) -> {
+    System.out.println(key + ":" + value);
+});
+```
+
+TreeMap LinkedHashMap 简单使用
+
+- TreeMap 的 key 是有一定排序规则的，如果 key 是字符串，就会转成对应的的 ACSII 码进行排序
+- LinkedHashMap 的 key 按插入顺序排序
+
+```java
+TreeMap<Integer, String> treeMap = new TreeMap<>();
+treeMap.put(2, "张三");
+treeMap.put(1, "李四");
+treeMap.put(3, "王五");
+System.out.println(treeMap); // {1=张三, 2=李四, 3=王五}
+
+LinkedHashMap<Integer, String> linkedHashMap = new LinkedHashMap<>();
+linkedHashMap.put(2, "张三");
+linkedHashMap.put(1, "李四");
+linkedHashMap.put(3, "王五");
+System.out.println(linkedHashMap); // 输出：{2=张三, 1=李四, 3=王五}
+```
+
+### Stream
