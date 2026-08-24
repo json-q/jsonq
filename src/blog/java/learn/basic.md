@@ -446,7 +446,7 @@ class Outer{
 Outer.Inner oi = new Outer.Inner();
 ```
 
-- 匿名内部类（重要，结合 Lamba 表达式）
+- 匿名内部类（重要，结合 Lambda 表达式）
 
 ```java
 interface Person{
@@ -486,9 +486,9 @@ public static void usePerson(Person person){
 }
 ```
 
-#### Lamba 表达式
+#### Lambda 表达式
 
-Lamba 表达式是 JDK8 引入，**只能简化函数式接口的匿名内部类写法**。`(匿名内部类被重写的方法形参)-> {}`
+Lambda 表达式是 JDK8 引入，**只能简化函数式接口的匿名内部类写法**。`(匿名内部类被重写的方法形参)-> {}`
 
 满足以下条件的是函数式接口：
 
@@ -523,7 +523,7 @@ public static void usePerson(Person person){
 }
 ```
 
-匿名内部类在警经过编译之后，会生成单独的字节码文件，而 Lamba 不会。
+匿名内部类在警经过编译之后，会生成单独的字节码文件，而 Lambda 不会。
 
 ### 常用 API
 
@@ -828,7 +828,7 @@ for (String s : list) {
     System.out.print(s + " ");
 }
 
-// for 循环的 Lamba 写法 正常写法 list.forEach(item->{ System.out.println(item); });
+// for 循环的 Lambda 写法 正常写法 list.forEach(item->{ System.out.println(item); });
 // 最简写法：方法引用写法 跟 js 的函数简写思路差不多 onChange={setValue}
 list.forEach(System.out::println);
 // 完整写法：匿名内部类 这个建议看一下 forEach 源码，本质就是方法回调。
@@ -1295,3 +1295,98 @@ System.out.println(linkedHashMap); // 输出：{2=张三, 1=李四, 3=王五}
 ```
 
 ### Stream
+
+#### 常用写法
+
+基本用法跟 js 基本差不多，不过比 js 要再多一些使用方式。**生成的 Stream 流不会影响源数据**
+
+- 集合获取 Stream
+  - ArrayList、Set 是最终都是基于 Collection 接口，可以直接调用 `stream()`
+  - Map 无法直接调用 `stream()`，可以调用 `keySet` 获取 Set 集合的键集合，或者 `values()` 的 Collection 集合，然后调用 `stream()`。**但是**，通常不推荐这两种，推荐使用 `entrySet()` 的 Set 集合
+- 数组获取 Stream
+  - 可以通过 `Arrays.stream(T[])` 转成 Stream
+  - int[] 的 Stream 是 `IntStream`，而 String[] 的 Stream 是 `Stream<String>`，用法完全一样，只是表示不一样
+- 零散数据获取 Stream
+  - 通过 `Stream.of(T...)` 将不在任何集合中的数据转换成 Stream
+
+```java
+ArrayList<String> list = new ArrayList<>();
+Collections.addAll(list, "张三", "李四", "张三三", "张三三三");
+list.stream()
+        .filter(item -> item.startsWith("张"))
+        .map(item -> item + "A")
+        .forEach(System.out::println); // 张三A 张三三A 张三三三A
+
+// Set 和 ArrayList 用法一样
+
+// Map
+HashMap<String, Integer> map = new HashMap<>();
+map.entrySet().stream()
+        .filter(item -> item.getValue() == 1)
+        .map(item -> item.getValue() + 1)
+        .forEach(System.out::println);
+
+// 数组
+int[] numbers = {1,2,3,4,5};
+String[] strings = {"A","B","C","D","E"};
+// IntStream 和 Stream 都 extends 了 BaseStream，是兄弟关系
+IntStream intStream = Arrays.stream(numbers);
+Stream<String> stringStream = Arrays.stream(strings);
+intStream.forEach(System.out::println);
+stringStream.forEach(System.out::println);
+
+// 零散数据
+Stream<Integer> integerStream = Stream.of(1, 2, 3, 4, 5);
+Stream<String> stringStream = Stream.of("A", "B", "C", "D", "E");
+```
+
+#### 其他 API
+
+- `filter(Predicate<? super T> predicate)`：过滤，用法同 js
+- `map(Function<? super T, ? extends R> mapper)`：映射，用法同 js
+- `skip(long n)` 跳过 n 个元素，返回一个跳过 n 个元素后的 Stream
+- `limit(long n)` 返回一个不超过 n 个元素的 Stream
+- `concat(Stream a, Stream b)` 合并两个 Stream
+- `sorted()` 排序，默认升序
+- `distinct()` 去除重复元素
+
+#### collect 收集（转换为可操作数据）
+
+Stream 流本身无法返回正常数据，返回的都是 Stream 流，可以基于 `Collectors` 工具类来将 Stream 流转换为正常数据，其中 `toList` 方法可以直接通过 Stream 流转换为 List
+
+```java
+// toList
+Stream<Integer> integerStream = Stream.of(1, 2, 3, 4, 5);
+List<Integer> list = integerStream.collect(Collectors.toList()); // 省略写法 integerStream.toList()
+
+// toSet
+Stream<String> stringStream = Stream.of("A", "B", "C", "D", "E");
+Set<String> set = stringStream.collect(Collectors.toSet());
+
+// toMap
+ArrayList<String> stringArrayList = new ArrayList<>();
+Collections.addAll(stringArrayList, "张三,18", "李四,20", "王五,21");
+// toMap(keyMapper, valueMapper)
+// keyMapper 的函数接口，第一个泛型是原数据类型，第二个泛型是转成 Map 的 key 类型，重写方法返回处理后的 key
+// valueMapper 的函数接口，第一个泛型是原数据类型，第二个是转成 Map 的 value 类型，，重写方法返回处理后的 value
+Map<String, Integer> map = stringArrayList.stream().collect(Collectors.toMap(new Function<String, String>() {
+    @Override
+    public String apply(String s) {
+        return s.split(",")[0];
+    }
+}, new Function<String, Integer>() {
+    @Override
+    public Integer apply(String s) {
+        return Integer.valueOf(s.split(",")[1]);
+    }
+}));
+System.out.println(map); // {李四=20, 张三=18, 王五=21}
+
+// toMap Lambda 写法
+Map<String, Integer> map = stringArrayList.stream().collect(Collectors.toMap(
+        s -> s.split(",")[0], // key
+        s -> Integer.valueOf(s.split(",")[1] // value
+        )));
+```
+
+## 异常
