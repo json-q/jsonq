@@ -7,6 +7,7 @@ export default defineAstroPaperConfig({
     description: "记录随笔和学习笔记",
     author: "jsonq",
     profile: "https://github.com/json-q/jsonq",
+    email: "j996730508@163.com",
     lang: "zh-CN",
     timezone: "Asia/Shanghai",
     dir: "ltr",
@@ -23,6 +24,5 @@ export default defineAstroPaperConfig({
   socials: [
     { name: "github", url: "https://github.com/json-q/jsonq" },
     { name: "cnblogs", url: "https://www.cnblogs.com/jsonq" },
-    { name: "mail", url: "mailto:9967300508@163.com" },
   ],
 });

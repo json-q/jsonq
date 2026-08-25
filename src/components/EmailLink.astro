@@ -1,0 +1,40 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { encodeEmail, obfuscateEmailHuman } from "@/utils/email";
+
+interface Props extends Omit<HTMLAttributes<"a">, "href"> {
+  email: string;
+  showText?: boolean;
+}
+
+const { email, showText = true, class: className, ...attrs } = Astro.props;
+const encoded = encodeEmail(email);
+const humanFallback = obfuscateEmailHuman(email);
+---
+
+<a href="mailto:" data-email-obfuscated={encoded} rel="noopener noreferrer" class:list={[className]} {...attrs}>
+  {showText && <span data-email-text />}
+  <slot />
+</a>
+<noscript>
+  <span class:list={[className]}>{humanFallback}</span>
+</noscript>
+
+<script>
+import { decodeEmail } from "@/utils/email";
+
+document.addEventListener("DOMContentLoaded", () => {
+  for (const el of document.querySelectorAll<HTMLAnchorElement>("a[data-email-obfuscated]")) {
+    const encoded = el.dataset.emailObfuscated;
+    if (!encoded) continue;
+    const email = decodeEmail(encoded);
+    el.href = `mailto:${email}`;
+    const text = el.querySelector<HTMLElement>("[data-email-text]");
+    if (text) text.textContent = email;
+    if (!el.hasAttribute("aria-label") && !el.getAttribute("aria-labelledby")) {
+      el.setAttribute("aria-label", email);
+    }
+    el.removeAttribute("data-email-obfuscated");
+  }
+});
+</script>

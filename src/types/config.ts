@@ -9,6 +9,8 @@ interface SiteConfig {
   author: string;
   /** Author profile URL (used in structured data) */
   profile?: string;
+  /** Contact email, rendered obfuscated in the UI (never in plaintext HTML) */
+  email?: string;
   /** HTML lang attribute, defaults to "zh-CN" */
   lang?: string;
   /** IANA timezone for post dates, defaults to "Asia/Shanghai" */
@@ -62,7 +64,7 @@ interface AstroPaperConfig {
 type ResolvedSiteConfig = Required<
   Pick<SiteConfig, "url" | "title" | "description" | "author" | "lang" | "timezone" | "dir">
 > &
-  Pick<SiteConfig, "profile">;
+  Pick<SiteConfig, "profile" | "email">;
 
 export interface ResolvedAstroPaperConfig {
   site: ResolvedSiteConfig;

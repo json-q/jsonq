@@ -62,7 +62,8 @@
     table {
       th,
       td {
-        @apply border-border border p-2;
+        /* fix: https://github.com/satnaing/astro-paper/issues/574 */
+        @apply border border-border p-2 wrap-break-word hyphens-auto;
       }
 
       th {

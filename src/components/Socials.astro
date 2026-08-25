@@ -3,6 +3,7 @@ import Mail from "@lucide/astro/icons/mail";
 import CnBlogs from "@/assets/CnBlogs.svg";
 import Github from "@/assets/Github.svg";
 import config from "@/config";
+import EmailLink from "./EmailLink.astro";
 import LinkButton from "./LinkButton.astro";
 
 const { site, socials } = config;
@@ -10,27 +11,37 @@ const { site, socials } = config;
 const iconMap = {
   github: Github,
   cnblogs: CnBlogs,
-  mail: Mail,
 };
 
 const items = socials.map(({ name, url, linkTitle }) => {
   const Icon = iconMap[name as keyof typeof iconMap];
-  const title =
-    linkTitle ??
-    (url.startsWith("mailto:") || name === "mail"
-      ? `Send an email to ${site.title}`
-      : `${site.title} on ${name.charAt(0).toUpperCase() + name.slice(1)}`);
+  const title = linkTitle ?? `${site.title} on ${name.charAt(0).toUpperCase() + name.slice(1)}`;
   return { url, title, Icon };
 });
+
+const iconClass =
+  "inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110";
+const mailTitle = `Send an email to ${site.title}`;
 ---
 
 <div class="flex flex-wrap items-center gap-1">
   {items.map(({ url, title, Icon }) =>
       Icon ? (
         <LinkButton href={url} class="p-2 hover:rotate-6 sm:p-1" title={title}>
-          <Icon class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110" />
+          <Icon class={iconClass} />
           <span class="sr-only">{title}</span>
         </LinkButton>
       ) : null
     )}
+  {config.site.email && (
+    <EmailLink
+      email={config.site.email}
+      showText={false}
+      title={mailTitle}
+      aria-label={mailTitle}
+      class="group p-2 hover:rotate-6 sm:p-1"
+    >
+      <Mail class={iconClass} />
+    </EmailLink>
+  )}
 </div>

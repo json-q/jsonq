@@ -12,7 +12,7 @@ export const t = {
     search: "搜索",
   },
   post: {
-    updatedAt: "更新时间",
+    updatedAt: "更新于",
     backToTop: "回到顶部",
     goBack: "返回",
     previousPost: "上一篇",

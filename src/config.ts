@@ -11,6 +11,7 @@ import type { ResolvedAstroPaperConfig } from "./types/config";
 const config: ResolvedAstroPaperConfig = {
   site: {
     ...userConfig.site,
+    email: userConfig.site.email,
     lang: userConfig.site.lang ?? "zh-CN",
     timezone: userConfig.site.timezone ?? "Asia/Shanghai",
     dir: userConfig.site.dir ?? "ltr",

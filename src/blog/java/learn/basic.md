@@ -1,7 +1,7 @@
 ---
 title: Java 基础学习
 pubDatetime: 2026-07-21
-updDatetime: 2026-08-19
+modDatetime: 2026-08-24
 description: 基于以前的 Java 知识补一下细节知识点以便后续开发
 tags:
   - Java

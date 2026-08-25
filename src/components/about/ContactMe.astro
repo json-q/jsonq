@@ -1,8 +1,13 @@
 ---
 import Mail from "@lucide/astro/icons/mail";
+import config from "@/config";
+import EmailLink from "../EmailLink.astro";
 ---
 
 <p class="flex items-center gap-2">
-  <Mail />
-  <a href="mailto:j996730508@163.com" rel="noopener noreferrer"> j996730508@163.com </a>
+  {config.site.email && (
+    <EmailLink email={config.site.email} class="flex items-center gap-2">
+      <Mail />
+    </EmailLink>
+  )}
 </p>
