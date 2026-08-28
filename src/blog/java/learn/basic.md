@@ -1,7 +1,7 @@
 ---
-title: Java 基础学习
+title: 一、Java 基础学习
 pubDatetime: 2026-07-21
-modDatetime: 2026-08-24
+modDatetime: 2026-08-28
 description: 基于以前的 Java 知识补一下细节知识点以便后续开发
 tags:
   - Java
@@ -1390,3 +1390,70 @@ Map<String, Integer> map = stringArrayList.stream().collect(Collectors.toMap(
 ```
 
 ## 异常
+
+大部分异常都是运行时异常 RuntimeException，编译时不会检查，运行时检查
+
+```java
+int[] arr = {1, 2, 3}
+System.out.println(arr[4]); // java.lang.ArrayIndexOutOfBoundsException 数组索引越界
+System.out.println(1 / 0); // java.lang.ArithmeticException 数学运算异常
+String str = null;
+System.out.println(str.length()); // java.lang.NullPointerException 空指针异常
+Object obj = "你好"
+Integer integer = (Integer) obj; // java.lang.ClassCastException 类型转换异常
+System.out.println(Integer.valueOf("12a")); // NumberFormatException 数字格式化异常
+```
+
+主动抛出异常、捕获异常
+
+```java
+private static void throwException() {
+  throw new RuntimeException("主动抛出异常");
+}
+
+try {
+    System.out.println(Integer.valueOf("12a"));
+} catch (RuntimeException e) {
+    e.printStackTrace(); // 输出异常信息 通常情况下这里会使用 Logger
+}
+```
+
+### 自定义异常
+
+自定义异常继承 Exception 或者 RuntimeException
+
+继承 RuntimeException 的异常是运行时异常，可以主动抛出错误
+
+```java
+public class ServiceRuntimeException extends RuntimeException {
+    public ServiceRuntimeException() {
+    }
+
+    public ServiceRuntimeException(String message) {
+        super(message);
+    }
+}
+
+public static void test() {
+  throw new ServiceRuntimeException("自定义异常");
+}
+```
+
+继承 Exception 的异常是编译时异常，**手动 throw 抛出时，必须也在调用方的方法上 throw 抛出**
+
+带有编译时异常的方法，在调用时必须主动 `try catch` 或继续在调用的方法上 throw 抛出错误，编译时异常通常不推荐使用
+
+```java
+// 和 RuntimeException 的写法完全一样，仅仅改变继承的类
+public static void test() throws ServiceException { // throws ServiceException
+  throw new ServiceRuntimeException("自定义异常");
+}
+
+public static void main(String[] args) {
+  try {
+    test(); // 必须在 try catch 中处理或继续在方法上 throw 抛出
+  }catch (ServiceException e) {
+    e.printStackTrace();
+  }
+}
+```
