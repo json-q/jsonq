@@ -1,7 +1,7 @@
 ---
 title: 一、Java SE
 pubDatetime: 2026-07-21
-modDatetime: 2026-08-29
+modDatetime: 2026-08-30
 description: 基于以前的 Java 知识补一下细节知识点以便后续开发
 tags:
   - Java
@@ -692,7 +692,8 @@ System.out.println("a.compareTo(b): " + a.compareTo(b)); // 0 (表示相等)
 6. Duration：时间间隔，如 1 小时 30 分钟。
 7. Period：日期间隔，如 1 年 2 个月 3 天。
 8. Instant：时间戳，如 2023-01-01T10:30:00Z。
-9. DateTimeFormatter：用于格式化和解析日期和时间。
+9. DateTimeFormatter：用于格式化和解析日期和时间。（线程安全）
+10. SimpleDateFormat：和 DateTimeFormatter 类似，但是线程不安全，推荐使用 DateTimeFormatter。
 
 ```java
 // 1. LocalDate —— 只含日期（年-月-日）
@@ -745,11 +746,12 @@ Instant epoch = Instant.ofEpochSecond(0);           // 从1970-01-01开始的0�
 System.out.println(epoch);                          // 1970-01-01T00:00:00Z
 
 // 9. DateTimeFormatter —— 自定义日期时间的格式化和解析
+// ofPattern 在格式化时，最好使用一个 M 一个 d 更稳妥，因为 yyyy-M-d 可以解析 2023-01-01 格式。但 yyyy-MM-dd 无法解析 2023-1-1。
 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 LocalDateTime dt = LocalDateTime.of(2023, 1, 1, 10, 30);
 String formatted = dt.format(formatter);            // 按指定格式输出
 System.out.println(formatted);                      // 2023-01-01 10:30:00
-LocalDateTime parsed = LocalDateTime.parse("2023-01-01 10:30:00", formatter); // 按格式解析字符串
+LocalDateTime parsed = LocalDateTime.parse("2023-01-01 10:30:00", formatter); // 按格式解析字符串，若字符串格式和解析格式不一致，会抛出异常
 System.out.println(parsed);                         // 2023-01-01T10:30
 ```
 
@@ -1039,7 +1041,7 @@ TreeSet 底层结构是红黑树，红黑树是一种自平衡的二叉查找树
 - 任意节点，左边的节点都比当前节点小，右边的节点都比当前节点大
 - 每次添加节点，都从根节点开始，如果比根节点小，则向左子树添加。如果比根节点大，则向右子树添加。一样的不存
 
-![image](./assets/basic/20260816155358.png)
+![image](./assets/se/20260816155358.png)
 
 #### TreeSet 排序方式
 
@@ -1501,4 +1503,131 @@ try {
 - `delete()` 删除文件或文件夹，delete 只能删除空的文件夹，如果文件夹有内容，则删除失败返回 false
 - `renameTo()` 重命名文件
 
-### 常用 API / IO
+### 时间类 API 补充
+
+Math System BigDecimal 和时间类查看 [Math System Runtime BigDecimal](#math-system-runtime-bigdecimal) 章节
+
+修改年月日时分秒相关的方法，LocalDateTime LocalDate LocalTime 都是不可变的，返回一个新的对象，不会改变原对象
+
+- `withYear()` `withMonth()` `withDayOfMonth()` 年月日修改
+- `withHour()` `withMinute()` `withSecond()` `withNano()` 时分秒（纳秒）修改
+
+```java
+LocalDateTime dt = LocalDateTime.of(2026, 1, 31, 10, 30); // 2026-01-31T10:30
+
+// 修改年份为 2025 年
+System.out.println(dt.withYear(2025)); // 2025-01-31T10:30
+
+// 修改月份为 2月，但是 2 月没有31 天，所以天会自动到当月的最后一天
+System.out.println(dt.withMonth(2)); // 2026-02-28T10:30
+
+// withDayOfMonth(31)：如果当前是2月，直接设置日为31号，会直接抛异常
+// 但如果当前是1月，设置日为31号，则正常
+System.out.println(dt.withDayOfMonth(15)); // 输出：2026-01-15T10:30
+```
+
+- `plusYears()` `plusMonths()` `plusWeeks()` `plusDays()` 将时间按年、月、周、日增加
+- `plusHours()` `plusMinutes()` `plusSeconds()` `plusNanos()` 将时间按小时、分、秒、纳秒增加
+- `minusYears()` `minusMonths()` `minusWeeks()` `minusDays()` 将时间按年、月、周、日减少`
+- `minusHours()` `minusMinutes()` `minusSeconds()` `minusNanos()` 将时间按小时、分、秒、纳秒减少
+
+```java
+LocalDateTime now = LocalDateTime.now();
+System.out.println(now); // 2026-08-30T16:36:37.072493500
+System.out.println(now.plusYears(1)); // 2027-08-30T16:36:37.072493500
+System.out.println(now.plusMonths(1)); // 2026-09-30T16:36:37.072493500
+System.out.println(now.plusWeeks(1)); // 2026-09-06T16:36:37.072493500
+System.out.println(now.plusDays(1)); // 2026-08-31T16:36:37.072493500
+// 剩下的略
+```
+
+- `isBefore()` `isAfter()` 判断时间是否早于、晚于某个时间
+
+```java
+LocalDateTime now = LocalDateTime.now(); // 2026-08-30T16:36:37.072493500
+// 当前时间是否在 2026-01-01 00:00:00 之前 false
+System.out.println(now.isBefore(LocalDateTime.of(2026, 1, 1, 0, 0)));
+// 当前时间是否在 2026-01-01 00:00:00 之后 true
+System.out.println(now.isAfter(LocalDateTime.of(2026, 1, 1, 0, 0)));
+```
+
+- `Duration` 类用于计算两个时间之间的间隔（秒、纳秒）
+- `Period` 类用于计算两个日期之间的间隔（年、月、日）
+- `ChronoUnit` 结合以上两个的所有功能
+
+`ChronoUnit.XXX.between(start, end)` 就是两个时间的间隔，后者减前者。`XXX`是 `ChronoUnit` 提供的一些静态常量，比如 `YEARS` `MONTHS` `DAYS` `HOURS` `MINUTES` `SECONDS` `MILLIS` 等等。
+
+### IO
+
+IO 就是 I(Input) 和 O(Output)，输入（读取）和输出（写入）。IO 流可以分为 字节流 和 字符流。字节流又称万能流，因为任何文件都是由字节组成。字符流是为了解决字节流读取纯文本文件的中文可能出现乱码的问题。
+
+**流对象用完之后要记得调用 close 关闭流，不然会始终占用资源（内存泄漏）**
+
+字节流：
+
+- 抽象类有 `InputStream`（字节输入流） `OutputStream`（字节输出流），不能直接创建对象
+- 对应的抽象子类有 `FileInputStream` `FileOutputStream`
+
+字符流：
+
+- 抽象类有 `Reader`（字符输入流） `Writer`（字符输出流），不能直接创建对象
+- 对应的抽象子类有 `FileReader` `FileWriter`
+
+#### 字节流写入数据
+
+```java
+public static void main(String[] args) throws IOException {
+  // 如果文件不存在，会自动创建，存在，默认写入时会先清空文件内容，再写入
+  // 第二个参数是 append 追加，设为 true 就是向现有内容追加而非覆盖
+  FileOutputStream fos = new FileOutputStream("A.txt", true);
+
+  fos.write(97);
+  fos.write(98);
+  fos.write(99); // 运行完 A.txt 中是 abc
+
+  byte[] bytes = {97, 98, 99};
+  fos.write(bytes); // 运行完 A.txt 中是 abcabc
+
+  // 起始索引为 0 的位置开始，写入 2 长度的字节，即 {97,98}
+  fos.write(bytes, 0, 2); // 运行完 A.txt 中是 abcabcab
+
+  // 写入中文
+  fos.write("你好".getBytes());
+}
+```
+
+> 注意：以上写法中，不管任何异常都直接抛出 IO 异常并不是规范写法
+
+#### IO 流标准异常处理
+
+JDK7 之前写法（了解即可）
+
+```java
+FileOutputStream fos = null;
+// 为什么 close 需要写在 finally 中？
+// 如果 close 之前有异常导致程序终止，那这个流就永远无法关闭
+try {
+    fos = new FileOutputStream("A.txt", true);
+    fos.write("你好".getBytes());
+} catch (IOException e) {
+    e.printStackTrace();
+} finally {
+    if (fos != null) {
+        try {
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+JDK7 新写法（推荐），会自动调用 close() 关闭流，try 的内部只有实现过 `AutoCloseable` 接口的类才能这么写
+
+```java
+try (FileOutputStream fos = new FileOutputStream("A.txt", true)) {
+  fos.write("你好".getBytes());
+}catch (IOException e) {
+  e.printStackTrace();
+}
+```
