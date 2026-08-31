@@ -1461,49 +1461,7 @@ public static void main(String[] args) {
 }
 ```
 
-## File/IO 等
-
-### File
-
-1. File 创建文件，如果路径是相对路径，那就会在当前运行项目的根目录下查找或创建
-
-- File(String pathname)
-- File(String parent, String child)
-- File(File parent, String child)
-
-```java
-File file = new File("E:\\A.txt"); // 文件路径和文件夹路径都支持
-File file1 = new File("E:\\", "A.txt");
-File file2 = new File(new File("E\\"), "A.txt");
-
-System.out.println(file.exists()); // 是否存在
-
-// 创建文件，相对路径，在当前项目根目录创建
-File file3 = new File("A.txt");
-try {
-    boolean newFile = file3.createNewFile();
-    System.out.println(newFile); // true
-    System.out.println(file3.getAbsoluteFile()); // F:\myself\java-learn\java-01\java-01\A.txt
-} catch (IOException e) {
-    throw new RuntimeException(e);
-}
-```
-
-2. File 常用 API
-
-- `isDirectory()` 判断是否是目录（文件夹）
-- `isFile()` 判断是否是文件
-- `exists()` 判断文件是否存在
-- `length()` 获取文件大小
-- `getName()` 获取文件名（带后缀）
-- `getAbsoluteFile()` 获取绝对路径
-- `listFiles()` 获取文件列表，会把当前目录下所有的文件和文件夹返回成一个 File 数组
-- `mkdir()` 创建目录（文件夹）
-- `mkdirs()` 创建多级目录（文件夹）
-- `delete()` 删除文件或文件夹，delete 只能删除空的文件夹，如果文件夹有内容，则删除失败返回 false
-- `renameTo()` 重命名文件
-
-### 时间类 API 补充
+## 时间类 API 补充
 
 Math System BigDecimal 和时间类查看 [Math System Runtime BigDecimal](#math-system-runtime-bigdecimal) 章节
 
@@ -1557,6 +1515,48 @@ System.out.println(now.isAfter(LocalDateTime.of(2026, 1, 1, 0, 0)));
 
 `ChronoUnit.XXX.between(start, end)` 就是两个时间的间隔，后者减前者。`XXX`是 `ChronoUnit` 提供的一些静态常量，比如 `YEARS` `MONTHS` `DAYS` `HOURS` `MINUTES` `SECONDS` `MILLIS` 等等。
 
+## File/IO 等
+
+### File
+
+1. File 创建文件，如果路径是相对路径，那就会在当前运行项目的根目录下查找或创建
+
+- File(String pathname)
+- File(String parent, String child)
+- File(File parent, String child)
+
+```java
+File file = new File("E:\\A.txt"); // 文件路径和文件夹路径都支持
+File file1 = new File("E:\\", "A.txt");
+File file2 = new File(new File("E\\"), "A.txt");
+
+System.out.println(file.exists()); // 是否存在
+
+// 创建文件，相对路径，在当前项目根目录创建
+File file3 = new File("A.txt");
+try {
+    boolean newFile = file3.createNewFile();
+    System.out.println(newFile); // true
+    System.out.println(file3.getAbsoluteFile()); // F:\myself\java-learn\java-01\java-01\A.txt
+} catch (IOException e) {
+    throw new RuntimeException(e);
+}
+```
+
+2. File 常用 API
+
+- `isDirectory()` 判断是否是目录（文件夹）
+- `isFile()` 判断是否是文件
+- `exists()` 判断文件是否存在
+- `length()` 获取文件大小
+- `getName()` 获取文件名（带后缀）
+- `getAbsoluteFile()` 获取绝对路径
+- `listFiles()` 获取文件列表，会把当前目录下所有的文件和文件夹返回成一个 File 数组
+- `mkdir()` 创建目录（文件夹）
+- `mkdirs()` 创建多级目录（文件夹）
+- `delete()` 删除文件或文件夹，delete 只能删除空的文件夹，如果文件夹有内容，则删除失败返回 false
+- `renameTo()` 重命名文件
+
 ### IO
 
 IO 就是 I(Input) 和 O(Output)，输入（读取）和输出（写入）。IO 流可以分为 字节流 和 字符流。字节流又称万能流，因为任何文件都是由字节组成。字符流是为了解决字节流读取纯文本文件的中文可能出现乱码的问题。
@@ -1573,7 +1573,7 @@ IO 就是 I(Input) 和 O(Output)，输入（读取）和输出（写入）。IO 
 - 抽象类有 `Reader`（字符输入流） `Writer`（字符输出流），不能直接创建对象
 - 对应的抽象子类有 `FileReader` `FileWriter`
 
-#### 字节流写入数据
+#### 字节流写入数据 FileOutputStream
 
 ```java
 public static void main(String[] args) throws IOException {
@@ -1630,4 +1630,47 @@ try (FileOutputStream fos = new FileOutputStream("A.txt", true)) {
 }catch (IOException e) {
   e.printStackTrace();
 }
+```
+
+#### 字节流读取数据 FileInputStream
+
+- `read()` 读取一个字节，返回一个 int，如果已经读完，返回 -1
+- `read(byte[] b)` 读取字节数组，返回读取的**有效**字节数，如果已经读完，返回 -1
+
+read 不传递就是默认一次读一个字节。传入 byte[] 数组 n，一次读取 n 个字节，返回值不再是读取到的字节，而是读取了几个字节。
+
+```java
+// 文件内容为 abcde
+FileInputStream fis = new FileInputStream("A.txt");
+
+int b;
+while ((b = fis.read()) != -1) {
+    System.out.println(b); //  97 98 99 ... 依次打印
+}
+fis.close();
+
+FileInputStream fis = new FileInputStream("A.txt");
+int b;
+byte[] size = new byte[3];
+while ((b = fis.read(size)) != -1) {
+    System.out.println(b); //  3 2 依次打印读取到的字节长度
+    System.out.println(Arrays.toString(size));// [97, 98, 99] [100, 101, 99] 依次打印
+}
+fis.close();
+```
+
+以上代码可以发现，在传入 byte[] 数组时，虽然读取分别返回了 3 个和 2 个字节，但是读取 2 字节返回的结果依然是 3 个字节数组，第 3 个字节位置的数据其实是上一轮读取的残留数据。
+
+解决这个问题可以使用 `String(byte[] bytes, int offset, int length)`，len 传入当前读取到的有效字节可以防止将残留数据进行读取。
+
+```java
+// 文件内容为 abcde
+FileInputStream fis = new FileInputStream("A.txt");
+byte[] b = new byte[3];
+int len;
+while ((len = fis.read(b)) != -1) {
+    String s = new String(b, 0, len); // 将字节转换成对应的字符串
+    System.out.println(s); // abc de 依次打印
+}
+fis.close();
 ```
