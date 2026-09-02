@@ -1,7 +1,7 @@
 ---
 title: 一、Java SE
 pubDatetime: 2026-07-21
-modDatetime: 2026-08-30
+modDatetime: 2026-09-02
 description: 基于以前的 Java 知识补一下细节知识点以便后续开发
 tags:
   - Java
@@ -1674,3 +1674,225 @@ while ((len = fis.read(b)) != -1) {
 }
 fis.close();
 ```
+
+#### 字符流
+
+用于读取纯文本文件时，中文乱码的问题。基本就是把 `FileInputStream` 换成 `FileReader`，byte 数组换成了 char 数组。
+
+```java
+// 文件内容为 abcde
+FileReader fr = new FileReader("A.txt");
+char[] c = new char[3];
+int len;
+while ((len = fr.read(c)) != -1) {
+    String s = new String(c, 0, len);
+    System.out.print(s + "-"); // 你好,-你好-
+}
+fr.close();
+```
+
+FileWriter 提供了 `flush()` 用于刷新缓冲区，将数据写入文件。
+
+默认情况下 `FileWriter` 的 `Writer` 父类中 有一个 writeBuffer 缓冲区，只有当写入的数据达到 1024 个字节时，才会将缓冲区的数据写入文件。在不关闭流的情况下，如果想马上写入文件，可以使用 `flush()` 方法。
+
+- `flush()` 刷新缓冲区，将数据写入文件，刷新之后相当于清空缓冲区，依然可以继续写入数据
+- `close()` 关闭流，将缓冲区中的数据写入文件，并清空缓冲区，不可以再写入数据
+
+```java
+// 文件内容为 abcde
+FileWriter fw = new FileWriter("A.txt");
+
+char[] chs = {'a', 'b', 'c'};
+
+fw.write(chs);
+fw.write("你好菜啊");
+fw.write(chs, 0, 2);
+fw.write("张三");
+fw.write("不要断章取义", 2, 4);
+// 最后 A.txt 输出 abc你好菜啊ab张三断章取义
+fw.close();
+```
+
+#### Properties
+
+Properties 跟 Map 比较像，常用于配置文件的读取。
+
+基础方法使用
+
+- `setProperty(String key, String value)` 类似 Map 的 put，虽然其本身也有 put 方法，但是不建议使用
+- `getProperty(String key)`
+- `stringPropertyNames()` 类似 Map 的 `keySet`
+
+```java
+Properties properties = new Properties();
+properties.setProperty("username", "admin");
+properties.setProperty("password", "123456");
+
+System.out.println(properties); // {password=123456, username=admin}
+System.out.println(properties.getProperty("username")); // admin
+System.out.println(properties.stringPropertyNames()); // [password, username]
+// Properties properties = new Properties();
+// properties.load(new FileInputStream("db.properties"));
+// System.out.println(properties.getProperty("url"));
+```
+
+与 IO 文件流相关的方法
+
+- `load(InputStream inStream)` 读将文件中的数据加载到 Properties 中
+- `store(OutputStream out, String comments)` 将 Properties 中的数据写入到文件中
+
+loading 方法
+
+```java
+Properties properties = new Properties();
+// 加载文件
+FileInputStream fis = new FileInputStream("src\\main\\resources\\config.properties");
+properties.load(fis);
+System.out.println(properties); // {password=123456, username=admin}
+fis.close();
+```
+
+store 方法
+
+```java
+Properties properties = new Properties();
+properties.setProperty("username", "admin");
+properties.setProperty("password", "123456");
+
+FileOutputStream fos = new FileOutputStream("src\\main\\resources\\config.properties");
+properties.store(fos, "哦耶"); // comment 可以传 null，尽量不要传递中文，因为写入时会始终转换成 Unicode
+fos.close();
+
+// 最终写入的文件内容
+#\u54E6\u8036
+#Tue Sep 01 22:59:47 CST 2026
+password=123456
+username=admin
+```
+
+## 线程
+
+一个进程可以同时执行多个任务，每个任务都是一个线程。单线程只能调用一个 CPU，这种对于多核 CPU 来说其实是一种性能浪费。可以将一个线程中的多个任务分配多个 CPU 进行运算，从而提高效率。
+
+但是有个错觉，当运行任务多于系统线程时，下意识以为线程会在第一批任务处理完成之后再去执行第二批，其实是线程在大量运行任务之间进行快速切换。
+
+### Thread 线程基础认识
+
+当 Java 程序运行时，至少包含两个线程：main 主线程 和 GC 垃圾回收线程。
+
+1. 编写 class 类继承 Thread 类
+2. 重写 run 方法
+3. 将线程代码写入 run 方法
+4. 创建线程对象
+5. 调用 start 方法启动线程（同时会调用 run 方法）
+
+```java
+class DemoThread extends Thread {
+    @Override
+    public void run() {
+        for (int i = 0; i < 500; i++) {
+            System.out.println("run方法执行" + i);
+        }
+    }
+}
+
+DemoThread demoThread = new DemoThread();
+demoThread.start();
+
+for (int i = 0; i < 500; i++) {
+    System.out.println("主线程执行" + i);
+}
+```
+
+最终执行时，主线程的 for 循环和 DemoThread 的 for 循环交替执行。
+
+![image](./assets/se/20260902195308.png)
+
+### 创建线程的三种方式
+
+- 继承 Thread 类
+- 实现 Runnable 接口
+  - 相比 Thread 的优势，Thread 只能被继承使用，而 Java 只能单继承，这会导致原本继承过父类的类，就无法再继承 Thread 类
+  - 而 Runnable 是接口，可以多实现，相比 Thread 更灵活，但是用法稍微繁琐一点点
+  - `implements Runnable` -> `new DemoThread` -> `new Thread(demoThread)` -> `thread.start()`
+- 使用 Callable 接口
+  - 如果想让线程有返回值，可以使用 Callable 接口
+  - `implements Callable` -> `new DemoThread` -> `new FutureTask(demoThread)` -> `new Thread(task)` -> `thread.start()`
+  - 相比 Runnable 的创建，Callable 又多了一个 `new FutureTask()` 的步骤
+  - 可通过 `new FutureTask()` 的 `get()` 方法获取线程的返回值
+
+```java
+// Runnable
+class DemoThread implements Runnable {
+    @Override
+    public void run() {
+    // ...
+    }
+}
+DemoThread demoThread = new DemoThread();
+Thread thread = new Thread(demoThread);
+thread.start();
+
+//  Callable
+class DemoThread implements Callable<Integer> {
+    @Override
+    public Integer call() throws Exception {
+        int sum = 0;
+        for (int i = 0; i < 1000; i++) {
+            sum += i;
+        }
+        return sum;
+    }
+}
+DemoThread demoThread = new DemoThread();
+FutureTask<Integer> task = new FutureTask<>(demoThread);
+Thread thread = new Thread(task);
+thread.start();
+Integer result = task.get();
+System.out.println(result);
+```
+
+### 线程常见方法
+
+除了以上使用的 start 和 get 方法外，还有一些
+
+- `getName()` 获取线程名称
+- `setName()` 设置线程名称 `new Thread(xx,"线程名称")` 也可以
+- `currentThread()` 获取当前线程对象
+- `sleep()` 让线程休眠的时间（毫秒）
+
+```java
+class DemoThread extends Thread {
+    @Override
+    public void run() {
+      // Thread.currentThread().getName()
+        System.out.println(super.getName());
+        /**
+         *
+            for (int i = 0; i < 5; i++) {
+              System.out.println("倒计时：" + i);
+            try {
+                Thread.sleep(1000); // 每间隔 1000 毫秒输出一次
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+         */
+    }
+}
+
+DemoThread demoThread1 = new DemoThread();
+DemoThread demoThread2 = new DemoThread();
+
+demoThread1.setName("线程1");
+
+// 默认线程名称为 Thread-x 输出：Thread-1 线程1（因为并行，所以不分先后顺序）
+demoThread1.start();
+demoThread2.start();
+```
+
+线程优先级默认为 5，最小为 1，最大为 10，优先级越高的线程，越容易抢占到 CPU，越快被执行（完成），虽然依然是并行执行，但是优先级更高的越容易更早执行完毕。
+
+- `getPriority()` 获取线程优先级
+- `setPriority()` 设置线程优先级
+- `setDaemon(true)` 设置线程为守护线程，当所有非守护线程执行完毕时，守护线程会自动结束，不管这些线程是哪里来的，这个规则是不变的。
