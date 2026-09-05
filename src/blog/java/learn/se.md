@@ -1,7 +1,7 @@
 ---
 title: 一、Java SE
 pubDatetime: 2026-07-21
-modDatetime: 2026-09-02
+modDatetime: 2026-09-03
 description: 基于以前的 Java 知识补一下细节知识点以便后续开发
 tags:
   - Java
@@ -1896,3 +1896,194 @@ demoThread2.start();
 - `getPriority()` 获取线程优先级
 - `setPriority()` 设置线程优先级
 - `setDaemon(true)` 设置线程为守护线程，当所有非守护线程执行完毕时，守护线程会自动结束，不管这些线程是哪里来的，这个规则是不变的。
+
+### 线程安全问题/同步
+
+案例：100 张票 3 个窗口卖票。当票卖出的时候，正常应该当前票数减 1，但是线程是不断切换的，当线程一在第 1 张票卖出准备减 1 时，线程二抢到资源开始执行，此时票数还没减 1，线程二会再次卖出第 1 张票。会造成票数重复卖出。
+
+意思就是，有多个线程同时操作一个数据时，就会出现线程问题。
+
+解决以上问题可以使用同步技术：
+
+- 同步代码块 synchronized 可以让当前的方法必须执行完毕才能轮到下一个线程执行，但是相对的会降低运行效率
+- 同步方法。在返回值前边添加 `synchronized` 关键字
+  - 同步方法也是有锁对象，只不过是内部自动指定
+  - 静态方法的锁对象是字节码对象，非静态方法锁对象是 this
+- Lock `ReentrantLock` 锁。主动上锁，释放锁
+
+同步代码块：
+
+```java
+class TickTask implements Runnable {
+    int tickNum = 1000;
+    final Object lockObj = new Object();
+
+    @Override
+    public void run() {
+        while (true) {
+          // synchronized (锁对象) {}
+          // 推荐使用 TickTask.class 传入锁对象，就是字节码对象，在程序运行中是唯一的
+            synchronized (TickTask.class) {
+                if (tickNum <= 0) {
+                    System.out.println("票已卖完");
+                    break;
+                }
+                System.out.println(Thread.currentThread().getName() + "卖出第" + tickNum + "张票");
+                tickNum--;
+            }
+        }
+    }
+}
+
+TickTask task = new TickTask();
+Thread thread1 = new Thread(task, "窗口A");
+Thread thread2 = new Thread(task, "窗口B");
+Thread thread3 = new Thread(task, "窗口C");
+thread1.start();
+thread2.start();
+thread3.start();
+```
+
+同步方法：
+
+```java
+class TickTask implements Runnable {
+    int tickNum = 1000;
+
+    @Override
+    public void run() {
+        while (true) {
+            if (outTick()) {
+                System.out.println("票已卖完");
+                break;
+            }
+        }
+    }
+
+    // synchronized 修饰符作为同步方法调用
+    private synchronized boolean outTick() {
+        if (tickNum <= 0) {
+            return true;
+        }
+        System.out.println(Thread.currentThread().getName() + "卖出第" + tickNum + "张票");
+        tickNum--;
+        return false;
+    }
+}
+```
+
+ReentrantLock 锁：需要注意上锁了一定要释放锁，否则进程无法终止。
+
+```java
+class TickTask implements Runnable {
+    int tickNum = 1000;
+    ReentrantLock lock = new ReentrantLock();
+
+    @Override
+    public void run() {
+        while (true) {
+            if (tickNum <= 0) {
+                break;
+            }
+
+            // 或者 try finally 也可以，在 finally 中释放锁
+            lock.lock(); // 上锁
+            System.out.println(Thread.currentThread().getName() + "卖出第" + tickNum + "张票");
+            tickNum--;
+            lock.unlock(); // 释放锁
+        }
+    }
+}
+```
+
+### 线程池
+
+线程的创建和销毁非常消耗资源，因为涉及到和操作系统的交互，而创建大量生命周期很短的线程，会严重浪费系统资源。
+
+将线程对象交给线程池管理，可以降低系统资源的消耗。但是 阿里规范手册中 **不允许**使用 JDK 自带的 `Executors` 创建线程池，因为 `Executors` 默认创建的线程数量和请求队列很大，当请求或线程数量过多时可能会造成 OOM（堆内存溢出）。
+
+#### JDK 线程池
+
+JDK 自带得线程池（了解）。`newCachedThreadPool` 默认允许创建 Integer.MAX_VALUE 个线程，可以使用 `newFixedThreadPool` 创建固定数量的线程。
+
+```java
+// 获取线程池对象
+ExecutorService threadPool = Executors.newCachedThreadPool();
+// 提交线程任务到线程池
+// 提交 100 个线程
+for (int i = 0; i <= 100; i++) {
+    threadPool.submit(new Runnable() {
+        @Override
+        public void run() {
+            System.out.println(Thread.currentThread().getName() + "提交线程任务");
+        }
+    });
+}
+```
+
+最终提交得 100 个线程，线程池会自动分配，自动复用线程。
+
+![image](./assets/se/20260905173920.png)
+
+#### 自定义线程池
+
+之前的 `newCachedThreadPool()` 的源码就是下边的，`newFixedThreadPool` 指定线程池数量也是使用 `ThreadPoolExecutor`，这个 `ThreadPoolExecutor` 就是可以直接进行自定义线程池的对象。
+
+```java
+public static ExecutorService newCachedThreadPool() {
+    return new ThreadPoolExecutor(0, Integer.MAX_VALUE,
+                                  60L, TimeUnit.SECONDS,
+                                  new SynchronousQueue<Runnable>());
+}
+
+public static ExecutorService newFixedThreadPool(int nThreads) {
+    return new ThreadPoolExecutor(nThreads, nThreads,
+                                  0L, TimeUnit.MILLISECONDS,
+                                  new LinkedBlockingQueue<Runnable>());
+}
+```
+
+`ThreadPoolExecutor` 有 7 个参数
+
+- corePoolSize：核心线程数（餐馆正式员工）
+- maximumPoolSize：最大线程数（最多有几个员工，比如 `corePoolSize=3`，`maximumPoolSize=5`，意思最多再招 2 个临时工（临时线程））
+- keepAliveTime：线程空闲时间（超过这个时间临时工就需要被开除（销毁临时线程））
+- unit：时间单位
+- workQueue：任务队列（排队人数）
+  - `ArrayBlockingQueue` 有界队列（推荐使用）
+  - `LinkedBlockingQueue` 无界队列（虽然名义无界，但是内部也指定了一个默认大小，默认为 `Integer.MAX_VALUE`）
+- threadFactory：线程工厂
+- handler：拒绝策略
+
+```java
+ThreadPoolExecutor executor = new ThreadPoolExecutor(
+        2, // 2 核心线程数
+        5, // 5 最大线程数
+        60, // 60 线程空闲时间
+        TimeUnit.MINUTES, // 分钟
+        new ArrayBlockingQueue<>(10), // 排队队列（排队人数） 10
+        Executors.defaultThreadFactory(), // 线程工厂
+        new ThreadPoolExecutor.AbortPolicy() // 拒绝策略（超过排队人数触发拒绝策略）
+);
+
+// 12 不会出现第 3 个线程，因为 12=2+10，还不需要创建临时线程，13 才会创建第 3 个线程（临时）
+// 当为 16 时，
+for (int i = 1; i <= 13; i++) {
+    poolExecutor.submit(new Runnable() {
+        @Override
+        public void run() {
+            System.out.println(Thread.currentThread().getName() + "提交线程任务");
+        }
+    });
+}
+```
+
+- 只有当**提交的线程数量 > corePoolSize（核心线程）+ workQueue.size()（排队人数）**时，才会创建临时线程（招临时工）。
+- 只有当**提交的线程数量 > maximumPoolSize（最大线程）+ workQueue.size()（排队人数）**时，才会触发拒绝策略（临时工都在忙，排队人数超了，默认策略会把最新排队的给丢掉（抛异常））
+
+线程池的拒绝策略：
+
+- AbortPolicy：默认策略，丢弃任务并抛异常
+- DiscardPolicy：丢弃任务但不抛异常（不推荐）
+- DiscardOldestPolicy：丢弃队列中等待最久的任务，把当前任务加入队列执行
+- CallerRunsPolicy：调用 run 方法，绕过线程池直接执行（让主线程干活）
