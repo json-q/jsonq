@@ -1,7 +1,7 @@
 ---
 title: 一、Java SE
 pubDatetime: 2026-07-21
-modDatetime: 2026-09-03
+modDatetime: 2026-09-08
 description: 基于以前的 Java 知识补一下细节知识点以便后续开发
 tags:
   - Java
@@ -2087,3 +2087,195 @@ for (int i = 1; i <= 13; i++) {
 - DiscardPolicy：丢弃任务但不抛异常（不推荐）
 - DiscardOldestPolicy：丢弃队列中等待最久的任务，把当前任务加入队列执行
 - CallerRunsPolicy：调用 run 方法，绕过线程池直接执行（让主线程干活）
+
+## 高级技术
+
+### 枚举 enum
+
+枚举的第一行**必须是枚举对象的名称**，这些名称都是常量。
+
+```java
+public enum ColorEnum {
+    RED, BLUE, PINK;
+}
+
+System.out.println(ColorEnum.BLUE); // BLUE 在正常情况下，经过序列化返回给前端就是字符串 'BLUE'
+System.out.println(ColorEnum.BLUE.ordinal()); // 索引为 1
+```
+
+如果有一些含义比较复杂的枚举对象，无法用简单的变量名来表示，可以定义枚举对象的属性，然后通过属性获取枚举对象的值。
+
+```java
+public enum ColorEnum {
+    RED("red", "红色"),
+    BLUE("blue", "蓝色"),
+    PINK("pink", "粉色");
+
+    private final String en;
+    private final String zhCN;
+
+    ColorEnum(String en, String zhCN) {
+        this.en = en;
+        this.zhCN = zhCN;
+    }
+
+    public String getEn() {
+        return en;
+    }
+
+    public String getZhCN() {
+        return zhCN;
+    }
+}
+
+System.out.println(ColorEnum.BLUE.getEn() + ":" + ColorEnum.BLUE.getZhCN());
+```
+
+### 反射 Reflect
+
+官方原话：反射就是加载类，并允许以编程的方式访问和修改它的方法、成员变量、构造器等。
+
+在 IDEA 中，通过 new 创建的对象，在调用时 IDEA 可以提示出这个属性的各种方法和变量，这就是使用的反射实现的。
+
+1. 反射第一步：加载类，获取类的字节码（class 对象）`类名.class` 或 `Class.forName("类名")` 或 `对象.getClass()`
+
+```java
+// 这三种方式获取到的字节码地址是完全相同的，就是同一个
+Class studentClass = Student.class;
+System.out.println(studentClass); // class com.jsq.Student
+System.out.println(Class.forName("com.jsq.Student")); // class com.jsq.Student
+Student student = new Student();
+System.out.println(student.getClass()); // class com.jsq.Student
+```
+
+2. 获取类的构造器：Constructor 对象。常用 `getDeclaredConstructors()` 获取全部构造器对象，`getConstructors()` 只能获取 public 修饰的
+
+获取类构造器的作用：初始化对象，说白了就是 new 一个对象。有点脱裤子放屁，但是在场景下确实是有用的（因为有获取私有构造器/属性/方法的权限，因此能突破原本封装性）。
+
+```java
+Class studentClass = Student.class;
+// Constructor[] constructors = studentClass.getConstructors();
+
+// 获取全部构造器
+Constructor[] constructors = studentClass.getDeclaredConstructors();
+for (Constructor constructor : constructors) {
+    // i=0 com.jsq.Student==>public com.jsq.Student()
+    // i=1 com.jsq.Student==>public com.jsq.Student(java.lang.String,java.lang.Integer)
+    System.out.println(constructor.getName() + "==>" + constructor);
+}
+
+// 获取类的 有参/无参构造器
+Class studentClass = Student.class;
+Constructor c1 = studentClass.getDeclaredConstructor(); // 定位到无参构造器
+Constructor c2 = studentClass.getDeclaredConstructor(String.class, Integer.class); // 定位到有参构造器
+
+Student s1 = (Student) c1.newInstance(); // 等价于 new Student()
+// 但是，如果 Student 构造器是 private 修饰，则以下代码会报错，使用 setAccessible 强制访问
+// c2.setAccessible(true); // 暴力反射（禁止检查访问权限）
+Student s2 = (Student) c2.newInstance("张三", 18); // 等价于 new Student("张三", 18)
+```
+
+3. 获取类的成员变量：Field 对象
+
+```java
+Class studentClass = Student.class;
+
+Field[] fields = studentClass.getDeclaredFields();
+for (Field field : fields) {
+    // class java.lang.String name
+    // class java.lang.Integer age
+    System.out.println(field.getType() + " " + field.getName());
+}
+
+Student student = new Student();
+// 获取单个成员变量
+Field nameField = studentClass.getDeclaredField("name");
+// nameField.setAccessible(true); // 如果是私有成员变量，则需要强制访问
+nameField.set(student, "张三"); // 给 name 成员变量赋值
+String name = (String) nameField.get(student); // 获取 name 成员变量的值
+System.out.println(name);
+```
+
+4. 获取类的成员方法：Method 对象
+
+```java
+Class studentClass = Student.class;
+
+Method[] methods = studentClass.getDeclaredMethods();
+for (Method method : methods) {
+    System.out.println(method.getName());
+}
+
+Student student = new Student();
+// 获取单个成员方法
+Method method = studentClass.getDeclaredMethod("getName");
+method.setAccessible(true);
+// 如果 getName 是有参数的，则 method.invoke(student, 参数1, 参数2, ...)
+Object o = method.invoke(student); // 调用 getName 方法
+System.out.println(o);
+```
+
+### 注解
+
+`@Override` `@Test` 这些就是，根据注解让可以程序如何执行当前注解上的程序。
+
+注解可以在非常多地方使用；方法、类、成员变量、构造器等等，基本都能用。
+
+#### 自定义注解
+
+- 注解使用 `@interface` 定义，由 `public 属性类型 属性名称() default 默认值;` 构成
+- 如果一个注解中**只有一个** `value` 属性（必须叫 value），在使用注解时可以省略属性名
+
+```java
+public @interface MyTest {
+    String name();
+
+    double money() default 100;
+
+    String[] author();
+}
+
+public @interface MyTest2 {
+    String value();
+}
+
+@MyTest(name = "张三", author = {"张三", "李四"})
+@MyTest2("张三") // 等价于 @MyTest2(value = "张三")
+```
+
+注解的原理：
+
+- 注解其实就是一个继承了 `Annotation` 的接口
+- 而注解内的属性其实就是抽象方法
+
+#### 元注解
+
+修饰注解的注解就是元注解。元注解有：`@Target` `@Retention` `@Documented` `@Inherited`，常用的就是 `@Target` `@Retention`
+
+`@Target` 用来指定注解的**作用范围**（被修饰的注解能在哪些地方使用，比如 `@Target(ElementType.METHOD)` 表示该注解只能用于方法上），也可以同时指定多个作用范围
+
+- `ElementType.TYPE` 类、接口（包括注解类型）
+- `ElementType.FIELD` 成员变量
+- `ElementType.METHOD` 方法
+- `ElementType.PARAMETER` 方法参数
+- `ElementType.CONSTRUCTOR` 构造器
+- `ElementType.LOCAL_VARIABLE` 局部变量
+- `ElementType.ANNOTATION_TYPE` 注解
+
+```java
+@Target(ElementType.METHOD) // 只能在方法上用 MyTest 注解，其他地方会报错
+@Target({ElementType.METHOD, ElementType.TYPE}) // 可在方法、类上用 MyTest 注解
+public @interface MyTest {
+    String name();
+
+    double money() default 100;
+
+    String[] author();
+}
+```
+
+`@Retention` 用来指定注解的**生命周期**（注解保留在哪些地方），也可以同时指定多个生命周期
+
+- `RetentionPolicy.SOURCE` 仅保留在源代码中，编译后的字节码文件中
+- `RetentionPolicy.CLASS` （默认值），注解保留在源代码和编译后的字节码文件中，但运行阶段不存在
+- `RetentionPolicy.RUNTIME` （开发常用）一直保留到运行阶段，因为很多逻辑代码会基于注解去做，比如 AOP，不做成 RUNTIME 跟没做一样
