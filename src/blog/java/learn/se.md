@@ -2,7 +2,7 @@
 title: 一、Java SE
 pubDatetime: 2026-07-21
 modDatetime: 2026-09-08
-description: 基于以前的 Java 知识补一下细节知识点以便后续开发
+description: Java 基础
 tags:
   - Java
   - Java 学习
