@@ -1,13 +1,18 @@
 ---
 title: 学习 Rust
 pubDatetime: 2026-09-25
+modDatetime: 2026-09-29
 description: 简单上手学习一下 Rust
 tags:
   - Rust
   - Rust 学习
 ---
 
-起因是玩的游戏在解析本地缓存数据以及数据展示上会使用 tauri，而对应的解析层逆向用 Rust，用 AI 开发的基础版虽然能用，也能让 AI 继续往上堆功能，但是更希望自己能掌握这门语言的用法。（早都想接触一下 Rust 了，毕竟是编程界的原神）
+> 暂时搁置 Rust 的学习，先继续搞 Java 了（忙不过来了，淦）。
+
+起因是玩的一个游戏可以通过解析本地缓存数据来获取当前账号下的绝大部分信息，让部分信息更直观的展示。使用的 tauri，对应的解析层逆向是 Rust，用 AI 开发的基础版虽然能用，也能让 AI 继续往上堆功能，但是更希望自己能掌握这门语言的用法。（早都想接触一下 Rust 了，毕竟是编程界的原神）。
+
+Java 是工作，Rust 是兴趣。
 
 ## Table of Contents
 
@@ -360,6 +365,109 @@ fn test_for_iter() {
 }
 ```
 
+#### match
+
+见 [Enums and Pattern Matching](https://doc.rust-lang.org/book/ch06-00-enums.html)
+
+match 语句用法比较特殊，硬要说用法的话就是 switch。在 Rust 中，Rust 会推荐穷举所有可能出现的情况（没有写 `_` 兜底的情况），匹配不到的用 `_` 来表示，如果只有一行代码，若需要简洁性，`{}` 可省略
+
+match 在匹配到条件后，就不会继续往下执行，当匹配到第一个满足条件的分支后就会停止执行。相当于自动写了 `break;`
+
+```rust
+fn test_match_int(age: u8) {
+    match age {
+        1..=15 if age > 10 => {
+            println!("Your age is between 11 and 15")
+        }
+        16 => {
+            println!("Your age is 16")
+        }
+        18 | 19 => {
+            println!("Your age is 18 or 19")
+        }
+        20..=30 => {
+            println!("Your age is between 20 and 30");
+        }
+        31.. => {
+            println!("Your age is greater than or equal to 31");
+        }
+        _ => {
+            println!("not matching");
+        }
+    }
+}
+```
+
+像以下代码，如果缩写的直接是一个值，那此时 match 会将这个匹配当作一个返回值，就需要在 fn 函数上声明返回类型。如果不需要返回类型，则在 match 后面加 `;`，对，仅仅添加 `;` 就可以了
+
+```rust
+// 注意，编译器不允许返回类型不同的匹配值，必须都是同一个类型
+fn test_match_string(name: &str) {
+    match name {
+        "Rust" => "This is Rust",
+        "C++" => "This is C++",
+        _ => "I don't know",
+    }; // 不想返回类型添加 ;
+}
+```
+
+match 匹配数组时，可以匹配数组的某一段是否符合
+
+```rust
+fn test_match_array(arr: [u32; 5]) {
+    match arr[0..=1] {
+        [218, 20] => {
+            println!("only array[0] and array[1] is 218 and 20");
+        }
+        [300, 540, ..] => {
+            println!("array[0] array[1]  is 300 and 540");
+        }
+        _ => {
+            println!("match failed");
+        }
+    }
+}
+```
+
 ### 闭包（匿名函数）
 
 见 [Closure](https://doc.rust-lang.org/book/ch13-01-closures.html)
+
+最简单的闭包，`let some_fn = || {代码块}`，把 `||` 当作函数的 `()` 来理解的话会好很多
+
+```rust
+fn test_closure() {
+    // js 写法映射 const print_text = ()=> console.log("test_closure")
+    // 以 js 写法来说其实就是把 `()=>` 换成 `||`
+    let print_text1 = || println!("test_closure");
+
+    // 以上代码是缩写，单行省略了 {}，等价于 👇
+    let print_text2 = || {
+        println!("test_closure");
+    };
+
+    print_text1();
+}
+```
+
+带参数的闭包，一个正常的 Rust 函数，变量都是需要声明类型的。而闭包可以忽略类型，由编译器自动推断，同样的，简单的返回类型也可以自动推断。
+
+但是，**当没有声明参数类型的，闭包函数首次被调用后，编译器就推断并确定了类型，就无法再改变类型了**，后续再调用，参数类型也不会改变了
+
+```rust
+fn test_closure_with_param() {
+    // |text: &str| 就等价于 (text: &str)，这么来看，第一眼确实抽象，但是理解了还好
+    let print_text = |text: &str| println!("params `text` is {}", text);
+
+    print_text("Hello, Rust!");
+}
+
+fn test_closure_with_param_un_type() {
+  // 这里 text 没声明类型，由编译器自动推断
+    let print_text = |text| println!("params `text` is {}", text);
+
+    print_text(123); // 编译器推断出为 i32
+    // 传入 &str 就会报错
+    print_text("Hello, Rust!"); // mismatched types expected integer, found `&str`
+}
+```
