@@ -126,3 +126,15 @@ export default defineConfig({
   }
 }
 ```
+
+## 问题汇总
+
+### 关于在 jenkins 上 rolldown-plugin-dts 问题
+
+暂时只发现一个问题，不确定是 tsdown 本身的问题还是 vite-plus 内置的 tsdown 问题，因为之前在 turbo 上是正常的。
+
+有点奇怪的是：在我本地的 windows 上是可以正常构建的，但是 Jenkins 上却报如下错误：
+
+![image](./assets/turborepo-migrate-vite+/20261009151220.png)
+
+既然是 `dts` 生成的问题，那我在构建的时候不生成 dts 就可以了，比较生产构建 dts 也没什么意义，将 `dts: true` 改为 `dts: "local-only"` 仅在本地生成 dts 就解决了。虽然不清楚问题所在，但是好使就行。
