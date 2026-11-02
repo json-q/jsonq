@@ -1,6 +1,7 @@
 ---
 title: 二、Java Web 基础
 pubDatetime: 2026-09-18
+modDatetime: 2026-10-09
 description: Maven、SpringBoot、MyBatis
 draft: true
 tags:
@@ -604,7 +605,7 @@ SELECT * FROM student ORDER BY score DESC LIMIT 1, 10;
 # application.yml
 spring:
   datasource:
-    url: jdbc:mysql://192.168.52.128:3306/db_name?useSSL=false&serverTimezone=UTC&characterEncoding=utf8
+    url: jdbc:mysql://192.168.52.128:3306/demo?useSSL=false&serverTimezone=Asia/Shanghai&characterEncoding=utf8&allowPublicKeyRetrieval=true
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -626,7 +627,7 @@ public class User {
 @Mapper
 public interface UserMapper {
   @Select("select * from user")
-  public List<User> findAllUser();
+  List<User> findAllUser();
 }
 ```
 
@@ -652,3 +653,89 @@ class SpringMybatisApplicationTests {
 ### 配置
 
 application.yml 的配置具体看[文档](https://mybatis.org/spring-boot-starter/mybatis-spring-boot-autoconfigure/zh_CN/index.html)就行
+
+### 数据库连接池
+
+SpringBoot 自带的连接池是 Hikari，而国内通常会采用阿里开源的 Druid。
+
+```xml
+<dependency>
+    <groupId>com.alibaba</groupId>
+    <artifactId>druid</artifactId>
+    <version>1.2.28</version>
+</dependency>
+```
+
+额外配置
+
+```yml
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+```
+
+### CRUD
+
+#### 注解
+
+以下写法基本不会在项目开发中用到，因为太简单了
+
+```java
+@Mapper
+public interface UserMapper {
+
+    @Select("select * from user")
+    List<User> findAllUser();
+
+    @Select("select * from user where username=#{username} and password=#{password}")
+    // @Param("username") 是给参数起名，在 #{} 中的变量要和 @Param("") 中一致
+    // @Param("username") 也可以省略，只要在 #{} 中变量名一致即可（基于 springboot 创建的项目才行）
+    List<User> findUserByNameAndPassword(@Param("username") String username,@Param("password") String password);
+
+    @Insert("insert into user(username, password) values (#{username}, #{password})")
+    void insertUser(User user);
+
+    @Update("update user set username=#{username} where id=#{id}")
+    List<User> deleteById(String id, String username);
+
+    @Delete("delete from user where id=#{id}")
+    Integer deleteById(String id);
+}
+```
+
+`@Param` 注解可以省略，因为基于 springboot 官方的 `spring-boot-starter-parent` 的 maven 依赖会自动识别参数名
+
+![image](./assets/web-basic/20261011141455.png)
+
+#### XML
+
+通常会放在 `resources/mapper/` 目录下，文件名一般和 Mapper 类名一致，如 `UserMapper.xml`，而这种存放方式 mybatis 默认不支持，需要配置 `mybatis.mapper-locations`
+
+```yml
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations:
+    - classpath:mapper/*.xml # 寻找 classes 目录下的 mapper 文件
+```
+
+![image](./assets/web-basic/20261011153303.png)
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 对应的 Mapper 文件 -->
+<mapper namespace="com.example.mapper.AttachmentsMapper">
+    <!--  id="方法名" resultType="实体类"  -->
+    <select id="getFileDataById" resultType="com.example.model.entity.Attachments">
+        select a.id, a.file_name, a.file_extension
+        FROM uckj_attachments a
+        WHERE a.id = #{id}
+    </select>
+</mapper>
+```
+
+### Logback 日志
+
+Springboot 项目移交默认包含了 `logback-classic` 依赖，根据 Maven 的依赖传递，可以直接使用
