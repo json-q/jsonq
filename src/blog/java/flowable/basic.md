@@ -377,4 +377,44 @@ void completeTask() {
 }
 ```
 
-> 感觉很难用得上方法表达式，因为和源码直接强关联，实际业务应该不会这么用
+### 任务监听器
+
+flowable 提供了 4 种任务监听器
+
+- create（创建）:任务被创建且所有的任务属性设置完成后才触发
+- assignment（指派）：任务被分配给某个办理人之后触发，比如 A 的节点审批完才会触发给下一个节点分配 B 办理人
+- complete（完成）：配置了监听器的上一个任务完成时触发
+- delete（删除）：任务即将被删除前触发（completeTask 正常完成时也会删除当前数据插入新的，因此也会触发）
+
+![image](../assets/flowable/20261106222634.png)
+
+具体生命周期是：assignment -> create -> complete -> delete
+
+监听器是需要指定到具体的项目源码目录下的实体类的，而实体类需要实现 `TaskListener` 接口
+
+```java
+package com.my.flowablelearn.listener;
+
+// 相对的，监听器的文件路径必须流程配置中的路径保持一致
+public class MyListener01 implements TaskListener {
+    @Override
+    public void notify(DelegateTask delegateTask) {
+        System.out.println("MyListener01 监听器执行: " + delegateTask.getEventName());
+        // 由于指定了 create 阶段，所以这里也需要判断 create
+        if (EVENTNAME_CREATE.equals(delegateTask.getEventName())) {
+            // 可以在监听器中更改分配人
+            delegateTask.setAssignee("Jackie Chan");
+        }
+    }
+}
+```
+
+发起一个审批，查找控制台日志，此时是没有 print 打印信息的，说明 Listener 在此阶段没有执行。这是正常的，因为只在 <审批人 2> 的 create 阶段配置的，而 create 阶段是上一个节点完成后触发的。
+
+此时流程在<审批人 1> 节点，完成后再查找日志，就会找到对应的打印。此时再查看 `ACT_RU_TASK` 表，原本 <审批人 2> 分配的 lisi，但是现在变成了 Jackie Chan，因为我们在 Listener 中修改了分配人。
+
+![image](../assets/flowable/20261106224609.png)
+
+## 流程变量
+
+TODO
