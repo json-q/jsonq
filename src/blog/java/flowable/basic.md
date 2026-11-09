@@ -11,7 +11,9 @@ tags:
 
 ## Table of contents
 
-## 最小化基础流程部署
+## 基础入门
+
+### 最小化基础流程部署
 
 准备 mysql，导入 flowable 全量 maven 依赖（可按需导入，具体自行查阅官方文档）运行项目
 
@@ -23,7 +25,7 @@ tags:
 </dependency>
 ```
 
-最小化启动（不依赖 springboot 启动），pbmn 流程 xml 可使用 [vue-bpmn-designer](https://tsai996.github.io/vue-bpmn-designer/) 或者 [bpmn-js 官方](https://demo.bpmn.io/new) 临时导出，感谢各位的开源。
+最小化启动（不依赖 springboot 启动），bpmn 流程 xml 可使用 [vue-bpmn-designer](https://tsai996.github.io/vue-bpmn-designer/) 或者 [bpmn-js 官方](https://demo.bpmn.io/new) 临时导出，感谢各位的开源。
 
 ```java
 public class PureJavaFlowable {
@@ -67,7 +69,7 @@ public class PureJavaFlowable {
 
 > 部署 deploy 和流程定义 processDefine 的区别：一次部署可以部署多个流程定义，多个同时部署时，这些流程对应的部署 ID 是相同的。
 
-## 表基础结构了解
+### 表基础结构了解
 
 这个应该结合后续的发起审批、任务流转来看，直接看应该看不懂。
 
@@ -105,11 +107,11 @@ public class PureJavaFlowable {
 
 用户表用户组不使用，因为正常项目开发不会使用 flowable 来创建和管理用户。
 
-### 部署
+#### 部署
 
 部署后相关的表：`ACT_RE_DEPLOYMENT` `ACT_GE_BYTEARRAY` `ACT_RE_PROCDEF`，其中 deployment 和 processdef 是一对多的关系，一次部署可以部署多个流程定义
 
-### 流程启动
+#### 流程启动
 
 当启动一个流程实例后，会在 `ACT_RU_*` 对应的表中操作，运行时实例涉及以下 10 张表：
 
@@ -126,11 +128,11 @@ public class PureJavaFlowable {
 
 当一个流程实例启动时，直接会影响到的表有 `ACT_RU_EXECUTION` `ACT_RU_TASK` `ACT_RU_VARIABLE` `ACT_RU_IDENTITYLINK`
 
-### 流程结束
+#### 流程结束
 
 当流程完成时，`ACT_RU_*` 相关表的数据就会被清空掉，因为已经不属于运行时了，相对的，可以在 `ACT_HI_*` 相关表进行查询，具体可见上方的表结构
 
-## SpringBoot 流程部署
+### SpringBoot 流程部署
 
 ```yaml
 server:
@@ -178,7 +180,7 @@ class FlowableLearnJavaApplicationTests {
 }
 ```
 
-## flowable service 的设计模式
+### flowable service 的设计模式
 
 所有的 service 都可以从 ProcessEngine 中获取，也可以通过 @Autowired 直接注入相关容器
 
@@ -192,7 +194,7 @@ class FlowableLearnJavaApplicationTests {
 
 ![image](../assets/flowable/20261101161854.png)
 
-## 启动已部署的流程实例
+### 启动已部署的流程实例
 
 - 其中 processId 为 `ACT_RE_PROCDEF` 表中的 `ID_` 列的值，processKey 为 `ACT_RE_PROCDEF` 表中的 `KEY_` 列的值。
 - processKey 在前端绘制流程图时，可以手动指定，不指定则 bpmn-js 会自动生成，手动指定时，要保证 key 的唯一性。
@@ -235,7 +237,7 @@ class FlowableLearnJavaApplicationTests {
 - 流程定义：类似 Java 中的类，即流程的部署
 - 流程实例：类似 Java 中的对象，即流程的启动（发起），可以根据一个流程定义启动很多个流程实例
 
-## 获取审批任务
+### 获取审批任务
 
 比如要获取某人的待审批任务
 
@@ -264,7 +266,7 @@ class FlowableLearnJavaApplicationTests {
 }
 ```
 
-## 完成审批任务
+### 完成审批任务
 
 流转到下一阶段
 
@@ -285,7 +287,7 @@ void completeTask(){
 
 ![image](../assets/flowable/20261101152505.png)
 
-## 流程的挂起和激活
+### 流程的挂起和激活
 
 部署后的流程默认是激活状态，如果暂时不想使用此流程，可以将流程定义进行挂起，无法启动新的流程任务，**但是不会影响已经启动的流程实例**。
 
@@ -330,15 +332,15 @@ void suspendedInstance() {
 }
 ```
 
-## 任务分配
+### 任务分配
 
 顾名思义，每个节点总得有人审批，那这个人是提前预设好的，就该张三批，还是说根据条件来判断由张三还是李四批，就这样。
 
-### 固定分配
+#### 固定分配
 
 就是直接指定节点的审批人员，什么情况下都是这个人批，这个没啥说的。
 
-### 表达式分配
+#### 表达式分配
 
 flowable 使用 UEL 进行表达式解析。
 
@@ -377,7 +379,7 @@ void completeTask() {
 }
 ```
 
-### 任务监听器
+#### 任务监听器
 
 flowable 提供了 4 种任务监听器
 
@@ -415,6 +417,65 @@ public class MyListener01 implements TaskListener {
 
 ![image](../assets/flowable/20261106224609.png)
 
-## 流程变量
+## 流程操作方式
 
-TODO
+### 流程变量
+
+#### 全局变量和局部变量
+
+开始的入门案例也使用了流程变量，比如 `money >=15000` 时走 A 分支，否则走 B 分支。，这里的 money 就是流程变量。还有表达式中的 `${assignee}` 来动态的指定审批人，这个 assignee 也是流程变量。只要是通过 variables 参数传入的变量，就会在任务完成前保存在 `ACT_RU_VARIABLE` 表中。
+
+```java
+@Test
+void startFLow() {
+    Map<String, Object> variables = new HashMap<>();
+    variables.put("money", 15000); // // 流程中的分支条件
+    // variables.put("assignee", "jsq");// 动态指定节点的审批人
+
+    String processId = "Process_2a9ten7:1:39d9dc9b-d543-11f1-982b-00e04c3600d6";
+    ProcessInstance processInstance = runtimeService.startProcessInstanceById(processId, variables);
+}
+```
+
+- 通常情况下，默认设置的流程变量是全局变量，也可以设置流程实例的局部变量和并行任务的局部变量，此时 `EXECUTION_ID_` 列的值可能会由于情况不同而改变，具有隔离性（全局变量下，`EXECUTION_ID_` 列的值始终和 `PROC_INST_ID_` 列的值相同）
+- 全局变量只有当整个流程结束之后才会销毁，局部变量仅针对一个任务和一个执行范围（子流程的 local 和父流程的 local 变量）
+- 通过 runtimeService 和 taskService 获取/设置流程变量，可以在流程未结束的任意时刻向流程变量中添加数据。其中通过 taskService 设置的局部变量，流程变量表会绑定 taskId，只跟当前节点有关，**在当前任务节点完成时删除对应的局部变量**。
+
+```java
+@Test
+void getProcessVariables() {
+    String executionId = "b26e258d-d5d1-11f1-8dc7-00e04c3600d6";
+    Map<String, Object> variables = runtimeService.getVariables(executionId);
+
+    // {money=15000, initiator=null} 这里的 initiator 应该是发起人，在发起的时候调用 identityService.setAuthenticatedUserId(userId)
+    // initiator 的作用就是标记发起人，比如流程退回时给发起人
+    System.out.println(variables);
+
+    //也可以通过 taskId 获取流程变量
+    // Map<String, Object> variables1 = taskService.getVariables("4d9a46ad-d6ca-11f1-9110-00e04c3600d6");
+    // System.out.println(variables1);
+}
+
+@Test
+void setProcessVariables() {
+    String executionId = "b26e258d-d5d1-11f1-8dc7-00e04c3600d6";
+    runtimeService.setVariable(executionId, "var1", "123");
+    // 设置局部变量
+    runtimeService.setVariableLocal(executionId, "runtimeLocalVar1", "runtimeLocalVar1");
+
+    // 通过 taskService 绑定的局部变量，只跟当前节点有关，当前节点完成时删除对应的局部变量
+    String taskId = "4d9a46ad-d6ca-11f1-9110-00e04c3600d6";
+    taskService.setVariable(taskId, "taskVar1", "taskVar1");
+    taskService.setVariableLocal(taskId, "taskLocalVar1", "taskLocalVar1");
+}
+```
+
+#### 历史变量
+
+`ACT_HI_VARINST` 表中保存了流程变量的历史数据，包括全局变量和局部变量，只要是设置的变量，当流程结束时，这里就会保存一份数据。
+
+## 身份服务
+
+### 候选人
+
+一个审批节点指定多个人，一个人审批通过就算流程审批通过了。
