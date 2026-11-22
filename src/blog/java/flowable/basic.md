@@ -1,7 +1,7 @@
 ---
 title: Flowable 流程引擎-基础入门
 pubDatetime: 2026-10-31
-pubDatetime: 2026-11-22
+modDatetime: 2026-11-22
 description: 学习流程引擎的基本使用、基本设计结构、任务流转等。
 tags:
   - SpringBoot
