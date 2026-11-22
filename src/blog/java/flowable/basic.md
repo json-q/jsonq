@@ -1,6 +1,7 @@
 ---
 title: Flowable 流程引擎-基础入门
 pubDatetime: 2026-10-31
+pubDatetime: 2026-11-22
 description: 学习流程引擎的基本使用、基本设计结构、任务流转等。
 tags:
   - SpringBoot
@@ -478,4 +479,75 @@ void setProcessVariables() {
 
 ### 候选人
 
-一个审批节点指定多个人，一个人审批通过就算流程审批通过了。
+候选人和多人会签还不太一样，候选人需要认领之后，才能作为审批人去处理待办任务。也就是说，默认情况下，存在候选人的节点是没有处理人的，必须要认领才能处理。
+
+![image](../assets/flowable/20261122164408.png)
+
+这个流程图很简单，两个审批节点，部门领导候选人是 zhangsan、lisi、wangwu，多人之间是 `,` 分割的。公司领导候选人是 qianqi。
+
+然后发起流程，此时查看`ACT_HI_IDENTITYLINK` 表，就会看到一些不一样的数据，TYPE 列的值为 `candidate`，其中还关联了当前节点的 `TASK_ID_` 列的值。这个就是部门领导的候选者。
+
+![image](../assets/flowable/20261122165202.png)
+
+这个时候，当前节点的审批人是空的
+
+![image](../assets/flowable/20261122170857.png)
+
+#### 认领（拾取）
+
+多个候选人，只有一个人能成为审批人。通过 `taskService.claim(taskId, userId)` 来认领。如果认领后不想处理了，也可以归还此任务 `taskService.unclaim(taskId)`。
+
+```java
+// 根据候选人查询待办信息
+@Test
+void findTaskByCandidateUser() {
+    // 根据当前人为候选人的任务信息
+    List<Task> tasks = taskService.createTaskQuery()
+            .taskCandidateUser("zhangsan")
+            .list();
+    System.out.println(tasks);
+
+    Task task = tasks.get(0);
+    // 让 zhangsan 认领这个审批任务
+    taskService.claim(task.getId(), "zhangsan");
+    // taskService.unclaim(task.getId()); // 让当前认领解除（归还）
+}
+```
+
+执行完之后，再去看 `ACT_RU_TASK` 表，就会看到 `ASSIGNEE_` 列的值变成了 zhangsan
+
+![image](../assets/flowable/20261122171056.png)
+
+### 指派
+
+指派另一个用户来处理任务。其实本质上就是把当前节点的审批人换了一下，通过 `taskService.setAssignee(taskId, userId)` 来实现。
+
+```java
+    @Test
+    void setAssign() {
+        List<Task> tasks = taskService.createTaskQuery()
+                .taskAssignee("zhangsan")
+                .list();
+        System.out.println(tasks);
+        Task task = tasks.get(0);
+
+        taskService.setAssignee(task.getId(), "one piece");
+    }
+```
+
+![image](../assets/flowable/20261122172615.png)
+
+## 候选人组
+
+与候选人组相关的数据，都在 `ACT_ID_*` 的数据表中。在实际业务中，有两种方式可以使用 flowable 的候选人组：
+
+1. 直接使用业务数据来和 flowable 进行关联
+2. 将业务数据定时同步到 flowable 中的相关表中。
+
+用的比较多的表就下边三张
+
+| 表名                | 描述                           |
+| ------------------- | ------------------------------ |
+| `ACT_ID_GROUP`      | 候选组                         |
+| `ACT_ID_MEMBERSHIP` | 候选组成员（用户和组的关联表） |
+| `ACT_ID_USER`       | 候选用户                       |
