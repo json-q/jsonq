@@ -1,7 +1,7 @@
 ---
-title: Flowable 流程引擎-基础入门
+title: Flowable 流程引擎-流程基础
 pubDatetime: 2026-10-31
-modDatetime: 2026-11-22
+modDatetime: 2026-11-24
 description: 学习流程引擎的基本使用、基本设计结构、任务流转等。
 tags:
   - SpringBoot
@@ -66,7 +66,7 @@ public class PureJavaFlowable {
 - `ACT_RE_DEPLOYMENT`：流程部署表，记录此次的部署行为
 - `ACT_RE_PROCDEF`：流程定义表，记录此次部署对应的流程定义信息
 
-![image](../assets/flowable/20261031163319.png)
+![image](../assets/flowable/basic/20261031163319.png)
 
 > 部署 deploy 和流程定义 processDefine 的区别：一次部署可以部署多个流程定义，多个同时部署时，这些流程对应的部署 ID 是相同的。
 
@@ -185,15 +185,15 @@ class FlowableLearnJavaApplicationTests {
 
 所有的 service 都可以从 ProcessEngine 中获取，也可以通过 @Autowired 直接注入相关容器
 
-![image](../assets/flowable/20261101153445.png)
+![image](../assets/flowable/basic/20261101153445.png)
 
 基于源码也可以看到能够获取到的 service
 
-![image](../assets/flowable/20261101161251.png)
+![image](../assets/flowable/basic/20261101161251.png)
 
 本质上内部也是调用的这些 getService() 方法
 
-![image](../assets/flowable/20261101161854.png)
+![image](../assets/flowable/basic/20261101161854.png)
 
 ### 启动已部署的流程实例
 
@@ -223,7 +223,7 @@ class FlowableLearnJavaApplicationTests {
 }
 ```
 
-![image](../assets/flowable/20261031232012.png)
+![image](../assets/flowable/basic/20261031232012.png)
 
 基于当前的流程设计图，启动流程实例后，就会走到 “部门负责人 张三” 处，此时可以观察以下几张数据表等等（有好多张表）
 
@@ -282,11 +282,11 @@ void completeTask(){
 
 此时再观察 `ACT_RU_TASK` 表，会发现数据变成了下一个节点的信息，而且 taskId 也变了，说明当前节点完成后已删除，流转到下个节点时插入了一个新的节点数据
 
-![image](../assets/flowable/20261101151627.png)
+![image](../assets/flowable/basic/20261101151627.png)
 
 再将新的 taskId 完成，此流程就结束了，此时 `ACT_RU_TASK` 表数据的相关数据就清空了，而在 `ACT_HI_ACTINST` 可以看到完整的流程走向。
 
-![image](../assets/flowable/20261101152505.png)
+![image](../assets/flowable/basic/20261101152505.png)
 
 ### 流程的挂起和激活
 
@@ -345,7 +345,7 @@ void suspendedInstance() {
 
 flowable 使用 UEL 进行表达式解析。
 
-![image](../assets/flowable/20261102223706.png)
+![image](../assets/flowable/basic/20261102223706.png)
 
 值表达式：以占位符 `${assignee}` `${myBean.leader}` 这种格式来动态指定节点的审批人员，可以直接通过 `complete(taskId, variables)` 的第二个参数传入
 
@@ -389,7 +389,7 @@ flowable 提供了 4 种任务监听器
 - complete（完成）：配置了监听器的上一个任务完成时触发
 - delete（删除）：任务即将被删除前触发（completeTask 正常完成时也会删除当前数据插入新的，因此也会触发）
 
-![image](../assets/flowable/20261106222634.png)
+![image](../assets/flowable/basic/20261106222634.png)
 
 具体生命周期是：assignment -> create -> complete -> delete
 
@@ -416,7 +416,7 @@ public class MyListener01 implements TaskListener {
 
 此时流程在<审批人 1> 节点，完成后再查找日志，就会找到对应的打印。此时再查看 `ACT_RU_TASK` 表，原本 <审批人 2> 分配的 lisi，但是现在变成了 Jackie Chan，因为我们在 Listener 中修改了分配人。
 
-![image](../assets/flowable/20261106224609.png)
+![image](../assets/flowable/basic/20261106224609.png)
 
 ## 流程操作方式
 
@@ -481,17 +481,17 @@ void setProcessVariables() {
 
 候选人和多人会签还不太一样，候选人需要认领之后，才能作为审批人去处理待办任务。也就是说，默认情况下，存在候选人的节点是没有处理人的，必须要认领才能处理。
 
-![image](../assets/flowable/20261122164408.png)
+![image](../assets/flowable/basic/20261122164408.png)
 
 这个流程图很简单，两个审批节点，部门领导候选人是 zhangsan、lisi、wangwu，多人之间是 `,` 分割的。公司领导候选人是 qianqi。
 
 然后发起流程，此时查看`ACT_HI_IDENTITYLINK` 表，就会看到一些不一样的数据，TYPE 列的值为 `candidate`，其中还关联了当前节点的 `TASK_ID_` 列的值。这个就是部门领导的候选者。
 
-![image](../assets/flowable/20261122165202.png)
+![image](../assets/flowable/basic/20261122165202.png)
 
 这个时候，当前节点的审批人是空的
 
-![image](../assets/flowable/20261122170857.png)
+![image](../assets/flowable/basic/20261122170857.png)
 
 #### 认领（拾取）
 
@@ -516,7 +516,7 @@ void findTaskByCandidateUser() {
 
 执行完之后，再去看 `ACT_RU_TASK` 表，就会看到 `ASSIGNEE_` 列的值变成了 zhangsan
 
-![image](../assets/flowable/20261122171056.png)
+![image](../assets/flowable/basic/20261122171056.png)
 
 ### 指派
 
@@ -535,7 +535,7 @@ void findTaskByCandidateUser() {
     }
 ```
 
-![image](../assets/flowable/20261122172615.png)
+![image](../assets/flowable/basic/20261122172615.png)
 
 ## 候选人组
 
@@ -551,3 +551,81 @@ void findTaskByCandidateUser() {
 | `ACT_ID_GROUP`      | 候选组                         |
 | `ACT_ID_MEMBERSHIP` | 候选组成员（用户和组的关联表） |
 | `ACT_ID_USER`       | 候选用户                       |
+
+### 用户/用户组的创建和关联
+
+```java
+// 维护用户
+@Test
+void createUser() {
+    User user = identityService.newUser("zhangsan");
+    user.setEmail("zhangsan@qq.com");
+    user.setFirstName("zhang");
+    user.setLastName("san");
+    identityService.saveUser(user);
+
+    User user1 = identityService.newUser("lisi");
+    user1.setEmail("lisi@qq.com");
+    user1.setFirstName("li");
+    user1.setLastName("si");
+    user1.setPassword("123456");
+    user1.setDisplayName("李四");
+    identityService.saveUser(user1);
+}
+
+// 维护用户组
+@Test
+void createGroup(){
+    Group group = identityService.newGroup("SCKF");
+    group.setName("市场开发部");
+    group.setType("总部");
+    identityService.saveGroup(group);
+
+    Group group1 = identityService.newGroup("FLHG");
+    group1.setName("法律合规部");
+    group1.setType("总部");
+    identityService.saveGroup(group1);
+}
+
+// 维护用户-用户组关联关系
+@Test
+void createMemberShip() {
+    // 查询到某一个组的数据
+    Group group = identityService.createGroupQuery().groupId("SCKF").singleResult();
+    // 查询到用户列表
+    List<User> userList = identityService.createUserQuery().list();
+    userList.forEach(user -> {
+        // 用户和组的绑定
+        identityService.createMembership(user.getId(), group.getId());
+    });
+}
+```
+
+### 用户组流程
+
+发起一个流程，可以观察到 `ACT_RU_IDENTITYLINK` 表中，有 `candidate` 类型的数据，并且 `GROUP_ID_` 列的值为 `SCKF`，表示这个任务当前是 SCKF 组的候选者。
+
+![image](../assets/flowable/basic/20261124222600.png)
+
+然后，需要人认领任务，就需要明确到人，从候选组中找到人。
+
+```java
+// 候选组任务查询
+@Test
+void findCandidateTaskAndClaim() {
+    // 查询到 zhangsan 所在的用户组
+    Group group = identityService.createGroupQuery()
+            .groupMember("zhangsan")
+            .singleResult();
+
+    // 查询 市场开发 候选组的任务列表数据
+    List<Task> tasks = taskService.createTaskQuery()
+            .taskCandidateGroup("SCKF")
+            .list();
+
+    tasks.forEach(task -> {
+        // 让候选组中的用户 zhangsan 来认领这些任务
+        taskService.claim(task.getId(), "zhangsan");
+    });
+}
+```
